@@ -4,11 +4,12 @@ import torch
 from sklearn.model_selection import ParameterGrid
 from torch_geometric.data import DataLoader
 import torch_geometric.transforms as T
+from torch_cluster import knn_graph
 
 from datasets.bim import BIM
 from datasets.ModelNet import ModelNet
 
-from learning.models import PN2Net, DGCNNNet
+from learning.models import PN2Net, DGCNNNet, UNet
 from learning.trainer import Trainer
 
 import os
@@ -39,7 +40,7 @@ class Experimenter(object):
         cdw= cwd = os.getcwd()
 
 
-        path = '../../BIM_PC_small/points'
+        path = '../../BIM_PC/points'
         dataset = BIM(path, True)
         test_data = BIM(path, False)
 
@@ -91,6 +92,18 @@ class Experimenter(object):
                 model = model_name().to(device)
             if model_name.__name__ is 'DGCNNNet':
                 model = model_name(out_channels=train_data.num_classes).to(device)
+
+            if model_name.__name__ is 'UNet':
+                # TODO : make a bit nicer...
+                dataset = BIM(path, True, transform=T.Compose([T.KNNGraph(k=3)]))
+                test_data = BIM(path, False, transform=T.Compose([T.KNNGraph(k=3)]))
+                train_data = dataset[:train_size]
+                val_data = dataset[train_size:train_size + val_size]
+                train_loader = DataLoader(train_data, batch_size=batch_size, shuffle=True, num_workers=6)
+                val_loader = DataLoader(val_data, batch_size=batch_size, shuffle=False, num_workers=6)
+                test_loader = DataLoader(test_data, batch_size=batch_size, shuffle=False, num_workers=6)
+                model = model_name(num_features=dataset.num_features, num_classes=dataset.num_classes, num_nodes=dataset.data.num_nodes).to(device)
+            #num_features, num_classes, num_nodes, edge_index
 
             optimizer = torch.optim.Adam(params=model.parameters(), lr=learning_rate, weight_decay=0.00001)
 
@@ -152,11 +165,11 @@ if __name__ == '__main__':
     torch.cuda.empty_cache()
     config = dict()
 
-    config['n_epochs'] = [20]
-    config['learning_rate'] = [1e-2, 0.1]
+    config['n_epochs'] = [150]
+    config['learning_rate'] = [1e-2]
     config['batch_size'] = [10]
     config['model_name'] = [PN2Net, DGCNNNet]
-
+    #config['model_name'] = [UNet]
     ex = Experimenter(config)
     ex.run()
 

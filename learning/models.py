@@ -2,7 +2,8 @@ import torch
 import torch.nn.functional as F
 from torch.nn import Sequential as Seq, Linear as Lin, ReLU, Dropout, BatchNorm1d as BN
 from torch_geometric.nn import PointConv, fps, radius, global_max_pool
-from torch_geometric.nn import DynamicEdgeConv, global_max_pool
+from torch_geometric.nn import DynamicEdgeConv, global_max_pool, GraphUNet
+from torch_geometric.utils import dropout_adj
 
 class SAModule(torch.nn.Module):
     def __init__(self, ratio, r, nn):
@@ -88,3 +89,21 @@ class DGCNNNet(torch.nn.Module):
         out = global_max_pool(out, batch)
         out = self.mlp(out)
         return F.log_softmax(out, dim=1)
+
+
+class UNet(torch.nn.Module):
+    def __init__(self, num_features, num_classes, num_nodes):
+        super(UNet, self).__init__()
+        pool_ratios = [2000 / num_nodes, 0.5]
+        self.unet = GraphUNet(3, 32, num_classes,
+                              depth=3, pool_ratios=pool_ratios)
+
+    def forward(self, data):
+        edge_index, _ = dropout_adj(data.edge_index, p=0.2,
+                                    force_undirected=True,
+                                    num_nodes=data.num_nodes,
+                                    training=self.training)
+        x = F.dropout(data.pos, p=0.92, training=self.training)
+
+        x = self.unet(x, edge_index)
+        return F.log_softmax(x, dim=1)

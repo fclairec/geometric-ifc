@@ -7,6 +7,7 @@ import glob
 from torch_geometric.io import read_txt_array
 
 
+
 class BIM(InMemoryDataset):
     r"""The ModelNet10/40 datasets from the `"3D ShapeNets: A Deep
     Representation for Volumetric Shapes"
