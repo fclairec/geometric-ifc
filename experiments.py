@@ -56,23 +56,18 @@ class Experimenter(object):
         print("Training graphs: ", train_size)
         print("Validation graphs: ", val_size)
 
-
-
-
-
-        train_data = dataset[:train_size]
-        val_data = dataset[train_size:train_size + val_size]
+        kf2 = StratifiedKFold(n_splits=3, shuffle=False)
 
         results = []
         grid_unfold = list(self.grid)
 
         for i, params in enumerate(grid_unfold):
+
             print("Run {} of {}".format(i, len(grid_unfold)))
             output_path = '../out/' + str(i)
 
             if not os.path.exists(output_path):
                 os.makedirs(output_path)
-
             result = params
 
             n_epochs = params['n_epochs']
@@ -80,25 +75,39 @@ class Experimenter(object):
             learning_rate = params['learning_rate']
             model_name = params['model_name']
 
-            train_loader = DataLoader(train_data, batch_size=batch_size, shuffle=True, num_workers=6)
-            val_loader = DataLoader(val_data, batch_size=batch_size, shuffle=False, num_workers=6)
-            test_loader = DataLoader(test_data, batch_size=batch_size, shuffle=False, num_workers=6)
-            set_analyst(train_data, 'train_data')
-            set_analyst(test_data,'test_data')
-            set_analyst(val_data, 'val_data')
+            cv_i=0
 
-            if model_name.__name__ is 'PN2Net':
-                model = model_name().to(device)
-            if model_name.__name__ is 'DGCNNNet':
-                model = model_name(out_channels=train_data.num_classes).to(device)
+            for train_idx, val_idx in kf2.split(dataset, dataset.data.y):
+                train_dataset = dataset[torch.LongTensor(train_idx)]
+                data_list = [data for data in train_dataset]
+                train_dataset.data, train_dataset.slices = train_dataset.collate(data_list)
 
-            optimizer = torch.optim.Adam(params=model.parameters(), lr=learning_rate, weight_decay=0.00001)
+                val_dataset = dataset[torch.LongTensor(val_idx)]
+                data_list = [data for data in val_dataset]
+                val_dataset.data, val_dataset.slices = val_dataset.collate(data_list)
 
-            trainer = Trainer(model, output_path)  # ,max_patience=5
-            epoch_losses, train_accuracies, val_accuracies = trainer.train(train_loader, val_loader, n_epochs, optimizer)
+                train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=6)
+                val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False, num_workers=6)
+                test_loader = DataLoader(test_data, batch_size=batch_size, shuffle=False, num_workers=6)
+                set_analyst(train_dataset, 'train_data')
+                set_analyst(test_data, 'test_data')
+                set_analyst(val_dataset, 'val_data')
 
-            #threshold = trainer.optim_threshold(val_loader)
-            #result['threshold'] = threshold
+                if model_name.__name__ is 'PN2Net':
+                    model = model_name().to(device)
+                if model_name.__name__ is 'DGCNNNet':
+                    model = model_name(out_channels=train_dataset.num_classes).to(device)
+
+                optimizer = torch.optim.Adam(params=model.parameters(), lr=learning_rate, weight_decay=0.00001)
+
+                trainer = Trainer(model, output_path)  # ,max_patience=5
+                epoch_losses, train_accuracies, val_accuracies, best_val_acc = trainer.train(train_loader, val_loader, n_epochs,
+                                                                           optimizer)
+                print('Cross-validation {} for model {} config {} --> best val_acc {}' .format(cv_i, model_name.__name__, i, best_val_acc))
+                cv_i += 1
+
+            # threshold = trainer.optim_threshold(val_loader)
+            # result['threshold'] = threshold
 
             test_acc, y_pred, y_real = trainer.test(test_loader)
             result['test_acc'] = test_acc
@@ -110,14 +119,13 @@ class Experimenter(object):
 
             target_names = test_data.classmap.values()
             real_target_names = [test_data.classmap[i] for i in np.unique(np.array(dataset.data.y))]
-            class_rep = classification_report(y_true=y_real, y_pred=y_pred, target_names=real_target_names, output_dict=True)
+            class_rep = classification_report(y_true=y_real, y_pred=y_pred, target_names=real_target_names,
+                                              output_dict=True)
             df2 = DataFrame(class_rep).transpose()
             filename = output_path + '/class_report.csv'
             df2.to_csv(filename)
 
-
-
-            print('test acc = {}' .format(test_acc))
+            print('test acc = {}'.format(test_acc))
 
             plt.figure()
             plt.plot(range(len(epoch_losses)), epoch_losses, label='training loss')
@@ -135,7 +143,7 @@ class Experimenter(object):
 
             results.append(result)
 
-            #self.plot_latent_space(model, train_loader)
+            # self.plot_latent_space(model, train_loader)
 
             """sampler = Sampler(model)
             num_nodes = 10
@@ -145,6 +153,7 @@ class Experimenter(object):
         # TODO: add final trainings loss, validato?
         pd.DataFrame(results).to_csv('../out/results.csv')
         torch.cuda.empty_cache()
+
 
 
 
