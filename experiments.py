@@ -57,10 +57,6 @@ class Experimenter(object):
         print("Training graphs: ", train_size)
         print("Validation graphs: ", val_size)
 
-
-
-
-
         train_data = dataset[:train_size]
         val_data = dataset[train_size:train_size + val_size]
 
@@ -165,11 +161,11 @@ if __name__ == '__main__':
     torch.cuda.empty_cache()
     config = dict()
 
-    config['n_epochs'] = [150]
+    config['n_epochs'] = [2]
     config['learning_rate'] = [1e-2]
     config['batch_size'] = [10]
-    config['model_name'] = [PN2Net, DGCNNNet]
-    #config['model_name'] = [UNet]
+    config['model_name'] = [PN2Net]
+    #config['model_name'] = [UNet, , DGCNNNet]
     ex = Experimenter(config)
     ex.run()
 

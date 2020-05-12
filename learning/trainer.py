@@ -54,7 +54,9 @@ class Trainer:
 
             epoch_losses.append(torch.mean(torch.stack(train_losses, dim=0)))
 
+            print("train correct")
             train_acc = self.eval(train_loader)
+            print("eval correct")
             val_acc = self.eval(val_loader)
             train_accuracies.append(train_acc)
             val_accuracies.append(val_acc)
@@ -68,6 +70,7 @@ class Trainer:
             # saves state dictionary of every epoch (overwrites), additionally saves best
             self.save_checkpoint(self.output_path,
                                  {
+                                     'model': type(self.model).__name__,
                                      'epoch': epoch + 1,
                                      'state_dict': self.model.state_dict(),
                                      'best_val_acc': best_performance,
@@ -102,7 +105,7 @@ class Trainer:
             correct += pred.eq(data.y).sum().item()
 
         acc = correct / len(data_loader.dataset)
-        print ("correct {}". format(correct))
+        print ("correct {} / {}". format(correct, len(data_loader.dataset)))
 
         return acc
 
@@ -116,6 +119,9 @@ class Trainer:
             loss = F.nll_loss(self.model(data), data.y)
             with torch.no_grad():
                 pred = self.model(data).max(1)[1]
+                m = self.model(data)
+                d= m.min(1)
+                a=d[1]
             correct += pred.eq(data.y).sum().item()
             y_pred = concat((y_pred, pred.cpu().numpy()))
             y_real = concat((y_real, data.y.cpu().numpy()))
@@ -125,10 +131,10 @@ class Trainer:
         return acc, y_pred, y_real
 
     def save_checkpoint(self, path, state, is_best):
-        filename = 'model_state'
+        filename = 'model_state.pth.tar'
         path_out = osp.join(path, filename)
         torch.save(state, path_out)
         if is_best:
-            filename = 'model_state_best_val'
+            filename = 'model_state_best_val.pth.tar'
             path_out = osp.join(path, filename)
             torch.save(state, path_out)

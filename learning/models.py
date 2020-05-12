@@ -52,7 +52,7 @@ class PN2Net(torch.nn.Module):
 
         self.lin1 = Lin(1024, 512)
         self.lin2 = Lin(512, 256)
-        self.lin3 = Lin(256, 10)
+        self.lin3 = Lin(256, 2)
 
     def forward(self, data):
         sa0_out = (data.x, data.pos, data.batch)
