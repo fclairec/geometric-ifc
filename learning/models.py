@@ -100,12 +100,15 @@ class UNet(torch.nn.Module):
                               depth=3, pool_ratios=pool_ratios)
 
     def forward(self, data):
+        # TODO: needs node features!! now we are passing pos as x
+        x, batch = data.pos, data.batch
         edge_index, _ = dropout_adj(data.edge_index, p=0.2,
                                     force_undirected=True,
                                     num_nodes=data.num_nodes,
                                     training=self.training)
-        x = F.dropout(data.pos, p=0.92, training=self.training)
+        x1 = F.dropout(x, p=0.92, training=self.training)
 
-        x = self.unet(x, edge_index)
-        a= F.log_softmax(x, dim=1)
+        x2 = self.unet(x1, edge_index)
+        out = global_max_pool(x2, batch)
+        a = F.log_softmax(out, dim=1)
         return a

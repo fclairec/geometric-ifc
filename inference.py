@@ -8,6 +8,7 @@ from torch_geometric.data import DataLoader
 import numpy
 import matplotlib.pyplot as plt
 from mpl_toolkits import mplot3d
+import torch_geometric.transforms as T
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
@@ -20,7 +21,9 @@ class Inference(object):
 
     def infer(self, test=False):
         if test:
-            test_data = BIM(path, False)
+            transform = T.Compose([T.NormalizeScale(), T.Center()])
+
+            test_data = BIM(path, False, transform)
             test_loader = DataLoader(test_data, batch_size=1, shuffle=False, num_workers=6)
         else:
             print('Warning: inference dataloader not yet implemented')
@@ -37,7 +40,20 @@ class Inference(object):
                 # here we assume test set contains all classes contained in train set...
                 model_class = getattr(learning.models, model_name)
                 model = model_class(out_channels=test_data.num_classes)
-            # if model_name is 'UNet':
+            if model_name == 'UNet':
+                transform = T.Compose([T.KNNGraph(k=3), T.NormalizeScale(), T.Center()])
+
+                dataset = BIM(path, True, transform)
+                test_data = BIM(path, False, transform)
+                test_loader = DataLoader(test_data, batch_size=1, shuffle=False, num_workers=0)
+                model_class = getattr(learning.models, model_name)
+                model = model_class(num_features=dataset.num_features, num_classes=dataset.num_classes,
+                                   num_nodes=dataset.data.num_nodes).to(device)
+
+
+
+
+
 
             model.load_state_dict(checkpoint['state_dict'], strict=False)
             model.to(device)
@@ -75,6 +91,9 @@ class Inference(object):
                     [list(a) for a in zip(data.pos[:, 0].numpy(), data.pos[:, 1].numpy(), data.pos[:, 2].numpy())])
                 ax = plt.axes(projection='3d')
                 ax.scatter(xyz[:, 0], xyz[:, 1], xyz[:, 2], color='black', s=10)
+                ax.set_xlim(left=1, right=-1)
+                ax.set_ylim(bottom=1, top=-1)
+                ax.set_zlim(-1, 1)
 
                 if y_pred != y_real:
                     out = output_path_error + "/" + str(i) + y_real_l + "-" + y_pred_l
