@@ -24,7 +24,7 @@ printout = 15
 
 
 class Trainer:
-    def __init__(self, model, output_path, max_patience=8):
+    def __init__(self, model, output_path, max_patience=2):
         self.model = model
         self.output_path = output_path
         self.max_patience = max_patience
@@ -87,6 +87,11 @@ class Trainer:
 
             if self.patience == 0:
                 # early stopping
+                # load best model back into memory
+                model_load = self.output_path + '/model_state_best_val.pth.tar'
+                checkpoint = torch.load(model_load)
+                self.model.load_state_dict(checkpoint['state_dict'], strict=False)
+                self.model.to(device)
                 return epoch_losses, train_accuracies, val_accuracies
 
 

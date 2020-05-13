@@ -40,7 +40,7 @@ class Experimenter(object):
         cdw= cwd = os.getcwd()
 
 
-        path = '../../BIM_PC/points'
+        path = '../../BIM_PC_small/points'
         dataset = BIM(path, True)
         test_data = BIM(path, False)
 
@@ -85,7 +85,7 @@ class Experimenter(object):
             set_analyst(val_data, 'val_data')
 
             if model_name.__name__ is 'PN2Net':
-                model = model_name().to(device)
+                model = model_name(out_channels=train_data.num_classes).to(device)
             if model_name.__name__ is 'DGCNNNet':
                 model = model_name(out_channels=train_data.num_classes).to(device)
 
@@ -161,11 +161,11 @@ if __name__ == '__main__':
     torch.cuda.empty_cache()
     config = dict()
 
-    config['n_epochs'] = [2]
+    config['n_epochs'] = [20]
     config['learning_rate'] = [1e-2]
     config['batch_size'] = [10]
-    config['model_name'] = [PN2Net]
-    #config['model_name'] = [UNet, , DGCNNNet]
+    config['model_name'] = [UNet]
+    #config['model_name'] = [, PN2Net, DGCNNNet]
     ex = Experimenter(config)
     ex.run()
 

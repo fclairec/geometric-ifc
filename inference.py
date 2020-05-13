@@ -32,7 +32,7 @@ class Inference(object):
 
             if model_name == 'PN2Net':
                 model_class = getattr(learning.models, model_name)
-                model = model_class()
+                model = model_class(out_channels=test_data.num_classes)
             if model_name == 'DGCNNNet':
                 # here we assume test set contains all classes contained in train set...
                 model_class = getattr(learning.models, model_name)
@@ -116,7 +116,7 @@ if __name__ == '__main__':
         i += 1
     print('inference for {} models with test {}'.format(i, test))
 
-    path = '../../BIM_PC/points'
+    path = '../../BIM_PC_small/points'
     # if not test set --> change path
 
     inf = Inference(path)

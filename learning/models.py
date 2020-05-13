@@ -43,7 +43,7 @@ def MLP(channels, batch_norm=True):
 
 
 class PN2Net(torch.nn.Module):
-    def __init__(self):
+    def __init__(self, out_channels):
         super(PN2Net, self).__init__()
 
         self.sa1_module = SAModule(0.5, 0.2, MLP([3, 64, 64, 128]))
@@ -52,7 +52,8 @@ class PN2Net(torch.nn.Module):
 
         self.lin1 = Lin(1024, 512)
         self.lin2 = Lin(512, 256)
-        self.lin3 = Lin(256, 2)
+        #TODO change the output layer to dynamic class numbers. Howver.. if we want the likely hood that a chair is an other class then we should kepp all classes.
+        self.lin3 = Lin(256, out_channels)
 
     def forward(self, data):
         sa0_out = (data.x, data.pos, data.batch)
@@ -106,4 +107,5 @@ class UNet(torch.nn.Module):
         x = F.dropout(data.pos, p=0.92, training=self.training)
 
         x = self.unet(x, edge_index)
-        return F.log_softmax(x, dim=1)
+        a= F.log_softmax(x, dim=1)
+        return a
