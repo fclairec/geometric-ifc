@@ -57,13 +57,13 @@ class BIM(InMemoryDataset):
     @property
     def raw_file_names(self):
         return [
-            'IfcBeam', 'IfcColumn'
+            'IfcBeam', 'IfcColumn', 'IfcFurnishingElement', 'IfcStairFlight', 'IfcDoor', 'IfcFlowSegment', 'IfcFlowTerminal', 'IfcSlab', 'IfcWallStandardCase'
         ]
     # 'IfcBeam', 'IfcColumn', 'IfcFurnishingElement', 'IfcStairFlight', 'IfcDoor', 'IfcFlowSegment', 'IfcFlowTerminal', 'IfcSlab', 'IfcWallStandardCase'
 
     @property
     def classmap(self):
-        return {0: 'IfcBeam', 1: 'IfcColumn'}
+        return {0: 'IfcBeam', 1: 'IfcColumn', 2:'IfcFurnishingElement', 3:'IfcStairFlight', 4:'IfcDoor', 5:'IfcFlowSegment', 6:'IfcFlowTerminal', 7:'IfcSlab', 8:'IfcWallStandardCase'}
 
     #{0: 'IfcBeam', 1: 'IfcColumn', 2:'IfcFurnishingElement', 3:'IfcStairFlight', 4:'IfcDoor', 5:'IfcFlowSegment', 6:'IfcFlowTerminal', 7:'IfcSlab', 8:'IfcWallStandardCase'}
 

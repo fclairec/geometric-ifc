@@ -39,9 +39,9 @@ class Experimenter(object):
         #path = '../data/Dummy'
         cdw= cwd = os.getcwd()
 
-        transform = T.Compose([T.NormalizeScale(), T.Center()])
-
-        path = '../../BIM_PC_small/points'
+        transform = T.Compose([T.Distance(), T.Center()])
+        #,
+        path = '../../BIM_PC/points'
         dataset = BIM(path, True, transform)
         test_data = BIM(path, False, transform)
 
@@ -80,9 +80,9 @@ class Experimenter(object):
             learning_rate = params['learning_rate']
             model_name = params['model_name']
 
-            train_loader = DataLoader(train_data, batch_size=batch_size, shuffle=True, num_workers=0)
-            val_loader = DataLoader(val_data, batch_size=batch_size, shuffle=False, num_workers=0)
-            test_loader = DataLoader(test_data, batch_size=batch_size, shuffle=False, num_workers=0)
+            train_loader = DataLoader(train_data, batch_size=batch_size, shuffle=True, num_workers=6)
+            val_loader = DataLoader(val_data, batch_size=batch_size, shuffle=False, num_workers=6)
+            test_loader = DataLoader(test_data, batch_size=batch_size, shuffle=False, num_workers=6)
             set_analyst(train_data, 'train_data')
             set_analyst(test_data,'test_data')
             set_analyst(val_data, 'val_data')
@@ -94,14 +94,14 @@ class Experimenter(object):
 
             if model_name.__name__ is 'UNet':
                 # TODO : make a bit nicer...
-                transform = T.Compose([T.KNNGraph(k=3), T.NormalizeScale(), T.Center()])
+                transform = T.Compose([T.KNNGraph(k=3), T.Distance(), T.Center()])
                 dataset = BIM(path, True, transform)
                 test_data = BIM(path, False, transform)
                 train_data = dataset[:train_size]
                 val_data = dataset[train_size:train_size + val_size]
-                train_loader = DataLoader(train_data, batch_size=batch_size, shuffle=True, num_workers=0)
-                val_loader = DataLoader(val_data, batch_size=batch_size, shuffle=False, num_workers=0)
-                test_loader = DataLoader(test_data, batch_size=batch_size, shuffle=False, num_workers=0)
+                train_loader = DataLoader(train_data, batch_size=batch_size, shuffle=True, num_workers=6)
+                val_loader = DataLoader(val_data, batch_size=batch_size, shuffle=False, num_workers=6)
+                test_loader = DataLoader(test_data, batch_size=batch_size, shuffle=False, num_workers=6)
                 model = model_name(num_features=dataset.num_features, num_classes=dataset.num_classes, num_nodes=dataset.data.num_nodes).to(device)
             #num_features, num_classes, num_nodes, edge_index
 
@@ -165,10 +165,10 @@ if __name__ == '__main__':
     torch.cuda.empty_cache()
     config = dict()
 
-    config['n_epochs'] = [20]
+    config['n_epochs'] = [200]
     config['learning_rate'] = [1e-2]
-    config['batch_size'] = [8]
-    config['model_name'] = [UNet,PN2Net, DGCNNNet]
+    config['batch_size'] = [10]
+    config['model_name'] = [UNet, PN2Net, DGCNNNet]
     #config['model_name'] = [, PN2Net, DGCNNNet]
     ex = Experimenter(config)
     ex.run()

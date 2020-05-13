@@ -21,7 +21,7 @@ class Inference(object):
 
     def infer(self, test=False):
         if test:
-            transform = T.Compose([T.NormalizeScale(), T.Center()])
+            transform = T.Compose([T.Distance(), T.Center()])
 
             test_data = BIM(path, False, transform)
             test_loader = DataLoader(test_data, batch_size=1, shuffle=False, num_workers=6)
@@ -41,7 +41,7 @@ class Inference(object):
                 model_class = getattr(learning.models, model_name)
                 model = model_class(out_channels=test_data.num_classes)
             if model_name == 'UNet':
-                transform = T.Compose([T.KNNGraph(k=3), T.NormalizeScale(), T.Center()])
+                transform = T.Compose([T.KNNGraph(k=3), T.Distance(), T.Center()])
 
                 dataset = BIM(path, True, transform)
                 test_data = BIM(path, False, transform)
@@ -135,7 +135,7 @@ if __name__ == '__main__':
         i += 1
     print('inference for {} models with test {}'.format(i, test))
 
-    path = '../../BIM_PC_small/points'
+    path = '../../BIM_PC/points'
     # if not test set --> change path
 
     inf = Inference(path)

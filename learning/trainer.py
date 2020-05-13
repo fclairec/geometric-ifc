@@ -24,7 +24,7 @@ printout = 15
 
 
 class Trainer:
-    def __init__(self, model, output_path, max_patience=10):
+    def __init__(self, model, output_path, max_patience=15):
         self.model = model
         self.output_path = output_path
         self.max_patience = max_patience
