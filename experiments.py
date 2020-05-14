@@ -39,20 +39,22 @@ class Experimenter(object):
         #path = '../data/Dummy'
         cdw= cwd = os.getcwd()
 
+
+        """
         transform = T.Compose([T.Distance(), T.Center()])
         #,
         path = '../../BIM_PC/points'
         dataset = BIM(path, True, transform)
         test_data = BIM(path, False, transform)
-
-
-
         """
-        path = '../../ModelNet40'
+
+
+
+        path = '../../ModelNet10'
         transform, pre_transform = T.NormalizeScale(), T.SamplePoints(1024)
-        dataset = ModelNet(path, '40', True, transform, pre_transform)
-        test_data = ModelNet(path, '40', False, transform, pre_transform)
-        """
+        dataset = ModelNet(path, '10', True, transform, pre_transform)
+        test_data = ModelNet(path, '10', False, transform, pre_transform)
+
 
         num_graphs = len(dataset)
         train_size = int(0.8 * num_graphs)
@@ -94,10 +96,13 @@ class Experimenter(object):
 
             if model_name.__name__ is 'UNet':
                 # TODO : make a bit nicer...
-                transform = T.Compose([T.KNNGraph(k=3), T.Distance(), T.Center()])
+                """transform = T.Compose([T.KNNGraph(k=3), T.Distance(), T.Center()])
                 dataset = BIM(path, True, transform)
                 test_data = BIM(path, False, transform)
-                train_data = dataset[:train_size]
+                train_data = dataset[:train_size]"""
+                transform, pre_transform = T.Compose([T.NormalizeScale(), T.KNNGraph(k=3)]), T.SamplePoints(1024)
+                dataset = ModelNet(path, '10', True, transform, pre_transform)
+                test_data = ModelNet(path, '10', False, transform, pre_transform)
                 val_data = dataset[train_size:train_size + val_size]
                 train_loader = DataLoader(train_data, batch_size=batch_size, shuffle=True, num_workers=6)
                 val_loader = DataLoader(val_data, batch_size=batch_size, shuffle=False, num_workers=6)
@@ -165,7 +170,7 @@ if __name__ == '__main__':
     torch.cuda.empty_cache()
     config = dict()
 
-    config['n_epochs'] = [200]
+    config['n_epochs'] = [10]
     config['learning_rate'] = [1e-2]
     config['batch_size'] = [10]
     config['model_name'] = [UNet, PN2Net, DGCNNNet]

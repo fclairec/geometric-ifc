@@ -52,7 +52,7 @@ class ModelNet(InMemoryDataset): #
     }
     #'40': 'https://shapenet.cs.stanford.edu/media/modelnet40_normal_resampled.zip'
 
-    def __init__(self, root, name='40', train=True, transform=None,
+    def __init__(self, root, name='10', train=True, transform=None,
                  pre_transform=None, pre_filter=None):
         assert name in ['10', '40']
         self.name = name
@@ -64,20 +64,17 @@ class ModelNet(InMemoryDataset): #
     @property
     def raw_file_names(self):
         return [
-            'stairs', 'chair', 'door', 'desk', 'toilet', 'sink', 'table',
-                       'bench', 'bookshelf',
-                       'lamp',   'monitor',
-                       'sofa', 'stool'
+            'bathtub', 'bed', 'chair', 'desk', 'dresser', 'monitor',
+            'night_stand', 'sofa', 'table', 'toilet'
         ]
     #   'tv_stand'
     # 'airplane', 'bottle',  'cone', 'bowl', 'bathtub',+'car','cup', 'laptop','flower_pot', 'glass_box', 'guitar', 'keyboard', 'mantel', 'person','piano', 'plant', 'radio', 'range_hood','tent', 'vase', 'xbox'
 
     @property
     def classmap(self):
-        return {0: 'stairs', 1: 'chair', 2: 'door', 3: 'desk', 4: 'toilet', 5: 'sink', 6: 'table',
-                7: 'bench', 8: 'bookshelf',
-                9: 'lamp', 10: 'monitor',
-                11: 'sofa', 12: 'stool'
+        return {0: 'bathtub', 1: 'bed', 2: 'chair', 3: 'desk', 4: 'dresser', 5: 'monitor', 6: 'night_stand',
+                7: 'sofa', 8: 'table',
+                9: 'toilet'
                 }
 
     """
@@ -91,7 +88,7 @@ class ModelNet(InMemoryDataset): #
         return ['training.pt', 'test.pt']
 
     def download(self):
-        """
+
         path = download_url(self.urls[self.name], self.root)
         extract_zip(path, self.root)
         os.unlink(path)
@@ -104,7 +101,7 @@ class ModelNet(InMemoryDataset): #
         if osp.exists(metadata_folder):
             shutil.rmtree(metadata_folder)
 
-        """
+
         return
 
     def process(self):
