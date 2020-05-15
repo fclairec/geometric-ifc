@@ -4,6 +4,7 @@ from torch.nn import Sequential as Seq, Linear as Lin, ReLU, Dropout, BatchNorm1
 from torch_geometric.nn import PointConv, fps, radius, global_max_pool
 from torch_geometric.nn import DynamicEdgeConv, global_max_pool, GraphUNet
 from torch_geometric.utils import dropout_adj
+import numpy
 
 class SAModule(torch.nn.Module):
     def __init__(self, ratio, r, nn):
@@ -89,6 +90,7 @@ class DGCNNNet(torch.nn.Module):
         out = self.lin1(torch.cat([x1, x2], dim=1))
         out = global_max_pool(out, batch)
         out = self.mlp(out)
+
         return F.log_softmax(out, dim=1)
 
 

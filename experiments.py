@@ -181,7 +181,7 @@ class Experimenter(object):
             # threshold = trainer.optim_threshold(val_loader)
             # result['threshold'] = threshold
 
-            test_acc, y_pred, y_real = trainer.test(test_loader)
+            test_acc, y_pred, y_real, _ = trainer.test(test_loader)
             result['test_acc'] = test_acc
 
             conf_mat = confusion_matrix(y_true=y_real, y_pred=y_pred)

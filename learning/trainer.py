@@ -116,24 +116,25 @@ class Trainer:
 
     def test(self, data_loader):
         self.model.eval()
-        y_pred=[]
-        y_real=[]
-        correct=0
+        y_pred = []
+        y_real = []
+        correct = 0
+        prob = []
         for data in data_loader:
             data = data.to(device)
             loss = F.nll_loss(self.model(data), data.y)
             with torch.no_grad():
-                pred = self.model(data).max(1)[1]
-                m = self.model(data)
-                d= m.min(1)
-                a=d[1]
+                logSM = self.model(data)
+                SM = torch.max(torch.exp(logSM))
+                pred = logSM.max(1)[1]
             correct += pred.eq(data.y).sum().item()
             y_pred = concat((y_pred, pred.cpu().numpy()))
             y_real = concat((y_real, data.y.cpu().numpy()))
+            prob.append(SM.cpu().numpy())
 
         acc = correct / len(data_loader.dataset)
 
-        return acc, y_pred, y_real
+        return acc, y_pred, y_real, prob
 
     def save_checkpoint(self, path, state, is_best):
         filename = 'model_state.pth.tar'

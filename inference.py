@@ -74,7 +74,7 @@ class Inference(object):
             if not os.path.exists(output_path):
                 os.makedirs(output_path)
             trainer = Trainer(model, output_path)
-            test_acc, y_pred_list, y_real_list = trainer.test(test_loader)
+            test_acc, y_pred_list, y_real_list, prob = trainer.test(test_loader)
             print(test_acc)
 
             # get labels
@@ -90,6 +90,7 @@ class Inference(object):
             # Write files
             for i, data in enumerate(test_loader):
 
+                certainty = prob[i]
                 y_real = y_real_list[i]
                 y_pred = y_pred_list[i]
                 y_real_l = test_data.classmap[y_real]
@@ -105,18 +106,18 @@ class Inference(object):
                 ax.set_zlim(-1, 1)
 
                 if y_pred != y_real:
-                    out = output_path_error + "/" + str(i) + y_real_l + "-" + y_pred_l
+                    out = output_path_error + "/" + str(i) + y_real_l  + "-" + y_pred_l + "-with(" + str(certainty) + ")"
                     with open(out + ".txt", "w") as text_file:
                         for line in pos:
                             text_file.write(str(line[0]) + ', ' + str(line[1]) + ', ' + str(line[2]) + '\n')
-                    plt.savefig(out+'png')
+                    plt.savefig(out+'.png')
                     plt.show()
                 else:
-                    out = output_path + "/" + str(i) + y_real_l + "-" + y_pred_l
+                    out = output_path + "/" + str(i) + y_real_l  + "-" + y_pred_l + "-with(" + str(certainty) + ")"
                     with open(out + ".txt", "w") as text_file:
                         for line in pos:
                             text_file.write(str(line[0]) + ', ' + str(line[1]) + ', ' + str(line[2]) + '\n')
-                    plt.savefig(out + 'png')
+                    plt.savefig(out + '.png')
                     plt.show()
 
 
