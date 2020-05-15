@@ -1,5 +1,6 @@
 import torch
 from datasets.bim import BIM
+from datasets.ModelNet import ModelNet
 import os
 from learning.models import PN2Net, DGCNNNet, UNet
 import learning.models
@@ -21,10 +22,18 @@ class Inference(object):
 
     def infer(self, test=False):
         if test:
+
+
+
+            transform, pre_transform = T.NormalizeScale(), T.SamplePoints(1024)
+            test_data = ModelNet(path, '10', False, transform, pre_transform)
+            test_loader = DataLoader(test_data, batch_size=1, shuffle=False, num_workers=6)
+            """
             transform = T.Compose([T.Distance(), T.Center()])
 
             test_data = BIM(path, False, transform)
             test_loader = DataLoader(test_data, batch_size=1, shuffle=False, num_workers=6)
+            """
         else:
             print('Warning: inference dataloader not yet implemented')
             return
@@ -45,7 +54,7 @@ class Inference(object):
 
                 dataset = BIM(path, True, transform)
                 test_data = BIM(path, False, transform)
-                test_loader = DataLoader(test_data, batch_size=1, shuffle=False, num_workers=0)
+                test_loader = DataLoader(test_data, batch_size=1, shuffle=False, num_workers=6)
                 model_class = getattr(learning.models, model_name)
                 model = model_class(num_features=dataset.num_features, num_classes=dataset.num_classes,
                                    num_nodes=dataset.data.num_nodes).to(device)
@@ -135,7 +144,9 @@ if __name__ == '__main__':
         i += 1
     print('inference for {} models with test {}'.format(i, test))
 
-    path = '../../BIM_PC/points'
+    #path = '../../BIM_PC/points'
+
+    path = '../../ModelNet10'
     # if not test set --> change path
 
     inf = Inference(path)
