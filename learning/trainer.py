@@ -6,8 +6,6 @@ import torch.nn.functional as F
 from sklearn.metrics import roc_auc_score, average_precision_score
 from torch_geometric.utils import (negative_sampling, remove_self_loops,
                                    add_self_loops)
-from ignite.metrics import Accuracy
-from sklearn.metrics import accuracy_score
 
 #from tensorflow.keras.metrics import Accuracy
 from tqdm import tqdm
@@ -21,6 +19,18 @@ from numpy import concatenate as concat
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 #device = 'cpu'
 printout = 15
+
+def pointnetloss(outputs, labels, m3x3, m64x64, alpha = 0.0001):
+    criterion = torch.nn.NLLLoss()
+    bs=outputs.size(0)
+    id3x3 = torch.eye(3, requires_grad=True).repeat(bs,1,1)
+    id64x64 = torch.eye(64, requires_grad=True).repeat(bs,1,1)
+    if outputs.is_cuda:
+        id3x3=id3x3.cuda()
+        id64x64=id64x64.cuda()
+    diff3x3 = id3x3-torch.bmm(m3x3,m3x3.transpose(1,2))
+    diff64x64 = id64x64-torch.bmm(m64x64,m64x64.transpose(1,2))
+    return criterion(outputs, labels) + alpha * (torch.norm(diff3x3)+torch.norm(diff64x64)) / float(bs)
 
 
 class Trainer:
@@ -42,15 +52,16 @@ class Trainer:
             for i, data in enumerate(train_loader):
                 data = data.to(device)
                 optimizer.zero_grad()
-                loss = F.nll_loss(self.model(data), data.y)
+                outputs = self.model(data)[0]
+                loss = F.nll_loss(outputs, data.y)
                 loss.backward()
                 optimizer.step()
                 train_losses.append(loss.data)
 
                 # for batch progress tracking in terminal
                 if (i + 1) % printout == 0:
-                    print('\nBatches {}-{}/{} (BS = {})'.format(i - printout + 1, i, len(train_loader),
-                                                                train_loader.batch_size))
+                    print('\nBatches {}-{}/{} (BS = {}) with loss {}'.format(i - printout + 1, i, len(train_loader),
+                                                                train_loader.batch_size, loss))
 
             epoch_losses.append(torch.mean(torch.stack(train_losses, dim=0)))
 
@@ -104,9 +115,9 @@ class Trainer:
         correct=0
         for data in data_loader:
             data = data.to(device)
-            loss = F.nll_loss(self.model(data), data.y)
+            loss = F.nll_loss(self.model(data)[0], data.y)
             with torch.no_grad():
-                pred = self.model(data).max(1)[1]
+                pred = self.model(data)[0].max(1)[1]
             correct += pred.eq(data.y).sum().item()
 
         acc = correct / len(data_loader.dataset)
@@ -120,21 +131,23 @@ class Trainer:
         y_real = []
         correct = 0
         prob = []
+        crit_points_list=[]
         for data in data_loader:
             data = data.to(device)
-            loss = F.nll_loss(self.model(data), data.y)
+            loss = F.nll_loss(self.model(data)[0], data.y)
             with torch.no_grad():
-                logSM = self.model(data)
+                logSM, crit_points = self.model(data)
                 SM = torch.max(torch.exp(logSM))
                 pred = logSM.max(1)[1]
             correct += pred.eq(data.y).sum().item()
             y_pred = concat((y_pred, pred.cpu().numpy()))
             y_real = concat((y_real, data.y.cpu().numpy()))
+            crit_points_list.append(crit_points.cpu().numpy())
             prob.append(SM.cpu().numpy())
 
         acc = correct / len(data_loader.dataset)
 
-        return acc, y_pred, y_real, prob
+        return acc, y_pred, y_real, prob, crit_points_list
 
     def save_checkpoint(self, path, state, is_best):
         filename = 'model_state.pth.tar'

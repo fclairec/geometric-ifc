@@ -4,18 +4,17 @@ import shutil
 import glob
 
 import torch
-from torch_geometric.data import InMemoryDataset, download_url, extract_zip, Dataset
+from torch_geometric.data import download_url, extract_zip, Dataset, InMemoryDataset
 from torch_geometric.io import read_off
+from helpers.in_memory_dataset import InMemoryDataset
 
 
-class ModelNet(InMemoryDataset): #
+class ModelNet(InMemoryDataset):  #
     r"""The ModelNet10/40 datasets from the `"3D ShapeNets: A Deep
     Representation for Volumetric Shapes"
     <https://people.csail.mit.edu/khosla/papers/cvpr2015_wu.pdf>`_ paper,
     containing CAD models of 10 and 40 categories, respectively.
-
     .. note::
-
         Data objects hold mesh faces instead of edge indices.
         To convert the mesh to a graph, use the
         :obj:`torch_geometric.transforms.FaceToEdge` as :obj:`pre_transform`.
@@ -23,7 +22,6 @@ class ModelNet(InMemoryDataset): #
         :obj:`torch_geometric.transforms.SamplePoints` as :obj:`transform` to
         sample a fixed number of points on the mesh faces according to their
         face area.
-
     Args:
         root (string): Root directory where the dataset should be saved.
         name (string, optional): The name of the dataset (:obj:`"10"` for
@@ -46,11 +44,12 @@ class ModelNet(InMemoryDataset): #
 
     urls = {
         '10':
-        'http://vision.princeton.edu/projects/2014/3DShapeNets/ModelNet10.zip',
+            'http://vision.princeton.edu/projects/2014/3DShapeNets/ModelNet10.zip',
         '40': 'http://modelnet.cs.princeton.edu/ModelNet40.zip'
 
     }
-    #'40': 'https://shapenet.cs.stanford.edu/media/modelnet40_normal_resampled.zip'
+
+    # '40': 'https://shapenet.cs.stanford.edu/media/modelnet40_normal_resampled.zip'
 
     def __init__(self, root, name='10', train=True, transform=None,
                  pre_transform=None, pre_filter=None):
@@ -67,22 +66,22 @@ class ModelNet(InMemoryDataset): #
             'bathtub', 'bed', 'chair', 'desk', 'dresser', 'monitor',
             'night_stand', 'sofa', 'table', 'toilet'
         ]
+
     #   'tv_stand'
     # 'airplane', 'bottle',  'cone', 'bowl', 'bathtub',+'car','cup', 'laptop','flower_pot', 'glass_box', 'guitar', 'keyboard', 'mantel', 'person','piano', 'plant', 'radio', 'range_hood','tent', 'vase', 'xbox'
 
     @property
     def classmap(self):
-        return {0: 'bathtub', 1: 'bed', 2: 'chair', 3: 'desk', 4: 'dresser', 5: 'monitor', 6: 'night_stand',
-                7: 'sofa', 8: 'table',
-                9: 'toilet'
+        return {0: 'bathtub', 1: 'bed', 2: 'chair', 3: 'desk', 4: 'dresser', 5: 'monitor', 6: 'night_stand', 7: 'sofa',
+                8: 'table', 9: 'toilet'
                 }
 
     """
     #   18: 'tv_stand'
-    
 
     #10:'airplane', 14:'bottle', 17:'cone',16:'laptop', 16:'car', 13:'bowl', 18:'cup', 20: 'flower_pot',  9:'bathtub',22:'guitar', 23:'keyboard', 26:'mantel',29:'person', 30: 'piano', 31: 'plant', 32: 'radio', 33: 'range_hood', 38: 'vase', 39: 'xbox', 36: 'tent',21:'glass_box',
     """
+
     @property
     def processed_file_names(self):
         return ['training.pt', 'test.pt']
@@ -101,7 +100,6 @@ class ModelNet(InMemoryDataset): #
         if osp.exists(metadata_folder):
             shutil.rmtree(metadata_folder)
 
-
         return
 
     def process(self):
@@ -110,7 +108,7 @@ class ModelNet(InMemoryDataset): #
 
     def process_set(self, dataset):
         categories = glob.glob(osp.join(self.raw_dir, '*', ''))
-        categories = self.raw_file_names#sorted([x.split(os.sep)[-2] for x in categories])
+        categories = self.raw_file_names  # sorted([x.split(os.sep)[-2] for x in categories])
 
         data_list = []
         for target, category in enumerate(categories):

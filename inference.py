@@ -10,6 +10,8 @@ import numpy
 import matplotlib.pyplot as plt
 from mpl_toolkits import mplot3d
 import torch_geometric.transforms as T
+from sklearn.metrics import confusion_matrix, classification_report
+from pandas import DataFrame
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
@@ -25,9 +27,9 @@ class Inference(object):
 
 
 
-            transform, pre_transform = T.NormalizeScale(), T.SamplePoints(1024)
-            test_data = ModelNet(path, '10', False, transform, pre_transform)
-            test_loader = DataLoader(test_data, batch_size=1, shuffle=False, num_workers=6)
+            transform = T.Compose([T.NormalizeScale(), T.SamplePoints(3000)])
+            test_data = ModelNet(path, '10', False, transform)
+            test_loader = DataLoader(test_data, batch_size=1, shuffle=False, num_workers=0)
             """
             transform = T.Compose([T.Distance(), T.Center()])
 
@@ -74,13 +76,24 @@ class Inference(object):
             if not os.path.exists(output_path):
                 os.makedirs(output_path)
             trainer = Trainer(model, output_path)
-            test_acc, y_pred_list, y_real_list, prob = trainer.test(test_loader)
+            test_acc, y_pred_list, y_real_list, prob, crit_points_list_ind = trainer.test(test_loader)
             print(test_acc)
 
             # get labels
             real_target_names = [test_data.classmap[i] for i in numpy.unique(numpy.array(test_data.data.y))]
 
-            # Write plots
+            # reports
+            conf_mat = confusion_matrix(y_true=y_real_list, y_pred=y_pred_list)
+            df1 = DataFrame(conf_mat)
+            filename = output_path + '/confmat_report.csv'
+            df1.to_csv(filename)
+
+            real_target_names = [test_data.classmap[i] for i in numpy.unique(numpy.array(test_data.data.y))]
+            class_rep = classification_report(y_true=y_real_list, y_pred=y_pred_list, target_names=real_target_names,
+                                              output_dict=True)
+            df2 = DataFrame(class_rep).transpose()
+            filename = output_path + '/class_report.csv'
+            df2.to_csv(filename)
 
 
 
@@ -89,6 +102,11 @@ class Inference(object):
 
             # Write files
             for i, data in enumerate(test_loader):
+
+                if i==3:
+                    break
+
+                #crit_points = [data.pos[j] for j in crit_points_list_ind[i][0]]
 
                 certainty = prob[i]
                 y_real = y_real_list[i]
@@ -99,8 +117,14 @@ class Inference(object):
 
                 xyz = numpy.array(
                     [list(a) for a in zip(data.pos[:, 0].numpy(), data.pos[:, 1].numpy(), data.pos[:, 2].numpy())])
+
+                crit_unique_ind = numpy.unique(crit_points_list_ind[i])
+                crit_points = numpy.vstack([xyz[j] for j in crit_unique_ind])
+                print("Shown {} critical points".format(len(crit_points)))
+
                 ax = plt.axes(projection='3d')
-                ax.scatter(xyz[:, 0], xyz[:, 1], xyz[:, 2], color='black', s=10)
+                #ax.scatter(xyz[:, 0], xyz[:, 1], xyz[:, 2], color='black', s=10)
+                ax.scatter(crit_points[:, 0], crit_points[:, 1], crit_points[:, 2], color='red', s=20)
                 ax.set_xlim(left=1, right=-1)
                 ax.set_ylim(bottom=1, top=-1)
                 ax.set_zlim(-1, 1)
@@ -119,6 +143,8 @@ class Inference(object):
                             text_file.write(str(line[0]) + ', ' + str(line[1]) + ', ' + str(line[2]) + '\n')
                     plt.savefig(out + '.png')
                     plt.show()
+
+
 
 
 

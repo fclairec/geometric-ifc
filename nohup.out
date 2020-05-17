@@ -1,0 +1,459 @@
+Traceback (most recent call last):
+  File "experiments.py", line 3, in <module>
+    import torch
+ModuleNotFoundError: No module named 'torch'
+Training graphs:  3191
+Validation graphs:  800
+Run 0 of 1
+processing epochs...:   0%|          | 0/150 [00:00<?, ?it/s]
+Batches 0-14/100 (BS = 32)
+
+Batches 15-29/100 (BS = 32)
+
+Batches 30-44/100 (BS = 32)
+
+Batches 45-59/100 (BS = 32)
+
+Batches 60-74/100 (BS = 32)
+
+Batches 75-89/100 (BS = 32)
+train correct
+correct 377 / 3191
+eval correct
+correct 128 / 800
+
+Epoch 0 - train loss: 3.856043815612793, train acc: 0.11814478219993732 val acc: 0.16
+processing epochs...:   1%|          | 1/150 [55:46<138:30:38, 3346.57s/it]
+Batches 0-14/100 (BS = 32)
+
+Batches 15-29/100 (BS = 32)
+
+Batches 30-44/100 (BS = 32)
+
+Batches 45-59/100 (BS = 32)
+
+Batches 60-74/100 (BS = 32)
+
+Batches 75-89/100 (BS = 32)
+train correct
+correct 332 / 3191
+eval correct
+correct 27 / 800
+
+Epoch 1 - train loss: 2.3048348426818848, train acc: 0.10404261986837982 val acc: 0.03375
+processing epochs...:   1%|▏         | 2/150 [1:52:07<138:00:15, 3356.86s/it]
+Batches 0-14/100 (BS = 32)
+
+Batches 15-29/100 (BS = 32)
+
+Batches 30-44/100 (BS = 32)
+
+Batches 45-59/100 (BS = 32)
+
+Batches 60-74/100 (BS = 32)
+
+Batches 75-89/100 (BS = 32)
+train correct
+correct 335 / 3191
+eval correct
+correct 66 / 800
+
+Epoch 2 - train loss: 2.320319175720215, train acc: 0.10498276402381698 val acc: 0.0825
+processing epochs...:   2%|▏         | 3/150 [2:47:54<136:56:57, 3353.86s/it]
+Batches 0-14/100 (BS = 32)
+
+Batches 15-29/100 (BS = 32)
+
+Batches 30-44/100 (BS = 32)
+
+Batches 45-59/100 (BS = 32)
+
+Batches 60-74/100 (BS = 32)
+
+Batches 75-89/100 (BS = 32)
+train correct
+correct 331 / 3191
+eval correct
+correct 136 / 800
+
+Epoch 3 - train loss: 2.3042497634887695, train acc: 0.10372923848323409 val acc: 0.17
+processing epochs...:   3%|▎         | 4/150 [3:44:19<136:23:51, 3363.23s/it]
+Batches 0-14/100 (BS = 32)
+
+Batches 15-29/100 (BS = 32)
+
+Batches 30-44/100 (BS = 32)
+
+Batches 45-59/100 (BS = 32)
+
+Batches 60-74/100 (BS = 32)
+
+Batches 75-89/100 (BS = 32)
+train correct
+correct 294 / 3191
+eval correct
+correct 40 / 800
+
+Epoch 4 - train loss: 2.3045084476470947, train acc: 0.09213412723284237 val acc: 0.05
+processing epochs...:   3%|▎         | 5/150 [4:39:53<135:06:32, 3354.43s/it]
+Batches 0-14/100 (BS = 32)
+
+Batches 15-29/100 (BS = 32)
+
+Batches 30-44/100 (BS = 32)
+
+Batches 45-59/100 (BS = 32)
+
+Batches 60-74/100 (BS = 32)
+
+Batches 75-89/100 (BS = 32)
+train correct
+correct 309 / 3191
+eval correct
+correct 40 / 800
+
+Epoch 5 - train loss: 2.3037831783294678, train acc: 0.0968348480100282 val acc: 0.05
+processing epochs...:   4%|▍         | 6/150 [5:35:41<134:05:50, 3352.44s/it]
+Batches 0-14/100 (BS = 32)
+
+Batches 15-29/100 (BS = 32)
+
+Batches 30-44/100 (BS = 32)
+
+Batches 45-59/100 (BS = 32)
+
+Batches 60-74/100 (BS = 32)
+
+Batches 75-89/100 (BS = 32)
+train correct
+correct 426 / 3191
+eval correct
+correct 49 / 800
+
+Epoch 6 - train loss: 2.303797721862793, train acc: 0.13350047007207771 val acc: 0.06125
+processing epochs...:   5%|▍         | 7/150 [6:31:45<133:18:50, 3356.16s/it]
+Batches 0-14/100 (BS = 32)
+
+Batches 15-29/100 (BS = 32)
+
+Batches 30-44/100 (BS = 32)
+
+Batches 45-59/100 (BS = 32)
+
+Batches 60-74/100 (BS = 32)
+
+Batches 75-89/100 (BS = 32)
+train correct
+correct 342 / 3191
+eval correct
+correct 177 / 800
+
+Epoch 7 - train loss: 2.3246798515319824, train acc: 0.10717643371983704 val acc: 0.22125
+processing epochs...:   5%|▌         | 8/150 [7:27:44<132:24:59, 3357.04s/it]
+Batches 0-14/100 (BS = 32)
+
+Batches 15-29/100 (BS = 32)
+
+Batches 30-44/100 (BS = 32)
+
+Batches 45-59/100 (BS = 32)
+
+Batches 60-74/100 (BS = 32)
+
+Batches 75-89/100 (BS = 32)
+train correct
+correct 277 / 3191
+eval correct
+correct 69 / 800
+
+Epoch 8 - train loss: 2.3032820224761963, train acc: 0.08680664368536509 val acc: 0.08625
+processing epochs...:   6%|▌         | 9/150 [8:23:20<131:13:42, 3350.51s/it]
+Batches 0-14/100 (BS = 32)
+
+Batches 15-29/100 (BS = 32)
+
+Batches 30-44/100 (BS = 32)
+
+Batches 45-59/100 (BS = 32)
+
+Batches 60-74/100 (BS = 32)
+
+Batches 75-89/100 (BS = 32)
+train correct
+correct 301 / 3191
+eval correct
+correct 93 / 800
+
+Epoch 9 - train loss: 2.304687738418579, train acc: 0.09432779692886242 val acc: 0.11625
+processing epochs...:   7%|▋         | 10/150 [9:18:50<130:03:18, 3344.27s/it]
+Batches 0-14/100 (BS = 32)
+
+Batches 15-29/100 (BS = 32)
+
+Batches 30-44/100 (BS = 32)
+
+Batches 45-59/100 (BS = 32)
+
+Batches 60-74/100 (BS = 32)
+
+Batches 75-89/100 (BS = 32)
+train correct
+correct 486 / 3191
+eval correct
+correct 40 / 800
+
+Epoch 10 - train loss: 2.3010191917419434, train acc: 0.15230335318082106 val acc: 0.05
+processing epochs...:   7%|▋         | 11/150 [10:15:08<129:31:14, 3354.49s/it]
+Batches 0-14/100 (BS = 32)
+
+Batches 15-29/100 (BS = 32)
+
+Batches 30-44/100 (BS = 32)
+
+Batches 45-59/100 (BS = 32)
+
+Batches 60-74/100 (BS = 32)
+
+Batches 75-89/100 (BS = 32)
+train correct
+correct 307 / 3191
+eval correct
+correct 40 / 800
+
+Epoch 11 - train loss: 2.3032279014587402, train acc: 0.09620808523973676 val acc: 0.05
+processing epochs...:   8%|▊         | 12/150 [11:10:49<128:25:54, 3350.39s/it]
+Batches 0-14/100 (BS = 32)
+
+Batches 15-29/100 (BS = 32)
+
+Batches 30-44/100 (BS = 32)
+
+Batches 45-59/100 (BS = 32)
+
+Batches 60-74/100 (BS = 32)
+
+Batches 75-89/100 (BS = 32)
+train correct
+correct 319 / 3191
+eval correct
+correct 80 / 800
+
+Epoch 12 - train loss: 2.3112952709198, train acc: 0.09996866186148542 val acc: 0.1
+processing epochs...:   9%|▊         | 13/150 [12:07:01<127:45:02, 3356.95s/it]
+Batches 0-14/100 (BS = 32)
+
+Batches 15-29/100 (BS = 32)
+
+Batches 30-44/100 (BS = 32)
+
+Batches 45-59/100 (BS = 32)
+
+Batches 60-74/100 (BS = 32)
+
+Batches 75-89/100 (BS = 32)
+train correct
+correct 308 / 3191
+eval correct
+correct 41 / 800
+
+Epoch 13 - train loss: 2.3043253421783447, train acc: 0.09652146662488248 val acc: 0.05125
+processing epochs...:   9%|▉         | 14/150 [13:03:19<127:03:30, 3363.31s/it]
+Batches 0-14/100 (BS = 32)
+
+Batches 15-29/100 (BS = 32)
+
+Batches 30-44/100 (BS = 32)
+
+Batches 45-59/100 (BS = 32)
+
+Batches 60-74/100 (BS = 32)
+
+Batches 75-89/100 (BS = 32)
+train correct
+correct 330 / 3191
+eval correct
+correct 79 / 800
+
+Epoch 14 - train loss: 2.305619239807129, train acc: 0.10341585709808837 val acc: 0.09875
+processing epochs...:  10%|█         | 15/150 [13:59:25<126:09:15, 3364.11s/it]
+Batches 0-14/100 (BS = 32)
+
+Batches 15-29/100 (BS = 32)
+
+Batches 30-44/100 (BS = 32)
+
+Batches 45-59/100 (BS = 32)
+
+Batches 60-74/100 (BS = 32)
+
+Batches 75-89/100 (BS = 32)
+train correct
+correct 322 / 3191
+eval correct
+correct 40 / 800
+
+Epoch 15 - train loss: 2.303466558456421, train acc: 0.10090880601692259 val acc: 0.05
+processing epochs...:  11%|█         | 16/150 [14:55:05<124:57:03, 3356.89s/it]Traceback (most recent call last):
+  File "experiments.py", line 13, in <module>
+    from datasets.ModelNet import ModelNet
+  File "/home/ubuntu/tmp/proj34/geometric-ifc/datasets/ModelNet.py", line 72
+    'bathtub', 'night_stand', 'sofa', 'table', 'toilet'
+    ^
+IndentationError: unexpected indent
+Training graphs:  2059
+Validation graphs:  231
+Run 0 of 2
+processing epochs...:   0%|          | 0/6 [00:00<?, ?it/s]
+Batches 0-14/138 (BS = 15) with loss 2.1747450828552246
+Training graphs:  2059
+Validation graphs:  231
+Run 0 of 2
+processing epochs...:   0%|          | 0/3 [00:00<?, ?it/s]
+Batches 0-14/138 (BS = 15) with loss 68.8978042602539
+
+Batches 15-29/138 (BS = 15) with loss 1.7796188592910767
+
+Batches 30-44/138 (BS = 15) with loss 1.6101975440979004
+
+Batches 45-59/138 (BS = 15) with loss 1.6147996187210083
+
+Batches 60-74/138 (BS = 15) with loss 1.5739035606384277
+
+Batches 75-89/138 (BS = 15) with loss 1.60984468460083
+
+Batches 90-104/138 (BS = 15) with loss 1.6358634233474731
+
+Batches 120-134/138 (BS = 15) with loss 1.5594029426574707
+train correct
+correct 372 / 2059
+eval correct
+correct 47 / 231
+
+Epoch 0 - train loss: 280.0677795410156, train acc: 0.18067022826614862 val acc: 0.20346320346320346
+processing epochs...:  33%|███▎      | 1/3 [36:35<1:13:11, 2195.91s/it]
+Batches 0-14/138 (BS = 15) with loss 1.6655552387237549
+
+Batches 15-29/138 (BS = 15) with loss 1.6255806684494019
+
+Batches 30-44/138 (BS = 15) with loss 1.6036404371261597
+
+Batches 45-59/138 (BS = 15) with loss 1.5689938068389893
+
+Batches 60-74/138 (BS = 15) with loss 1.6375621557235718
+
+Batches 75-89/138 (BS = 15) with loss 1.6160895824432373
+
+Batches 90-104/138 (BS = 15) with loss 1.6402982473373413
+
+Batches 105-119/138 (BS = 15) with loss 1.5973268747329712
+
+Batches 120-134/138 (BS = 15) with loss 1.61931574344635
+train correct
+correct 401 / 2059
+eval correct
+correct 35 / 231
+
+Epoch 1 - train loss: 1.6413928270339966, train acc: 0.19475473530840215 val acc: 0.15151515151515152
+processing epochs...:  67%|██████▋   | 2/3 [1:12:58<36:31, 2191.82s/it]
+Batches 0-14/138 (BS = 15) with loss 1.5989667177200317
+
+Batches 15-29/138 (BS = 15) with loss 1.6084469556808472
+
+Batches 30-44/138 (BS = 15) with loss 1.6442711353302002
+
+Batches 45-59/138 (BS = 15) with loss 1.6123887300491333
+
+Batches 60-74/138 (BS = 15) with loss 1.7103976011276245
+
+Batches 75-89/138 (BS = 15) with loss 1.6066900491714478
+
+Batches 90-104/138 (BS = 15) with loss 1.628261685371399
+
+Batches 105-119/138 (BS = 15) with loss 1.6145771741867065
+
+Batches 120-134/138 (BS = 15) with loss 1.6750701665878296
+train correct
+correct 423 / 2059
+eval correct
+correct 40 / 231
+
+Epoch 2 - train loss: 1.6238194704055786, train acc: 0.20543953375424964 val acc: 0.17316017316017315
+processing epochs...: 100%|██████████| 3/3 [1:49:27<00:00, 2190.98s/it]processing epochs...: 100%|██████████| 3/3 [1:49:27<00:00, 2189.07s/it]
+/home/ubuntu/anaconda3/envs/pytorch_geom_p36/lib/python3.6/site-packages/sklearn/metrics/_classification.py:1272: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+test acc = 0.205761316872428
+Run 1 of 2
+processing epochs...:   0%|          | 0/3 [00:00<?, ?it/s]
+Batches 0-14/138 (BS = 15) with loss 2.4264018535614014
+
+Batches 15-29/138 (BS = 15) with loss 1.3349891901016235
+
+Batches 30-44/138 (BS = 15) with loss 1.1621676683425903
+
+Batches 45-59/138 (BS = 15) with loss 1.4206924438476562
+
+Batches 60-74/138 (BS = 15) with loss 1.2624975442886353
+
+Batches 75-89/138 (BS = 15) with loss 1.0778769254684448
+
+Batches 90-104/138 (BS = 15) with loss 0.6747244000434875
+
+Batches 105-119/138 (BS = 15) with loss 0.7933457493782043
+
+Batches 120-134/138 (BS = 15) with loss 0.8504775762557983
+train correct
+correct 1761 / 2059
+eval correct
+correct 194 / 231
+
+Epoch 0 - train loss: 1.3456138372421265, train acc: 0.8552695483244294 val acc: 0.8398268398268398
+processing epochs...:  33%|███▎      | 1/3 [36:33<1:13:07, 2193.99s/it]
+Batches 0-14/138 (BS = 15) with loss 0.9556424617767334
+
+Batches 15-29/138 (BS = 15) with loss 0.6738154292106628
+
+Batches 30-44/138 (BS = 15) with loss 0.3988441228866577
+
+Batches 45-59/138 (BS = 15) with loss 0.2870720624923706
+
+Batches 60-74/138 (BS = 15) with loss 0.39672666788101196
+
+Batches 75-89/138 (BS = 15) with loss 0.40676558017730713
+
+Batches 90-104/138 (BS = 15) with loss 0.249287411570549
+
+Batches 105-119/138 (BS = 15) with loss 0.3223945200443268
+
+Batches 120-134/138 (BS = 15) with loss 1.0107834339141846
+train correct
+correct 1803 / 2059
+eval correct
+correct 204 / 231
+
+Epoch 1 - train loss: 0.5919947028160095, train acc: 0.8756677999028655 val acc: 0.8831168831168831
+processing epochs...:  67%|██████▋   | 2/3 [1:12:48<36:28, 2188.15s/it]
+Batches 0-14/138 (BS = 15) with loss 0.633108377456665
+
+Batches 15-29/138 (BS = 15) with loss 0.41340553760528564
+
+Batches 30-44/138 (BS = 15) with loss 0.44284969568252563
+
+Batches 45-59/138 (BS = 15) with loss 0.42375320196151733
+
+Batches 60-74/138 (BS = 15) with loss 0.35847872495651245
+
+Batches 75-89/138 (BS = 15) with loss 0.07098321616649628
+
+Batches 90-104/138 (BS = 15) with loss 0.3678346574306488
+
+Batches 105-119/138 (BS = 15) with loss 0.6682624816894531
+
+Batches 120-134/138 (BS = 15) with loss 0.4396936595439911
+train correct
+correct 1867 / 2059
+eval correct
+correct 203 / 231
+
+Epoch 2 - train loss: 0.48176321387290955, train acc: 0.906750849927149 val acc: 0.8787878787878788
+processing epochs...: 100%|██████████| 3/3 [1:52:36<00:00, 2248.24s/it]processing epochs...: 100%|██████████| 3/3 [1:52:36<00:00, 2252.32s/it]
+test acc = 0.8950617283950617

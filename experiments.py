@@ -2,14 +2,14 @@ __author__ = 'fiona.collins'
 
 import torch
 from sklearn.model_selection import ParameterGrid
-from torch_geometric.data import DataLoader
+from torch_geometric.data import DataLoader, DenseDataLoader, DataListLoader
 import torch_geometric.transforms as T
 from torch_cluster import knn_graph
 
 from datasets.bim import BIM
 from datasets.ModelNet import ModelNet
 
-from learning.models import PN2Net, DGCNNNet, UNet
+from learning.models import PN2Net, DGCNNNet, UNet, PointNet
 from learning.trainer import Trainer
 
 import os
@@ -44,13 +44,9 @@ def random_splits(dataset, num_classes):
         index = index[torch.randperm(index.size(0))]
         indices.append(index)
 
-
-
     l_per_class = Set_analyst(given_set=dataset).class_counter()
     lengths = [tup[1] for tup in list(l_per_class.items())]
-    lengths = [int(l*0.8) for l in lengths]
-
-
+    lengths = [int(l*0.9) for l in lengths]
 
     train_index = torch.cat([i[:l] for i, l in zip(indices, lengths)], dim=0)
     rest_index = torch.cat([i[l:] for i, l in zip(indices, lengths)], dim=0)
@@ -80,20 +76,17 @@ class Experimenter(object):
         """
 
         path = '../../ModelNet10'
-        transform, pre_transform = T.Compose([T.NormalizeScale(), T.RandomRotate((-180,180)), T.RandomFlip(axis=0)]), T.SamplePoints(1024)
-        dataset = ModelNet(path, '10', True, transform, pre_transform)
-        test_data = ModelNet(path, '10', False, transform, pre_transform)
-
+        transform = T.Compose([T.NormalizeScale(), T.SamplePoints(1024)])
+        dataset = ModelNet(path, '10', True, transform)
+        test_data = ModelNet(path, '10', False, transform)
 
         _, train_index, val_index = random_splits(dataset, dataset.num_classes)
 
-        train_dataset = dataset[dataset.train_mask].copy(train_index)
-        val_dataset = dataset[dataset.val_mask].copy(val_index)
-
+        train_dataset = dataset[dataset.train_mask].copy_set(train_index)
+        val_dataset = dataset[dataset.val_mask].copy_set(val_index)
 
         print("Training graphs: ", len(train_dataset))
         print("Validation graphs: ", len(val_dataset))
-
 
         l_per_class = Set_analyst(given_set=train_dataset).class_counter()
 
@@ -120,24 +113,6 @@ class Experimenter(object):
             learning_rate = params['learning_rate']
             model_name = params['model_name']
 
-            """
-            class_sample_count = np.array(
-            [len(np.where(target == t)[0]) for t in np.unique(target)])
-            weight = 1. / class_sample_count
-            samples_weight = np.array([weight[t] for t in target])
-
-            samples_weight = torch.from_numpy(samples_weight)
-            samples_weigth = samples_weight.double()
-            sampler = WeightedRandomSampler(samples_weight, len(samples_weight))
-
-            target = torch.from_numpy(target).long()
-            train_dataset = torch.utils.data.TensorDataset(data, target)
-
-            train_loader = DataLoader(
-            train_dataset, batch_size=bs, num_workers=1, sampler=sampler)
-            """
-
-            # , sampler=sampler
             Set_analyst(given_set=train_dataset).bar_plot("train_set")
             train_loader = DataLoader(train_dataset, batch_size=batch_size, num_workers=6, sampler=sampler)
             val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False, num_workers=6)
@@ -148,6 +123,8 @@ class Experimenter(object):
 
             if model_name.__name__ is 'PN2Net':
                 model = model_name(out_channels=train_dataset.num_classes).to(device)
+            if model_name.__name__ is 'PointNet':
+                model = model_name(classes=train_dataset.num_classes).to(device)
             if model_name.__name__ is 'DGCNNNet':
                 model = model_name(out_channels=train_dataset.num_classes).to(device)
 
@@ -177,9 +154,6 @@ class Experimenter(object):
             trainer = Trainer(model, output_path)
             epoch_losses, train_accuracies, val_accuracies = trainer.train(train_loader, val_loader, n_epochs,
                                                                            optimizer)
-
-            # threshold = trainer.optim_threshold(val_loader)
-            # result['threshold'] = threshold
 
             test_acc, y_pred, y_real, _ = trainer.test(test_loader)
             result['test_acc'] = test_acc
@@ -231,9 +205,9 @@ if __name__ == '__main__':
     torch.cuda.empty_cache()
     config = dict()
 
-    config['n_epochs'] = [10]
-    config['learning_rate'] = [1e-1]
-    config['batch_size'] = [10]
+    config['n_epochs'] = [50]
+    config['learning_rate'] = [0.001]
+    config['batch_size'] = [15]
     config['model_name'] = [PN2Net]
     # config['model_name'] = [, PN2Net, DGCNNNet, , DGCNNNet, UNet]
     ex = Experimenter(config)
