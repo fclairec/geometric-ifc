@@ -120,8 +120,11 @@ class InMemoryDataset(Dataset):
 
         return data, slices
 
-    def copy_set(self, idx):
-        data_list = [self.get(i) for i in idx]
+    def copy_set(self, idx=None):
+        if idx == None:
+            data_list = [self.get(i) for i in range(len(self))]
+        else:
+            data_list = [self.get(i) for i in idx]
         dataset = copy.copy(self)
         dataset.__indices__ = None
         dataset.data, dataset.slices = self.collate(data_list)

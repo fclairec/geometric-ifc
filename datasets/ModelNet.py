@@ -65,7 +65,9 @@ class ModelNet(InMemoryDataset):  #
         return [
             'bathtub', 'bed', 'chair', 'desk', 'dresser', 'monitor',
             'night_stand', 'sofa', 'table', 'toilet'
+
         ]
+
 
     #   'tv_stand'
     # 'airplane', 'bottle',  'cone', 'bowl', 'bathtub',+'car','cup', 'laptop','flower_pot', 'glass_box', 'guitar', 'keyboard', 'mantel', 'person','piano', 'plant', 'radio', 'range_hood','tent', 'vase', 'xbox'

@@ -77,16 +77,18 @@ class Experimenter(object):
 
         path = '../../ModelNet10'
         transform = T.Compose([T.NormalizeScale(), T.SamplePoints(1024)])
-        dataset = ModelNet(path, '10', True, transform)
-        test_data = ModelNet(path, '10', False, transform)
+        dataset = ModelNet(path, '10', True, transform).shuffle()
+        #dataset = dataset[:15].copy_set()
+        test_data = ModelNet(path, '10', False, transform).shuffle()
+        #test_data = test_data[:15].copy_set()
 
         _, train_index, val_index = random_splits(dataset, dataset.num_classes)
 
         train_dataset = dataset[dataset.train_mask].copy_set(train_index)
         val_dataset = dataset[dataset.val_mask].copy_set(val_index)
 
-        print("Training graphs: ", len(train_dataset))
-        print("Validation graphs: ", len(val_dataset))
+        print("Training {} graphs with {} number of classes" .format(len(train_dataset), train_dataset.num_classes))
+        print("Validating on {} graphs with {} number of classes: ". format(len(val_dataset), val_dataset.num_classes))
 
         l_per_class = Set_analyst(given_set=train_dataset).class_counter()
 
@@ -114,9 +116,9 @@ class Experimenter(object):
             model_name = params['model_name']
 
             Set_analyst(given_set=train_dataset).bar_plot("train_set")
-            train_loader = DataLoader(train_dataset, batch_size=batch_size, num_workers=6, sampler=sampler)
-            val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False, num_workers=6)
-            test_loader = DataLoader(test_data, batch_size=batch_size, shuffle=False, num_workers=6)
+            train_loader = DataLoader(train_dataset, batch_size=batch_size, num_workers=0, sampler=sampler)
+            val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False, num_workers=0)
+            test_loader = DataLoader(test_data, batch_size=batch_size, shuffle=False, num_workers=0)
             Set_analyst(train_loader).bar_plot("train")
             Set_analyst(val_loader).bar_plot("val")
             Set_analyst(test_loader).bar_plot("test")
@@ -134,17 +136,28 @@ class Experimenter(object):
                 dataset = BIM(path, True, transform)
                 test_data = BIM(path, False, transform)
                 train_data = dataset[:train_size]"""
-                transform, pre_transform = T.Compose([T.NormalizeScale(), T.KNNGraph(k=3)]), T.SamplePoints(1024)
-                dataset = ModelNet(path, '10', True, transform, pre_transform).shuffle()
-                test_data = ModelNet(path, '10', False, transform, pre_transform)
-                train_data = dataset[:train_size]
-                val_data = dataset[train_size:train_size + val_size]
-                train_loader = DataLoader(train_data, batch_size=batch_size, shuffle=True, num_workers=6)
-                val_loader = DataLoader(val_data, batch_size=batch_size, shuffle=False, num_workers=6)
-                test_loader = DataLoader(test_data, batch_size=batch_size, shuffle=False, num_workers=6)
-                set_analyst(train_loader, 'train_data')
-                set_analyst(test_loader, 'test_data')
-                set_analyst(val_loader, 'val_data')
+                path_trick= path+'_points'
+                transform, pretransform = T.Compose([T.NormalizeScale(), T.KNNGraph(k=3)]) , T.SamplePoints(1024)
+                dataset = ModelNet(path_trick, '10', True, transform, pretransform)
+                test_data = ModelNet(path_trick, '10', False, transform, pretransform)
+
+                _, train_index, val_index = random_splits(dataset, dataset.num_classes)
+
+                train_dataset = dataset[dataset.train_mask]  # .copy_set(train_index)
+                val_dataset = dataset[dataset.val_mask]  # .copy_set(val_index)
+
+                l_per_class = Set_analyst(given_set=train_dataset).class_counter()
+
+                weights_dict = [(tup[0], 1 / tup[1]) for tup in list(l_per_class.items())]
+                weights = [1 / tup[1] for tup in list(l_per_class.items())]
+                samples_weights = [weights[t] for t in train_dataset.data.y]
+                samples_weights = torch.from_numpy(np.array(samples_weights)).double()
+                sampler = WeightedRandomSampler(samples_weights, len(samples_weights))
+
+                train_loader = DataLoader(train_dataset, batch_size=batch_size, num_workers=0, sampler=sampler)
+                val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False, num_workers=0)
+                test_loader = DataLoader(test_data, batch_size=batch_size, shuffle=False, num_workers=0)
+
                 model = model_name(num_features=dataset.num_features, num_classes=dataset.num_classes,
                                    num_nodes=dataset.data.num_nodes).to(device)
             # num_features, num_classes, num_nodes, edge_index
@@ -155,7 +168,7 @@ class Experimenter(object):
             epoch_losses, train_accuracies, val_accuracies = trainer.train(train_loader, val_loader, n_epochs,
                                                                            optimizer)
 
-            test_acc, y_pred, y_real, _ = trainer.test(test_loader)
+            test_acc, y_pred, y_real, _, _ = trainer.test(test_loader)
             result['test_acc'] = test_acc
 
             conf_mat = confusion_matrix(y_true=y_real, y_pred=y_pred)

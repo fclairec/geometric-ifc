@@ -222,10 +222,10 @@ class DGCNNNet(torch.nn.Module):
         x1 = self.conv1(pos, batch)
         x2 = self.conv2(x1, batch)
         out = self.lin1(torch.cat([x1, x2], dim=1))
-        out = global_max_pool(out, batch)
+        out, _ = global_max_pool(out, batch)
         out = self.mlp(out)
 
-        return F.log_softmax(out, dim=1)
+        return F.log_softmax(out, dim=1), _
 
 
 class UNet(torch.nn.Module):
@@ -245,6 +245,6 @@ class UNet(torch.nn.Module):
         x1 = F.dropout(x, p=0.92, training=self.training)
 
         x2 = self.unet(x1, edge_index)
-        out = global_max_pool(x2, batch)
+        out, _ = global_max_pool(x2, batch)
         a = F.log_softmax(out, dim=1)
-        return a
+        return a, _

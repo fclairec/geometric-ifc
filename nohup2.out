@@ -3,3 +3,1638 @@ Training graphs:  3589
 Validation graphs:  402
 Run 0 of 1
 processing epochs...:   0%|          | 0/50 [00:00<?, ?it/s]
+Batches 0-14/240 (BS = 15) with loss 2.887248992919922
+
+Batches 15-29/240 (BS = 15) with loss 2.7016780376434326
+
+Batches 30-44/240 (BS = 15) with loss 2.332669496536255
+
+Batches 45-59/240 (BS = 15) with loss 2.3330235481262207
+
+Batches 60-74/240 (BS = 15) with loss 2.479710340499878
+
+Batches 75-89/240 (BS = 15) with loss 2.101814031600952
+
+Batches 90-104/240 (BS = 15) with loss 2.134687900543213
+
+Batches 105-119/240 (BS = 15) with loss 1.7908422946929932
+
+Batches 120-134/240 (BS = 15) with loss 1.8241606950759888
+
+Batches 135-149/240 (BS = 15) with loss 1.8680419921875
+
+Batches 150-164/240 (BS = 15) with loss 1.8166974782943726
+
+Batches 165-179/240 (BS = 15) with loss 1.4599446058273315
+
+Batches 180-194/240 (BS = 15) with loss 1.6985989809036255
+
+Batches 195-209/240 (BS = 15) with loss 1.8739813566207886
+
+Batches 210-224/240 (BS = 15) with loss 1.6382100582122803
+
+Batches 225-239/240 (BS = 15) with loss 1.402854084968567
+train correct
+correct 1966 / 3589
+eval correct
+correct 235 / 402
+
+Epoch 0 - train loss: 1.9971288442611694, train acc: 0.5477848983003623 val acc: 0.5845771144278606
+processing epochs...:   2%|▏         | 1/50 [1:02:30<51:02:43, 3750.27s/it]
+Batches 0-14/240 (BS = 15) with loss 1.6413681507110596
+
+Batches 15-29/240 (BS = 15) with loss 1.1583153009414673
+
+Batches 30-44/240 (BS = 15) with loss 1.0486031770706177
+
+Batches 45-59/240 (BS = 15) with loss 1.4082382917404175
+
+Batches 60-74/240 (BS = 15) with loss 1.309326171875
+
+Batches 75-89/240 (BS = 15) with loss 1.1360995769500732
+
+Batches 90-104/240 (BS = 15) with loss 2.194281816482544
+
+Batches 105-119/240 (BS = 15) with loss 1.4513674974441528
+
+Batches 120-134/240 (BS = 15) with loss 1.0306878089904785
+
+Batches 135-149/240 (BS = 15) with loss 1.6778115034103394
+
+Batches 150-164/240 (BS = 15) with loss 1.735276699066162
+
+Batches 165-179/240 (BS = 15) with loss 1.4119817018508911
+
+Batches 180-194/240 (BS = 15) with loss 0.8798126578330994
+
+Batches 195-209/240 (BS = 15) with loss 0.7478052973747253
+
+Batches 210-224/240 (BS = 15) with loss 1.5987955331802368
+
+Batches 225-239/240 (BS = 15) with loss 1.3339879512786865
+train correct
+correct 2668 / 3589
+eval correct
+correct 324 / 402
+
+Epoch 1 - train loss: 1.291658878326416, train acc: 0.7433825578155475 val acc: 0.8059701492537313
+processing epochs...:   4%|▍         | 2/50 [2:04:22<49:51:11, 3738.99s/it]
+Batches 0-14/240 (BS = 15) with loss 0.9722111821174622
+
+Batches 15-29/240 (BS = 15) with loss 1.2765319347381592
+
+Batches 30-44/240 (BS = 15) with loss 1.0255404710769653
+
+Batches 45-59/240 (BS = 15) with loss 1.4328176975250244
+
+Batches 60-74/240 (BS = 15) with loss 0.7813774347305298
+
+Batches 75-89/240 (BS = 15) with loss 0.9876998066902161
+
+Batches 90-104/240 (BS = 15) with loss 0.8356893658638
+
+Batches 105-119/240 (BS = 15) with loss 0.6211205720901489
+
+Batches 120-134/240 (BS = 15) with loss 1.1065846681594849
+
+Batches 135-149/240 (BS = 15) with loss 0.3784327805042267
+
+Batches 150-164/240 (BS = 15) with loss 1.251700520515442
+
+Batches 165-179/240 (BS = 15) with loss 0.6721430420875549
+
+Batches 180-194/240 (BS = 15) with loss 0.5957006812095642
+
+Batches 195-209/240 (BS = 15) with loss 0.8991677165031433
+
+Batches 210-224/240 (BS = 15) with loss 0.6574990749359131
+
+Batches 225-239/240 (BS = 15) with loss 1.754418134689331
+train correct
+correct 2441 / 3589
+eval correct
+correct 325 / 402
+
+Epoch 2 - train loss: 1.0137355327606201, train acc: 0.6801337419894121 val acc: 0.8084577114427861
+processing epochs...:   6%|▌         | 3/50 [3:06:16<48:42:48, 3731.25s/it]
+Batches 0-14/240 (BS = 15) with loss 1.1467927694320679
+
+Batches 15-29/240 (BS = 15) with loss 0.7786027789115906
+
+Batches 30-44/240 (BS = 15) with loss 1.3453543186187744
+
+Batches 45-59/240 (BS = 15) with loss 1.1903234720230103
+
+Batches 60-74/240 (BS = 15) with loss 1.1629340648651123
+
+Batches 75-89/240 (BS = 15) with loss 1.1291178464889526
+
+Batches 90-104/240 (BS = 15) with loss 0.524583637714386
+
+Batches 105-119/240 (BS = 15) with loss 1.3398244380950928
+
+Batches 120-134/240 (BS = 15) with loss 0.6871910691261292
+
+Batches 135-149/240 (BS = 15) with loss 0.7886699438095093
+
+Batches 150-164/240 (BS = 15) with loss 0.9270064234733582
+
+Batches 165-179/240 (BS = 15) with loss 0.7826171517372131
+
+Batches 180-194/240 (BS = 15) with loss 0.666131854057312
+
+Batches 195-209/240 (BS = 15) with loss 1.2664101123809814
+
+Batches 210-224/240 (BS = 15) with loss 0.9122976660728455
+
+Batches 225-239/240 (BS = 15) with loss 1.212734580039978
+train correct
+correct 2596 / 3589
+eval correct
+correct 309 / 402
+
+Epoch 3 - train loss: 0.9438446760177612, train acc: 0.7233212594037336 val acc: 0.7686567164179104
+processing epochs...:   8%|▊         | 4/50 [4:07:54<47:33:07, 3721.46s/it]
+Batches 0-14/240 (BS = 15) with loss 1.028990626335144
+
+Batches 15-29/240 (BS = 15) with loss 0.6026591658592224
+
+Batches 30-44/240 (BS = 15) with loss 0.6519061923027039
+
+Batches 45-59/240 (BS = 15) with loss 0.6535101532936096
+
+Batches 60-74/240 (BS = 15) with loss 0.489676296710968
+
+Batches 75-89/240 (BS = 15) with loss 0.7377620339393616
+
+Batches 90-104/240 (BS = 15) with loss 1.2745838165283203
+
+Batches 105-119/240 (BS = 15) with loss 1.399693250656128
+
+Batches 120-134/240 (BS = 15) with loss 0.7524194121360779
+
+Batches 135-149/240 (BS = 15) with loss 0.7558931112289429
+
+Batches 150-164/240 (BS = 15) with loss 0.5715643167495728
+
+Batches 165-179/240 (BS = 15) with loss 0.8063494563102722
+
+Batches 180-194/240 (BS = 15) with loss 1.3811718225479126
+
+Batches 195-209/240 (BS = 15) with loss 0.8277739882469177
+
+Batches 210-224/240 (BS = 15) with loss 0.7091710567474365
+
+Batches 225-239/240 (BS = 15) with loss 1.3072112798690796
+train correct
+correct 2952 / 3589
+eval correct
+correct 348 / 402
+
+Epoch 4 - train loss: 0.8481634259223938, train acc: 0.8225132348843689 val acc: 0.8656716417910447
+processing epochs...:  10%|█         | 5/50 [5:09:40<46:27:30, 3716.69s/it]
+Batches 0-14/240 (BS = 15) with loss 0.7374697327613831
+
+Batches 15-29/240 (BS = 15) with loss 0.48110026121139526
+
+Batches 30-44/240 (BS = 15) with loss 0.8895654082298279
+
+Batches 45-59/240 (BS = 15) with loss 0.5126804709434509
+
+Batches 60-74/240 (BS = 15) with loss 1.039735198020935
+
+Batches 75-89/240 (BS = 15) with loss 1.3004692792892456
+
+Batches 90-104/240 (BS = 15) with loss 0.7869384288787842
+
+Batches 105-119/240 (BS = 15) with loss 0.955660879611969
+
+Batches 120-134/240 (BS = 15) with loss 0.6520718336105347
+
+Batches 135-149/240 (BS = 15) with loss 0.562298059463501
+
+Batches 150-164/240 (BS = 15) with loss 1.357790470123291
+
+Batches 165-179/240 (BS = 15) with loss 0.8756144046783447
+
+Batches 180-194/240 (BS = 15) with loss 0.4300035536289215
+
+Batches 195-209/240 (BS = 15) with loss 0.6757042407989502
+
+Batches 210-224/240 (BS = 15) with loss 0.4991140067577362
+
+Batches 225-239/240 (BS = 15) with loss 2.7208094596862793
+train correct
+correct 2814 / 3589
+eval correct
+correct 344 / 402
+
+Epoch 5 - train loss: 0.7913142442703247, train acc: 0.7840624129283923 val acc: 0.8557213930348259
+processing epochs...:  12%|█▏        | 6/50 [6:11:10<45:19:41, 3708.68s/it]
+Batches 0-14/240 (BS = 15) with loss 1.1356106996536255
+
+Batches 15-29/240 (BS = 15) with loss 0.4145832061767578
+
+Batches 30-44/240 (BS = 15) with loss 0.5125971436500549
+
+Batches 45-59/240 (BS = 15) with loss 1.005573034286499
+
+Batches 60-74/240 (BS = 15) with loss 1.0486983060836792
+
+Batches 75-89/240 (BS = 15) with loss 0.6350527405738831
+
+Batches 90-104/240 (BS = 15) with loss 0.7318829298019409
+
+Batches 105-119/240 (BS = 15) with loss 0.8939775228500366
+
+Batches 120-134/240 (BS = 15) with loss 0.6747151017189026
+
+Batches 135-149/240 (BS = 15) with loss 0.41252943873405457
+
+Batches 150-164/240 (BS = 15) with loss 0.6000770926475525
+
+Batches 165-179/240 (BS = 15) with loss 0.5467044711112976
+
+Batches 180-194/240 (BS = 15) with loss 0.6276323199272156
+
+Batches 195-209/240 (BS = 15) with loss 0.5865163207054138
+
+Batches 210-224/240 (BS = 15) with loss 1.2404826879501343
+
+Batches 225-239/240 (BS = 15) with loss 0.5657531023025513
+train correct
+correct 2974 / 3589
+eval correct
+correct 353 / 402
+
+Epoch 6 - train loss: 0.747830331325531, train acc: 0.8286430760657565 val acc: 0.8781094527363185
+processing epochs...:  14%|█▍        | 7/50 [7:13:21<44:22:38, 3715.31s/it]
+Batches 0-14/240 (BS = 15) with loss 0.9356118440628052
+
+Batches 15-29/240 (BS = 15) with loss 0.4196891188621521
+
+Batches 30-44/240 (BS = 15) with loss 0.6571633815765381
+
+Batches 45-59/240 (BS = 15) with loss 0.8681048154830933
+
+Batches 60-74/240 (BS = 15) with loss 1.0122029781341553
+
+Batches 75-89/240 (BS = 15) with loss 0.8455618619918823
+
+Batches 90-104/240 (BS = 15) with loss 0.38262948393821716
+
+Batches 105-119/240 (BS = 15) with loss 0.6630851626396179
+
+Batches 120-134/240 (BS = 15) with loss 0.7630771994590759
+
+Batches 135-149/240 (BS = 15) with loss 0.8628109693527222
+
+Batches 150-164/240 (BS = 15) with loss 0.40757355093955994
+
+Batches 165-179/240 (BS = 15) with loss 0.6222206354141235
+
+Batches 180-194/240 (BS = 15) with loss 0.46977099776268005
+
+Batches 195-209/240 (BS = 15) with loss 0.5562594532966614
+
+Batches 210-224/240 (BS = 15) with loss 0.45686474442481995
+
+Batches 225-239/240 (BS = 15) with loss 0.21588030457496643
+train correct
+correct 2997 / 3589
+eval correct
+correct 350 / 402
+
+Epoch 7 - train loss: 0.6799660325050354, train acc: 0.8350515463917526 val acc: 0.8706467661691543
+processing epochs...:  16%|█▌        | 8/50 [8:16:10<43:32:06, 3731.59s/it]
+Batches 0-14/240 (BS = 15) with loss 0.31226083636283875
+
+Batches 15-29/240 (BS = 15) with loss 0.4975793659687042
+
+Batches 30-44/240 (BS = 15) with loss 0.5627362132072449
+
+Batches 45-59/240 (BS = 15) with loss 0.937250554561615
+
+Batches 60-74/240 (BS = 15) with loss 0.5946482419967651
+
+Batches 75-89/240 (BS = 15) with loss 0.2645614743232727
+
+Batches 90-104/240 (BS = 15) with loss 0.47349366545677185
+
+Batches 105-119/240 (BS = 15) with loss 0.7601518630981445
+
+Batches 120-134/240 (BS = 15) with loss 0.561711311340332
+
+Batches 135-149/240 (BS = 15) with loss 1.782410740852356
+
+Batches 150-164/240 (BS = 15) with loss 0.4416476786136627
+
+Batches 165-179/240 (BS = 15) with loss 0.42881691455841064
+
+Batches 180-194/240 (BS = 15) with loss 0.6170952916145325
+
+Batches 195-209/240 (BS = 15) with loss 0.5350264310836792
+
+Batches 210-224/240 (BS = 15) with loss 0.4049432873725891
+
+Batches 225-239/240 (BS = 15) with loss 0.6288371682167053
+train correct
+correct 3024 / 3589
+eval correct
+correct 355 / 402
+
+Epoch 8 - train loss: 0.658723771572113, train acc: 0.8425745332961828 val acc: 0.8830845771144279
+processing epochs...:  18%|█▊        | 9/50 [9:18:44<42:34:32, 3738.36s/it]
+Batches 0-14/240 (BS = 15) with loss 0.46651047468185425
+
+Batches 15-29/240 (BS = 15) with loss 0.8682606816291809
+
+Batches 30-44/240 (BS = 15) with loss 0.29622676968574524
+
+Batches 45-59/240 (BS = 15) with loss 0.6084469556808472
+
+Batches 60-74/240 (BS = 15) with loss 0.13145354390144348
+
+Batches 75-89/240 (BS = 15) with loss 0.942281186580658
+
+Batches 90-104/240 (BS = 15) with loss 0.693862795829773
+
+Batches 105-119/240 (BS = 15) with loss 1.078800082206726
+
+Batches 120-134/240 (BS = 15) with loss 1.1152186393737793
+
+Batches 135-149/240 (BS = 15) with loss 0.29857200384140015
+
+Batches 150-164/240 (BS = 15) with loss 0.4783417284488678
+
+Batches 165-179/240 (BS = 15) with loss 1.1771728992462158
+
+Batches 180-194/240 (BS = 15) with loss 0.7205917239189148
+
+Batches 195-209/240 (BS = 15) with loss 0.5590531826019287
+
+Batches 210-224/240 (BS = 15) with loss 0.4698890447616577
+
+Batches 225-239/240 (BS = 15) with loss 0.6276321411132812
+train correct
+correct 2946 / 3589
+eval correct
+correct 347 / 402
+
+Epoch 9 - train loss: 0.6359020471572876, train acc: 0.8208414600167178 val acc: 0.8631840796019901
+processing epochs...:  20%|██        | 10/50 [10:20:41<41:27:55, 3731.90s/it]
+Batches 0-14/240 (BS = 15) with loss 0.5188013315200806
+
+Batches 15-29/240 (BS = 15) with loss 1.0647070407867432
+
+Batches 30-44/240 (BS = 15) with loss 0.652564287185669
+
+Batches 45-59/240 (BS = 15) with loss 0.5992330312728882
+
+Batches 60-74/240 (BS = 15) with loss 0.20380981266498566
+
+Batches 75-89/240 (BS = 15) with loss 0.5806569457054138
+
+Batches 90-104/240 (BS = 15) with loss 0.7268273830413818
+
+Batches 105-119/240 (BS = 15) with loss 0.810730516910553
+
+Batches 120-134/240 (BS = 15) with loss 1.0475941896438599
+
+Batches 135-149/240 (BS = 15) with loss 0.8466352224349976
+
+Batches 150-164/240 (BS = 15) with loss 0.5114951729774475
+
+Batches 165-179/240 (BS = 15) with loss 0.28638312220573425
+
+Batches 180-194/240 (BS = 15) with loss 0.2180265337228775
+
+Batches 195-209/240 (BS = 15) with loss 0.8163344860076904
+
+Batches 210-224/240 (BS = 15) with loss 0.3001858592033386
+
+Batches 225-239/240 (BS = 15) with loss 1.8182175159454346
+train correct
+correct 3129 / 3589
+eval correct
+correct 368 / 402
+
+Epoch 10 - train loss: 0.6323500275611877, train acc: 0.871830593480078 val acc: 0.9154228855721394
+processing epochs...:  22%|██▏       | 11/50 [11:23:37<40:34:22, 3745.19s/it]
+Batches 0-14/240 (BS = 15) with loss 1.2277450561523438
+
+Batches 15-29/240 (BS = 15) with loss 0.8459793925285339
+
+Batches 30-44/240 (BS = 15) with loss 0.453189492225647
+
+Batches 45-59/240 (BS = 15) with loss 0.7804148197174072
+
+Batches 60-74/240 (BS = 15) with loss 0.8916810154914856
+
+Batches 75-89/240 (BS = 15) with loss 0.6441754102706909
+
+Batches 90-104/240 (BS = 15) with loss 0.5831459164619446
+
+Batches 105-119/240 (BS = 15) with loss 0.6586487293243408
+
+Batches 120-134/240 (BS = 15) with loss 0.6872697472572327
+
+Batches 135-149/240 (BS = 15) with loss 0.8087720274925232
+
+Batches 150-164/240 (BS = 15) with loss 0.42129048705101013
+
+Batches 165-179/240 (BS = 15) with loss 0.3081992268562317
+
+Batches 180-194/240 (BS = 15) with loss 0.5110691785812378
+
+Batches 195-209/240 (BS = 15) with loss 0.8759860992431641
+
+Batches 210-224/240 (BS = 15) with loss 1.0212041139602661
+
+Batches 225-239/240 (BS = 15) with loss 1.105089783668518
+train correct
+correct 3078 / 3589
+eval correct
+correct 354 / 402
+
+Epoch 11 - train loss: 0.638235867023468, train acc: 0.8576205071050432 val acc: 0.8805970149253731
+processing epochs...:  24%|██▍       | 12/50 [12:27:09<39:44:33, 3765.09s/it]
+Batches 0-14/240 (BS = 15) with loss 1.0449837446212769
+
+Batches 15-29/240 (BS = 15) with loss 0.6110483407974243
+
+Batches 30-44/240 (BS = 15) with loss 0.82918381690979
+
+Batches 45-59/240 (BS = 15) with loss 0.37628379464149475
+
+Batches 60-74/240 (BS = 15) with loss 0.35577836632728577
+
+Batches 75-89/240 (BS = 15) with loss 1.2558318376541138
+
+Batches 90-104/240 (BS = 15) with loss 0.7629550099372864
+
+Batches 105-119/240 (BS = 15) with loss 0.8037149906158447
+
+Batches 120-134/240 (BS = 15) with loss 0.6826465129852295
+
+Batches 135-149/240 (BS = 15) with loss 0.8377511501312256
+
+Batches 150-164/240 (BS = 15) with loss 0.32042279839515686
+
+Batches 165-179/240 (BS = 15) with loss 0.49274399876594543
+
+Batches 180-194/240 (BS = 15) with loss 0.8707674741744995
+
+Batches 195-209/240 (BS = 15) with loss 0.6148633360862732
+
+Batches 210-224/240 (BS = 15) with loss 0.733020544052124
+
+Batches 225-239/240 (BS = 15) with loss 3.606379747390747
+train correct
+correct 3067 / 3589
+eval correct
+correct 359 / 402
+
+Epoch 12 - train loss: 0.5975582599639893, train acc: 0.8545555865143494 val acc: 0.8930348258706468
+processing epochs...:  26%|██▌       | 13/50 [13:29:24<38:36:11, 3755.99s/it]
+Batches 0-14/240 (BS = 15) with loss 1.0904370546340942
+
+Batches 15-29/240 (BS = 15) with loss 0.5365039706230164
+
+Batches 30-44/240 (BS = 15) with loss 0.7090338468551636
+
+Batches 45-59/240 (BS = 15) with loss 1.0645662546157837
+
+Batches 60-74/240 (BS = 15) with loss 0.16553479433059692
+
+Batches 75-89/240 (BS = 15) with loss 0.7814655900001526
+
+Batches 90-104/240 (BS = 15) with loss 0.45420730113983154
+
+Batches 105-119/240 (BS = 15) with loss 0.27765724062919617
+
+Batches 120-134/240 (BS = 15) with loss 0.3307444453239441
+
+Batches 135-149/240 (BS = 15) with loss 0.41866621375083923
+
+Batches 150-164/240 (BS = 15) with loss 0.46233347058296204
+
+Batches 165-179/240 (BS = 15) with loss 0.3931540250778198
+
+Batches 180-194/240 (BS = 15) with loss 0.4330730140209198
+
+Batches 195-209/240 (BS = 15) with loss 0.3533233106136322
+
+Batches 210-224/240 (BS = 15) with loss 0.6415533423423767
+
+Batches 225-239/240 (BS = 15) with loss 0.050309162586927414
+train correct
+correct 3144 / 3589
+eval correct
+correct 365 / 402
+
+Epoch 13 - train loss: 0.6172237396240234, train acc: 0.8760100306492059 val acc: 0.9079601990049752
+processing epochs...:  28%|██▊       | 14/50 [14:31:34<37:29:02, 3748.39s/it]
+Batches 0-14/240 (BS = 15) with loss 0.4065385162830353
+
+Batches 15-29/240 (BS = 15) with loss 0.5633852481842041
+
+Batches 30-44/240 (BS = 15) with loss 0.6913818120956421
+
+Batches 45-59/240 (BS = 15) with loss 0.7490842938423157
+
+Batches 60-74/240 (BS = 15) with loss 0.4548676311969757
+
+Batches 75-89/240 (BS = 15) with loss 0.37648168206214905
+
+Batches 90-104/240 (BS = 15) with loss 0.26586195826530457
+
+Batches 105-119/240 (BS = 15) with loss 0.8595228791236877
+
+Batches 120-134/240 (BS = 15) with loss 0.2516103982925415
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    correct 3145 / 3589
+eval correct
+correct 358 / 402
+
+Epoch 15 - train loss: 0.578119695186615, train acc: 0.8762886597938144 val acc: 0.8905472636815921
+processing epochs...:  32%|███▏      | 16/50 [16:36:09<35:19:59, 3741.17s/it]
+Batches 0-14/240 (BS = 15) with loss 0.34541207551956177
+
+Batches 15-29/240 (BS = 15) with loss 0.6359240412712097
+
+Batches 30-44/240 (BS = 15) with loss 0.3310438096523285
+
+Batches 45-59/240 (BS = 15) with loss 0.42950502038002014
+
+Batches 60-74/240 (BS = 15) with loss 0.25704219937324524
+
+Batches 75-89/240 (BS = 15) with loss 0.3308556377887726
+
+Batches 90-104/240 (BS = 15) with loss 0.18495003879070282
+
+Batches 105-119/240 (BS = 15) with loss 0.4033510088920593
+
+Batches 120-134/240 (BS = 15) with loss 0.2893751263618469
+
+Batches 135-149/240 (BS = 15) with loss 0.3080037832260132
+
+Batches 150-164/240 (BS = 15) with loss 0.5704092383384705
+
+Batches 165-179/240 (BS = 15) with loss 0.4251523017883301
+
+Batches 180-194/240 (BS = 15) with loss 0.5680913925170898
+
+Batches 195-209/240 (BS = 15) with loss 0.5727508664131165
+
+Batches 210-224/240 (BS = 15) with loss 0.33190467953681946
+
+Batches 225-239/240 (BS = 15) with loss 2.188570976257324
+train correct
+correct 3145 / 3589
+eval correct
+correct 368 / 402
+
+Epoch 16 - train loss: 0.5690842270851135, train acc: 0.8762886597938144 val acc: 0.9154228855721394
+processing epochs...:  34%|███▍      | 17/50 [17:37:58<34:12:25, 3731.67s/it]
+Batches 0-14/240 (BS = 15) with loss 0.3844131827354431
+
+Batches 15-29/240 (BS = 15) with loss 0.3877454698085785
+
+Batches 30-44/240 (BS = 15) with loss 1.4817410707473755
+
+Batches 45-59/240 (BS = 15) with loss 0.2998935282230377
+
+Batches 60-74/240 (BS = 15) with loss 0.5398775935173035
+
+Batches 75-89/240 (BS = 15) with loss 0.26748180389404297
+
+Batches 90-104/240 (BS = 15) with loss 0.2756982147693634
+
+Batches 105-119/240 (BS = 15) with loss 0.3629250228404999
+
+Batches 120-134/240 (BS = 15) with loss 0.14904972910881042
+
+Batches 135-149/240 (BS = 15) with loss 1.0681756734848022
+
+Batches 150-164/240 (BS = 15) with loss 1.0358874797821045
+
+Batches 165-179/240 (BS = 15) with loss 0.7264044284820557
+
+Batches 180-194/240 (BS = 15) with loss 0.6871708035469055
+
+Batches 195-209/240 (BS = 15) with loss 0.4181470274925232
+
+Batches 210-224/240 (BS = 15) with loss 0.4499674439430237
+
+Batches 225-239/240 (BS = 15) with loss 1.4320096969604492
+train correct
+correct 3163 / 3589
+eval correct
+correct 362 / 402
+
+Epoch 17 - train loss: 0.5446474552154541, train acc: 0.8813039843967679 val acc: 0.900497512437811
+processing epochs...:  36%|███▌      | 18/50 [18:40:48<33:16:23, 3743.22s/it]
+Batches 0-14/240 (BS = 15) with loss 0.7269649505615234
+
+Batches 15-29/240 (BS = 15) with loss 0.3055349886417389
+
+Batches 30-44/240 (BS = 15) with loss 1.1050180196762085
+
+Batches 45-59/240 (BS = 15) with loss 0.46198832988739014
+
+Batches 60-74/240 (BS = 15) with loss 0.22920337319374084
+
+Batches 75-89/240 (BS = 15) with loss 0.22426250576972961
+
+Batches 90-104/240 (BS = 15) with loss 0.09971416741609573
+
+Batches 105-119/240 (BS = 15) with loss 0.7099526524543762
+
+Batches 120-134/240 (BS = 15) with loss 0.3538822531700134
+
+Batches 135-149/240 (BS = 15) with loss 1.1411857604980469
+
+Batches 150-164/240 (BS = 15) with loss 0.42438778281211853
+
+Batches 165-179/240 (BS = 15) with loss 0.4122634828090668
+
+Batches 180-194/240 (BS = 15) with loss 0.27482378482818604
+
+Batches 195-209/240 (BS = 15) with loss 0.6256369948387146
+
+Batches 210-224/240 (BS = 15) with loss 0.4788932204246521
+
+Batches 225-239/240 (BS = 15) with loss 0.30928224325180054
+train correct
+correct 3158 / 3589
+eval correct
+correct 368 / 402
+
+Epoch 18 - train loss: 0.4857623875141144, train acc: 0.8799108386737253 val acc: 0.9154228855721394
+processing epochs...:  38%|███▊      | 19/50 [19:42:23<32:06:25, 3728.55s/it]
+Batches 0-14/240 (BS = 15) with loss 0.44475728273391724
+
+Batches 15-29/240 (BS = 15) with loss 0.4744783341884613
+
+Batches 30-44/240 (BS = 15) with loss 0.32651880383491516
+
+Batches 45-59/240 (BS = 15) with loss 0.5574097037315369
+
+Batches 60-74/240 (BS = 15) with loss 0.23136888444423676
+
+Batches 75-89/240 (BS = 15) with loss 0.1886787712574005
+
+Batches 90-104/240 (BS = 15) with loss 0.5611543655395508
+
+Batches 105-119/240 (BS = 15) with loss 0.06609582155942917
+
+Batches 120-134/240 (BS = 15) with loss 0.47609537839889526
+
+Batches 135-149/240 (BS = 15) with loss 0.6840025186538696
+
+Batches 150-164/240 (BS = 15) with loss 0.43585532903671265
+
+Batches 165-179/240 (BS = 15) with loss 0.8063268661499023
+
+Batches 180-194/240 (BS = 15) with loss 0.18364757299423218
+
+Batches 195-209/240 (BS = 15) with loss 2.4459524154663086
+
+Batches 210-224/240 (BS = 15) with loss 0.45533356070518494
+
+Batches 225-239/240 (BS = 15) with loss 0.6971468329429626
+train correct
+correct 3191 / 3589
+eval correct
+correct 355 / 402
+
+Epoch 19 - train loss: 0.47928714752197266, train acc: 0.8891056004458067 val acc: 0.8830845771144279
+processing epochs...:  40%|████      | 20/50 [20:44:07<31:00:33, 3721.13s/it]
+Batches 0-14/240 (BS = 15) with loss 0.4083414673805237
+
+Batches 15-29/240 (BS = 15) with loss 0.5937134623527527
+
+Batches 30-44/240 (BS = 15) with loss 0.6156834959983826
+
+Batches 45-59/240 (BS = 15) with loss 0.6359227299690247
+
+Batches 60-74/240 (BS = 15) with loss 0.7298504114151001
+
+Batches 75-89/240 (BS = 15) with loss 0.269396036863327
+
+Batches 90-104/240 (BS = 15) with loss 0.4505135715007782
+
+Batches 105-119/240 (BS = 15) with loss 0.8263496160507202
+
+Batches 120-134/240 (BS = 15) with loss 0.5533008575439453
+
+Batches 135-149/240 (BS = 15) with loss 0.4082031548023224
+
+Batches 150-164/240 (BS = 15) with loss 0.7621771097183228
+
+Batches 165-179/240 (BS = 15) with loss 0.36101946234703064
+
+Batches 180-194/240 (BS = 15) with loss 0.3878878951072693
+
+Batches 195-209/240 (BS = 15) with loss 0.3912944793701172
+
+Batches 210-224/240 (BS = 15) with loss 0.15310443937778473
+
+Batches 225-239/240 (BS = 15) with loss 0.22116100788116455
+train correct
+correct 3181 / 3589
+eval correct
+correct 376 / 402
+
+Epoch 20 - train loss: 0.5410377383232117, train acc: 0.8863193089997213 val acc: 0.9353233830845771
+processing epochs...:  42%|████▏     | 21/50 [21:45:59<29:57:18, 3718.56s/it]
+Batches 0-14/240 (BS = 15) with loss 1.0186840295791626
+
+Batches 15-29/240 (BS = 15) with loss 0.11975106596946716
+
+Batches 30-44/240 (BS = 15) with loss 0.21202988922595978
+
+Batches 45-59/240 (BS = 15) with loss 0.4006764590740204
+
+Batches 60-74/240 (BS = 15) with loss 0.8280303478240967
+
+Batches 75-89/240 (BS = 15) with loss 0.4807760417461395
+
+Batches 90-104/240 (BS = 15) with loss 0.3024865388870239
+
+Batches 105-119/240 (BS = 15) with loss 0.1232084259390831
+
+Batches 120-134/240 (BS = 15) with loss 0.07944796234369278
+
+Batches 135-149/240 (BS = 15) with loss 0.5062838196754456
+
+Batches 150-164/240 (BS = 15) with loss 0.4195139706134796
+
+Batches 165-179/240 (BS = 15) with loss 0.6042051911354065
+
+Batches 180-194/240 (BS = 15) with loss 0.2389482706785202
+
+Batches 195-209/240 (BS = 15) with loss 0.3614654839038849
+
+Batches 210-224/240 (BS = 15) with loss 0.12838464975357056
+
+Batches 225-239/240 (BS = 15) with loss 0.097205251455307
+train correct
+correct 3210 / 3589
+eval correct
+correct 370 / 402
+
+Epoch 21 - train loss: 0.4950037896633148, train acc: 0.8943995541933686 val acc: 0.9203980099502488
+processing epochs...:  44%|████▍     | 22/50 [22:47:54<28:54:50, 3717.53s/it]
+Batches 0-14/240 (BS = 15) with loss 0.34133413434028625
+
+Batches 15-29/240 (BS = 15) with loss 1.4675402641296387
+
+Batches 30-44/240 (BS = 15) with loss 1.0041207075119019
+
+Batches 45-59/240 (BS = 15) with loss 0.7048633694648743
+
+Batches 60-74/240 (BS = 15) with loss 0.24352551996707916
+
+Batches 75-89/240 (BS = 15) with loss 0.42364320158958435
+
+Batches 90-104/240 (BS = 15) with loss 0.7015283107757568
+
+Batches 105-119/240 (BS = 15) with loss 0.40941736102104187
+
+Batches 120-134/240 (BS = 15) with loss 0.5912206172943115
+
+Batches 135-149/240 (BS = 15) with loss 0.7970112562179565
+
+Batches 150-164/240 (BS = 15) with loss 0.7256137728691101
+
+Batches 165-179/240 (BS = 15) with loss 0.41597068309783936
+
+Batches 180-194/240 (BS = 15) with loss 0.35750147700309753
+
+Batches 195-209/240 (BS = 15) with loss 0.2366047501564026
+
+Batches 210-224/240 (BS = 15) with loss 0.5540440082550049
+
+Batches 225-239/240 (BS = 15) with loss 0.2787821590900421
+train correct
+correct 3232 / 3589
+eval correct
+correct 354 / 402
+
+Epoch 22 - train loss: 0.4840717613697052, train acc: 0.9005293953747562 val acc: 0.8805970149253731
+processing epochs...:  46%|████▌     | 23/50 [23:49:51<27:52:49, 3717.38s/it]
+Batches 0-14/240 (BS = 15) with loss 0.05787847563624382
+
+Batches 15-29/240 (BS = 15) with loss 0.7717151045799255
+
+Batches 30-44/240 (BS = 15) with loss 0.8449059724807739
+
+Batches 45-59/240 (BS = 15) with loss 0.04720356687903404
+
+Batches 60-74/240 (BS = 15) with loss 0.4980606734752655
+
+Batches 75-89/240 (BS = 15) with loss 0.44739723205566406
+
+Batches 90-104/240 (BS = 15) with loss 0.8121477961540222
+
+Batches 105-119/240 (BS = 15) with loss 1.4706412553787231
+
+Batches 120-134/240 (BS = 15) with loss 0.6836125254631042
+
+Batches 135-149/240 (BS = 15) with loss 0.2101898491382599
+
+Batches 150-164/240 (BS = 15) with loss 0.27940186858177185
+
+Batches 165-179/240 (BS = 15) with loss 0.29632189869880676
+
+Batches 180-194/240 (BS = 15) with loss 0.49605807662010193
+
+Batches 195-209/240 (BS = 15) with loss 0.43865853548049927
+
+Batches 210-224/240 (BS = 15) with loss 0.10633441805839539
+
+Batches 225-239/240 (BS = 15) with loss 1.5077167749404907
+train correct
+correct 3231 / 3589
+eval correct
+correct 365 / 402
+
+Epoch 23 - train loss: 0.489337295293808, train acc: 0.9002507662301477 val acc: 0.9079601990049752
+processing epochs...:  48%|████▊     | 24/50 [24:51:26<26:47:52, 3710.48s/it]
+Batches 0-14/240 (BS = 15) with loss 0.5077175498008728
+
+Batches 15-29/240 (BS = 15) with loss 0.3621286153793335
+
+Batches 30-44/240 (BS = 15) with loss 0.16634270548820496
+
+Batches 45-59/240 (BS = 15) with loss 0.8476684093475342
+
+Batches 60-74/240 (BS = 15) with loss 0.4362940788269043
+
+Batches 75-89/240 (BS = 15) with loss 0.5809858441352844
+
+Batches 90-104/240 (BS = 15) with loss 0.9239140748977661
+
+Batches 105-119/240 (BS = 15) with loss 0.3134102523326874
+
+Batches 120-134/240 (BS = 15) with loss 0.9123145937919617
+
+Batches 135-149/240 (BS = 15) with loss 0.7230532169342041
+
+Batches 150-164/240 (BS = 15) with loss 0.6232519745826721
+
+Batches 165-179/240 (BS = 15) with loss 0.4612577557563782
+
+Batches 180-194/240 (BS = 15) with loss 0.9127197265625
+
+Batches 195-209/240 (BS = 15) with loss 0.6088376641273499
+
+Batches 210-224/240 (BS = 15) with loss 0.5262507796287537
+
+Batches 225-239/240 (BS = 15) with loss 1.3120486736297607
+train correct
+correct 3205 / 3589
+eval correct
+correct 359 / 402
+
+Epoch 24 - train loss: 0.4888559877872467, train acc: 0.893006408470326 val acc: 0.8930348258706468
+processing epochs...:  50%|█████     | 25/50 [25:53:30<25:47:46, 3714.67s/it]
+Batches 0-14/240 (BS = 15) with loss 1.0426098108291626
+
+Batches 15-29/240 (BS = 15) with loss 0.7211788296699524
+
+Batches 30-44/240 (BS = 15) with loss 0.4038943946361542
+
+Batches 45-59/240 (BS = 15) with loss 0.28333333134651184
+
+Batches 60-74/240 (BS = 15) with loss 0.6448755264282227
+
+Batches 75-89/240 (BS = 15) with loss 0.49922293424606323
+
+Batches 90-104/240 (BS = 15) with loss 0.6305751800537109
+
+Batches 105-119/240 (BS = 15) with loss 0.6075640916824341
+
+Batches 120-134/240 (BS = 15) with loss 1.1828200817108154
+
+Batches 135-149/240 (BS = 15) with loss 0.2700582444667816
+
+Batches 150-164/240 (BS = 15) with loss 0.5522053837776184
+
+Batches 165-179/240 (BS = 15) with loss 0.7086278796195984
+
+Batches 180-194/240 (BS = 15) with loss 0.4804480969905853
+
+Batches 195-209/240 (BS = 15) with loss 0.21726037561893463
+
+Batches 210-224/240 (BS = 15) with loss 0.5824402570724487
+
+Batches 225-239/240 (BS = 15) with loss 0.6701636910438538
+train correct
+correct 3104 / 3589
+eval correct
+correct 359 / 402
+
+Epoch 25 - train loss: 0.46971815824508667, train acc: 0.8648648648648649 val acc: 0.8930348258706468
+processing epochs...:  52%|█████▏    | 26/50 [26:55:34<24:46:56, 3717.36s/it]
+Batches 0-14/240 (BS = 15) with loss 0.5365175604820251
+
+Batches 15-29/240 (BS = 15) with loss 0.1825607717037201
+
+Batches 30-44/240 (BS = 15) with loss 0.46233800053596497
+
+Batches 45-59/240 (BS = 15) with loss 0.4493216872215271
+
+Batches 60-74/240 (BS = 15) with loss 0.46416863799095154
+
+Batches 75-89/240 (BS = 15) with loss 0.27234700322151184
+
+Batches 90-104/240 (BS = 15) with loss 0.6315792202949524
+
+Batches 105-119/240 (BS = 15) with loss 0.3559301495552063
+
+Batches 120-134/240 (BS = 15) with loss 0.3770110309123993
+
+Batches 135-149/240 (BS = 15) with loss 0.8452430367469788
+
+Batches 150-164/240 (BS = 15) with loss 0.08270539343357086
+
+Batches 165-179/240 (BS = 15) with loss 0.3861682116985321
+
+Batches 180-194/240 (BS = 15) with loss 0.12138479202985764
+
+Batches 195-209/240 (BS = 15) with loss 0.8360122442245483
+
+Batches 210-224/240 (BS = 15) with loss 0.3718951940536499
+
+Batches 225-239/240 (BS = 15) with loss 1.447819471359253
+train correct
+correct 3196 / 3589
+eval correct
+correct 369 / 402
+
+Epoch 26 - train loss: 0.4757481515407562, train acc: 0.8904987461688493 val acc: 0.917910447761194
+processing epochs...:  54%|█████▍    | 27/50 [27:57:02<23:41:39, 3708.67s/it]
+Batches 0-14/240 (BS = 15) with loss 0.4210318326950073
+
+Batches 15-29/240 (BS = 15) with loss 0.571057140827179
+
+Batches 30-44/240 (BS = 15) with loss 0.6200554966926575
+
+Batches 45-59/240 (BS = 15) with loss 0.6864864826202393
+
+Batches 60-74/240 (BS = 15) with loss 0.5054991841316223
+
+Batches 75-89/240 (BS = 15) with loss 0.330169677734375
+
+Batches 90-104/240 (BS = 15) with loss 0.2709275186061859
+
+Batches 105-119/240 (BS = 15) with loss 0.20814631879329681
+
+Batches 120-134/240 (BS = 15) with loss 0.5519038438796997
+
+Batches 135-149/240 (BS = 15) with loss 0.47703060507774353
+
+Batches 150-164/240 (BS = 15) with loss 0.3074701130390167
+
+Batches 165-179/240 (BS = 15) with loss 0.5474250316619873
+
+Batches 180-194/240 (BS = 15) with loss 0.4548560082912445
+
+Batches 195-209/240 (BS = 15) with loss 0.44799259305000305
+
+Batches 210-224/240 (BS = 15) with loss 0.3583661615848541
+
+Batches 225-239/240 (BS = 15) with loss 0.2689931392669678
+train correct
+correct 3036 / 3589
+eval correct
+correct 362 / 402
+
+Epoch 27 - train loss: 0.4877014458179474, train acc: 0.8459180830314851 val acc: 0.900497512437811
+processing epochs...:  56%|█████▌    | 28/50 [28:58:49<22:39:38, 3708.14s/it]
+Batches 0-14/240 (BS = 15) with loss 0.19094735383987427
+
+Batches 15-29/240 (BS = 15) with loss 0.10922302305698395
+
+Batches 30-44/240 (BS = 15) with loss 1.0271062850952148
+
+Batches 45-59/240 (BS = 15) with loss 1.0685681104660034
+
+Batches 60-74/240 (BS = 15) with loss 1.1671016216278076
+
+Batches 75-89/240 (BS = 15) with loss 0.3818437159061432
+
+Batches 90-104/240 (BS = 15) with loss 0.21193476021289825
+
+Batches 105-119/240 (BS = 15) with loss 0.2504101097583771
+
+Batches 120-134/240 (BS = 15) with loss 0.6090150475502014
+
+Batches 135-149/240 (BS = 15) with loss 0.45307716727256775
+
+Batches 150-164/240 (BS = 15) with loss 0.12500602006912231
+
+Batches 165-179/240 (BS = 15) with loss 0.2691793441772461
+
+Batches 180-194/240 (BS = 15) with loss 0.5667585134506226
+
+Batches 195-209/240 (BS = 15) with loss 1.226466417312622
+
+Batches 210-224/240 (BS = 15) with loss 0.3698135316371918
+
+Batches 225-239/240 (BS = 15) with loss 0.42518526315689087
+train correct
+correct 3206 / 3589
+eval correct
+correct 368 / 402
+
+Epoch 28 - train loss: 0.4631457030773163, train acc: 0.8932850376149345 val acc: 0.9154228855721394
+processing epochs...:  58%|█████▊    | 29/50 [30:00:42<21:38:20, 3709.56s/it]
+Batches 0-14/240 (BS = 15) with loss 0.26653316617012024
+
+Batches 15-29/240 (BS = 15) with loss 0.24999472498893738
+
+Batches 30-44/240 (BS = 15) with loss 0.29041385650634766
+
+Batches 45-59/240 (BS = 15) with loss 1.3849624395370483
+
+Batches 60-74/240 (BS = 15) with loss 0.4384060800075531
+
+Batches 75-89/240 (BS = 15) with loss 0.5396741032600403
+
+Batches 90-104/240 (BS = 15) with loss 0.5381513833999634
+
+Batches 105-119/240 (BS = 15) with loss 0.49480289220809937
+
+Batches 120-134/240 (BS = 15) with loss 0.4044742286205292
+
+Batches 135-149/240 (BS = 15) with loss 1.0622450113296509
+
+Batches 150-164/240 (BS = 15) with loss 0.9347555041313171
+
+Batches 165-179/240 (BS = 15) with loss 0.2145737111568451
+
+Batches 180-194/240 (BS = 15) with loss 0.4908916652202606
+
+Batches 195-209/240 (BS = 15) with loss 0.005306652281433344
+
+Batches 210-224/240 (BS = 15) with loss 0.571799635887146
+
+Batches 225-239/240 (BS = 15) with loss 0.30640262365341187
+train correct
+correct 3219 / 3589
+eval correct
+correct 373 / 402
+
+Epoch 29 - train loss: 0.469296932220459, train acc: 0.8969072164948454 val acc: 0.927860696517413
+processing epochs...:  60%|██████    | 30/50 [31:02:30<20:36:25, 3709.27s/it]
+Batches 0-14/240 (BS = 15) with loss 0.06524305790662766
+
+Batches 15-29/240 (BS = 15) with loss 0.2230300009250641
+
+Batches 30-44/240 (BS = 15) with loss 0.8637481927871704
+
+Batches 45-59/240 (BS = 15) with loss 0.7712503671646118
+
+Batches 60-74/240 (BS = 15) with loss 0.7952451109886169
+
+Batches 75-89/240 (BS = 15) with loss 0.22591997683048248
+
+Batches 90-104/240 (BS = 15) with loss 0.19172902405261993
+
+Batches 105-119/240 (BS = 15) with loss 0.4157775640487671
+
+Batches 120-134/240 (BS = 15) with loss 1.0569645166397095
+
+Batches 135-149/240 (BS = 15) with loss 0.18558107316493988
+
+Batches 150-164/240 (BS = 15) with loss 0.2037263810634613
+
+Batches 165-179/240 (BS = 15) with loss 0.496071994304657
+
+Batches 180-194/240 (BS = 15) with loss 0.11804573982954025
+
+Batches 195-209/240 (BS = 15) with loss 0.6850082278251648
+
+Batches 210-224/240 (BS = 15) with loss 0.7464243173599243
+
+Batches 225-239/240 (BS = 15) with loss 3.4418773651123047
+train correct
+correct 3258 / 3589
+eval correct
+correct 357 / 402
+
+Epoch 30 - train loss: 0.5215525031089783, train acc: 0.9077737531345779 val acc: 0.8880597014925373
+processing epochs...:  62%|██████▏   | 31/50 [32:04:38<19:36:19, 3714.71s/it]
+Batches 0-14/240 (BS = 15) with loss 0.5346397757530212
+
+Batches 15-29/240 (BS = 15) with loss 0.7179100513458252
+
+Batches 30-44/240 (BS = 15) with loss 0.9771222472190857
+
+Batches 45-59/240 (BS = 15) with loss 0.5776828527450562
+
+Batches 60-74/240 (BS = 15) with loss 0.260627806186676
+
+Batches 75-89/240 (BS = 15) with loss 0.3557926118373871
+
+Batches 90-104/240 (BS = 15) with loss 0.8596596121788025
+
+Batches 105-119/240 (BS = 15) with loss 0.47396308183670044
+
+Batches 120-134/240 (BS = 15) with loss 0.8062220215797424
+
+Batches 135-149/240 (BS = 15) with loss 0.30447471141815186
+
+Batches 150-164/240 (BS = 15) with loss 0.21843291819095612
+
+Batches 165-179/240 (BS = 15) with loss 0.5580915808677673
+
+Batches 180-194/240 (BS = 15) with loss 0.08078969269990921
+
+Batches 195-209/240 (BS = 15) with loss 0.19574448466300964
+
+Batches 210-224/240 (BS = 15) with loss 0.3591770827770233
+
+Batches 225-239/240 (BS = 15) with loss 1.2087759971618652
+train correct
+correct 3252 / 3589
+eval correct
+correct 373 / 402
+
+Epoch 31 - train loss: 0.4773613214492798, train acc: 0.9061019782669267 val acc: 0.927860696517413
+processing epochs...:  64%|██████▍   | 32/50 [33:06:20<18:33:16, 3710.94s/it]
+Batches 0-14/240 (BS = 15) with loss 0.5137718915939331
+
+Batches 15-29/240 (BS = 15) with loss 0.2987418472766876
+
+Batches 30-44/240 (BS = 15) with loss 0.2529102861881256
+
+Batches 45-59/240 (BS = 15) with loss 0.38643091917037964
+
+Batches 60-74/240 (BS = 15) with loss 0.6390610337257385
+
+Batches 75-89/240 (BS = 15) with loss 0.41775742173194885
+
+Batches 90-104/240 (BS = 15) with loss 0.438905268907547
+
+Batches 105-119/240 (BS = 15) with loss 0.14418499171733856
+
+Batches 120-134/240 (BS = 15) with loss 0.2831125557422638
+
+Batches 135-149/240 (BS = 15) with loss 0.30562812089920044
+
+Batches 150-164/240 (BS = 15) with loss 0.8802856206893921
+
+Batches 165-179/240 (BS = 15) with loss 0.06434176862239838
+
+Batches 180-194/240 (BS = 15) with loss 0.29474908113479614
+
+Batches 195-209/240 (BS = 15) with loss 0.4470701515674591
+
+Batches 210-224/240 (BS = 15) with loss 0.1687283217906952
+
+Batches 225-239/240 (BS = 15) with loss 0.10578180104494095
+train correct
+correct 3287 / 3589
+eval correct
+correct 378 / 402
+
+Epoch 32 - train loss: 0.38669025897979736, train acc: 0.9158539983282251 val acc: 0.9402985074626866
+processing epochs...:  66%|██████▌   | 33/50 [34:07:58<17:30:17, 3706.90s/it]
+Batches 0-14/240 (BS = 15) with loss 0.6596139669418335
+
+Batches 15-29/240 (BS = 15) with loss 0.46517807245254517
+
+Batches 30-44/240 (BS = 15) with loss 0.10473912209272385
+
+Batches 45-59/240 (BS = 15) with loss 0.10858480632305145
+
+Batches 60-74/240 (BS = 15) with loss 0.34236961603164673
+
+Batches 75-89/240 (BS = 15) with loss 0.4455145597457886
+
+Batches 90-104/240 (BS = 15) with loss 0.2623203992843628
+
+Batches 105-119/240 (BS = 15) with loss 0.09921805560588837
+
+Batches 120-134/240 (BS = 15) with loss 0.09279707819223404
+
+Batches 135-149/240 (BS = 15) with loss 0.3012923300266266
+
+Batches 150-164/240 (BS = 15) with loss 0.2380337119102478
+
+Batches 165-179/240 (BS = 15) with loss 0.14903241395950317
+
+Batches 180-194/240 (BS = 15) with loss 0.28010299801826477
+
+Batches 195-209/240 (BS = 15) with loss 0.20551006495952606
+
+Batches 210-224/240 (BS = 15) with loss 1.0825951099395752
+
+Batches 225-239/240 (BS = 15) with loss 0.36344844102859497
+train correct
+correct 3336 / 3589
+eval correct
+correct 378 / 402
+
+Epoch 33 - train loss: 0.4021442234516144, train acc: 0.9295068264140429 val acc: 0.9402985074626866
+processing epochs...:  68%|██████▊   | 34/50 [35:10:47<16:33:30, 3725.67s/it]
+Batches 0-14/240 (BS = 15) with loss 0.40326985716819763
+
+Batches 15-29/240 (BS = 15) with loss 0.2892044186592102
+
+Batches 30-44/240 (BS = 15) with loss 0.33167967200279236
+
+Batches 45-59/240 (BS = 15) with loss 0.22370277345180511
+
+Batches 60-74/240 (BS = 15) with loss 0.1114683523774147
+
+Batches 75-89/240 (BS = 15) with loss 0.5122084021568298
+
+Batches 90-104/240 (BS = 15) with loss 0.7005862593650818
+
+Batches 105-119/240 (BS = 15) with loss 0.3308389484882355
+
+Batches 120-134/240 (BS = 15) with loss 0.17937196791172028
+
+Batches 135-149/240 (BS = 15) with loss 0.08346433192491531
+
+Batches 150-164/240 (BS = 15) with loss 0.3363695740699768
+
+Batches 165-179/240 (BS = 15) with loss 0.18152865767478943
+
+Batches 180-194/240 (BS = 15) with loss 0.24601061642169952
+
+Batches 195-209/240 (BS = 15) with loss 1.0552871227264404
+
+Batches 210-224/240 (BS = 15) with loss 0.7331545948982239
+
+Batches 225-239/240 (BS = 15) with loss 1.5376012325286865
+train correct
+correct 3302 / 3589
+eval correct
+correct 377 / 402
+
+Epoch 34 - train loss: 0.3742108643054962, train acc: 0.9200334354973531 val acc: 0.9378109452736318
+processing epochs...:  70%|███████   | 35/50 [36:13:04<15:32:15, 3729.04s/it]
+Batches 0-14/240 (BS = 15) with loss 0.236561119556427
+
+Batches 15-29/240 (BS = 15) with loss 0.8482659459114075
+
+Batches 30-44/240 (BS = 15) with loss 1.1769845485687256
+
+Batches 45-59/240 (BS = 15) with loss 0.22029227018356323
+
+Batches 60-74/240 (BS = 15) with loss 0.41520601511001587
+
+Batches 75-89/240 (BS = 15) with loss 0.24926383793354034
+
+Batches 90-104/240 (BS = 15) with loss 0.3809223175048828
+
+Batches 105-119/240 (BS = 15) with loss 0.30894383788108826
+
+Batches 120-134/240 (BS = 15) with loss 0.12572278082370758
+
+Batches 135-149/240 (BS = 15) with loss 0.40139147639274597
+
+Batches 150-164/240 (BS = 15) with loss 0.8030215501785278
+
+Batches 165-179/240 (BS = 15) with loss 0.1935443878173828
+
+Batches 180-194/240 (BS = 15) with loss 0.20027633011341095
+
+Batches 195-209/240 (BS = 15) with loss 0.39217594265937805
+
+Batches 210-224/240 (BS = 15) with loss 0.3418115973472595
+
+Batches 225-239/240 (BS = 15) with loss 0.9843963980674744
+train correct
+correct 3306 / 3589
+eval correct
+correct 372 / 402
+
+Epoch 35 - train loss: 0.41919177770614624, train acc: 0.9211479520757871 val acc: 0.9253731343283582
+processing epochs...:  72%|███████▏  | 36/50 [37:16:08<14:33:59, 3745.65s/it]
+Batches 0-14/240 (BS = 15) with loss 0.17516721785068512
+
+Batches 15-29/240 (BS = 15) with loss 0.3119582533836365
+
+Batches 30-44/240 (BS = 15) with loss 0.5475285053253174
+
+Batches 45-59/240 (BS = 15) with loss 0.29204514622688293
+
+Batches 60-74/240 (BS = 15) with loss 0.41020646691322327
+
+Batches 75-89/240 (BS = 15) with loss 0.8738225102424622
+
+Batches 90-104/240 (BS = 15) with loss 0.23308075964450836
+
+Batches 105-119/240 (BS = 15) with loss 0.1279653161764145
+
+Batches 120-134/240 (BS = 15) with loss 0.4772794842720032
+
+Batches 135-149/240 (BS = 15) with loss 0.29105204343795776
+
+Batches 150-164/240 (BS = 15) with loss 0.1924411654472351
+
+Batches 165-179/240 (BS = 15) with loss 0.33322373032569885
+
+Batches 180-194/240 (BS = 15) with loss 0.7953010201454163
+
+Batches 195-209/240 (BS = 15) with loss 0.04869944229722023
+
+Batches 210-224/240 (BS = 15) with loss 0.41306236386299133
+
+Batches 225-239/240 (BS = 15) with loss 0.23959366977214813
+train correct
+correct 3269 / 3589
+eval correct
+correct 375 / 402
+
+Epoch 36 - train loss: 0.4092593491077423, train acc: 0.9108386737252716 val acc: 0.9328358208955224
+processing epochs...:  74%|███████▍  | 37/50 [38:18:10<13:30:01, 3738.55s/it]
+Batches 0-14/240 (BS = 15) with loss 0.3253534138202667
+
+Batches 15-29/240 (BS = 15) with loss 0.221870556473732
+
+Batches 30-44/240 (BS = 15) with loss 0.2670079469680786
+
+Batches 45-59/240 (BS = 15) with loss 0.44703930616378784
+
+Batches 60-74/240 (BS = 15) with loss 0.1462881863117218
+
+Batches 75-89/240 (BS = 15) with loss 0.49582043290138245
+
+Batches 90-104/240 (BS = 15) with loss 0.02559620700776577
+
+Batches 105-119/240 (BS = 15) with loss 0.5079516768455505
+
+Batches 120-134/240 (BS = 15) with loss 0.19562430679798126
+
+Batches 135-149/240 (BS = 15) with loss 0.33573561906814575
+
+Batches 150-164/240 (BS = 15) with loss 0.38739317655563354
+
+Batches 165-179/240 (BS = 15) with loss 0.07702242583036423
+
+Batches 180-194/240 (BS = 15) with loss 0.7130586504936218
+
+Batches 195-209/240 (BS = 15) with loss 0.5749413967132568
+
+Batches 210-224/240 (BS = 15) with loss 0.44243019819259644
+
+Batches 225-239/240 (BS = 15) with loss 0.12690161168575287
+train correct
+correct 3296 / 3589
+eval correct
+correct 374 / 402
+
+Epoch 37 - train loss: 0.4380747079849243, train acc: 0.9183616606297018 val acc: 0.9303482587064676
+processing epochs...:  76%|███████▌  | 38/50 [39:20:26<12:27:33, 3737.80s/it]
+Batches 0-14/240 (BS = 15) with loss 0.351167768239975
+
+Batches 15-29/240 (BS = 15) with loss 0.6095959544181824
+
+Batches 30-44/240 (BS = 15) with loss 0.0966583862900734
+
+Batches 45-59/240 (BS = 15) with loss 0.8870633840560913
+
+Batches 60-74/240 (BS = 15) with loss 0.6768133044242859
+
+Batches 75-89/240 (BS = 15) with loss 0.49906742572784424
+
+Batches 90-104/240 (BS = 15) with loss 0.428260862827301
+
+Batches 105-119/240 (BS = 15) with loss 1.0753902196884155
+
+Batches 120-134/240 (BS = 15) with loss 0.10485700517892838
+
+Batches 135-149/240 (BS = 15) with loss 0.23542596399784088
+
+Batches 150-164/240 (BS = 15) with loss 0.2294948399066925
+
+Batches 165-179/240 (BS = 15) with loss 0.8486736416816711
+
+Batches 180-194/240 (BS = 15) with loss 0.20431675016880035
+
+Batches 195-209/240 (BS = 15) with loss 0.7826908230781555
+
+Batches 210-224/240 (BS = 15) with loss 0.14460189640522003
+
+Batches 225-239/240 (BS = 15) with loss 0.6678062081336975
+train correct
+correct 3324 / 3589
+eval correct
+correct 371 / 402
+
+Epoch 38 - train loss: 0.3922736346721649, train acc: 0.9261632766787405 val acc: 0.9228855721393034
+processing epochs...:  78%|███████▊  | 39/50 [40:22:46<11:25:22, 3738.41s/it]
+Batches 0-14/240 (BS = 15) with loss 0.24803631007671356
+
+Batches 15-29/240 (BS = 15) with loss 0.7179192900657654
+
+Batches 30-44/240 (BS = 15) with loss 0.19937823712825775
+
+Batches 45-59/240 (BS = 15) with loss 0.6017634272575378
+
+Batches 60-74/240 (BS = 15) with loss 0.6631450057029724
+
+Batches 75-89/240 (BS = 15) with loss 0.8635149598121643
+
+Batches 90-104/240 (BS = 15) with loss 0.7258923649787903
+
+Batches 105-119/240 (BS = 15) with loss 0.03914780169725418
+
+Batches 120-134/240 (BS = 15) with loss 0.06991340965032578
+
+Batches 135-149/240 (BS = 15) with loss 0.4980222284793854
+
+Batches 150-164/240 (BS = 15) with loss 0.1139669269323349
+
+Batches 165-179/240 (BS = 15) with loss 0.5765142440795898
+
+Batches 180-194/240 (BS = 15) with loss 0.32491084933280945
+
+Batches 195-209/240 (BS = 15) with loss 0.1873401701450348
+
+Batches 210-224/240 (BS = 15) with loss 0.2698727250099182
+
+Batches 225-239/240 (BS = 15) with loss 0.8064546585083008
+train correct
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              correct 3264 / 3589
+eval correct
+correct 372 / 402
+
+Epoch 40 - train loss: 0.3654037415981293, train acc: 0.909445528002229 val acc: 0.9253731343283582
+processing epochs...:  82%|████████▏ | 41/50 [42:27:53<9:21:32, 3743.65s/it] 
+Batches 0-14/240 (BS = 15) with loss 0.7160910964012146
+
+Batches 15-29/240 (BS = 15) with loss 0.4480869174003601
+
+Batches 30-44/240 (BS = 15) with loss 0.3673362731933594
+
+Batches 45-59/240 (BS = 15) with loss 0.38229599595069885
+
+Batches 60-74/240 (BS = 15) with loss 0.47544988989830017
+
+Batches 75-89/240 (BS = 15) with loss 0.16975031793117523
+
+Batches 90-104/240 (BS = 15) with loss 0.4829901158809662
+
+Batches 105-119/240 (BS = 15) with loss 0.6850146055221558
+
+Batches 120-134/240 (BS = 15) with loss 0.19480936229228973
+
+Batches 135-149/240 (BS = 15) with loss 0.08412480354309082
+
+Batches 150-164/240 (BS = 15) with loss 0.6359217166900635
+
+Batches 165-179/240 (BS = 15) with loss 0.6574150323867798
+
+Batches 180-194/240 (BS = 15) with loss 0.051235929131507874
+
+Batches 195-209/240 (BS = 15) with loss 0.3687874376773834
+
+Batches 210-224/240 (BS = 15) with loss 0.15244197845458984
+
+Batches 225-239/240 (BS = 15) with loss 0.04533463343977928
+train correct
+correct 3357 / 3589
+eval correct
+correct 378 / 402
+
+Epoch 41 - train loss: 0.4500750005245209, train acc: 0.935358038450822 val acc: 0.9402985074626866
+processing epochs...:  84%|████████▍ | 42/50 [43:30:47<8:20:22, 3752.75s/it]
+Batches 0-14/240 (BS = 15) with loss 0.46984291076660156
+
+Batches 15-29/240 (BS = 15) with loss 0.21551071107387543
+
+Batches 30-44/240 (BS = 15) with loss 0.1647610366344452
+
+Batches 45-59/240 (BS = 15) with loss 0.25228697061538696
+
+Batches 60-74/240 (BS = 15) with loss 0.2994312047958374
+
+Batches 75-89/240 (BS = 15) with loss 0.2124173492193222
+
+Batches 90-104/240 (BS = 15) with loss 0.11363956332206726
+
+Batches 105-119/240 (BS = 15) with loss 0.26020851731300354
+
+Batches 120-134/240 (BS = 15) with loss 0.39941468834877014
+
+Batches 135-149/240 (BS = 15) with loss 0.09791901707649231
+
+Batches 150-164/240 (BS = 15) with loss 0.5674988031387329
+
+Batches 165-179/240 (BS = 15) with loss 0.13628974556922913
+
+Batches 180-194/240 (BS = 15) with loss 0.333619087934494
+
+Batches 195-209/240 (BS = 15) with loss 0.37117287516593933
+
+Batches 210-224/240 (BS = 15) with loss 0.2195008099079132
+
+Batches 225-239/240 (BS = 15) with loss 0.4548977017402649
+train correct
+correct 3250 / 3589
+eval correct
+correct 371 / 402
+
+Epoch 42 - train loss: 0.3344820737838745, train acc: 0.9055447199777097 val acc: 0.9228855721393034
+processing epochs...:  86%|████████▌ | 43/50 [44:33:20<7:17:49, 3752.78s/it]
+Batches 0-14/240 (BS = 15) with loss 0.16590340435504913
+
+Batches 15-29/240 (BS = 15) with loss 0.4078058898448944
+
+Batches 30-44/240 (BS = 15) with loss 0.34242546558380127
+
+Batches 45-59/240 (BS = 15) with loss 0.44366881251335144
+
+Batches 60-74/240 (BS = 15) with loss 0.30693408846855164
+
+Batches 75-89/240 (BS = 15) with loss 0.3217080533504486
+
+Batches 90-104/240 (BS = 15) with loss 0.8605069518089294
+
+Batches 105-119/240 (BS = 15) with loss 0.38430723547935486
+
+Batches 120-134/240 (BS = 15) with loss 0.9902632832527161
+
+Batches 135-149/240 (BS = 15) with loss 0.413675993680954
+
+Batches 150-164/240 (BS = 15) with loss 0.3993082642555237
+
+Batches 165-179/240 (BS = 15) with loss 0.10005887597799301
+
+Batches 180-194/240 (BS = 15) with loss 0.7163271307945251
+
+Batches 195-209/240 (BS = 15) with loss 0.3465963304042816
+
+Batches 210-224/240 (BS = 15) with loss 0.5980668663978577
+
+Batches 225-239/240 (BS = 15) with loss 0.1683894246816635
+train correct
+correct 3330 / 3589
+eval correct
+correct 368 / 402
+
+Epoch 43 - train loss: 0.4191696345806122, train acc: 0.9278350515463918 val acc: 0.9154228855721394
+processing epochs...:  88%|████████▊ | 44/50 [45:36:48<6:16:56, 3769.41s/it]
+Batches 0-14/240 (BS = 15) with loss 0.2546687424182892
+
+Batches 15-29/240 (BS = 15) with loss 0.21764735877513885
+
+Batches 30-44/240 (BS = 15) with loss 0.2082527130842209
+
+Batches 45-59/240 (BS = 15) with loss 0.3087220788002014
+
+Batches 60-74/240 (BS = 15) with loss 0.2182043343782425
+
+Batches 75-89/240 (BS = 15) with loss 0.3907918632030487
+
+Batches 90-104/240 (BS = 15) with loss 0.03713781386613846
+
+Batches 105-119/240 (BS = 15) with loss 0.7591100335121155
+
+Batches 120-134/240 (BS = 15) with loss 0.31528276205062866
+
+Batches 135-149/240 (BS = 15) with loss 0.11646732687950134
+
+Batches 150-164/240 (BS = 15) with loss 0.43789929151535034
+
+Batches 165-179/240 (BS = 15) with loss 0.38392844796180725
+
+Batches 180-194/240 (BS = 15) with loss 0.11931119114160538
+
+Batches 195-209/240 (BS = 15) with loss 0.10751769691705704
+
+Batches 210-224/240 (BS = 15) with loss 0.07353651523590088
+
+Batches 225-239/240 (BS = 15) with loss 0.5541106462478638
+train correct
+correct 3336 / 3589
+eval correct
+correct 378 / 402
+
+Epoch 44 - train loss: 0.358757883310318, train acc: 0.9295068264140429 val acc: 0.9402985074626866
+processing epochs...:  88%|████████▊ | 44/50 [46:38:58<6:21:40, 3816.79s/it]
+Traceback (most recent call last):
+  File "experiments.py", line 214, in <module>
+    
+  File "experiments.py", line 156, in run
+    val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False, num_workers=0)
+  File "/home/ubuntu/tmp/proj34/geometric-ifc/learning/trainer.py", line 89, in train
+    }, is_best
+  File "/home/ubuntu/tmp/proj34/geometric-ifc/learning/trainer.py", line 155, in save_checkpoint
+    torch.save(state, path_out)
+  File "/home/ubuntu/anaconda3/envs/pytorch_geom_p36/lib/python3.6/site-packages/torch/serialization.py", line 327, in save
+    with _open_file_like(f, 'wb') as opened_file:
+  File "/home/ubuntu/anaconda3/envs/pytorch_geom_p36/lib/python3.6/site-packages/torch/serialization.py", line 212, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+  File "/home/ubuntu/anaconda3/envs/pytorch_geom_p36/lib/python3.6/site-packages/torch/serialization.py", line 193, in __init__
+    super(_open_file, self).__init__(open(name, mode))
+FileNotFoundError: [Errno 2] No such file or directory: '../out/0/model_state.pth.tar'

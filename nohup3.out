@@ -1,0 +1,8 @@
+nohup: ignoring input
+Training 3589 graphs with 10 number of classes
+Validating on 402 graphs with 10 number of classes: 
+Run 0 of 1
+processing epochs...:   0%|          | 0/50 [00:00<?, ?it/s]
+Batches 0-14/240 (BS = 15) with loss 2.840378999710083
+
+Batches 15-29/240 (BS = 15) with loss 2.3641507625579834

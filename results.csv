@@ -1,2 +1,0 @@
-,batch_size,learning_rate,model_name,n_epochs,test_acc
-0,5,0.01,<class 'learning.models.PN2Net'>,20,0.58203125

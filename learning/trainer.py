@@ -34,7 +34,7 @@ def pointnetloss(outputs, labels, m3x3, m64x64, alpha = 0.0001):
 
 
 class Trainer:
-    def __init__(self, model, output_path, max_patience=15):
+    def __init__(self, model, output_path, max_patience=10):
         self.model = model
         self.output_path = output_path
         self.max_patience = max_patience
@@ -115,7 +115,7 @@ class Trainer:
         correct=0
         for data in data_loader:
             data = data.to(device)
-            loss = F.nll_loss(self.model(data)[0], data.y)
+            #loss = F.nll_loss(self.model(data)[0], data.y)
             with torch.no_grad():
                 pred = self.model(data)[0].max(1)[1]
             correct += pred.eq(data.y).sum().item()
@@ -134,7 +134,7 @@ class Trainer:
         crit_points_list=[]
         for data in data_loader:
             data = data.to(device)
-            loss = F.nll_loss(self.model(data)[0], data.y)
+            #loss = F.nll_loss(self.model(data)[0], data.y)
             with torch.no_grad():
                 logSM, crit_points = self.model(data)
                 SM = torch.max(torch.exp(logSM))
