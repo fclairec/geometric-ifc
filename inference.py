@@ -26,8 +26,8 @@ class Inference(object):
 
             transform = T.Compose([T.NormalizeScale(), T.SamplePoints(3000)])
             dataset=ModelNet(path, '10', False, transform)
-            test_data = ModelNet(path, '10', False, transform).shuffle()
-            test_data=test_data[:15].copy_set()
+            test_data = ModelNet(path, '10', False, transform)
+            #test_data=test_data[:20].copy_set()
             test_loader = DataLoader(test_data, batch_size=1, shuffle=False, num_workers=0)
             """
             transform = T.Compose([T.Distance(), T.Center()])
@@ -105,7 +105,7 @@ if __name__ == '__main__':
     i = 0
     model_list = []
     while experiments:
-        model_path = '../out/' + str(i)
+        model_path = '../proj34_out/out/' + str(i)
         if not os.path.exists(model_path):
             break
         model_list.append(model_path + '/model_state_best_val.pth.tar')
@@ -114,7 +114,7 @@ if __name__ == '__main__':
 
     # path = '../../BIM_PC/points'
 
-    path = '../../ModelNet10'
+    path = '../ModelNet10'
     # if not test set --> change path
 
     inf = Inference(path, plot)

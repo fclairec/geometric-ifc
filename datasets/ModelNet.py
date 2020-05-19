@@ -6,7 +6,7 @@ import glob
 import torch
 from torch_geometric.data import download_url, extract_zip, Dataset, InMemoryDataset
 from torch_geometric.io import read_off
-from helpers.in_memory_dataset import InMemoryDataset
+#from helpers.in_memory_dataset import InMemoryDataset
 
 
 class ModelNet(InMemoryDataset):  #

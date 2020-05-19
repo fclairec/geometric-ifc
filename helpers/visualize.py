@@ -7,7 +7,7 @@ import numpy
 def vis_point(test_loader,  output_path, output_path_error, prob, y_pred_list, y_real_list, crit_points_list_ind=None):
 
     if crit_points_list_ind is not None:
-        vis_crit_points(test_loader,  output_path, output_path_error, prob, y_pred_list, y_real_list, crit_points_list_ind=None)
+        vis_crit_points(test_loader,  output_path, output_path_error, prob, y_pred_list, y_real_list, crit_points_list_ind)
         return
 
     for i, data in enumerate(test_loader):
@@ -58,8 +58,8 @@ def vis_crit_points(test_loader,  output_path, output_path_error, prob, y_pred_l
         certainty = prob[i]
         y_real = y_real_list[i]
         y_pred = y_pred_list[i]
-        y_real_l = test_loader.test_data.classmap[y_real]
-        y_pred_l = test_loader.test_data.classmap[y_pred]
+        y_real_l = test_loader.dataset.classmap[y_real]
+        y_pred_l = test_loader.dataset.classmap[y_pred]
         pos = data.pos.numpy()
 
         xyz = numpy.array(
@@ -77,6 +77,7 @@ def vis_crit_points(test_loader,  output_path, output_path_error, prob, y_pred_l
         ax.set_xlim(left=1, right=-1)
         ax.set_ylim(bottom=1, top=-1)
         ax.set_zlim(-1, 1)
+        ax.title.set_text("full pointcloud")
 
         # critical point
         ax = fig.add_subplot(1, 2, 2, projection='3d')
@@ -84,6 +85,7 @@ def vis_crit_points(test_loader,  output_path, output_path_error, prob, y_pred_l
         ax.set_xlim(left=1, right=-1)
         ax.set_ylim(bottom=1, top=-1)
         ax.set_zlim(-1, 1)
+        ax.title.set_text("critical points")
 
         if y_pred != y_real:
             out = output_path_error + "/" + str(i) + y_real_l + "-" + y_pred_l + "-with(" + str(certainty) + ")"
