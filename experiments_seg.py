@@ -116,7 +116,7 @@ class Experimenter(object):
         pd.DataFrame(results).to_csv(os.path.join(output_path, 'results_seg.csv'))
         torch.cuda.empty_cache()
 
-    def subrun(self, output_path_run, model_name, n_epochs, batch_size, learning_rate, pretrained=False,
+    def subrun(self, output_path_run, model_name, n_epochs, batch_size, learning_rate, knn, pretrained=False,
                print_set_stats=False, print_model_stats=False):
 
         if model_name.__name__ is 'PN2Net_seg':
@@ -218,6 +218,7 @@ if __name__ == '__main__':
     dataset_root_path = "../.."
     output_path = "../../out_roesti"
     # for Docker use this
+    #dataset_root_path = ".."
     #output_path = "/data/output"
 
     # Name of Dataset, careful the string matters!
@@ -237,9 +238,9 @@ if __name__ == '__main__':
     config['dataset_name'] = ['ASPERN'] #'S3DIS'
     config['n_epochs'] = [15]
     config['learning_rate'] = [0.001]
-    config['batch_size'] = [8]
+    config['batch_size'] = [4]
     config['model_name'] = [DGCNNNet_seg]  # , OWN, PN2Net_seg, DGCNNNet_seg, GUNet_seg
-    config['knn'] = 5
+    config['knn'] = [5]
     # config['model_name'] = [, PN2Net, DGCNNNet, , DGCNNNet, UNet]
     ex = Experimenter(config, dataset_root_path, output_path)
     ex.run(print_set_stats, print_model_stats, pretrained)
