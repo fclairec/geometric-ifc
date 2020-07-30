@@ -26,10 +26,11 @@ plt = matplotlib.pyplot
 from torch.nn import Sequential as Seq, Linear as Lin, Dropout
 from learning.models import MLP
 
-from helpers.results import summary
+from helpers.results import summary, save_set_stats, save_test_results
 
 # import trainer class
 from learning.trainers import Trainer_seg
+
 
 # Define depending on hardware
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -50,26 +51,6 @@ class Experimenter(object):
         if dataset_name[0] == 'A':
             self.dataset_name = ASPERN
             self.dataset_type = dataset_name[-2:]
-
-    def save_test_results(self, y_real, y_pred, test_acc, output_path, test_dataset, epoch_losses, train_accuracies,
-                          val_accuracies):
-
-        # plot epoch losses
-        plt.figure()
-        plt.plot(range(len(epoch_losses)), epoch_losses, label='training loss')
-        plt.legend()
-        plt.title("Train loss")
-        plt.savefig(output_path + '/train_loss.png')
-        plt.close()
-
-        # plot train and val accuracies
-        plt.figure()
-        plt.plot(range(len(train_accuracies)), train_accuracies, label='training accuracies')
-        plt.plot(range(len(train_accuracies)), val_accuracies, label='validation accuracies')
-        plt.legend()
-        plt.title("Train and validation accuracies")
-        plt.savefig(output_path + '/train-val_acc.png')
-        plt.close()
 
     def transform_setup(self):
 
@@ -212,8 +193,8 @@ class Experimenter(object):
         test_acc, y_pred, y_real, test_ious, _ = trainer.test(test_loader)
         print("Test accuracy = {}".format(test_acc))
 
-        self.save_test_results(y_real, y_pred, test_acc, output_path, test_dataset, epoch_losses, train_accuracies,
-                               val_accuracies)
+        save_test_results(y_real, y_pred, test_acc, output_path, test_dataset, epoch_losses, train_accuracies,
+                               val_accuracies, test_ious)
 
         return test_acc, epoch_losses, train_accuracies, val_accuracies, test_ious
 

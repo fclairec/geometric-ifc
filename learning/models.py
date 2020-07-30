@@ -276,13 +276,14 @@ class GraphConvLayer(torch.nn.Module):
         a=0
 
 class GCN(torch.nn.Module):
-    def __init__(self, num_features, num_classes):
+    def __init__(self, num_classes):
         super(GCN, self).__init__()
 
         self.conv1 = GCNConv(3, 64, cached=False, normalize=not True)
-        #self.conv12 = GCNConv(16, 32, cached=False, normalize=not True)
+        # self.conv12 = GCNConv(16, 32, cached=False, normalize=not True)
         self.conv2 = GCNConv(64, 128, cached=False, normalize=not True)
         self.conv3 = GCNConv(192, 254, cached=False, normalize=not True)
+        # CAREFUL: If modifying here, check line 202 in experiments.py for pretrained model
         self.lin1 = torch.nn.Linear(254, num_classes)
         self.mlp = Seq(
             MLP([1024, 512]), Dropout(0.5), MLP([512, 256]), Dropout(0.5),

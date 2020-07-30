@@ -36,11 +36,11 @@ class Inference(Experimenter):
 
 
                 if model_name == 'PN2Net':
-                    transform, pretransform = self.transform_setup(graph=False)
+                    transform, pretransform = transform_setup(graph=False)
                 if model_name == 'DGCNNNet':
-                    transform, pretransform = self.transform_setup(graph=False)
+                    transform, pretransform = transform_setup(graph=False)
                 if model_name == 'UNet':
-                    transform, pretransform = self.transform_setup(graph=True)
+                    transform, pretransform = transform_setup(graph=True)
 
                 # Define datasets
                 dataset = self.dataset_name(self.dataset_path, self.dataset_type, True, transform, pretransform)
