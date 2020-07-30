@@ -75,7 +75,7 @@ class GlobalSAModule(torch.nn.Module):
 
     def forward(self, x, pos, batch):
         x = self.nn(torch.cat([x, pos], dim=1))
-        x = global_max_pool(x, batch)[0]
+        x = global_max_pool(x, batch)
         pos = pos.new_zeros((x.size(0), 3))
         batch = torch.arange(x.size(0), device=batch.device)
         return x, pos, batch
@@ -104,15 +104,15 @@ class PN2Net(torch.nn.Module):
         sa0_out = (data.x, data.pos, data.batch)
         sa1_out = self.sa1_module(*sa0_out)
         sa2_out = self.sa2_module(*sa1_out)
-        x, pos, batch, crit_points = self.sa3_module(*sa2_out)
-
+        #x, pos, batch, crit_points = self.sa3_module(*sa2_out)
+        x, pos, batch = self.sa3_module(*sa2_out)
 
         x = F.relu(self.lin1(x))
         x = F.dropout(x, p=0.5, training=self.training)
         x = F.relu(self.lin2(x))
         x = F.dropout(x, p=0.5, training=self.training)
         x = self.lin3(x)
-        return F.log_softmax(x, dim=-1), crit_points
+        return F.log_softmax(x, dim=-1)  #, crit_points
 
 
 

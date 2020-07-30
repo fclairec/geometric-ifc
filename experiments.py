@@ -249,7 +249,7 @@ if __name__ == '__main__':
     config['n_epochs'] = [3]
     config['learning_rate'] = [0.001]
     config['batch_size'] = [8]
-    config['model_name'] = [GCN]
+    config['model_name'] = [PN2Net] #GCN
     config['knn'] = [5]
     # config['model_name'] = [, PN2Net, DGCNNNet, , DGCNNNet, UNetGCN]
     ex = Experimenter(config, dataset_root_path, output_path)

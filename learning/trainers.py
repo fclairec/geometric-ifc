@@ -60,9 +60,11 @@ class Trainer:
                 loss.backward()
                 optimizer.step()
                 with torch.no_grad():
-                    train_losses.append(loss.data)
+                    # train losses per batch
+                    train_losses.append(loss.data*data.num_graphs)
                     pred = outputs.max(1)[1]
-                    acc=pred.eq(data.y).sum().item() / train_loader.batch_size
+                    # train accuracies per batch
+                    acc = pred.eq(data.y).sum().item() / data.num_graphs
                     train_accuracies_batch.append(acc)
 
                 # for batch progress tracking in terminal
@@ -208,6 +210,7 @@ class Trainer_seg(Trainer):
             self.model.train()
             train_losses = []
             correct = 0
+            train_accuracies_batch = []
 
             for i, data in enumerate(train_loader):
                 data = data.to(device)
@@ -216,35 +219,32 @@ class Trainer_seg(Trainer):
                 loss = F.nll_loss(outputs, data.y)
                 loss.backward()
                 optimizer.step()
-                train_losses.append(loss.data * train_loader.batch_size)
                 with torch.no_grad():
+                    # Train losses per batch
+                    train_losses.append(loss.data * len(data.pos))
                     pred = outputs.max(1)[1]
-                correct += pred.eq(data.y).sum().item()
+                    # Train accuracies per bach
+                    acc = pred.eq(data.y).sum().item() / len(data.pos)
+                #correct += pred.eq(data.y).sum().item()
                 pred_np = pred.detach().cpu().numpy()
 
-                """train_true_labels.append(data.y.detach().cpu().numpy())
-                train_pred_labels.append(pred_np)"""
-
-                # TODO: careful! This needs to be changed when switching from shape to node classification
 
                 # for batch progress tracking in terminal
                 if (i + 1) % printout == 0:
-                    print('\nBatches {}-{}/{} (BS = {}) with loss {}'.format(i - printout + 1, i, len(train_loader),
-                                                                             train_loader.batch_size, train_losses[-1]))
-
-            train_acc = correct / len(train_loader.dataset.data.pos)
+                    print('\nBatches {}-{}/{} (BS = {}) with loss {} and accuracy {}'.format(i - printout + 1, i, len(train_loader),
+                                                                             train_loader.batch_size, train_losses[-1], train_accuracies_batch[-1]))
 
             epoch_losses.append(torch.mean(torch.stack(train_losses, dim=0)).item())
+            train_accuracies.append(np.mean(train_accuracies_batch))
 
             print("train correct")
-            # train_acc = self.eval(train_loader)
+            print(train_accuracies[-1])
             print("eval correct")
-            val_acc = self.eval(val_loader)
-            train_accuracies.append(train_acc)
+            val_acc = self.eval(val_loader, seg=True)
             val_accuracies.append(val_acc)
 
-            print("\nEpoch {} - train loss: {}, train acc: {} val acc: {}".format(epoch, epoch_losses[-1],
-                                                                                  train_acc,
+            print("\nEpoch {} - train loss: {}, train acc: {} val acc: {}".format(epoch, epoch_losses[-1].item(),
+                                                                                  train_accuracies[-1],
                                                                                   val_acc
                                                                                   ))
 
