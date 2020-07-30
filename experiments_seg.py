@@ -31,35 +31,29 @@ from helpers.results import summary, save_set_stats, save_test_results
 # import trainer class
 from learning.trainers import Trainer_seg
 
-
 # Define depending on hardware
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-
 # device = 'cpu'
+
+NUM_WORKERS = 6
+
+
+def transform_setup():
+    transform = T.KNNGraph(k=2)
+    # for now
+    # transform = None
+    pretransform = None
+
+    return transform, pretransform
 
 
 class Experimenter(object):
-    def __init__(self, config, dataset_name):
+    def __init__(self, config, dataset_root, output_path):
         if config is not None:
             self.grid = ParameterGrid(config)
-        self.dataset_root_path = '../'
-        self.dataset_path = self.dataset_root_path + dataset_name
-        if dataset_name[0] == 'S':
-            self.dataset_name = S3DIS
-            self.dataset_type = 6
-        if dataset_name[0] == 'A':
-            self.dataset_name = ASPERN
-            self.dataset_type = dataset_name[-2:]
-
-    def transform_setup(self):
-
-        transform = T.KNNGraph(k=2)
-        # for now
-        # transform = None
-        pretransform = None
-
-        return transform, pretransform
+        self.dataset_root_path = dataset_root
+        self.output_path = output_path
 
     def run(self, print_set_stats, print_model_stats, pretrained=False, inference=False):
 
@@ -69,74 +63,90 @@ class Experimenter(object):
         for i, params in enumerate(grid_unfold):
 
             # set experiment setting
+            dataset_name = params['dataset_name']
             n_epochs = params['n_epochs']
             batch_size = params['batch_size']
             learning_rate = params['learning_rate']
             model_name = params['model_name']
+            knn = params['knn']
 
             # Prepare result output
             result = params
 
+            # outputpaths
+            assert os.path.exists(output_path)
+            output_path_run = os.path.join(output_path, str(i), "_seg")
+
             print("Run {} of {}".format(i, len(grid_unfold)))
+            print("Writing outputs to {}".format(output_path_run))
+
+            if not os.path.exists(output_path_run):
+                os.makedirs(output_path_run)
             if pretrained:
-                output_path = '../data/retrained' + str(i)
-            else:
-                output_path = '../data' + str(i)
+                output_path_run = os.path.join(output_path, str(i), "_seg", "transfer")
+                if not os.path.exists(output_path_run):
+                    os.makedirs(output_path_run)
 
+            self.dataset_path = os.path.join(self.dataset_root_path, dataset_name)
+            assert os.path.exists(self.dataset_path)
 
-            if not os.path.exists(output_path):
-                os.makedirs(output_path)
+            if dataset_name[0] == 'S':
+                self.dataset_name = S3DIS
+                self.dataset_type = 6
+            if dataset_name[0] == 'A':
+                self.dataset_name = ASPERN
+                self.dataset_type = dataset_name[-2:]
 
-            test_acc, epoch_losses, train_accuracies, val_accuracies, test_ious = self.subrun(output_path, model_name
+            test_acc, epoch_losses, train_accuracies, val_accuracies, test_ious = self.subrun(output_path_run,
+                                                                                              model_name
                                                                                               , n_epochs, batch_size,
                                                                                               learning_rate
-                                                                                              , pretrained,
-                                                                                              print_set_stats
-                                                                                              , print_model_stats)
+                                                                                              , knn, pretrained,
+                                                                                              print_set_stats= print_set_stats
+                                                                                              , print_model_stats=print_model_stats)
 
             result['test_acc'] = test_acc
             result['loss'] = epoch_losses
-            result['train_acc'] = train_accuracies
-            result['val_acc'] = val_accuracies
-            result['test_ious'] = test_ious
+            #result['train_acc'] = train_accuracies
+            #result['val_acc'] = val_accuracies
+            #result['test_ious'] = test_ious
 
             results.append(result)
 
-        pd.DataFrame(results).to_csv('data/results.csv')
+        pd.DataFrame(results).to_csv(os.path.join(output_path, 'results_seg.csv'))
         torch.cuda.empty_cache()
 
-    def subrun(self, output_path, model_name, n_epochs, batch_size, learning_rate, pretrained=False,
+    def subrun(self, output_path_run, model_name, n_epochs, batch_size, learning_rate, pretrained=False,
                print_set_stats=False, print_model_stats=False):
 
         if model_name.__name__ is 'PN2Net_seg':
-            transform, pretransform = self.transform_setup()
+            transform, pretransform = transform_setup()
         if model_name.__name__ is 'DGCNNNet_seg':
-            transform, pretransform = self.transform_setup()
+            transform, pretransform = transform_setup()
         if model_name.__name__ is 'GUNet_seg':
-            transform, pretransform = self.transform_setup()
-        if model_name.__name__ is 'OWN':
-            transform, pretransform = self.transform_setup()
+            transform, pretransform = transform_setup()
 
         # Define datasets (no val dataset)
-        print("Training on {}".format(self.dataset_name.__name__))
         train_dataset = self.dataset_name(self.dataset_path, self.dataset_type, True, transform, pretransform)
         test_dataset = self.dataset_name(self.dataset_path, self.dataset_type, False, transform, pretransform)
         val_dataset = self.dataset_name(self.dataset_path, self.dataset_type, False, transform, pretransform)
+
+        print("Run with dataset {} type {}".format(str(self.dataset_name.__name__), str(self.dataset_type)))
 
         print("Training {} graphs with {} number of classes".format(len(train_dataset), train_dataset.num_classes))
         print("Validating on {} graphs with {} number of classes ".format(len(val_dataset), val_dataset.num_classes))
         print("Testing on {} graphs with {} number of classes ".format(len(test_dataset), test_dataset.num_classes))
 
         # Define dataloaders
-        train_loader = DataLoader(train_dataset, batch_size=batch_size, num_workers=0)
-        test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False, num_workers=0)
-        val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False, num_workers=0)
+        train_loader = DataLoader(train_dataset, batch_size=batch_size, num_workers=NUM_WORKERS)
+        test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False, num_workers=NUM_WORKERS)
+        val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False, num_workers=NUM_WORKERS)
 
         if pretrained:
             checkpoint = torch.load(pretrained)
-            # dim_last_layer = checkpoint['num_output_classes']
-            # dim last layer of pretrained model, needed for loading
-            dim_last_layer = 6
+            # say the class output dimension of the pretrained model, for correct loading
+            # e.g. if pretrained model was on S3DIS -> set here 13
+            dim_last_layer = 13
 
         # Define models depending on the setting
         if model_name.__name__ is 'PN2Net_seg':
@@ -186,15 +196,17 @@ class Experimenter(object):
         # Define optimizer depending on settings
         optimizer = torch.optim.Adam(params=model.parameters(), lr=learning_rate, weight_decay=0.00001)
 
-        trainer = Trainer_seg(model, output_path)
+        #Initialize segmentation trainer
+        trainer = Trainer_seg(model, output_path_run)
+        # Let Trainer run over epochs
         epoch_losses, train_accuracies, val_accuracies = trainer.train(train_loader, val_loader, n_epochs,
                                                                        optimizer)
 
-        test_acc, y_pred, y_real, test_ious, _ = trainer.test(test_loader)
+        test_acc, y_pred, y_real, test_ious, _ = trainer.test(test_loader, seg=True)
         print("Test accuracy = {}".format(test_acc))
 
         save_test_results(y_real, y_pred, test_acc, output_path, test_dataset, epoch_losses, train_accuracies,
-                               val_accuracies, test_ious)
+                          val_accuracies, test_ious)
 
         return test_acc, epoch_losses, train_accuracies, val_accuracies, test_ious
 
@@ -203,8 +215,13 @@ if __name__ == '__main__':
     torch.cuda.empty_cache()
     config = dict()
 
+    dataset_root_path = "../.."
+    output_path = "../../out_roesti"
+    # for Docker use this
+    #output_path = "/data/output"
+
     # Name of Dataset, careful the string matters!
-    dataset_name = 'ASPERN' #'S3DIS'
+    dataset_name = 'ASPERN'  # 'S3DIS'
     print(dataset_name)
 
     # print set plots
@@ -214,12 +231,15 @@ if __name__ == '__main__':
     print_model_stats = True
 
     # pretrained model?
-    pretrained = 'data/0/model_state_best_val.pth.tar'
+    pretrained = False
+    #pretrained = os.path.join(output_path, "0_seg", "model_state_best_val.pth.tar")
 
+    config['dataset_name'] = ['ASPERN'] #'S3DIS'
     config['n_epochs'] = [15]
     config['learning_rate'] = [0.001]
     config['batch_size'] = [8]
     config['model_name'] = [DGCNNNet_seg]  # , OWN, PN2Net_seg, DGCNNNet_seg, GUNet_seg
+    config['knn'] = 5
     # config['model_name'] = [, PN2Net, DGCNNNet, , DGCNNNet, UNet]
-    ex = Experimenter(config, dataset_name)
+    ex = Experimenter(config, dataset_root_path, output_path)
     ex.run(print_set_stats, print_model_stats, pretrained)

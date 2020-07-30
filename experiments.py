@@ -21,12 +21,7 @@ import pandas as pd
 from helpers.results import save_test_results, save_set_stats
 from helpers.results import summary
 
-from sklearn.manifold import TSNE
-
-from pandas import DataFrame
-
 from helpers.visualize import vis_graph, write_pointcloud
-from torch_geometric.utils import erdos_renyi_graph, to_networkx, from_networkx
 
 # Define depending on hardware
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -65,7 +60,7 @@ class Experimenter(object):
         self.dataset_root_path = dataset_root
         self.output_path = output_path
 
-    def run(self, print_set_stats, print_model_stats, pretrained, inference=False):
+    def run(self, print_set_stats, print_model_stats, pretrained=False, inference=False):
 
         grid_unfold = list(self.grid)
         results = []
@@ -85,13 +80,17 @@ class Experimenter(object):
 
             # outputpaths
             assert os.path.exists(output_path)
-            output_path_run = os.path.join(output_path, str(i))
+            output_path_run = os.path.join(output_path, str(i), "_clas")
 
             print("Run {} of {}".format(i, len(grid_unfold)))
             print("Writing outputs to {}".format(output_path_run))
 
             if not os.path.exists(output_path_run):
                 os.makedirs(output_path_run)
+            if pretrained:
+                output_path_run = os.path.join(output_path, str(i), "_clas", "transfer")
+                if not os.path.exists(output_path_run):
+                    os.makedirs(output_path_run)
 
             self.dataset_path = os.path.join(self.dataset_root_path, dataset_name)
             assert os.path.exists(self.dataset_path)
@@ -106,10 +105,10 @@ class Experimenter(object):
                 self.dataset_name = ModelNet_small
                 self.dataset_type = '10'
 
-            test_acc, epoch_losses, train_accuracies, val_accuracies = self.subrun(output_path_run, model_name
+            test_acc, epoch_losses, train_accuracies, val_accuracies, test_ious = self.subrun(output_path_run, model_name
                                                                                    , n_epochs, batch_size,
                                                                                    learning_rate, knn, pretrained,
-                                                                                   print_set_stats=print_set_stats)
+                                                                                   print_set_stats=print_set_stats, print_model_stats=print_model_stats)
 
             result['test_acc'] = test_acc
             result['loss'] = epoch_losses
@@ -118,19 +117,16 @@ class Experimenter(object):
 
             results.append(result)
 
-        pd.DataFrame(results).to_csv(os.path.join(output_path,'results.csv'))
+        pd.DataFrame(results).to_csv(os.path.join(output_path,'results_clas.csv'))
         torch.cuda.empty_cache()
 
     def subrun(self, output_path_run, model_name, n_epochs, batch_size, learning_rate, knn, pretrained=False,
-               print_set_stats=False):
+               print_set_stats=False, print_model_stats=False):
 
         if model_name.__name__ is 'PN2Net':
             transform, pretransform = transform_setup()
         if model_name.__name__ is 'DGCNNNet':
             transform, pretransform = transform_setup()
-        if model_name.__name__ is 'UNet':
-            # number of knn to connect to as argument
-            transform, pretransform = transform_setup(graph_u=knn)
         if model_name.__name__ is 'GCN':
             # number of knn to connect to as argument
             transform, pretransform = transform_setup(graph_gcn=knn)
@@ -169,7 +165,7 @@ class Experimenter(object):
                            train_dataset)
 
         if pretrained:
-            checkpoint = pretrained
+            checkpoint = torch.load(pretrained)
             # say the class output dimension of the pretrained model, for correct loading
             # e.g. if pretrained model was on ModelNet10 -> set here 10
             dim_last_layer = 10
@@ -220,6 +216,8 @@ class Experimenter(object):
         # Evaluate best model on Test set
         test_acc, y_pred, y_real, test_ious, _ = trainer.test(test_loader, seg=False)
 
+        print("Test accuracy = {}".format(test_acc))
+
         # save test results
         save_test_results(y_real, y_pred, test_acc, output_path_run, test_dataset, epoch_losses, train_accuracies,
                           val_accuracies, test_ious)
@@ -227,7 +225,7 @@ class Experimenter(object):
         # vis_graph(val_loader, output_path)
         # write_pointcloud(val_loader,output_path)
 
-        return test_acc, epoch_losses, train_accuracies, val_accuracies
+        return test_acc, epoch_losses, train_accuracies, val_accuracies, test_ious
 
 
 if __name__ == '__main__':
@@ -245,7 +243,7 @@ if __name__ == '__main__':
 
     # pretrained model
     pretrained = False
-    # pretrained = path
+    # pretrained = os.path.join(output_path, "0_clas", "model_state_best_val.pth.tar")
 
     config['dataset_name'] = ['ModelNet10']
     config['n_epochs'] = [3]

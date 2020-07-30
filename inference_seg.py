@@ -30,13 +30,13 @@ class Inference(Experimenter):
 
 
                 if model_name == 'PN2Net_seg':
-                    transform, pretransform = self.transform_setup()
+                    transform, pretransform = transform_setup()
                 if model_name == 'DGCNNNet_seg':
-                    transform, pretransform = self.transform_setup()
+                    transform, pretransform = transform_setup()
                 if model_name == 'GUNet_seg':
-                    transform, pretransform = self.transform_setup()
+                    transform, pretransform = transform_setup()
                 if model_name == 'OWN':
-                    transform, pretransform = self.transform_setup()
+                    transform, pretransform = transform_setup()
 
                 # Define datasets
                 dataset = self.dataset_name(self.dataset_path, self.dataset_type, True, transform, pretransform)
