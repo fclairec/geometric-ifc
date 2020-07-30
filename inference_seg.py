@@ -1,20 +1,14 @@
 import torch
-from datasets.bim import BIM
-from datasets.ModelNet import ModelNet
 import os
-from learning.models import PN2Net, DGCNNNet, UNet
 import learning.models
-from learning.trainers import Trainer_seg
+from learning.trainers import Trainer
 from torch_geometric.data import DataLoader
 import numpy
-import matplotlib.pyplot as plt
-from mpl_toolkits import mplot3d
-import torch_geometric.transforms as T
 from sklearn.metrics import confusion_matrix, classification_report
 from pandas import DataFrame
-from experiments import Experimenter
-from helpers.visualize import vis_point, vis_graph
-from datasets.splits import random_splits
+from experiments_seg import Experimenter
+
+from prepare_data import indoor3d_util
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
@@ -35,49 +29,47 @@ class Inference(Experimenter):
                 model_name = checkpoint['model']
 
 
-                if model_name == 'PN2Net':
-                    transform, pretransform = self.transform_setup(graph=False)
-                if model_name == 'DGCNNNet':
-                    transform, pretransform = self.transform_setup(graph=False)
-                if model_name == 'UNet':
-                    transform, pretransform = self.transform_setup(graph=True)
+                if model_name == 'PN2Net_seg':
+                    transform, pretransform = self.transform_setup()
+                if model_name == 'DGCNNNet_seg':
+                    transform, pretransform = self.transform_setup()
+                if model_name == 'GUNet_seg':
+                    transform, pretransform = self.transform_setup()
+                if model_name == 'OWN':
+                    transform, pretransform = self.transform_setup()
 
                 # Define datasets
                 dataset = self.dataset_name(self.dataset_path, self.dataset_type, True, transform, pretransform)
                 test_dataset = self.dataset_name(self.dataset_path, self.dataset_type, False, transform, pretransform)
-                len_before = len(test_dataset)
-                # using this as a hack to get a subset of objects for inference:
-                test_dataset, inference_index, _ = random_splits(dataset, dataset.num_classes, train_ratio=0.05)
-                test_dataset = test_dataset[test_dataset.train_mask].copy_set(inference_index)
-                len_after = len(test_dataset)
 
-                print("For inference the test set of {} is reduced to {}" .format(len_before, len_after))
 
-                test_loader = DataLoader(test_dataset, batch_size=1, shuffle=False, num_workers=0)
+                test_loader = DataLoader(test_dataset, batch_size=7, shuffle=False, num_workers=8)
 
-                if model_name == 'PN2Net':
+                if model_name == 'PN2Net_seg':
                     model_class = getattr(learning.models, model_name)
-                    model = model_class(out_channels=dataset.num_classes)
-                if model_name == 'DGCNNNet':
+                    model = model_class(out_channels=test_dataset.num_classes)
+                if model_name == 'DGCNNNet_seg':
                     # here we assume test set contains all classes contained in train set...
                     model_class = getattr(learning.models, model_name)
-                    model = model_class(out_channels=dataset.num_classes)
-                if model_name == 'UNet':
-                    transform = T.Compose([T.KNNGraph(k=3), T.Distance(), T.Center()])
+                    model = model_class(out_channels=test_dataset.num_classes)
+                if model_name == 'GUNet_seg':
+                    model_class = getattr(learning.models, model_name)
+                    model = model_class(num_features=test_dataset.num_features, num_classes=test_dataset.num_classes,
+                               num_nodes=test_dataset.data.num_nodes).to(device)
 
 
                 model.load_state_dict(checkpoint['state_dict'], strict=False)
                 model.to(device)
 
-                output_path = '../out/pred/' + str(i)
-                output_path_error = output_path + '/errors'
-                if not os.path.exists(output_path_error):
-                    os.makedirs(output_path_error)
+                output_path = '/data/output/pred/' + str(i)
+                #output_path_error = output_path + '/errors'
+                """if not os.path.exists(output_path_error):
+                    os.makedirs(output_path_error)"""
                 if not os.path.exists(output_path):
                     os.makedirs(output_path)
 
-                trainer = Trainer_seg(model, output_path)
-                test_acc, y_pred_list, y_real_list, prob, crit_points_list_ind = Trainer_seg.test(test_loader)
+                trainer = Trainer(model, output_path)
+                test_acc, y_pred_list, y_real_list, prob, crit_points_list_ind = trainer.test(test_loader)
                 print(test_acc)
 
                 # reports
@@ -94,7 +86,7 @@ class Inference(Experimenter):
                 filename = output_path + '/class_report.csv'
                 df2.to_csv(filename)
 
-                if plot:
+                """if plot:
 
                     if model_name == 'PN2Net':
                         vis_point(test_loader, output_path, output_path_error, prob, y_pred_list, y_real_list,
@@ -102,7 +94,7 @@ class Inference(Experimenter):
                     if model_name == 'DGCNNNet':
                         vis_graph(test_loader, output_path)
                     if model_name == 'UNet':
-                        vis_graph(test_loader, output_path)
+                        vis_graph(test_loader, output_path)"""
 
 
         else:
@@ -112,10 +104,13 @@ class Inference(Experimenter):
 
 if __name__ == '__main__':
 
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    ROOT_DIR = os.path.dirname(BASE_DIR)
+    DATA_PATH = os.path.join(ROOT_DIR, 'bim-shape-learning/data/room3.txt')
     test = True
 
     # Name of Dataset, careful the string matters!
-    dataset_name = 'BIM_PC_T1'  # BIM_PC_T2, ModelNet10, ModelNet40
+    dataset_name = 'S3DIS'  # BIM_PC_T2, ModelNet10, ModelNet40
     config = None
     ex = Experimenter(config, dataset_name)
 
@@ -123,10 +118,14 @@ if __name__ == '__main__':
 
     i = 0
     model_list = []
+    print(os.getcwd())
+    room_path = "data\\input\\room3.txt"
+    NUM_POINT = 4096
+    current_data, current_label = indoor3d_util.room2blocks_wrapper_normalized(DATA_PATH, NUM_POINT)
 
     # fills list with all models to perform inference on - scans dir
     while experiments:
-        model_path = '../out/' + str(i)
+        model_path = '/data/output/' + str(i)
         if not os.path.exists(model_path):
             break
         model_list.append(model_path + '/model_state_best_val.pth.tar')

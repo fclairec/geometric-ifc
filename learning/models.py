@@ -1,12 +1,17 @@
 import torch
 import torch.nn.functional as F
+import torch_geometric.transforms as T
 from torch.nn import Sequential as Seq, Linear as Lin, ReLU, Dropout, BatchNorm1d as BN
 from torch_geometric.nn import PointConv, fps, radius, global_max_pool
-from torch_geometric.nn import DynamicEdgeConv, global_max_pool, GraphUNet
+from torch_geometric.nn import DynamicEdgeConv, global_max_pool, GCNConv
+from helpers.graph_unet import GraphUNet
 from torch_geometric.utils import dropout_adj
 import numpy
 from torch.autograd import Variable
-from helpers.glob import global_max_pool
+from torch_geometric.nn import global_add_pool, global_mean_pool
+import torch.nn as nn
+
+
 
 class STNkd(torch.nn.Module):
     def __init__(self, k=64):
@@ -70,10 +75,10 @@ class GlobalSAModule(torch.nn.Module):
 
     def forward(self, x, pos, batch):
         x = self.nn(torch.cat([x, pos], dim=1))
-        x, crit_points = global_max_pool(x, batch)
+        x = global_max_pool(x, batch)[0]
         pos = pos.new_zeros((x.size(0), 3))
         batch = torch.arange(x.size(0), device=batch.device)
-        return x, pos, batch, crit_points
+        return x, pos, batch
 
 
 def MLP(channels, batch_norm=True):
@@ -109,9 +114,6 @@ class PN2Net(torch.nn.Module):
         x = self.lin3(x)
         return F.log_softmax(x, dim=-1), crit_points
 
-
-import torch
-import torch.nn as nn
 
 
 
@@ -222,29 +224,90 @@ class DGCNNNet(torch.nn.Module):
         x1 = self.conv1(pos, batch)
         x2 = self.conv2(x1, batch)
         out = self.lin1(torch.cat([x1, x2], dim=1))
-        out, _ = global_max_pool(out, batch)
+        out = global_max_pool(out, batch)
         out = self.mlp(out)
 
-        return F.log_softmax(out, dim=1), _
+        return F.log_softmax(out, dim=1)
 
 
 class UNet(torch.nn.Module):
     def __init__(self, num_features, num_classes, num_nodes):
         super(UNet, self).__init__()
-        pool_ratios = [2000 / num_nodes, 0.5]
-        self.unet = GraphUNet(3, 32, num_classes,
+        pool_ratios = [0.9, 0.9]
+        self.unet = GraphUNet(6, 32, num_classes,
                               depth=3, pool_ratios=pool_ratios)
+        self.lin1 = MLP([32, 1024])
+        self.mlp = Seq(
+            MLP([1024, 512]), Dropout(0.5), MLP([512, 256]), Dropout(0.5),
+            Lin(256, num_classes))
+        """self.lin1 = Lin(32, 16)
+        self.lin2 = Lin(16, 8)
+        self.lin3 = Lin(8,num_classes)"""
 
     def forward(self, data):
         # TODO: needs node features!! now we are passing pos as x
-        x, batch = data.pos, data.batch
-        edge_index, _ = dropout_adj(data.edge_index, p=0.2,
+        x, batch = torch.cat([data.norm, data.pos], dim=1), data.batch
+        edge_index, _ = dropout_adj(data.edge_index, p=0.1,
                                     force_undirected=True,
                                     num_nodes=data.num_nodes,
                                     training=self.training)
-        x1 = F.dropout(x, p=0.92, training=self.training)
+        x1 = F.dropout(x, p=0.1, training=self.training)
 
-        x2 = self.unet(x1, edge_index)
+        x2, batch = self.unet(x1, edge_index, batch)
         out, _ = global_max_pool(x2, batch)
+
+        out=self.lin1(out)
+        """x = F.relu(self.lin1(out))
+        x = F.dropout(x, p=0.5, training=self.training)
+        x = F.relu(self.lin2(x))
+        x = F.dropout(x, p=0.5, training=self.training)
+        x = self.lin3(x)"""
+        out = self.mlp(out)
         a = F.log_softmax(out, dim=1)
         return a, _
+
+class GraphConvLayer(torch.nn.Module):
+    def __init__(self, npoints, in_channel, mlp, dropout=0.5):
+        super(GraphConvLayer, self).__init__()
+        self.dropout=dropout
+        self.last_channel = in_channel
+
+    def forward(self, xyz, points):
+        a=0
+
+class GCN(torch.nn.Module):
+    def __init__(self, num_features, num_classes):
+        super(GCN, self).__init__()
+
+        self.conv1 = GCNConv(3, 64, cached=False, normalize=not True)
+        #self.conv12 = GCNConv(16, 32, cached=False, normalize=not True)
+        self.conv2 = GCNConv(64, 128, cached=False, normalize=not True)
+        self.conv3 = GCNConv(192, 254, cached=False, normalize=not True)
+        self.lin1 = torch.nn.Linear(254, num_classes)
+        self.mlp = Seq(
+            MLP([1024, 512]), Dropout(0.5), MLP([512, 256]), Dropout(0.5),
+            Lin(256, num_classes))
+
+        self.reg_params = self.conv1.parameters()
+        self.non_reg_params = self.conv2.parameters()
+
+    def forward(self, data):
+        x, batch = data.pos , data.batch # torch.cat([data.norm, data.pos], dim=1), data.batch #torch.cat([data.norm, data.pos], dim=1)
+        edge_index, edge_weight = data.edge_index, data.edge_attr
+        x1 = F.relu(self.conv1(x, edge_index, edge_weight))
+
+        #x = F.dropout(x, training=self.training)
+        #x = self.conv12(x, edge_index, edge_weight)
+        #x = F.relu(x)
+        #x = F.dropout(x, training=self.training)
+        x2 = F.relu(self.conv2(x1, edge_index, edge_weight))
+
+        x= torch.cat([x1,x2], dim=1)
+        x = F.relu(self.conv3(x, edge_index, edge_weight))
+        out = global_max_pool(x, batch)
+        out = self.lin1(out)
+        out = F.log_softmax(out, dim=1)
+        return out
+
+
+

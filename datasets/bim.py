@@ -4,8 +4,12 @@ import torch
 from torch_geometric.data import InMemoryDataset, Data
 
 import glob
-from torch_geometric.io import read_txt_array
-
+from torch_geometric.io import read_txt_array, read_ply
+from torch_geometric.data import download_url, extract_zip
+import os
+import shutil
+# Edited because newest push to master in PytorchGeom is not in pip package (yet)
+from helpers.in_memory_dataset import InMemoryDataset
 
 
 class BIM(InMemoryDataset):
@@ -44,66 +48,93 @@ class BIM(InMemoryDataset):
             final dataset. (default: :obj:`None`)
     """
 
+    urls = {
+        'T1':
+            'https://drive.google.com/uc?export=download&id=1YrlVZpjbpxAMWswPa3gPlNMEPu4nKH8Z',
+        'T2': 'https://drive.google.com/uc?export=download&id=1uAbELJqkCCuB01iAbWDx8wZECaUZiGh1'
 
+    }
 
-    def __init__(self, root, train=True, transform=None, pre_transform=None, pre_filter=None):
-
+    def __init__(self, root, name='T1', train=True, transform=None, pre_transform=None, pre_filter=None):
+        assert name in ['T1', 'T2']
+        self.name = name
 
         super(BIM, self).__init__(root, transform, pre_transform, pre_filter)
         path = self.processed_paths[0] if train else self.processed_paths[1]
         self.data, self.slices = torch.load(path)
 
-
     @property
     def raw_file_names(self):
-        return [
-            'IfcBeam', 'IfcColumn', 'IfcFurnishingElement', 'IfcStairFlight', 'IfcDoor', 'IfcFlowSegment', 'IfcFlowTerminal', 'IfcSlab', 'IfcWallStandardCase'
-        ]
-    # 'IfcBeam', 'IfcColumn', 'IfcFurnishingElement', 'IfcStairFlight', 'IfcDoor', 'IfcFlowSegment', 'IfcFlowTerminal', 'IfcSlab', 'IfcWallStandardCase'
+            if self.name == 'T1':
+                return [
+                    # corresponds to what is in the dataset
+                    'IfcColumn', 'IfcFurnishingElement', 'IfcStair', 'IfcDoor', 'IfcSlab', 'IfcWall', 'IfcWindow'
+                ]
+            elif self.name == 'T2':
+                return [
+                    # corresponds to what is in the dataset
+                    'IfcDistributionControlElement', 'IfcFlowController', 'IfcFlowFitting', 'IfcFlowSegment',
+                    'IfcFlowTerminal'
+                ]
 
     @property
     def classmap(self):
-        return {0: 'IfcBeam', 1: 'IfcColumn', 2:'IfcFurnishingElement', 3:'IfcStairFlight', 4:'IfcDoor', 5:'IfcFlowSegment', 6:'IfcFlowTerminal', 7:'IfcSlab', 8:'IfcWallStandardCase'}
-
-    #{0: 'IfcBeam', 1: 'IfcColumn', 2:'IfcFurnishingElement', 3:'IfcStairFlight', 4:'IfcDoor', 5:'IfcFlowSegment', 6:'IfcFlowTerminal', 7:'IfcSlab', 8:'IfcWallStandardCase'}
+        if self.name == 'T1':
+            return {
+                # corresponds to what is in the dataset
+                0: 'IfcColumn', 1: 'IfcFurnishingElement', 2: 'IfcStair', 3: 'IfcDoor', 4: 'IfcSlab', 5: 'IfcWall',
+                    6: 'IfcWindow'
+            }
+        elif self.name == 'T2':
+            return {
+                # corresponds to what is in the dataset
+                0: 'IfcDistributionControlElement', 1: 'IfcFlowController', 2: 'IfcFlowFitting',
+                    3: 'IfcFlowSegment', 4: 'IfcFlowTerminal'
+            }
 
     @property
     def processed_file_names(self):
         return ['training.pt', 'test.pt']
 
     def download(self):
+
+        path = download_url(self.urls[self.name], self.root)
+        extract_zip(path, self.root)
+        os.unlink(path)
+        folder = osp.join(self.root, 'BIM_PC_{}'.format(self.name))
+        shutil.rmtree(self.raw_dir)
+        os.rename(folder, self.raw_dir)
+
+        # Delete osx metadata generated during compression of ModelNet10
+        metadata_folder = osp.join(self.root, '__MACOSX')
+        if osp.exists(metadata_folder):
+            shutil.rmtree(metadata_folder)
+
         return
 
     def process(self):
+        print(self.processed_paths[0])
         torch.save(self.process_set('train'), self.processed_paths[0])
+
         torch.save(self.process_set('test'), self.processed_paths[1])
 
     def process_set(self, dataset):
 
-        #path = osp.join(self.raw_dir, 'pointcloud-tz-test.ply')
-        #y_path = osp.join(self.raw_dir, 'ys_long.csv')
-        categories = glob.glob(osp.join(self.raw_dir, '*', ''))
-        categories = self.raw_file_names#sorted([x.split(osp.sep)[-2] for x in categories])
+        categories = self.raw_file_names
         print(categories)
 
         data_list = []
 
         for target, category in enumerate(categories):
             folder = osp.join(self.raw_dir, category, dataset)
-            paths = glob.glob('{}/*.txt'.format(folder))
+            paths = glob.glob('{}/*.ply'.format(folder))
 
             for path in paths:
-                data = read_txt_array(path, sep=None, start=0, end=None, dtype=None, device=None)
+                data = read_ply(path)
                 data.y = torch.tensor([target])
-
-                data = Data(y=data.y, pos=data[:, (0, 1, 2)])
-                #   data=Data(y=data.y, pos= data[:,(0,1,2)], r= data[:,3],g= data[:,4],b= data[:,5] )
 
                 data_list.append(data)
             self.classmap.update({target:category})
-
-
-
 
         if self.pre_filter is not None:
             data_list = [d for d in data_list if self.pre_filter(d)]
@@ -112,7 +143,6 @@ class BIM(InMemoryDataset):
             data_list = [self.pre_transform(d) for d in data_list]
 
         return self.collate(data_list)
-
 
     def __repr__(self):
         return '{}{}({})'.format(self.__class__.__name__, self.name, len(self))
