@@ -56,7 +56,7 @@ class ASPERN(InMemoryDataset):
 
     @property
     def classmap(self):
-        return {0: 'pipes', 1: 'walls', 2: 'slabs', 3: 'stairs', 4: 'column', 5: 'tanks'
+        return {0: 'pipes', 1: 'walls', 2: 'slabs', 3: 'stairs', 4: 'doors', 5: 'column', 6: 'tanks'
                 }
 
     @property

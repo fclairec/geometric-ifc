@@ -89,15 +89,17 @@ class Experimenter(object):
                 if not os.path.exists(output_path_run):
                     os.makedirs(output_path_run)
 
-            self.dataset_path = os.path.join(self.dataset_root_path, dataset_name)
+            dataset_name_dir, _= dataset_name.split('_')
+            self.dataset_path = os.path.join(self.dataset_root_path, dataset_name_dir)
             assert os.path.exists(self.dataset_path)
 
-            if dataset_name[:4] == 'S3DIS':
+            if dataset_name[:5] == 'S3DIS':
                 self.dataset_name = S3DIS
                 self.dataset_type = dataset_name[-1]
-            if dataset_name[:5] == 'ASPERN':
+            if dataset_name[:6] == 'ASPERN':
                 self.dataset_name = ASPERN
                 self.dataset_type = dataset_name[-2:]
+            else: raise Exception("no dataset_name")
 
             test_acc, epoch_losses, train_accuracies, val_accuracies, test_ious = self.subrun(output_path_run,
                                                                                               model_name
@@ -145,8 +147,7 @@ class Experimenter(object):
 
         if print_set_stats:
             # Plots class distributions
-            save_set_stats(output_path_run, train_loader, val_loader, test_loader,
-                           train_dataset, seg=True)
+            save_set_stats(output_path_run, train_loader, test_loader, train_dataset, val_loader, seg=True)
 
 
         if pretrained:
@@ -242,8 +243,8 @@ if __name__ == '__main__':
     pretrained = False
     #pretrained = os.path.join(output_path, "0_seg", "model_state_best_val.pth.tar")
 
-    config['dataset_name'] = ['S3DIS1'] #'S3DIS_1' 'ASPERN_UG', ASPERN_DG'
-    config['n_epochs'] = [2]
+    config['dataset_name'] = ['ASPERN_UG'] #'S3DIS_1' 'ASPERN_UG', ASPERN_DG'
+    config['n_epochs'] = [1]
     config['learning_rate'] = [0.001]
     config['batch_size'] = [4]
     config['model_name'] = [DGCNNNet_seg]  # , OWN, PN2Net_seg, DGCNNNet_seg, GUNet_seg

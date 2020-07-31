@@ -138,8 +138,7 @@ def save_test_results(y_real, y_pred, test_acc, output_path, test_dataset, epoch
     plt.close()
 
 
-def save_set_stats(output_path, train_loader, unbalanced_train_loader, val_loader, test_loader, train_dataset,
-                   seg=False):
+def save_set_stats(output_path, train_loader, test_loader, train_dataset,  unbalanced_train_loader=None, val_loader=None, seg=False):
     Set_analyst(given_set=train_dataset).bar_plot("train_set", output_path)
     if not seg:
         Set_analyst([train_loader, unbalanced_train_loader]).bar_plot("train", output_path)

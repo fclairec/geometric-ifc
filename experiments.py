@@ -162,8 +162,8 @@ class Experimenter(object):
 
         if print_set_stats:
             # Plots class distributions
-            save_set_stats(output_path_run, train_loader, unbalanced_train_loader, val_loader, test_loader,
-                           train_dataset)
+            save_set_stats(output_path_run, train_loader, test_loader,
+                           train_dataset, unbalanced_train_loader, val_loader, seg=False)
 
         if pretrained:
             checkpoint = torch.load(pretrained)
