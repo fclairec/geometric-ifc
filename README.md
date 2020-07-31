@@ -11,7 +11,7 @@ My own datasets come from
 
 
 - [Installation](#installation)
-- [Dataset proparation](#preparation)
+- [Dataset preparation](#preparation)
 - [Shape classification](#shape-classification)
 - [Point cloud semantic segmentation](#point-cloud-semantic-segmentation)
 

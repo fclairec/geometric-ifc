@@ -16,11 +16,15 @@ def collect_indoor3d_data():
     if not os.path.exists(output_folder):
         os.mkdir(output_folder)
 
-    out_filename = 'asp_ug.npy'
+    out_filename_train = 'asp_train_subsampled.npy'
+    out_filename_test = 'asp_test_subsampled.npy'
 
 
-    collect_point_label(cloud, os.path.join(output_folder, out_filename), 'numpy')
-    test(os.path.join(output_folder, out_filename))
+    collect_point_label(cloud, os.path.join(output_folder, out_filename_train), 'numpy')
+    test(os.path.join(output_folder, out_filename_train))
+
+    collect_point_label(cloud, os.path.join(output_folder, out_filename_test), 'numpy')
+    test(os.path.join(output_folder, out_filename_test))
 
 
 if __name__ == '__main__':

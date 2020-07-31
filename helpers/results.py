@@ -59,8 +59,7 @@ def summary(model):
     print("Non-trainable params:", total_params - num_trainable_params)
 
 
-def calculate_sem_IoU(self, pred_np, seg_np, num_classes):
-    print(num_classes)
+def calculate_sem_IoU(pred_np, seg_np, num_classes):
     I_all = np.zeros(num_classes)
     U_all = np.zeros(num_classes)
     for sem_idx in range(seg_np.shape[0]):

@@ -101,7 +101,7 @@ class Experimenter(object):
                 self.dataset_type = dataset_name[-2:]
             else: raise Exception("no dataset_name")
 
-            test_acc, epoch_losses, train_accuracies, val_accuracies, test_ious = self.subrun(output_path_run,
+            test_acc, epoch_losses, train_accuracies, val_accuracies = self.subrun(output_path_run,
                                                                                               model_name
                                                                                               , n_epochs, batch_size,
                                                                                               learning_rate
@@ -214,9 +214,9 @@ class Experimenter(object):
         print("Test accuracy = {}".format(test_acc))
 
         save_test_results(y_real, y_pred, test_acc, output_path, test_dataset, epoch_losses, train_accuracies,
-                          val_accuracies, WRITE_DF_TO_)
+                          val_accuracies, WRITE_DF_TO_, seg=True)
 
-        return test_acc, epoch_losses, train_accuracies, val_accuracies, test_ious
+        return test_acc, epoch_losses, train_accuracies, val_accuracies
 
 
 if __name__ == '__main__':

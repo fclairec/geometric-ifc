@@ -125,7 +125,8 @@ class Trainer:
         self.model.eval()
 
         correct = 0
-        for data in data_loader:
+        for i, data in enumerate(data_loader):
+            #if i == 3: break
             data = data.to(device)
             # loss = F.nll_loss(self.model(data)[0], data.y)
             with torch.no_grad():
@@ -149,7 +150,8 @@ class Trainer:
         prob = []
         crit_points_list = []
         # ious = [[] for _ in range(data_loader.dataset.num_classes)]
-        for data in data_loader:
+        for i, data in enumerate(data_loader):
+            #if i == 3: break
             data = data.to(device)
             # loss = F.nll_loss(self.model(data)[0], data.y)
             with torch.no_grad():
@@ -201,6 +203,7 @@ class Trainer_seg(Trainer):
             train_accuracies_batch = []
 
             for i, data in enumerate(train_loader):
+                #if i == 3: break
                 data = data.to(device)
                 optimizer.zero_grad()
                 outputs = self.model(data)
