@@ -11,33 +11,18 @@ My own datasets come from
 
 
 - [Installation](#installation)
-- [Shape classification](#clas)
-- [Point cloud semantic segmentation](#seg)
+- [Dataset proparation](#preparation)
+- [Shape classification](#shape-classification)
+- [Point cloud semantic segmentation](#point-cloud-semantic-segmentation)
 
 
 ---
 ## Installation  
-d
 
-d
 
-d
 
-d
-
-d
-
-d
-
-d
-
-d
-
-d
-
-d
-
-d
+--- 
+## Dataset proparation
 
 
 ---
