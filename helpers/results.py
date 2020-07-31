@@ -61,24 +61,47 @@ def summary(model):
         print("Non-trainable params:", total_params - num_trainable_params)
 
 
+def calculate_sem_IoU(self, pred_np, seg_np, num_classes):
+    print(num_classes)
+    I_all = np.zeros(num_classes)
+    U_all = np.zeros(num_classes)
+    for sem_idx in range(seg_np.shape[0]):
+        for sem in range(num_classes):
+            I = np.sum(np.logical_and(pred_np[sem_idx] == sem, seg_np[sem_idx] == sem))
+            U = np.sum(np.logical_or(pred_np[sem_idx] == sem, seg_np[sem_idx] == sem))
+            I_all[sem] += I
+            U_all[sem] += U
+    return I_all / U_all
+
+
+
+
 def save_test_results(y_real, y_pred, test_acc, output_path, test_dataset, epoch_losses, train_accuracies,
-                      val_accuracies, test_ious):
-    df0 = DataFrame(test_ious)
-    filename0 = output_path + '/test_ious.csv'
-    df0.to_csv(filename0)
+                      val_accuracies, WRITE_DF_TO_, seg=False):
 
-    conf_mat = confusion_matrix(y_true=y_real, y_pred=y_pred)
-    df1 = DataFrame(conf_mat)
-    filename = output_path + '/confmat.csv'
-    df1.to_csv(filename)
+    if seg:
+        test_ious = calculate_sem_IoU(y_pred, y_real, test_dataset.num_classes)
 
-    target_names = test_dataset.classmap.values()
-    real_target_names = [test_dataset.classmap[i] for i in np.unique(np.array(test_dataset.data.y))]
-    class_rep = classification_report(y_true=y_real, y_pred=y_pred, target_names=real_target_names,
+        #write Test IOUS
+        df0 = DataFrame(test_ious)
+        file_ious_csv = output_path + '/test_ious.csv'
+        df0.to_csv(file_ious_csv)
+        if 'to_latex' in WRITE_DF_TO_:
+            file_ious_tex = output_path + '/test_ious.tex'
+            df0.to_latex(file_ious_tex, index=False)
+
+    if not seg:
+        conf_mat = confusion_matrix(y_true=y_real, y_pred=y_pred)
+        df1 = DataFrame(conf_mat)
+        filename = output_path + '/confmat.csv'
+        df1.to_x(filename)
+
+        real_target_names = [test_dataset.classmap[i] for i in np.unique(np.array(test_dataset.data.y))]
+        class_rep = classification_report(y_true=y_real, y_pred=y_pred, target_names=real_target_names,
                                       output_dict=True)
-    df2 = DataFrame(class_rep).transpose()
-    filename = output_path + '/class_report.csv'
-    df2.to_csv(filename)
+        df2 = DataFrame(class_rep).transpose()
+        filename = output_path + '/class_report.csv'
+        df2.to_csv(filename)
 
     print('test acc = {}'.format(test_acc))
 
@@ -110,11 +133,11 @@ def save_test_results(y_real, y_pred, test_acc, output_path, test_dataset, epoch
     plt.close()
 
 
-def save_set_stats(output_path, train_loader, unbalanced_train_loader, val_loader, test_loader, train_dataset):
+def save_set_stats(output_path, train_loader, unbalanced_train_loader, val_loader, test_loader, train_dataset, seg=False):
     Set_analyst(given_set=train_dataset).bar_plot("train_set", output_path)
-
-    Set_analyst([train_loader, unbalanced_train_loader]).bar_plot("train", output_path)
-    Set_analyst([val_loader]).bar_plot("val", output_path)
-    Set_analyst([test_loader]).bar_plot("test", output_path)
+    if not seg:
+        Set_analyst([train_loader, unbalanced_train_loader]).bar_plot("train", output_path)
+        Set_analyst([val_loader]).bar_plot("val", output_path)
+        Set_analyst([test_loader]).bar_plot("test", output_path)
 
 

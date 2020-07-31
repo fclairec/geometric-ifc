@@ -75,7 +75,7 @@ class Trainer:
                                                                                              loss,
                                                                                              train_accuracies_batch[-1]))
 
-            epoch_losses.append(torch.mean(torch.stack(train_losses, dim=0)))
+            epoch_losses.append(torch.mean(torch.stack(train_losses, dim=0)).item())
             train_accuracies.append(np.mean(train_accuracies_batch))
 
             print("train correct")
@@ -85,7 +85,7 @@ class Trainer:
             val_acc = self.eval(val_loader, seg=False)
             val_accuracies.append(val_acc)
 
-            print("\nEpoch {} - train loss: {}, train acc: {} val acc: {}".format(epoch, epoch_losses[-1].item(),
+            print("\nEpoch {} - train loss: {}, train acc: {} val acc: {}".format(epoch, epoch_losses[-1],
                                                                                   train_accuracies[-1],
                                                                                   val_acc))
 
@@ -162,15 +162,15 @@ class Trainer:
             y_pred = concat((y_pred, pred.cpu().numpy()))
             y_real = concat((y_real, data.y.cpu().numpy()))
             # crit_points_list.append(crit_points.cpu().numpy())
-            prob.append(SM.cpu().numpy())
+            #prob.append(SM.cpu().numpy())
 
         if seg:
             acc = correct / len(data_loader.dataset.data.pos)
+
         else:
             acc = correct / len(data_loader.dataset)
-        test_ious = self.calculate_sem_IoU(y_pred, y_real, data_loader.dataset.num_classes)
 
-        return acc, y_pred, y_real, test_ious, prob
+        return acc, y_pred, y_real
 
     def save_checkpoint(self, path, state, is_best):
         filename = 'model_state.pth.tar'
@@ -180,18 +180,6 @@ class Trainer:
             filename = 'model_state_best_val.pth.tar'
             path_out = osp.join(path, filename)
             torch.save(state, path_out)
-
-    def calculate_sem_IoU(self, pred_np, seg_np, num_classes):
-        print(num_classes)
-        I_all = np.zeros(num_classes)
-        U_all = np.zeros(num_classes)
-        for sem_idx in range(seg_np.shape[0]):
-            for sem in range(num_classes):
-                I = np.sum(np.logical_and(pred_np[sem_idx] == sem, seg_np[sem_idx] == sem))
-                U = np.sum(np.logical_or(pred_np[sem_idx] == sem, seg_np[sem_idx] == sem))
-                I_all[sem] += I
-                U_all[sem] += U
-        return I_all / U_all
 
 
 class Trainer_seg(Trainer):
@@ -225,6 +213,7 @@ class Trainer_seg(Trainer):
                     pred = outputs.max(1)[1]
                     # Train accuracies per bach
                     acc = pred.eq(data.y).sum().item() / len(data.pos)
+                    train_accuracies_batch.append(acc)
                 #correct += pred.eq(data.y).sum().item()
                 pred_np = pred.detach().cpu().numpy()
 
@@ -243,7 +232,7 @@ class Trainer_seg(Trainer):
             val_acc = self.eval(val_loader, seg=True)
             val_accuracies.append(val_acc)
 
-            print("\nEpoch {} - train loss: {}, train acc: {} val acc: {}".format(epoch, epoch_losses[-1].item(),
+            print("\nEpoch {} - train loss: {}, train acc: {} val acc: {}".format(epoch, epoch_losses[-1],
                                                                                   train_accuracies[-1],
                                                                                   val_acc
                                                                                   ))

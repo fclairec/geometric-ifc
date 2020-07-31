@@ -37,6 +37,8 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 # device = 'cpu'
 
 NUM_WORKERS = 6
+WRITE_DF_TO_ = 'csv', 'latex'
+
 
 
 def transform_setup():
@@ -75,7 +77,7 @@ class Experimenter(object):
 
             # outputpaths
             assert os.path.exists(output_path)
-            output_path_run = os.path.join(output_path, str(i), "_seg")
+            output_path_run = os.path.join(output_path, str(i)+"_seg")
 
             print("Run {} of {}".format(i, len(grid_unfold)))
             print("Writing outputs to {}".format(output_path_run))
@@ -90,10 +92,10 @@ class Experimenter(object):
             self.dataset_path = os.path.join(self.dataset_root_path, dataset_name)
             assert os.path.exists(self.dataset_path)
 
-            if dataset_name[0] == 'S':
+            if dataset_name[:4] == 'S3DIS':
                 self.dataset_name = S3DIS
-                self.dataset_type = 6
-            if dataset_name[0] == 'A':
+                self.dataset_type = dataset_name[-1]
+            if dataset_name[:5] == 'ASPERN':
                 self.dataset_name = ASPERN
                 self.dataset_type = dataset_name[-2:]
 
@@ -104,7 +106,6 @@ class Experimenter(object):
                                                                                               , knn, pretrained,
                                                                                               print_set_stats= print_set_stats
                                                                                               , print_model_stats=print_model_stats)
-
             result['test_acc'] = test_acc
             result['loss'] = epoch_losses
             #result['train_acc'] = train_accuracies
@@ -141,6 +142,12 @@ class Experimenter(object):
         train_loader = DataLoader(train_dataset, batch_size=batch_size, num_workers=NUM_WORKERS)
         test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False, num_workers=NUM_WORKERS)
         val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False, num_workers=NUM_WORKERS)
+
+        if print_set_stats:
+            # Plots class distributions
+            save_set_stats(output_path_run, train_loader, val_loader, test_loader,
+                           train_dataset, seg=True)
+
 
         if pretrained:
             checkpoint = torch.load(pretrained)
@@ -202,11 +209,11 @@ class Experimenter(object):
         epoch_losses, train_accuracies, val_accuracies = trainer.train(train_loader, val_loader, n_epochs,
                                                                        optimizer)
 
-        test_acc, y_pred, y_real, test_ious, _ = trainer.test(test_loader, seg=True)
+        test_acc, y_pred, y_real, _ = trainer.test(test_loader, seg=True)
         print("Test accuracy = {}".format(test_acc))
 
         save_test_results(y_real, y_pred, test_acc, output_path, test_dataset, epoch_losses, train_accuracies,
-                          val_accuracies, test_ious)
+                          val_accuracies, WRITE_DF_TO_)
 
         return test_acc, epoch_losses, train_accuracies, val_accuracies, test_ious
 
@@ -235,8 +242,8 @@ if __name__ == '__main__':
     pretrained = False
     #pretrained = os.path.join(output_path, "0_seg", "model_state_best_val.pth.tar")
 
-    config['dataset_name'] = ['ASPERN'] #'S3DIS'
-    config['n_epochs'] = [15]
+    config['dataset_name'] = ['S3DIS1'] #'S3DIS_1' 'ASPERN_UG', ASPERN_DG'
+    config['n_epochs'] = [2]
     config['learning_rate'] = [0.001]
     config['batch_size'] = [4]
     config['model_name'] = [DGCNNNet_seg]  # , OWN, PN2Net_seg, DGCNNNet_seg, GUNet_seg

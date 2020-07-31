@@ -28,6 +28,7 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 # device = 'cpu'
 
 NUM_WORKERS = 6
+WRITE_DF_TO_ = ['to_csv', 'to_latex']
 
 
 def transform_setup(graph_u=False, graph_gcn=False):
@@ -80,7 +81,7 @@ class Experimenter(object):
 
             # outputpaths
             assert os.path.exists(output_path)
-            output_path_run = os.path.join(output_path, str(i), "_clas")
+            output_path_run = os.path.join(output_path, str(i)+"_clas")
 
             print("Run {} of {}".format(i, len(grid_unfold)))
             print("Writing outputs to {}".format(output_path_run))
@@ -214,13 +215,13 @@ class Experimenter(object):
         epoch_losses, train_accuracies, val_accuracies = trainer.train(train_loader, val_loader, n_epochs,
                                                                        optimizer)
         # Evaluate best model on Test set
-        test_acc, y_pred, y_real, test_ious, _ = trainer.test(test_loader, seg=False)
+        test_acc, y_pred, y_real, _ = trainer.test(test_loader, seg=False)
 
         print("Test accuracy = {}".format(test_acc))
 
         # save test results
         save_test_results(y_real, y_pred, test_acc, output_path_run, test_dataset, epoch_losses, train_accuracies,
-                          val_accuracies, test_ious)
+                          val_accuracies, WRITE_DF_TO_, seg=False)
 
         # vis_graph(val_loader, output_path)
         # write_pointcloud(val_loader,output_path)
@@ -246,7 +247,7 @@ if __name__ == '__main__':
     # pretrained = os.path.join(output_path, "0_clas", "model_state_best_val.pth.tar")
 
     config['dataset_name'] = ['ModelNet10']
-    config['n_epochs'] = [3]
+    config['n_epochs'] = [2]
     config['learning_rate'] = [0.001]
     config['batch_size'] = [8]
     config['model_name'] = [PN2Net] #GCN

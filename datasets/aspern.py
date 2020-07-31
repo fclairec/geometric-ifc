@@ -54,6 +54,10 @@ class ASPERN(InMemoryDataset):
     def raw_file_names(self):
         return ['all_files_train.txt', 'all_files_test.txt']
 
+    @property
+    def classmap(self):
+        return {0: 'pipes', 1: 'walls', 2: 'slabs', 3: 'stairs', 4: 'column', 5: 'tanks'
+                }
 
     @property
     def processed_file_names(self):
