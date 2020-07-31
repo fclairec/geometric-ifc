@@ -209,7 +209,7 @@ class Experimenter(object):
         epoch_losses, train_accuracies, val_accuracies = trainer.train(train_loader, val_loader, n_epochs,
                                                                        optimizer)
 
-        test_acc, y_pred, y_real, _ = trainer.test(test_loader, seg=True)
+        test_acc, y_pred, y_real = trainer.test(test_loader, seg=True)
         print("Test accuracy = {}".format(test_acc))
 
         save_test_results(y_real, y_pred, test_acc, output_path, test_dataset, epoch_losses, train_accuracies,

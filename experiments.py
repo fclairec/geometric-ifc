@@ -106,7 +106,7 @@ class Experimenter(object):
                 self.dataset_name = ModelNet_small
                 self.dataset_type = '10'
 
-            test_acc, epoch_losses, train_accuracies, val_accuracies, test_ious = self.subrun(output_path_run, model_name
+            test_acc, epoch_losses, train_accuracies, val_accuracies = self.subrun(output_path_run, model_name
                                                                                    , n_epochs, batch_size,
                                                                                    learning_rate, knn, pretrained,
                                                                                    print_set_stats=print_set_stats, print_model_stats=print_model_stats)
@@ -215,7 +215,7 @@ class Experimenter(object):
         epoch_losses, train_accuracies, val_accuracies = trainer.train(train_loader, val_loader, n_epochs,
                                                                        optimizer)
         # Evaluate best model on Test set
-        test_acc, y_pred, y_real, _ = trainer.test(test_loader, seg=False)
+        test_acc, y_pred, y_real = trainer.test(test_loader, seg=False)
 
         print("Test accuracy = {}".format(test_acc))
 
@@ -226,7 +226,7 @@ class Experimenter(object):
         # vis_graph(val_loader, output_path)
         # write_pointcloud(val_loader,output_path)
 
-        return test_acc, epoch_losses, train_accuracies, val_accuracies, test_ious
+        return test_acc, epoch_losses, train_accuracies, val_accuracies
 
 
 if __name__ == '__main__':
@@ -247,10 +247,10 @@ if __name__ == '__main__':
     # pretrained = os.path.join(output_path, "0_clas", "model_state_best_val.pth.tar")
 
     config['dataset_name'] = ['ModelNet10']
-    config['n_epochs'] = [2]
+    config['n_epochs'] = [1]
     config['learning_rate'] = [0.001]
     config['batch_size'] = [8]
-    config['model_name'] = [PN2Net] #GCN
+    config['model_name'] = [GCN] #GCN
     config['knn'] = [5]
     # config['model_name'] = [, PN2Net, DGCNNNet, , DGCNNNet, UNetGCN]
     ex = Experimenter(config, dataset_root_path, output_path)
