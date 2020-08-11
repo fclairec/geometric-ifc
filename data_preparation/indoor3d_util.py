@@ -45,6 +45,7 @@ def collect_point_label(cloud, out_filename, file_format='txt'):
     """
     points_list = []
     points = np.loadtxt(cloud)
+    print("loaded successfully")
     xyz_min = np.amin(points, axis=0)[0:3]
     points[:, 0:3] -= xyz_min
     labels = points[:, 6]

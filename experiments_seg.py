@@ -29,7 +29,7 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 # device = 'cpu'
 
-NUM_WORKERS = 6
+NUM_WORKERS = 8
 WRITE_DF_TO_ = 'csv', 'latex'
 
 model_dict = {"DGCNNNet_seg": DGCNNNet_seg, "GUNet_seg": GUNet_seg, "PN2Net_seg": PN2Net_seg}
@@ -76,15 +76,15 @@ class Experimenter(object):
             assert os.path.exists(output_path)
             output_path_run = os.path.join(output_path, str(i) + '_seg')
 
-            print("Run {} of {}".format(i, len(grid_unfold)))
-            print("Writing outputs to {}".format(output_path_run))
-
             if not os.path.exists(output_path_run):
                 os.makedirs(output_path_run)
             if pretrained:
-                output_path_run = os.path.join(output_path, str(i)+ "_seg"+ "_transfer")
+                output_path_run = os.path.join(output_path, str(i) + "_seg" + "_transfer")
                 if not os.path.exists(output_path_run):
                     os.makedirs(output_path_run)
+
+            print("Run {} of {}".format(i, len(grid_unfold)))
+            print("Writing outputs to {}".format(output_path_run))
 
             dataset_name_dir, _ = dataset_name.split('_')
             self.dataset_path = os.path.join(self.dataset_root_path, dataset_name_dir)
@@ -215,10 +215,16 @@ class Experimenter(object):
             best_performance = checkpoint['best_train_acc']
             # say the class output dimension of the pretrained model, for correct loading
             # e.g. if pretrained model was on S3DIS -> set here 13
-            dim_last_layer = 7
+            dim_last_layer = 13
+            print("retaining on new dataset with previous last dim layer {}" .format(dim_last_layer))
             #copy pretrained model over, in case, even after retraining the accuracy doesn't beat the old model
-            copyfile(pretrained, os.path.join(output_path_run, 'model_state_best_val.pth.tar'))
-            copyfile(pretrained, os.path.join(prediction_path, 'model_state_best_val.pth.tar'))
+            if inference:
+                copyfile(pretrained, os.path.join(prediction_path, 'model_state_best_val.pth.tar'))
+            else:
+                # no inference but retrain model
+                copyfile(pretrained, os.path.join(output_path_run, 'model_state_best_val.pth.tar'))
+                # set best performance to zero because previsou model is irrelevant
+                best_performance = 0
         else: best_performance = 0
 
 
@@ -236,6 +242,10 @@ class Experimenter(object):
                 # Define optimizer depending on settings
                 optimizer = torch.optim.Adam(params=model.parameters(), lr=learning_rate, weight_decay=0.00001)
                 optimizer.load_state_dict(checkpoint['optimizer'])
+                for state in optimizer.state.values():
+                    for k, v in state.items():
+                        if torch.is_tensor(v):
+                            state[k] = v.cuda()
             else:
                 model = model_name(train_dataset.num_classes).to(device)
                 optimizer = torch.optim.Adam(params=model.parameters(), lr=learning_rate, weight_decay=0.00001)
@@ -246,11 +256,16 @@ class Experimenter(object):
             if pretrained:
                 model = model_name(dim_last_layer)
                 model.load_state_dict(checkpoint['state_dict'], strict=False)
+
+                optimizer = torch.optim.Adam(params=model.parameters(), lr=learning_rate, weight_decay=0.00001)
+                optimizer.load_state_dict(checkpoint['optimizer'])
+                for state in optimizer.state.values():
+                    for k, v in state.items():
+                        if torch.is_tensor(v):
+                            state[k] = v.cuda()
                 model.mlp = Seq(
                     MLP([1024, 512]), Dropout(0.5), MLP([512, 256]), Dropout(0.5),
                     Lin(256, train_dataset.num_classes))
-                optimizer = torch.optim.Adam(params=model.parameters(), lr=learning_rate, weight_decay=0.00001)
-                optimizer.load_state_dict(checkpoint['optimizer'])
             else:
                 model = model_name(out_channels=train_dataset.num_classes)
                 optimizer = torch.optim.Adam(params=model.parameters(), lr=learning_rate, weight_decay=0.00001)
@@ -266,12 +281,22 @@ class Experimenter(object):
                 #model.lin3 = Lin(8, train_dataset.num_classes)
                 optimizer = torch.optim.Adam(params=model.parameters(), lr=learning_rate, weight_decay=0.00001)
                 optimizer.load_state_dict(checkpoint['optimizer'])
+                for state in optimizer.state.values():
+                    for k, v in state.items():
+                        if torch.is_tensor(v):
+                            state[k] = v.cuda()
             else:
                 model = model_name(num_features=train_dataset.num_features, num_classes=train_dataset.num_classes,
                                    num_nodes=train_dataset.data.num_nodes).to(device)
                 optimizer = torch.optim.Adam(params=model.parameters(), lr=learning_rate, weight_decay=0.00001)
                 # model = nn.DataParallel(model)
                 # print("Let's use", torch.cuda.device_count(), "GPUs!")
+
+        if pretrained:
+            #we need to rename the copied base for transfer learning
+            os.rename(os.path.join(output_path_run, 'model_state_best_val.pth.tar'), os.path.join(output_path_run, 'model_state_best_val_basemodel.pth.tar'))
+        if inference:
+            os.rename(os.path.join(prediction_path, 'model_state_best_val.pth.tar'), os.path.join(prediction_path, 'model_state_best_val_basemodel.pth.tar'))
 
         model.to(device)
 
@@ -300,11 +325,11 @@ if __name__ == '__main__':
     config = dict()
 
     # for roesti computer use this
-    dataset_root_path = "../.."
-    output_path = "../../out_roesti"
+    #dataset_root_path = "../.."
+    #output_path = "../../out_roesti"
     # for Docker use this
-    # dataset_root_path = ""
-    # output_path = "/data/output"
+    dataset_root_path = ""
+    output_path = "/data/output"
 
     # Name of Dataset, careful the string matters!
 
@@ -318,15 +343,15 @@ if __name__ == '__main__':
     # pretrained = False
     # inference = False
     # os.path.join(output_path, "0_seg", "model_state_best_val.pth.tar")
-    pretrained = [os.path.join(output_path, "0_seg", "model_state_best_val.pth.tar")]
+    pretrained = os.path.join(output_path, "2_seg", "model_state_best_val.pth.tar")
 
-    inference = True
+    inference = False
 
-    config['dataset_name'] = ['ASPERN']  # 'S3DIS_1' 'ASPERN_UG', ASPERN_DG' 'ASPERN_small' , ASPERN_full
-    config['n_epochs'] = [10]
+    config['dataset_name'] = ['ASPERN_full']  # 'S3DIS_1' 'ASPERN_UG', ASPERN_DG' 'ASPERN_small' , ASPERN_full
+    config['n_epochs'] = [80]
     config['learning_rate'] = [0.001]
-    config['batch_size'] = [4]
-    config['model_name'] = [GUNet_seg]  # , OWN, PN2Net_seg, DGCNNNet_seg, GUNet_seg
+    config['batch_size'] = [10]
+    config['model_name'] = [DGCNNNet_seg]  # , OWN, PN2Net_seg, DGCNNNet_seg, GUNet_seg
     config['knn'] = [5]
     # config['model_name'] = [, PN2Net, DGCNNNet, , DGCNNNet, UNet]
     ex = Experimenter(config, dataset_root_path, output_path)

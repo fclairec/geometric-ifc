@@ -88,7 +88,7 @@ class Set_analyst:
         filename = 'results_dataset_' + plotname + '.pgf'
         path = os.path.join(output_path, filename)
         plt.savefig(path)
-        filename = 'results_dataset_' + plotname + '.pdf'
+        """filename = 'results_dataset_' + plotname + '.pdf'
         path = os.path.join(output_path, filename)
-        plt.savefig(path)
+        plt.savefig(path)"""
 

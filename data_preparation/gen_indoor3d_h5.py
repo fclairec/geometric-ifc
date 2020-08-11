@@ -89,12 +89,12 @@ def gen_indoor3d_h5(data_label_files_in, train):
         print(data_label_filename)
 
         if train=='test':
-            data, label, data_nonnorm, label_nonnorm = room2blocks_wrapper_normalized(data_label_filename, NUM_POINT, block_size=20.0, stride=1,random_sample=False,
+            data, label, data_nonnorm, label_nonnorm = room2blocks_wrapper_normalized(data_label_filename, NUM_POINT, block_size=2.0, stride=1,random_sample=False,
                                                                                       sample_num=None)
 
         else:
             data, label, _, _ = room2blocks_wrapper_normalized(data_label_filename, NUM_POINT,
-                                                                                      block_size=20.0, stride=1,
+                                                                                      block_size=2.0, stride=1,
                                                                                       random_sample=False,
                                                                                       sample_num=None)
 
@@ -149,4 +149,5 @@ if __name__ == '__main__':
     #gen_indoor3d_h5(data_label_files_in=['asp_train_subsampled.npy'], train='train')
     # gen_indoor3d_h5(data_label_files_in = ['asp_train_subsampled.npy'], train='train')
     # gen_indoor3d_h5(data_label_files_in = ['asp_test_subsampled.npy'], train='test')
-    gen_indoor3d_h5(data_label_files_in=['asp_test_subsampled.npy'], train='test')
+    #gen_indoor3d_h5(data_label_files_in=['asp_test.npy'], train='test')
+    gen_indoor3d_h5(data_label_files_in=['asp_train.npy'], train='train')

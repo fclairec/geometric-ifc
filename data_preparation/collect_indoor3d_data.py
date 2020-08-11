@@ -8,31 +8,31 @@ def collect_indoor3d_data():
     ROOT_DIR = os.path.dirname(BASE_DIR)
     DATA_PATH = os.path.join(ROOT_DIR, '../../AspernV1')
 
-    cloud_train = os.path.join(DATA_PATH, 'all_subsampled_train.txt')
-    cloud_test = os.path.join(DATA_PATH, 'all_subsampled_test.txt')
+    """cloud_train = os.path.join(DATA_PATH, 'all_subsampled_train.txt')
+    cloud_test = os.path.join(DATA_PATH, 'all_subsampled_test.txt')"""
 
-    cloud_train_full = os.path.join(DATA_PATH, 'all-1-with-colorcode-train.txt')
-    cloud_test_full = os.path.join(DATA_PATH, 'all-1-with-colorcode-test.txt')
+    cloud_train_full = os.path.join(DATA_PATH, 'all-new-train.txt')
+    cloud_test_full = os.path.join(DATA_PATH, 'all-new-test.txt')
     #cloud = os.path.join(DATA_PATH, 'all_subsampled.txt')
 
 
-    output_folder_small = os.path.join(DATA_PATH, 'asp_small')
+    """output_folder_small = os.path.join(DATA_PATH, 'asp_small')
     if not os.path.exists(output_folder_small):
-        os.mkdir(output_folder_small)
+        os.mkdir(output_folder_small)"""
 
     output_folder_full = os.path.join(DATA_PATH, 'asp_full')
     if not os.path.exists(output_folder_full):
         os.mkdir(output_folder_full)
 
-    out_filename_train = 'asp_train_subsampled.npy'
-    out_filename_test = 'asp_test_subsampled.npy'
+    out_filename_train = 'asp_train.npy'
+    out_filename_test = 'asp_test.npy'
 
 
-    collect_point_label(cloud_train, os.path.join(output_folder_small, out_filename_train), 'numpy')
+    """collect_point_label(cloud_train, os.path.join(output_folder_small, out_filename_train), 'numpy')
     test(os.path.join(output_folder_small, out_filename_train))
 
     collect_point_label(cloud_test, os.path.join(output_folder_small, out_filename_test), 'numpy')
-    test(os.path.join(output_folder_small, out_filename_test))
+    test(os.path.join(output_folder_small, out_filename_test))"""
 
     collect_point_label(cloud_train_full, os.path.join(output_folder_full, out_filename_train), 'numpy')
     test(os.path.join(output_folder_full, out_filename_train))
