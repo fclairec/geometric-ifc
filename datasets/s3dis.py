@@ -45,6 +45,7 @@ class S3DIS(InMemoryDataset):
                  transform=None,
                  pre_transform=None,
                  pre_filter=None):
+        test_area = int(test_area)
         assert test_area >= 1 and test_area <= 6
         self.test_area = test_area
         super(S3DIS, self).__init__(root, transform, pre_transform, pre_filter)

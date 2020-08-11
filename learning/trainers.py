@@ -3,6 +3,7 @@ __author__ = 'fiona.collins'
 import numpy as np
 import torch
 import torch.nn.functional as F
+import os
 from sklearn.metrics import roc_auc_score, average_precision_score
 from torch_geometric.utils import (negative_sampling, remove_self_loops,
                                    add_self_loops)
@@ -36,7 +37,7 @@ def pointnetloss(outputs, labels, m3x3, m64x64, alpha=0.0001):
 
 
 class Trainer:
-    def __init__(self, model, output_path, max_patience=15):
+    def __init__(self, model, output_path, max_patience=80):
         self.model = model
         self.output_path = output_path
         self.max_patience = max_patience
@@ -53,6 +54,7 @@ class Trainer:
             train_losses = []
             train_accuracies_batch = []
             for i, data in enumerate(train_loader):
+                #if i == 3: break
                 data = data.to(device)
                 optimizer.zero_grad()
                 outputs = self.model(data)
@@ -95,7 +97,7 @@ class Trainer:
             self.save_checkpoint(self.output_path,
                                  {
                                      'model': type(self.model).__name__,
-                                     'epoch': epoch + 1,
+                                     'epoch': epoch,
                                      'state_dict': self.model.state_dict(),
                                      'best_val_acc': best_performance,
                                      'optimizer': optimizer.state_dict(),
@@ -109,24 +111,26 @@ class Trainer:
                 self.patience = self.max_patience
             else:
                 self.patience -= 1
+                print("reduce patience")
 
-            if self.patience == 0:
+            if self.patience == 0 or epoch+1 == num_epochs:
                 # early stopping
                 # load best model back into memory
                 model_load = self.output_path + '/model_state_best_val.pth.tar'
                 checkpoint = torch.load(model_load)
+                epoch_test = checkpoint['epoch']
+                print("checkpoint from epoch {} loaded" .format(epoch_test))
                 self.model.load_state_dict(checkpoint['state_dict'], strict=False)
                 self.model.to(device)
-                return epoch_losses, train_accuracies, val_accuracies
-
-        return epoch_losses, train_accuracies, val_accuracies
+                return epoch_losses, train_accuracies, val_accuracies, epoch_test
+        return
 
     def eval(self, data_loader, seg):
         self.model.eval()
 
         correct = 0
         for i, data in enumerate(data_loader):
-            #if i == 3: break
+            #i == 3: break
             data = data.to(device)
             # loss = F.nll_loss(self.model(data)[0], data.y)
             with torch.no_grad():
@@ -135,41 +139,76 @@ class Trainer:
 
         if seg:
             acc = correct / len(data_loader.dataset.data.pos)
-            print("correct {} / {}".format(correct, len(data_loader.dataset.data.pos)))
+            print("val acc {}".format(acc))
         else:
             acc = correct / len(data_loader.dataset)
-            print("correct {} / {}".format(correct, len(data_loader.dataset)))
+            print("val acc {}".format(acc))
 
         return acc
 
-    def test(self, data_loader, seg):
+    def test(self, data_loader, seg, save_pred=False, prediction_path=None, inf_dataloader=None):
         self.model.eval()
         y_pred = []
         y_real = []
         correct = 0
         prob = []
         crit_points_list = []
-        # ious = [[] for _ in range(data_loader.dataset.num_classes)]
-        for i, data in enumerate(data_loader):
-            #if i == 3: break
-            data = data.to(device)
-            # loss = F.nll_loss(self.model(data)[0], data.y)
-            with torch.no_grad():
-                outputs = self.model(data)
-                loss = F.nll_loss(outputs, data.y)
-                SM = torch.max(torch.exp(outputs))
-                pred = outputs.max(1)[1]
-            correct += pred.eq(data.y).sum().item()
+        if save_pred and inf_dataloader is not None:
+            print("running inference per batch with prediction printouts")
+            if not os.path.exists(prediction_path):
+                os.makedirs(prediction_path)
 
-            y_pred = concat((y_pred, pred.cpu().numpy()))
-            y_real = concat((y_real, data.y.cpu().numpy()))
-            # crit_points_list.append(crit_points.cpu().numpy())
-            #prob.append(SM.cpu().numpy())
+            for i, iterator in enumerate(zip(data_loader, inf_dataloader)):
+                data, inf_data = iterator
+                #i == 3: break
+                data = data.to(device)
+                # loss = F.nll_loss(self.model(data)[0], data.y)
+                with torch.no_grad():
+                    outputs = self.model(data)
+                    loss = F.nll_loss(outputs, data.y)
+                    SM = torch.max(torch.exp(outputs))
+                    pred = outputs.max(1)[1]
 
-        if seg:
-            acc = correct / len(data_loader.dataset.data.pos)
+                    one = inf_data.pos
+                    # Check if normalized indexes correspond to real ones
+                    assert inf_data.y.numpy().all()==data.y.cpu().numpy().all()
+
+                    nonnorm_labeled = np.concatenate((inf_data.pos.numpy(), data.y.cpu().numpy().reshape((-1, 1))), axis=1)
+                    # add print of labels
+                    np.savetxt(os.path.join(self.output_path, str(i) + ".txt"), nonnorm_labeled, delimiter=',')
+
+                correct += pred.eq(data.y).sum().item()
+
+                y_pred = concat((y_pred, pred.cpu().numpy()))
+                y_real = concat((y_real, data.y.cpu().numpy()))
+                # crit_points_list.append(crit_points.cpu().numpy())
+                # prob.append(SM.cpu().numpy())
 
         else:
+            # Loop for testing without writing results
+            for i, data in enumerate(data_loader):
+                #if i == 3: break
+                data = data.to(device)
+                # loss = F.nll_loss(self.model(data)[0], data.y)
+                with torch.no_grad():
+                    outputs = self.model(data)
+                    loss = F.nll_loss(outputs, data.y)
+                    SM = torch.max(torch.exp(outputs))
+                    pred = outputs.max(1)[1]
+
+                correct += pred.eq(data.y).sum().item()
+
+                y_pred = concat((y_pred, pred.cpu().numpy()))
+                y_real = concat((y_real, data.y.cpu().numpy()))
+                # crit_points_list.append(crit_points.cpu().numpy())
+                #prob.append(SM.cpu().numpy())
+
+        # Calculate Accuracies
+        if seg:
+            # average over the number of nodes
+            acc = correct / len(data_loader.dataset.data.pos)
+        else:
+            # average over the number of graphs
             acc = correct / len(data_loader.dataset)
 
         return acc, y_pred, y_real
@@ -186,9 +225,8 @@ class Trainer:
 
 class Trainer_seg(Trainer):
 
-    def train(self, train_loader, val_loader, num_epochs, optimizer):
+    def train(self, train_loader, val_loader, num_epochs, optimizer, best_performance=0):
         seg = True
-        best_performance = 0
 
         epoch_losses = []
         train_accuracies = []
@@ -203,7 +241,7 @@ class Trainer_seg(Trainer):
             train_accuracies_batch = []
 
             for i, data in enumerate(train_loader):
-                #if i == 3: break
+                #i == 3: break
                 data = data.to(device)
                 optimizer.zero_grad()
                 outputs = self.model(data)
@@ -260,19 +298,22 @@ class Trainer_seg(Trainer):
                 self.patience = self.max_patience
             else:
                 self.patience -= 1
+                print("reduce parience")
 
-            if self.patience == 0:
+            if self.patience == 0 or epoch+1 == num_epochs:
                 # early stopping
                 # load best model back into memory
                 model_load = self.output_path + '/model_state_best_val.pth.tar'
                 checkpoint = torch.load(model_load)
+                epoch_test = checkpoint['epoch']
+                print("checkpoint from epoch {} loaded" .format(epoch_test))
                 self.model.load_state_dict(checkpoint['state_dict'], strict=False)
                 self.model.to(device)
-                return epoch_losses, train_accuracies, val_accuracies
+                return epoch_losses, train_accuracies, val_accuracies, epoch_test
 
         """# fill for IoU
         train_true_labels = np.concatenate(train_true_labels)
         train_pred_labels = np.concatenate(train_pred_labels)
         # train_ious = self.calculate_sem_IoU(train_pred_labels, train_true_labels)"""
 
-        return epoch_losses, train_accuracies, val_accuracies
+        return

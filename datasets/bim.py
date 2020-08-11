@@ -49,14 +49,18 @@ class BIM(InMemoryDataset):
     """
 
     urls = {
-        'T1':
-            'https://drive.google.com/uc?export=download&id=1YrlVZpjbpxAMWswPa3gPlNMEPu4nKH8Z',
-        'T2': 'https://drive.google.com/uc?export=download&id=1uAbELJqkCCuB01iAbWDx8wZECaUZiGh1'
+        'T1':  'https://drive.google.com/uc?export=download&id=1YrlVZpjbpxAMWswPa3gPlNMEPu4nKH8Z',
+        'T2': 'https://drive.google.com/uc?export=download&id=1uAbELJqkCCuB01iAbWDx8wZECaUZiGh1',
+        # inter ifc generalization
+        'T3': 'https://drive.google.com/uc?export=download&id=1uAbELJqkCCuB01iAbWDx8wZECaUZiGh1',
+        # cross ifc generalization
+        'T4': 'https://drive.google.com/uc?export=download&id=1uAbELJqkCCuB01iAbWDx8wZECaUZiGh1'
+
 
     }
 
     def __init__(self, root, name='T1', train=True, transform=None, pre_transform=None, pre_filter=None):
-        assert name in ['T1', 'T2']
+        assert name in ['T1', 'T2', 'T3', 'T4']
         self.name = name
 
         super(BIM, self).__init__(root, transform, pre_transform, pre_filter)
@@ -76,6 +80,13 @@ class BIM(InMemoryDataset):
                     'IfcDistributionControlElement', 'IfcFlowController', 'IfcFlowFitting', 'IfcFlowSegment',
                     'IfcFlowTerminal'
                 ]
+            elif self.name == 'T3' or 'T4':
+                return [
+                    # corresponds to what is in the dataset
+                    'IfcDistributionControlElement', 'IfcFlowController', 'IfcFlowFitting', 'IfcFlowSegment',
+                    'IfcFlowTerminal', 'IfcColumn', 'IfcFurnishingElement', 'IfcStair', 'IfcDoor', 'IfcSlab', 'IfcWall'
+                    , 'IfcWindow'
+                ]
 
     @property
     def classmap(self):
@@ -90,6 +101,13 @@ class BIM(InMemoryDataset):
                 # corresponds to what is in the dataset
                 0: 'IfcDistributionControlElement', 1: 'IfcFlowController', 2: 'IfcFlowFitting',
                     3: 'IfcFlowSegment', 4: 'IfcFlowTerminal'
+            }
+        elif self.name == 'T3' or 'T4':
+            return {
+                # corresponds to what is in the dataset
+                0: 'IfcDistributionControlElement', 1: 'IfcFlowController', 2: 'IfcFlowFitting',
+                    3: 'IfcFlowSegment', 4: 'IfcFlowTerminal', 5: 'IfcColumn', 6: 'IfcFurnishingElement', 7: 'IfcStair',
+                    8: 'IfcDoor', 9: 'IfcSlab', 10: 'IfcWall', 11: 'IfcWindow'
             }
 
     @property

@@ -144,7 +144,7 @@ CMD ["echo", "hello world"]
 COPY proj99_tum /
  
 #CMD ["nohup", "python3", "-u", "bim-shape-learning/experiments_seg.py", "&>", "/data/nohup.out", "&"]
-CMD ["python3", "bim-shape-learning/experiments_seg.py"]
+CMD ["python3", "../experiments_seg.py"]
 
 # Set the default command to python3.
 #CMD ["python3"]

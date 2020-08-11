@@ -115,7 +115,7 @@ if __name__ == '__main__':
     test = True
 
     # Name of Dataset, careful the string matters!
-    dataset_name = 'BIM_PC_T1'  # BIM_PC_T2, ModelNet10, ModelNet40
+    dataset_name = 'ASPERN_small'  # BIM_PC_T2, ModelNet10, ModelNet40
     config = None
     ex = Experimenter(config, dataset_name)
 
@@ -126,7 +126,7 @@ if __name__ == '__main__':
 
     # fills list with all models to perform inference on - scans dir
     while experiments:
-        model_path = '../out/' + str(i)
+        model_path = '../out/' + str(i) + "_seg"
         if not os.path.exists(model_path):
             break
         model_list.append(model_path + '/model_state_best_val.pth.tar')

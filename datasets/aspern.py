@@ -47,12 +47,12 @@ class ASPERN(InMemoryDataset):
                  pre_filter=None):
         self.test_area = test_area
         super(ASPERN, self).__init__(root, transform, pre_transform, pre_filter)
-        path = self.processed_paths[0] if train else self.processed_paths[1]
+        path = self.processed_paths[0] if train and not train== 'nonnorm' else (self.processed_paths[2] if train == 'nonnorm' else self.processed_paths[1])
         self.data, self.slices = torch.load(path)
 
     @property
     def raw_file_names(self):
-        return ['all_files_train.txt', 'all_files_test.txt']
+        return ['all_filestrain.txt', 'all_filestest.txt', 'all_filestest_nonnorm.txt']
 
     @property
     def classmap(self):
@@ -62,7 +62,7 @@ class ASPERN(InMemoryDataset):
     @property
     def processed_file_names(self):
         test_area = self.test_area
-        return ['{}_{}.pt'.format(s, test_area) for s in ['train', 'test']]
+        return ['{}_{}.pt'.format(s, test_area) for s in ['train', 'test', 'test_nonnorm']]
 
     def download(self):
         return
@@ -72,6 +72,8 @@ class ASPERN(InMemoryDataset):
             filenames = [x.split('/')[-1] for x in f.read().split('\n')[:-1]]
         with open(self.raw_paths[1], 'r') as f:
             filenames_test = [x.split('/')[-1] for x in f.read().split('\n')[:-1]]
+        with open(self.raw_paths[2], 'r') as f:
+            filenames_test_nonnorm = [x.split('/')[-1] for x in f.read().split('\n')[:-1]]
 
         xs, ys = [], []
         for filename in filenames:
@@ -97,6 +99,12 @@ class ASPERN(InMemoryDataset):
             xs_test += torch.from_numpy(f['data'][:]).unbind(0)
             ys_test += torch.from_numpy(f['label'][:]).to(torch.long).unbind(0)
 
+        xs_test_nonnorm, ys_test_nonnorm = [], []
+        for filename in filenames_test_nonnorm:
+            f = h5py.File(osp.join(self.raw_dir, filename))
+            xs_test_nonnorm += torch.from_numpy(f['data'][:]).unbind(0)
+            ys_test_nonnorm += torch.from_numpy(f['label'][:]).to(torch.long).unbind(0)
+
         test_data_list = []
         for i, (x, y) in enumerate(zip(xs_test, ys_test)):
             data = Data(pos=x[:, :3], x=x[:, 3:], y=y)
@@ -108,5 +116,17 @@ class ASPERN(InMemoryDataset):
 
             test_data_list.append(data)
 
+        test_nonnorm_data_list = []
+        for i, (x, y) in enumerate(zip(xs_test_nonnorm, ys_test_nonnorm)):
+            data = Data(pos=x[:, :3], x=x[:, 3:], y=y)
+
+            if self.pre_filter is not None and not self.pre_filter(data):
+                continue
+            if self.pre_transform is not None:
+                data = self.pre_transform(data)
+
+            test_nonnorm_data_list.append(data)
+
         torch.save(self.collate(train_data_list), self.processed_paths[0])
         torch.save(self.collate(test_data_list), self.processed_paths[1])
+        torch.save(self.collate(test_nonnorm_data_list), self.processed_paths[2])

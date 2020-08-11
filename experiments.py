@@ -10,7 +10,7 @@ from datasets.ModelNet import ModelNet
 from datasets.ModelNet_small import ModelNet_small
 from datasets.splits import random_splits, make_set_sampler
 
-from learning.models import PN2Net, DGCNNNet, UNet, PointNet, GCN
+from learning.models import PN2Net, DGCNNNet, UNet, PointNet, GCN, GCN_nocat, GCN_nocat_pool
 from learning.trainers import Trainer
 from torch.nn import Sequential as Seq, Dropout, Linear as Lin
 from learning.models import MLP
@@ -78,7 +78,9 @@ class Experimenter(object):
 
             # Prepare result output
             result = params
-
+            result['model_name'] = params['model_name'].__name__
+            plot_name = ','.join(['%s' % value for (key, value) in result.items()])
+            plot_name=plot_name.replace('_', '')
             # outputpaths
             assert os.path.exists(output_path)
             output_path_run = os.path.join(output_path, str(i)+"_clas")
@@ -106,13 +108,14 @@ class Experimenter(object):
                 self.dataset_name = ModelNet_small
                 self.dataset_type = '10'
 
-            test_acc, epoch_losses, train_accuracies, val_accuracies = self.subrun(output_path_run, model_name
+            test_acc, epoch_losses, train_accuracies, val_accuracies, epoch_test = self.subrun(output_path_run, model_name
                                                                                    , n_epochs, batch_size,
-                                                                                   learning_rate, knn, pretrained,
+                                                                                   learning_rate, knn, pretrained, plot_name,
                                                                                    print_set_stats=print_set_stats, print_model_stats=print_model_stats)
 
             result['test_acc'] = test_acc
-            result['loss'] = epoch_losses
+            result['epoch_test'] = epoch_test
+            #result['loss'] = epoch_losses
             # result['train_acc'] = train_accuracies
             # result['val_acc'] = val_accuracies
 
@@ -121,20 +124,20 @@ class Experimenter(object):
         pd.DataFrame(results).to_csv(os.path.join(output_path,'results_clas.csv'))
         torch.cuda.empty_cache()
 
-    def subrun(self, output_path_run, model_name, n_epochs, batch_size, learning_rate, knn, pretrained=False,
+    def subrun(self, output_path_run, model_name, n_epochs, batch_size, learning_rate, knn, pretrained=False, plot_name= False,
                print_set_stats=False, print_model_stats=False):
 
         if model_name.__name__ is 'PN2Net':
             transform, pretransform = transform_setup()
         if model_name.__name__ is 'DGCNNNet':
             transform, pretransform = transform_setup()
-        if model_name.__name__ is 'GCN':
+        if model_name.__name__ is 'GCN' or 'GCN_nocat' or 'GCN_nocat_pool':
             # number of knn to connect to as argument
             transform, pretransform = transform_setup(graph_gcn=knn)
 
         # Define datasets
         dataset = self.dataset_name(self.dataset_path, self.dataset_type, True, transform, pretransform)
-        test_dataset = self.dataset_name(self.dataset_path, self.dataset_type, False, transform, pretransform)
+        test_dataset = self.dataset_name(self.dataset_path, self.dataset_type, True, transform, pretransform)
 
         print("Run with dataset {} type {}".format(str(self.dataset_name.__name__), str(self.dataset_type)))
 
@@ -192,7 +195,7 @@ class Experimenter(object):
             else:
                 model = model_name(out_channels=train_dataset.num_classes)
 
-        if model_name.__name__ is 'GCN':
+        if model_name.__name__ is 'GCN' or 'GCN_nocat' or'GCN_nocat_pool':
             if pretrained:
                 model = model_name(num_features=dataset.num_features, num_classes=dim_last_layer,
                                    num_nodes=dataset.data.num_nodes).to(device)
@@ -212,21 +215,23 @@ class Experimenter(object):
         # Initialize Trainer
         trainer = Trainer(model, output_path_run)
         # let Trainer run over epochs
-        epoch_losses, train_accuracies, val_accuracies = trainer.train(train_loader, val_loader, n_epochs,
+        epoch_losses, train_accuracies, val_accuracies, epoch_test = trainer.train(train_loader, val_loader, n_epochs,
                                                                        optimizer)
         # Evaluate best model on Test set
         test_acc, y_pred, y_real = trainer.test(test_loader, seg=False)
+        val_acc2, _ , _ = trainer.test(val_loader, seg=False)
 
-        print("Test accuracy = {}".format(test_acc))
+        print("Test accuracy = {}, Val accuracy = {}".format(test_acc, val_acc2))
+
 
         # save test results
         save_test_results(y_real, y_pred, test_acc, output_path_run, test_dataset, epoch_losses, train_accuracies,
-                          val_accuracies, WRITE_DF_TO_, seg=False)
+                          val_accuracies, WRITE_DF_TO_, plot_name, seg=False)
 
         # vis_graph(val_loader, output_path)
         # write_pointcloud(val_loader,output_path)
 
-        return test_acc, epoch_losses, train_accuracies, val_accuracies
+        return test_acc, epoch_losses, train_accuracies, val_accuracies, epoch_test
 
 
 if __name__ == '__main__':
@@ -237,7 +242,7 @@ if __name__ == '__main__':
     output_path = "../../out_roesti"
 
     # print set plots
-    print_set_stats = True
+    print_set_stats = False
 
     # print model stats
     print_model_stats = True
@@ -246,11 +251,11 @@ if __name__ == '__main__':
     pretrained = False
     # pretrained = os.path.join(output_path, "0_clas", "model_state_best_val.pth.tar")
 
-    config['dataset_name'] = ['ModelNet10']
-    config['n_epochs'] = [1]
+    config['dataset_name'] = ['ModelNet10'] #BIM_PC_T1
+    config['n_epochs'] = [2]
     config['learning_rate'] = [0.001]
-    config['batch_size'] = [8]
-    config['model_name'] = [GCN] #GCN
+    config['batch_size'] = [30]
+    config['model_name'] = [GCN_nocat] #GCN GCN_nocat_pool GCN_nocat
     config['knn'] = [5]
     # config['model_name'] = [, PN2Net, DGCNNNet, , DGCNNNet, UNetGCN]
     ex = Experimenter(config, dataset_root_path, output_path)

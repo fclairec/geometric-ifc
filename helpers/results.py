@@ -7,14 +7,7 @@ import matplotlib as mpl
 import numpy as np
 from helpers.set_plot import Set_analyst
 
-plt = mpl.pyplot
-plt.rcParams['text.latex.preamble'] = [r"\usepackage{lmodern}"]
-params = {'text.usetex': True,
-          'font.size': 11,
-          'font.family': 'lmodern',
-          'text.latex.unicode': True,
-          }
-plt.rcParams.update(params)
+
 
 
 class Results():
@@ -72,29 +65,40 @@ def calculate_sem_IoU(pred_np, seg_np, num_classes):
 
 
 def save_test_results(y_real, y_pred, test_acc, output_path, test_dataset, epoch_losses, train_accuracies,
-                      val_accuracies, WRITE_DF_TO_, seg=False):
+                      val_accuracies, WRITE_DF_TO_, plot_name, seg=False):
+    plt = mpl.pyplot
+    plt.rcParams['text.latex.preamble'] = [r"\usepackage{lmodern}"]
+    params = {'text.usetex': True,
+              'font.size': 11,
+              'font.family': 'lmodern'
+              }
+    plt.rcParams.update(params)
+
+
+    real_target_names = [test_dataset.classmap[i] for i in np.unique(np.array(test_dataset.data.y))]
+    plot_name.replace('_', ' ')
+    print(plot_name)
+
     if seg:
         test_ious = calculate_sem_IoU(y_pred, y_real, test_dataset.num_classes)
 
         # write Test IOUS
-        df0 = DataFrame(test_ious)
+        df0 = DataFrame(test_ious, index=real_target_names, columns=[plot_name])
         file_ious_csv = output_path + '/test_ious.csv'
         df0.to_csv(file_ious_csv)
         if 'to_latex' in WRITE_DF_TO_:
-            file_ious_tex = output_path + '/test_ious.tex'
-            df0.to_latex(file_ious_tex, index=False)
+            file_ious_tex = output_path + '/test_ious' + plot_name + '.tex'
+            df0.to_latex(file_ious_tex, caption=plot_name, index=False)
 
     if not seg:
-        real_target_names = [test_dataset.classmap[i] for i in np.unique(np.array(test_dataset.data.y))]
-
         # Confusion matrix
         conf_mat = confusion_matrix(y_true=y_real, y_pred=y_pred)
         df1 = DataFrame(conf_mat, index=real_target_names, columns=real_target_names)
         file_confmat_csv = output_path + '/confmat.csv'
         df1.to_csv(file_confmat_csv)
         if 'to_latex' in WRITE_DF_TO_:
-            file_confmat_tex = output_path + '/confmat.tex'
-            df1.to_latex(file_confmat_tex)
+            file_confmat_tex = output_path + '/confmat' + plot_name + '.tex'
+            df1.to_latex(file_confmat_tex, caption=plot_name)
             print("latex written")
 
         # Classification report
@@ -104,37 +108,53 @@ def save_test_results(y_real, y_pred, test_acc, output_path, test_dataset, epoch
         file_classrep_csv = output_path + '/class_report.csv'
         df2.to_csv(file_classrep_csv)
         if 'to_latex' in WRITE_DF_TO_:
-            file_classrep_tex = output_path + '/class_report.tex'
-            df2.to_latex(file_classrep_tex)
+            file_classrep_tex = output_path + '/class_report' + plot_name + '.tex'
+            df2.to_latex(file_classrep_tex, caption=plot_name)
 
-    print('test acc = {}'.format(test_acc))
-
+    plot_name.replace('_', ' ')
     # plot epoch losses
     fig, ax = plt.subplots(figsize=(12, 7))
     ax.plot(range(len(epoch_losses)), epoch_losses, label='training loss', color='steelblue')
     ax.legend()
-    ax.set_title("Train loss", fontsize=20)
+    ax.set_title("Train loss" + plot_name, fontsize=20)
     plt.xlabel('Epochs', fontsize=16)
     plt.ylabel('Loss', fontsize=16)
     ax.set_xticks(range(len(epoch_losses)))
     ax.set_xticklabels(range(len(epoch_losses)), fontsize=12)
-    plt.savefig(output_path + '/train_loss.pgf')
-    plt.savefig(output_path + '/train_loss.pdf')
+    if 'to_latex' in WRITE_DF_TO_:
+        plt.savefig(output_path + '/train_loss' + plot_name + '.pgf')
+    #plt.savefig(output_path + '/train_loss.pdf')
     plt.close()
+    plt.clf()
 
     # plot train and val accuracies
     fig, ax2 = plt.subplots(figsize=(12, 7))
     ax2.plot(range(len(train_accuracies)), train_accuracies, label='Training accuracies', color='steelblue')
     ax2.plot(range(len(train_accuracies)), val_accuracies, label='Validation accuracies', color='indianred')
     ax2.legend(fontsize=16)
-    ax2.set_title("Train and validation accuracies", fontsize=20)
+    ax2.set_title("Train and validation accuracies" + plot_name, fontsize=20)
     plt.xlabel('Epochs', fontsize=16)
     plt.ylabel('Accuracy score', fontsize=16)
     ax2.set_xticks(range(len(train_accuracies)))
     ax2.set_xticklabels(range(len(train_accuracies)), fontsize=12)
-    plt.savefig(output_path + '/train-val_acc.pgf')
-    plt.savefig(output_path + '/train-val_acc.pdf')
+    plot_name.replace('_', ' ')
+    if 'to_latex' in WRITE_DF_TO_:
+        plt.savefig(output_path + '/train-val_acc' + plot_name + '.pgf')
+    #plt.savefig(output_path + '/train-val_acc.pdf')
     plt.close()
+    plt.clf()
+
+    # save epoch losses, train_loss, train_accuracies, validation accuracies
+    dic = {'train loss': epoch_losses, 'train accuracy': train_accuracies, 'validation accuracy': val_accuracies}
+    df4 = DataFrame(dic)
+    file_epochresults_csv = output_path + '/epoch_results.csv'
+    df4.to_csv(file_epochresults_csv)
+    plot_name.replace('_',' ')
+    if 'to_latex' in WRITE_DF_TO_:
+        file_epochresults_txt = output_path + '/epoch_results' + plot_name + '.tex'
+        df4.to_latex(file_epochresults_txt, caption=plot_name, index=False)
+
+    plt.close('all')
 
 
 def save_set_stats(output_path, train_loader, test_loader, train_dataset,  unbalanced_train_loader=None, val_loader=None, seg=False):

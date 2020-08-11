@@ -2,7 +2,7 @@ import torch
 import torch.nn.functional as F
 import torch_geometric.transforms as T
 from torch.nn import Sequential as Seq, Linear as Lin, ReLU, Dropout, BatchNorm1d as BN
-from torch_geometric.nn import PointConv, fps, radius, global_max_pool
+from torch_geometric.nn import PointConv, fps, radius, global_max_pool,fps, avg_pool_x, voxel_grid
 from torch_geometric.nn import DynamicEdgeConv, global_max_pool, GCNConv
 from helpers.graph_unet import GraphUNet
 from torch_geometric.utils import dropout_adj
@@ -10,6 +10,7 @@ import numpy
 from torch.autograd import Variable
 from torch_geometric.nn import global_add_pool, global_mean_pool
 import torch.nn as nn
+#from helpers.glob import global_max_pool, global_add_pool, global_mean_pool
 
 
 
@@ -279,7 +280,7 @@ class GCN(torch.nn.Module):
     def __init__(self, num_classes):
         super(GCN, self).__init__()
 
-        self.conv1 = GCNConv(3, 64, cached=False, normalize=not True)
+        self.conv1 = GCNConv(6, 64, cached=False, normalize=not True)
         # self.conv12 = GCNConv(16, 32, cached=False, normalize=not True)
         self.conv2 = GCNConv(64, 128, cached=False, normalize=not True)
         self.conv3 = GCNConv(192, 254, cached=False, normalize=not True)
@@ -293,19 +294,104 @@ class GCN(torch.nn.Module):
         self.non_reg_params = self.conv2.parameters()
 
     def forward(self, data):
-        x, batch = data.pos , data.batch # torch.cat([data.norm, data.pos], dim=1), data.batch #torch.cat([data.norm, data.pos], dim=1)
+        x, batch = torch.cat([data.norm, data.pos],dim=1), data.batch # torch.cat([data.norm, data.pos], dim=1), data.batch #torch.cat([data.norm, data.pos], dim=1)
         edge_index, edge_weight = data.edge_index, data.edge_attr
+        x = F.dropout(x, training=self.training)
         x1 = F.relu(self.conv1(x, edge_index, edge_weight))
-
-        #x = F.dropout(x, training=self.training)
         #x = self.conv12(x, edge_index, edge_weight)
         #x = F.relu(x)
         #x = F.dropout(x, training=self.training)
         x2 = F.relu(self.conv2(x1, edge_index, edge_weight))
 
         x= torch.cat([x1,x2], dim=1)
+        x1 = F.dropout(x1, training=self.training)
         x = F.relu(self.conv3(x, edge_index, edge_weight))
         out = global_max_pool(x, batch)
+        out = self.lin1(out)
+        out = F.log_softmax(out, dim=1)
+        return out
+
+class GCN_nocat(torch.nn.Module):
+    def __init__(self, num_classes):
+        super(GCN_nocat, self).__init__()
+
+        self.conv1 = GCNConv(6, 64, cached=False, normalize=not True)
+        # self.conv12 = GCNConv(16, 32, cached=False, normalize=not True)
+        self.conv2 = GCNConv(64, 128, cached=False, normalize=not True)
+        self.conv3 = GCNConv(128, 254, cached=False, normalize=not True)
+        # CAREFUL: If modifying here, check line 202 in experiments.py for pretrained model
+        self.lin1 = torch.nn.Linear(254, num_classes)
+        self.mlp = Seq(
+            MLP([1024, 512]), Dropout(0.5), MLP([512, 256]), Dropout(0.5),
+            Lin(256, num_classes))
+
+        self.reg_params = self.conv1.parameters()
+        self.non_reg_params = self.conv2.parameters()
+
+    def forward(self, data):
+        x, batch = torch.cat([data.norm, data.pos],dim=1), data.batch # torch.cat([data.norm, data.pos], dim=1), data.batch #torch.cat([data.norm, data.pos], dim=1)
+        edge_index, edge_weight = data.edge_index, data.edge_attr
+        x = F.dropout(x, training=self.training)
+        x1 = F.relu(self.conv1(x, edge_index, edge_weight))
+        #x = self.conv12(x, edge_index, edge_weight)
+        #x = F.relu(x)
+        #x = F.dropout(x, training=self.training)
+        x2 = F.relu(self.conv2(x1, edge_index, edge_weight))
+        x2 = F.dropout(x2, training=self.training)
+
+        #x= torch.cat([x1,x2], dim=1)
+        x = F.relu(self.conv3(x2, edge_index, edge_weight))
+        out = global_max_pool(x, batch)
+        out = self.lin1(out)
+        out = F.log_softmax(out, dim=1)
+        return out
+
+class GCN_nocat_pool(torch.nn.Module):
+    def __init__(self, num_classes):
+        super(GCN_nocat_pool, self).__init__()
+
+        self.conv1 = GCNConv(3, 32, cached=False, normalize=not True)
+        self.conv12 = GCNConv(32, 64, cached=False, normalize=not True)
+        # self.conv12 = GCNConv(16, 32, cached=False, normalize=not True)
+        self.conv2 = GCNConv(64, 128, cached=False, normalize=not True)
+        self.conv21 = GCNConv(64, 128, cached=False, normalize=not True)
+        self.conv3 = GCNConv(1, 128, cached=False, normalize=not True)
+        # CAREFUL: If modifying here, check line 202 in experiments.py for pretrained model
+        self.lin1 = torch.nn.Linear(128, num_classes)
+        self.mlp = Seq(
+            MLP([1024, 512]), Dropout(0.5), MLP([512, 256]), Dropout(0.5),
+            Lin(256, num_classes))
+
+        self.reg_params = self.conv1.parameters()
+        self.non_reg_params = self.conv2.parameters()
+
+    def forward(self, data):
+        x, batch = data.pos, data.batch # torch.cat([data.norm, data.pos], dim=1), data.batch #torch.cat([data.norm, data.pos], dim=1)
+        edge_index, edge_weight = data.edge_index, data.edge_attr
+        #x = F.dropout(x, training=self.training)
+        x1 = F.relu(self.conv1(x, edge_index, edge_weight))
+        x1 = F.relu(self.conv12(x1, edge_index, edge_weight))
+        #fp = fps(x1, batch, ratio=0.5, random_start=True)
+        #add = torch.mean(x1, dim=1)
+        add = voxel_grid(data.pos, batch, size =1)
+        add, batch2 = avg_pool_x(add, x1, batch)
+        #add, _ = torch.max(x1, dim=1)
+        #add = add.view(-1,1)
+
+        #x = self.conv12(x, edge_index, edge_weight)
+        #x = F.relu(x)
+        #x = F.dropout(x, training=self.training)
+        x2 = F.relu(self.conv2(add, edge_index[batch2], edge_weight[batch2]))
+        #x2 = F.relu(self.conv21(x2, edge_index, edge_weight))
+        #add2 = global_add_pool(x1, batch, size=len(batch))
+
+        add2 = torch.mean(x2, dim=1)
+        #add2, _ = torch.max(x2, dim=1)
+        add2 = add2.view(-1, 1)
+        x2 = F.dropout(add2, p=0.2,training=self.training)
+
+        x3 = F.relu(self.conv3(x2, edge_index[batch2], edge_weight[batch2]))
+        out = global_max_pool(x3, batch2)
         out = self.lin1(out)
         out = F.log_softmax(out, dim=1)
         return out

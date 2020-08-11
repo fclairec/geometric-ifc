@@ -250,7 +250,7 @@ def room2blocks_plus_normalized(data_label, num_point, block_size, stride,
         data_batch[b, :, 0] -= (minx + block_size / 2)
         data_batch[b, :, 1] -= (miny + block_size / 2)
     new_data_batch[:, :, 0:6] = data_batch
-    return new_data_batch, label_batch
+    return new_data_batch, label_batch, data_batch, label_batch
 
 
 def room2blocks_wrapper_normalized(data_label_filename, num_point, block_size=1.0, stride=1.0,
