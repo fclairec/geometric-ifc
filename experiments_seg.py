@@ -135,7 +135,7 @@ class Experimenter(object):
             self.dataset_type = dataset_name[-1]
         elif dataset_name[:6] == 'ASPERN' and dataset_name[-4:] == 'full':
             self.dataset_name = ASPERN
-            self.dataset_type = dataset_name[-2:]
+            self.dataset_type = 'full'
         elif dataset_name[:6] == 'ASPERN' and dataset_name[-5:] == 'small':
             self.dataset_name = ASPERN
             self.dataset_type = 'small'
@@ -152,11 +152,11 @@ class Experimenter(object):
             model_name = model_dict[model_name]
 
             n_epochs = 1
-            batch_size = 2
+            batch_size = 20
             learning_rate = 0.001
             knn = 5
 
-            prediction_path = os.path.join(output_path, str(i) + "_seg"+ "_predictions")
+            prediction_path = os.path.join(output_path, str(i) + "_seg" + "_predictions")
             if not os.path.exists(prediction_path):
                 os.makedirs(prediction_path)
             plot_name = model_name.__name__ +',inference'
@@ -215,11 +215,11 @@ class Experimenter(object):
             best_performance = checkpoint['best_train_acc']
             # say the class output dimension of the pretrained model, for correct loading
             # e.g. if pretrained model was on S3DIS -> set here 13
-            dim_last_layer = 13
+            dim_last_layer = 7
             print("retaining on new dataset with previous last dim layer {}" .format(dim_last_layer))
             #copy pretrained model over, in case, even after retraining the accuracy doesn't beat the old model
             if inference:
-                copyfile(pretrained, os.path.join(prediction_path, 'model_state_best_val.pth.tar'))
+                copyfile(pretrained, os.path.join(output_path_run, 'model_state_best_val.pth.tar'))
             else:
                 # no inference but retrain model
                 copyfile(pretrained, os.path.join(output_path_run, 'model_state_best_val.pth.tar'))
@@ -235,10 +235,7 @@ class Experimenter(object):
                 model = model_name(dim_last_layer)
                 # Load state
                 model.load_state_dict(checkpoint['state_dict'], strict=False)
-                # Change last layer to fit new classes of current dataset
-                model.mlp = Seq(
-                    MLP([1024, 512]), Dropout(0.5), MLP([512, 256]), Dropout(0.5),
-                    Lin(256, train_dataset.num_classes))
+
                 # Define optimizer depending on settings
                 optimizer = torch.optim.Adam(params=model.parameters(), lr=learning_rate, weight_decay=0.00001)
                 optimizer.load_state_dict(checkpoint['optimizer'])
@@ -246,6 +243,10 @@ class Experimenter(object):
                     for k, v in state.items():
                         if torch.is_tensor(v):
                             state[k] = v.cuda()
+                # Change last layer to fit new classes of current dataset
+                model.mlp = Seq(MLP([1024, 512]), Dropout(0.5), MLP([512, 256]), Dropout(0.5),
+                                Lin(256, train_dataset.num_classes))
+
             else:
                 model = model_name(train_dataset.num_classes).to(device)
                 optimizer = torch.optim.Adam(params=model.parameters(), lr=learning_rate, weight_decay=0.00001)
@@ -263,9 +264,10 @@ class Experimenter(object):
                     for k, v in state.items():
                         if torch.is_tensor(v):
                             state[k] = v.cuda()
-                model.mlp = Seq(
-                    MLP([1024, 512]), Dropout(0.5), MLP([512, 256]), Dropout(0.5),
-                    Lin(256, train_dataset.num_classes))
+                if not inference:
+                    #retrain on new classes, don't do this for inference, we need the good weights.
+                    model.mlp = Seq(MLP([1024, 256]), Dropout(0.5), MLP([256, 128]),
+                                Dropout(0.5), Lin(128, train_dataset.num_classes))
             else:
                 model = model_name(out_channels=train_dataset.num_classes)
                 optimizer = torch.optim.Adam(params=model.parameters(), lr=learning_rate, weight_decay=0.00001)
@@ -277,7 +279,7 @@ class Experimenter(object):
                 model = model_name(num_features=train_dataset.num_features, num_classes=dim_last_layer,
                                    num_nodes=train_dataset.data.num_nodes).to(device)
                 model.load_state_dict(checkpoint['state_dict'], strict=False)
-                model.unet.up_convs[-1] = GCNConv(128, train_dataset.num_classes, improved=True)
+
                 #model.lin3 = Lin(8, train_dataset.num_classes)
                 optimizer = torch.optim.Adam(params=model.parameters(), lr=learning_rate, weight_decay=0.00001)
                 optimizer.load_state_dict(checkpoint['optimizer'])
@@ -285,6 +287,7 @@ class Experimenter(object):
                     for k, v in state.items():
                         if torch.is_tensor(v):
                             state[k] = v.cuda()
+                model.unet.up_convs[-1] = GCNConv(128, train_dataset.num_classes, improved=True)
             else:
                 model = model_name(num_features=train_dataset.num_features, num_classes=train_dataset.num_classes,
                                    num_nodes=train_dataset.data.num_nodes).to(device)
@@ -292,30 +295,38 @@ class Experimenter(object):
                 # model = nn.DataParallel(model)
                 # print("Let's use", torch.cuda.device_count(), "GPUs!")
 
-        if pretrained:
-            #we need to rename the copied base for transfer learning
+        if pretrained and not inference:
+            #we need to rename the copied base for transfer learning because we dont want it to win, in case of inference, it can win
             os.rename(os.path.join(output_path_run, 'model_state_best_val.pth.tar'), os.path.join(output_path_run, 'model_state_best_val_basemodel.pth.tar'))
-        if inference:
+        """if inference:
             os.rename(os.path.join(prediction_path, 'model_state_best_val.pth.tar'), os.path.join(prediction_path, 'model_state_best_val_basemodel.pth.tar'))
-
+"""
         model.to(device)
 
         if print_model_stats:
             summary(model)
 
-
-
         # Initialize segmentation trainer
         trainer = Trainer_seg(model, output_path_run)
-        # Let Trainer run over epochs
-        epoch_losses, train_accuracies, val_accuracies, epoch_test = trainer.train(train_loader, val_loader, n_epochs,
+
+        if not inference:
+            # Only retrain when doing transfer training
+
+            # Let Trainer run over epochs
+            epoch_losses, train_accuracies, val_accuracies, epoch_test = trainer.train(train_loader, val_loader, n_epochs,
                                                                        optimizer, best_performance=best_performance)
+        if inference:
+            #make fake
+            epoch_losses = []
+            train_accuracies=[]
+            val_accuracies=[]
+            epoch_losses=0
 
         test_acc, y_pred, y_real = trainer.test(test_loader, seg=True, save_pred=save_pred, prediction_path=prediction_path, inf_dataloader=inf_loader)
         print("Test accuracy = {}".format(test_acc))
 
-        #save_test_results(y_real, y_pred, test_acc, output_path_run, test_dataset, epoch_losses, train_accuracies,
-        #                  val_accuracies, WRITE_DF_TO_, plot_name, seg=True)
+        save_test_results(y_real, y_pred, test_acc, output_path_run, test_dataset, epoch_losses, train_accuracies,
+                          val_accuracies, WRITE_DF_TO_, plot_name, seg=True)
 
         return test_acc, epoch_losses, train_accuracies, val_accuracies, epoch_test
 
@@ -337,22 +348,26 @@ if __name__ == '__main__':
     print_set_stats = False
 
     # print print model stats
-    print_model_stats = False
+    print_model_stats = True
 
     # pretrained model?
     # pretrained = False
     # inference = False
     # os.path.join(output_path, "0_seg", "model_state_best_val.pth.tar")
-    pretrained = os.path.join(output_path, "2_seg", "model_state_best_val.pth.tar")
+    pretrained = os.path.join(output_path, "3_seg", "model_state_best_val.pth.tar")
+    #pretrained = [os.path.join(output_path, "0_seg_transfer", "model_state_best_val.pth.tar")]
+    #pretrained = False
+    # When doing inference this needs to be a list, when only retraining this needs to be the model path directly
 
-    inference = False
+
+    inference = False # NOTE: check dim_last_layer! AND that pretrained is an array!
 
     config['dataset_name'] = ['ASPERN_full']  # 'S3DIS_1' 'ASPERN_UG', ASPERN_DG' 'ASPERN_small' , ASPERN_full
-    config['n_epochs'] = [80]
+    config['n_epochs'] = [60]
     config['learning_rate'] = [0.001]
-    config['batch_size'] = [10]
-    config['model_name'] = [DGCNNNet_seg]  # , OWN, PN2Net_seg, DGCNNNet_seg, GUNet_seg
-    config['knn'] = [5]
+    config['batch_size'] = [20]
+    config['model_name'] = [GUNet_seg, DGCNNNet_seg]  # , OWN, PN2Net_seg, DGCNNNet_seg, GUNet_seg
+    config['knn'] = [5, 10]
     # config['model_name'] = [, PN2Net, DGCNNNet, , DGCNNNet, UNet]
     ex = Experimenter(config, dataset_root_path, output_path)
 
@@ -361,5 +376,5 @@ if __name__ == '__main__':
         ex.run(print_set_stats, print_model_stats, pretrained)
     if inference:
         dataset_path = os.path.join(dataset_root_path, 'ASPERN_full')
-        dataset_type = 'small'
+        dataset_type = 'full'
         ex.inference(pretrained, inference, dataset_name='ASPERN_full', dataset_path=dataset_path, dataset_type=dataset_type)

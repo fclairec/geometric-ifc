@@ -39,8 +39,10 @@ def transform_setup(graph_u=False, graph_gcn=False):
         transform = T.Compose([T.NormalizeScale(), T.Center(), T.SamplePoints(1024, True, True), T.RandomRotate(180),
                                T.KNNGraph(k=graph_u)])
     elif graph_gcn:
-        transform = T.Compose([T.NormalizeScale(), T.Center(), T.SamplePoints(1024, True, True), T.RandomRotate(180),
+        transform = T.Compose([T.NormalizeScale(), T.Center(), T.SamplePoints(1024, True, True), T.RandomRotate(20),
                                T.KNNGraph(k=graph_gcn)])
+        """transform = T.Compose([T.NormalizeScale(), T.Center(), T.RandomRotate(180), T.GenerateMeshNormals(),
+                               T.FaceToEdge(True)])"""
         """T.GDC(self_loop_weight=1, normalization_in='sym',
               normalization_out='col',
               diffusion_kwargs=dict(method='ppr', alpha=0.05),
@@ -251,11 +253,11 @@ if __name__ == '__main__':
     pretrained = False
     # pretrained = os.path.join(output_path, "0_clas", "model_state_best_val.pth.tar")
 
-    config['dataset_name'] = ['ModelNet10'] #BIM_PC_T1
-    config['n_epochs'] = [2]
+    config['dataset_name'] = ['ModelNet10', 'BIM_PC_T1', 'BIM_PC_T2'] #BIM_PC_T1
+    config['n_epochs'] = [50]
     config['learning_rate'] = [0.001]
-    config['batch_size'] = [30]
-    config['model_name'] = [GCN_nocat] #GCN GCN_nocat_pool GCN_nocat
+    config['batch_size'] = [10]
+    config['model_name'] = [GCN, GCN_nocat] #GCN GCN_nocat_pool GCN_nocat
     config['knn'] = [5]
     # config['model_name'] = [, PN2Net, DGCNNNet, , DGCNNNet, UNetGCN]
     ex = Experimenter(config, dataset_root_path, output_path)

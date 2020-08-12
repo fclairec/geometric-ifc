@@ -49,8 +49,8 @@ class GraphUNet(torch.nn.Module):
         self.pools = torch.nn.ModuleList()
         self.down_convs.append(GCNConv(in_channels, channels[0], improved=True))
         for i in range(depth):
-            #self.pools.append(TopKPooling(channels[i], self.pool_ratios[i]))
-            self.pools.append(SAGPooling(channels[i], self.pool_ratios[i]))
+            self.pools.append(TopKPooling(channels[i], self.pool_ratios[i]))
+            #self.pools.append(SAGPooling(channels[i], self.pool_ratios[i]))
             self.down_convs.append(GCNConv(channels[i], channels[i+1], improved=True))
 
         in_channels = channels[-1] #if sum_res else sum(channels)

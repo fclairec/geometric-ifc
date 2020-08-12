@@ -283,30 +283,29 @@ class GCN(torch.nn.Module):
         self.conv1 = GCNConv(6, 64, cached=False, normalize=not True)
         # self.conv12 = GCNConv(16, 32, cached=False, normalize=not True)
         self.conv2 = GCNConv(64, 128, cached=False, normalize=not True)
-        self.conv3 = GCNConv(192, 254, cached=False, normalize=not True)
+        self.conv3 = GCNConv(192, 256, cached=False, normalize=not True)
         # CAREFUL: If modifying here, check line 202 in experiments.py for pretrained model
-        self.lin1 = torch.nn.Linear(254, num_classes)
-        self.mlp = Seq(
-            MLP([1024, 512]), Dropout(0.5), MLP([512, 256]), Dropout(0.5),
-            Lin(256, num_classes))
+        self.lin1 = torch.nn.Linear(256, num_classes)
+
 
         self.reg_params = self.conv1.parameters()
         self.non_reg_params = self.conv2.parameters()
 
     def forward(self, data):
-        x, batch = torch.cat([data.norm, data.pos],dim=1), data.batch # torch.cat([data.norm, data.pos], dim=1), data.batch #torch.cat([data.norm, data.pos], dim=1)
+        x, batch = torch.cat([data.norm, data.pos],dim=1), data.batch
         edge_index, edge_weight = data.edge_index, data.edge_attr
-        x = F.dropout(x, training=self.training)
-        x1 = F.relu(self.conv1(x, edge_index, edge_weight))
-        #x = self.conv12(x, edge_index, edge_weight)
-        #x = F.relu(x)
-        #x = F.dropout(x, training=self.training)
-        x2 = F.relu(self.conv2(x1, edge_index, edge_weight))
 
-        x= torch.cat([x1,x2], dim=1)
-        x1 = F.dropout(x1, training=self.training)
+        x = F.dropout(x, training=self.training, p=0.2)
+        x = F.relu(self.conv1(x, edge_index, edge_weight))
+
+        x1 = F.dropout(x, training=self.training, p=0.2)
+        x1 = F.relu(self.conv2(x1, edge_index, edge_weight))
+
+        x = torch.cat([x, x1], dim=1)
+        x = F.dropout(x, training=self.training)
         x = F.relu(self.conv3(x, edge_index, edge_weight))
-        out = global_max_pool(x, batch)
+
+        out = global_mean_pool(x, batch)
         out = self.lin1(out)
         out = F.log_softmax(out, dim=1)
         return out
@@ -318,30 +317,23 @@ class GCN_nocat(torch.nn.Module):
         self.conv1 = GCNConv(6, 64, cached=False, normalize=not True)
         # self.conv12 = GCNConv(16, 32, cached=False, normalize=not True)
         self.conv2 = GCNConv(64, 128, cached=False, normalize=not True)
-        self.conv3 = GCNConv(128, 254, cached=False, normalize=not True)
+        self.conv3 = GCNConv(128, 256, cached=False, normalize=not True)
         # CAREFUL: If modifying here, check line 202 in experiments.py for pretrained model
-        self.lin1 = torch.nn.Linear(254, num_classes)
-        self.mlp = Seq(
-            MLP([1024, 512]), Dropout(0.5), MLP([512, 256]), Dropout(0.5),
-            Lin(256, num_classes))
+        self.lin1 = torch.nn.Linear(256, num_classes)
 
-        self.reg_params = self.conv1.parameters()
-        self.non_reg_params = self.conv2.parameters()
 
     def forward(self, data):
-        x, batch = torch.cat([data.norm, data.pos],dim=1), data.batch # torch.cat([data.norm, data.pos], dim=1), data.batch #torch.cat([data.norm, data.pos], dim=1)
+        x, batch = torch.cat([data.norm, data.pos],dim=1), data.batch
         edge_index, edge_weight = data.edge_index, data.edge_attr
-        x = F.dropout(x, training=self.training)
-        x1 = F.relu(self.conv1(x, edge_index, edge_weight))
-        #x = self.conv12(x, edge_index, edge_weight)
-        #x = F.relu(x)
-        #x = F.dropout(x, training=self.training)
-        x2 = F.relu(self.conv2(x1, edge_index, edge_weight))
-        x2 = F.dropout(x2, training=self.training)
 
-        #x= torch.cat([x1,x2], dim=1)
-        x = F.relu(self.conv3(x2, edge_index, edge_weight))
-        out = global_max_pool(x, batch)
+        x = F.dropout(x, training=self.training, p=0.2)
+        x = F.relu(self.conv1(x, edge_index, edge_weight))
+
+        x = F.dropout(x, training=self.training, p=0.2)
+        x = F.relu(self.conv2(x, edge_index, edge_weight))
+
+        x = F.relu(self.conv3(x, edge_index, edge_weight))
+        out = global_mean_pool(x, batch)
         out = self.lin1(out)
         out = F.log_softmax(out, dim=1)
         return out
@@ -358,9 +350,7 @@ class GCN_nocat_pool(torch.nn.Module):
         self.conv3 = GCNConv(1, 128, cached=False, normalize=not True)
         # CAREFUL: If modifying here, check line 202 in experiments.py for pretrained model
         self.lin1 = torch.nn.Linear(128, num_classes)
-        self.mlp = Seq(
-            MLP([1024, 512]), Dropout(0.5), MLP([512, 256]), Dropout(0.5),
-            Lin(256, num_classes))
+
 
         self.reg_params = self.conv1.parameters()
         self.non_reg_params = self.conv2.parameters()

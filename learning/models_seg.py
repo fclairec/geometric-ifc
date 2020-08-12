@@ -89,19 +89,20 @@ class PN2Net_seg(torch.nn.Module):
 class GUNet_seg(torch.nn.Module):
     def __init__(self, num_features, num_nodes, num_classes):
         super(GUNet_seg, self).__init__()
-        pool_ratios = [0.8, 0.5]
+        pool_ratios = [0.8, 0.8]
         channels = [64, 128, 256]
-        self.unet = GraphUNet(num_features, channels, num_classes,
+        self.unet = GraphUNet(9, channels, num_classes,
                               depth=2, sum_res=False, pool_ratios=pool_ratios)
 
     def forward(self, data):
-        edge_index, _ = dropout_adj(data.edge_index, p=0.2,
+        x0 = torch.cat([data.x, data.pos], dim=-1)
+        """edge_index, _ = dropout_adj(data.edge_index, p=0.5,
                                     force_undirected=True,
                                     num_nodes=data.num_nodes,
                                     training=self.training)
-        x = F.dropout(data.x, p=0.92, training=self.training)
+        x = F.dropout(data.x, p=0.5, training=self.training)"""
 
-        x = self.unet(x, edge_index)
+        x = self.unet(x0, data.edge_index)
         return F.log_softmax(x, dim=1)
 
 
