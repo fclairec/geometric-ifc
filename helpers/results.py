@@ -5,7 +5,9 @@ from pandas import DataFrame
 from sklearn.metrics import confusion_matrix, classification_report
 import matplotlib as mpl
 import numpy as np
+import os
 from helpers.set_plot import Set_analyst
+
 
 
 
@@ -50,6 +52,7 @@ def summary(model):
     num_trainable_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
     print("Trainable params:", num_trainable_params)
     print("Non-trainable params:", total_params - num_trainable_params)
+    return num_trainable_params
 
 
 def calculate_sem_IoU(pred_np, seg_np, num_classes):
@@ -90,10 +93,13 @@ def save_test_results(y_real, y_pred, test_acc, output_path, test_dataset, epoch
             file_ious_tex = output_path + '/test_ious' + plot_name + '.tex'
             df0.to_latex(file_ious_tex, caption=plot_name, index=False)
 
+
     if not seg:
         # Confusion matrix
-        conf_mat = confusion_matrix(y_true=y_real, y_pred=y_pred)
+        conf_mat = confusion_matrix(y_true=y_real, y_pred=y_pred, normalize='true')
+
         df1 = DataFrame(conf_mat, index=real_target_names, columns=real_target_names)
+
         file_confmat_csv = output_path + '/confmat.csv'
         df1.to_csv(file_confmat_csv)
         if 'to_latex' in WRITE_DF_TO_:
@@ -123,9 +129,13 @@ def save_test_results(y_real, y_pred, test_acc, output_path, test_dataset, epoch
     ax.set_xticklabels(range(len(epoch_losses)), fontsize=12)
     if 'to_latex' in WRITE_DF_TO_:
         plt.savefig(output_path + '/train_loss' + plot_name + '.pgf')
+        import tikzplotlib
+        tikzplotlib.save("test.tex")
+
     #plt.savefig(output_path + '/train_loss.pdf')
     plt.close()
     plt.clf()
+
 
     # plot train and val accuracies
     fig, ax2 = plt.subplots(figsize=(12, 7))
@@ -156,10 +166,37 @@ def save_test_results(y_real, y_pred, test_acc, output_path, test_dataset, epoch
 
     plt.close('all')
 
+def print_set_csv(l_trainset, l_testset,val_dataset, output_path, classmap, plotname):
 
-def save_set_stats(output_path, train_loader, test_loader, train_dataset,  unbalanced_train_loader=None, val_loader=None, seg=False):
+    filename = 'results_dataset_' + plotname + '.csv'
+    path = os.path.join(output_path, filename)
+    total_trainset= l_trainset[0]+val_dataset[0]
+    with open(path, encoding='utf-8-sig', mode='w') as fp:
+        fp.write('Train dataset\n')
+        for tag, count in total_trainset.items():
+            tag = classmap[tag]
+            fp.write('{},{}\n'.format(tag, count))
+        fp.write('\nTest dataset\n')
+        for tag, count in l_testset[0].items():
+            tag = classmap[tag]
+            fp.write('{},{}\n'.format(tag, count))
+
+    return
+
+
+def save_set_stats(output_path, train_loader, test_loader, train_dataset, test_dataset, val_dataset, unbalanced_train_loader=None, val_loader=None, seg=False):
     Set_analyst(given_set=train_dataset).bar_plot("train_set", output_path)
-    if not seg:
-        Set_analyst([train_loader, unbalanced_train_loader]).bar_plot("train", output_path)
-        Set_analyst([val_loader]).bar_plot("val", output_path)
-        Set_analyst([test_loader]).bar_plot("test", output_path)
+    l_trainset = Set_analyst(given_set=train_dataset).class_counter()
+    l_testset = Set_analyst(given_set=test_dataset).class_counter()
+    l_valset = Set_analyst(given_set=val_dataset).class_counter()
+    print_set_csv(l_trainset, l_testset, l_valset, output_path, train_dataset.classmap, plotname='datasets')
+
+    l_trainloader = Set_analyst([train_loader]).class_counter()
+    l_testloader = Set_analyst([test_loader]).class_counter()
+    l_valloader =  Set_analyst([val_loader]).class_counter()
+    print_set_csv(l_trainloader, l_testloader, l_valloader, output_path, train_dataset.classmap, plotname='dataloaders')
+
+    #if not seg:
+        #Set_analyst([train_loader, unbalanced_train_loader]).bar_plot("train", output_path)
+        #Set_analyst([val_loader]).bar_plot("val", output_path)
+        #Set_analyst([test_loader]).bar_plot("test", output_path)

@@ -69,8 +69,47 @@ def collect_point_label(cloud, out_filename, file_format='txt'):
               (file_format))
         exit()
 
+def collect_point_label_nonnorm(cloud, out_filename, file_format='txt'):
+    """ Convert original dataset files to data_label file (each line is XYZRGBL).
+        We aggregated all the points from each instance in the room.
+
+    Args:
+        anno_path: path to annotations. e.g. Area_1/office_2/Annotations/
+        out_filename: path to save collected points and labels (each line is XYZRGBL)
+        file_format: txt or numpy, determines what file format to save.
+    Returns:
+        None
+    Note:
+        the points are shifted before save, the most negative point is now at origin.
+    """
+    points_list = []
+    points = np.loadtxt(cloud)
+    print("loaded successfully")
+    labels = points[:, 6]
+
+    if file_format == 'txt':
+        fout = open(out_filename, 'w')
+        for i in range(points.shape[0]):
+            fout.write('%f %f %f %d %d %d %d\n' % \
+            #fout.write('%f %f %f %d %d %d %f %f %f %d\n' % \
+                       (points[i, 0], points[i, 1], points[i, 2],
+                        points[i, 3], points[i, 4], points[i, 5],
+                        #points[i, 7], points[i, 8], points[i, 9],
+                        points[i, 6]))
+        fout.close()
+    elif file_format == 'numpy':
+        # don't include normals for transfer learning
+        points = np.delete(points, np.s_[7:10], axis=1)
+        np.save(out_filename, points)
+    else:
+        print('ERROR!! Unknown file format: %s, please use txt or numpy.' % \
+              (file_format))
+        exit()
+
 def test(out_filename):
     print(np.load(out_filename).shape)
+
+
 
 
 

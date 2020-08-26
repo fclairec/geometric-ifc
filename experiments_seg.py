@@ -215,7 +215,7 @@ class Experimenter(object):
             best_performance = checkpoint['best_train_acc']
             # say the class output dimension of the pretrained model, for correct loading
             # e.g. if pretrained model was on S3DIS -> set here 13
-            dim_last_layer = 7
+            dim_last_layer = 13
             print("retaining on new dataset with previous last dim layer {}" .format(dim_last_layer))
             #copy pretrained model over, in case, even after retraining the accuracy doesn't beat the old model
             if inference:
@@ -354,7 +354,7 @@ if __name__ == '__main__':
     # pretrained = False
     # inference = False
     # os.path.join(output_path, "0_seg", "model_state_best_val.pth.tar")
-    pretrained = os.path.join(output_path, "3_seg", "model_state_best_val.pth.tar")
+    pretrained = os.path.join(output_path, "2_seg_DGCNN_S2DIS", "model_state_best_val.pth.tar")
     #pretrained = [os.path.join(output_path, "0_seg_transfer", "model_state_best_val.pth.tar")]
     #pretrained = False
     # When doing inference this needs to be a list, when only retraining this needs to be the model path directly
@@ -363,11 +363,11 @@ if __name__ == '__main__':
     inference = False # NOTE: check dim_last_layer! AND that pretrained is an array!
 
     config['dataset_name'] = ['ASPERN_full']  # 'S3DIS_1' 'ASPERN_UG', ASPERN_DG' 'ASPERN_small' , ASPERN_full
-    config['n_epochs'] = [60]
+    config['n_epochs'] = [20]
     config['learning_rate'] = [0.001]
     config['batch_size'] = [20]
-    config['model_name'] = [GUNet_seg, DGCNNNet_seg]  # , OWN, PN2Net_seg, DGCNNNet_seg, GUNet_seg
-    config['knn'] = [5, 10]
+    config['model_name'] = [DGCNNNet_seg]  # , OWN, PN2Net_seg, DGCNNNet_seg, GUNet_seg
+    config['knn'] = [10]
     # config['model_name'] = [, PN2Net, DGCNNNet, , DGCNNNet, UNet]
     ex = Experimenter(config, dataset_root_path, output_path)
 

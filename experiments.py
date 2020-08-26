@@ -1,5 +1,5 @@
 __author__ = 'fiona.collins'
-
+import time
 import torch
 from sklearn.model_selection import ParameterGrid
 from torch_geometric.data import DataLoader
@@ -10,7 +10,7 @@ from datasets.ModelNet import ModelNet
 from datasets.ModelNet_small import ModelNet_small
 from datasets.splits import random_splits, make_set_sampler
 
-from learning.models import PN2Net, DGCNNNet, UNet, PointNet, GCN, GCN_nocat, GCN_nocat_pool
+from learning.models import PN2Net, DGCNNNet, UNet, PointNet, GCN, GCN_cat, GCN_pool
 from learning.trainers import Trainer
 from torch.nn import Sequential as Seq, Dropout, Linear as Lin
 from learning.models import MLP
@@ -25,23 +25,28 @@ from helpers.visualize import vis_graph, write_pointcloud
 
 # Define depending on hardware
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-# device = 'cpu'
+#device = 'cpu'
 
 NUM_WORKERS = 6
-WRITE_DF_TO_ = ['to_csv', 'to_latex']
+WRITE_DF_TO_ = ['to_csv']#, 'to_latex'
 
 
-def transform_setup(graph_u=False, graph_gcn=False):
+def transform_setup(graph_u=False, graph_gcn=False, rotation=180, samplePoints=1024):
     if not graph_u and not graph_gcn:
         # Default transformation for scale noralization, centering, point sampling and rotating
-        transform = T.Compose([T.NormalizeScale(), T.Center(), T.SamplePoints(1024), T.RandomRotate(180)])
+        pretransform = T.Compose([T.NormalizeScale(), T.Center()])
+        transform = T.Compose([T.SamplePoints(samplePoints), T.RandomRotate(rotation)])
+        print("pointnet rotation {}" .format(rotation))
     elif graph_u:
-        transform = T.Compose([T.NormalizeScale(), T.Center(), T.SamplePoints(1024, True, True), T.RandomRotate(180),
+        pretransform = T.Compose([T.NormalizeScale(), T.Center()])
+        transform = T.Compose([T.NormalizeScale(), T.Center(), T.SamplePoints(samplePoints, True, True), T.RandomRotate(rotation),
                                T.KNNGraph(k=graph_u)])
     elif graph_gcn:
-        transform = T.Compose([T.NormalizeScale(), T.Center(), T.SamplePoints(1024, True, True), T.RandomRotate(20),
+        pretransform = T.Compose([T.NormalizeScale(), T.Center()])
+        transform = T.Compose([T.SamplePoints(samplePoints, True, True), T.RandomRotate(rotation),
                                T.KNNGraph(k=graph_gcn)])
-        """transform = T.Compose([T.NormalizeScale(), T.Center(), T.RandomRotate(180), T.GenerateMeshNormals(),
+        print("Rotation {}" . format(rotation))
+        """transform = T.Compose([T.RandomRotate(rotation), T.GenerateMeshNormals(),
                                T.FaceToEdge(True)])"""
         """T.GDC(self_loop_weight=1, normalization_in='sym',
               normalization_out='col',
@@ -51,7 +56,7 @@ def transform_setup(graph_u=False, graph_gcn=False):
     else:
         print('no transfom')
 
-    pretransform = None
+
 
     return transform, pretransform
 
@@ -77,6 +82,8 @@ class Experimenter(object):
             learning_rate = params['learning_rate']
             model_name = params['model_name']
             knn = params['knn']
+            rotation =params['rotation']
+            sample_points = params['samplePoints']
 
             # Prepare result output
             result = params
@@ -110,36 +117,41 @@ class Experimenter(object):
                 self.dataset_name = ModelNet_small
                 self.dataset_type = '10'
 
-            test_acc, epoch_losses, train_accuracies, val_accuracies, epoch_test = self.subrun(output_path_run, model_name
+            test_acc, epoch_losses, train_accuracies, val_accuracies, epoch_test, mean_epoch_time, num_train_params, num_pos, num_ed = self.subrun(output_path_run, model_name
                                                                                    , n_epochs, batch_size,
-                                                                                   learning_rate, knn, pretrained, plot_name,
+                                                                                   learning_rate, knn, pretrained, plot_name, rotation, sample_points,
                                                                                    print_set_stats=print_set_stats, print_model_stats=print_model_stats)
 
             result['test_acc'] = test_acc
             result['epoch_test'] = epoch_test
+            result['mean_epoch_time'] = mean_epoch_time
+            result['num_trainable_parameter'] = num_train_params
+            result['num_pos'] = num_pos
+            result['num_edge'] = num_ed
             #result['loss'] = epoch_losses
             # result['train_acc'] = train_accuracies
             # result['val_acc'] = val_accuracies
 
             results.append(result)
+            pd.DataFrame(results).to_csv(os.path.join(output_path_run, 'results_clas.csv'))
 
         pd.DataFrame(results).to_csv(os.path.join(output_path,'results_clas.csv'))
         torch.cuda.empty_cache()
 
-    def subrun(self, output_path_run, model_name, n_epochs, batch_size, learning_rate, knn, pretrained=False, plot_name= False,
+    def subrun(self, output_path_run, model_name, n_epochs, batch_size, learning_rate, knn,  pretrained=False, plot_name= False, rotation=180, sample_points=1024,
                print_set_stats=False, print_model_stats=False):
 
         if model_name.__name__ is 'PN2Net':
-            transform, pretransform = transform_setup()
+            transform, pretransform = transform_setup(rotation=rotation, samplePoints=sample_points)
         if model_name.__name__ is 'DGCNNNet':
             transform, pretransform = transform_setup()
-        if model_name.__name__ is 'GCN' or 'GCN_nocat' or 'GCN_nocat_pool':
+        if model_name.__name__ is 'GCN' or 'GCN_cat' or 'GCN_pool':
             # number of knn to connect to as argument
-            transform, pretransform = transform_setup(graph_gcn=knn)
+            transform, pretransform = transform_setup(graph_gcn=knn, rotation=rotation, samplePoints=sample_points)
 
         # Define datasets
-        dataset = self.dataset_name(self.dataset_path, self.dataset_type, True, transform, pretransform)
-        test_dataset = self.dataset_name(self.dataset_path, self.dataset_type, True, transform, pretransform)
+        dataset = self.dataset_name(self.dataset_path, self.dataset_type, True, transform=transform, pre_transform=pretransform)
+        test_dataset = self.dataset_name(self.dataset_path, self.dataset_type, False, transform=transform, pre_transform=pretransform)
 
         print("Run with dataset {} type {}".format(str(self.dataset_name.__name__), str(self.dataset_type)))
 
@@ -165,10 +177,13 @@ class Experimenter(object):
         test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False, num_workers=NUM_WORKERS,
                                  sampler=sampler_test)
 
+        num_pos = int(next(iter(train_loader)).pos.size(0) / batch_size)
+        num_ed = int(next(iter(train_loader)).edge_index.size(1)/batch_size)
+
         if print_set_stats:
             # Plots class distributions
             save_set_stats(output_path_run, train_loader, test_loader,
-                           train_dataset, unbalanced_train_loader, val_loader, seg=False)
+                           train_dataset, test_dataset,val_dataset,unbalanced_train_loader, val_loader, seg=False)
 
         if pretrained:
             checkpoint = torch.load(pretrained)
@@ -197,17 +212,17 @@ class Experimenter(object):
             else:
                 model = model_name(out_channels=train_dataset.num_classes)
 
-        if model_name.__name__ is 'GCN' or 'GCN_nocat' or'GCN_nocat_pool':
+        if model_name.__name__ in ['GCN', 'GCN_cat', 'GCN_pool']:
             if pretrained:
-                model = model_name(num_features=dataset.num_features, num_classes=dim_last_layer,
-                                   num_nodes=dataset.data.num_nodes).to(device)
-                model = model.load_state_dict(checkpoint['state_dict'], strict=False)
+                model = model_name(num_classes=dim_last_layer)
+                model.load_state_dict(checkpoint['state_dict'], strict=False)
                 model.lin3 = Lin(254, train_dataset.num_classes)
             else:
                 model = model_name(num_classes=dataset.num_classes).to(device)
 
         if print_model_stats:
-            summary(model)
+            num_trainable_params = summary(model)
+        else : num_trainanble_params = None
 
         model.to(device)
 
@@ -217,8 +232,10 @@ class Experimenter(object):
         # Initialize Trainer
         trainer = Trainer(model, output_path_run)
         # let Trainer run over epochs
-        epoch_losses, train_accuracies, val_accuracies, epoch_test = trainer.train(train_loader, val_loader, n_epochs,
+        t0 = time.time()
+        epoch_losses, train_accuracies, val_accuracies, epoch_test, mean_epoch_time = trainer.train(train_loader, val_loader, n_epochs,
                                                                        optimizer)
+        print('{} seconds'.format(time.time() - t0))
         # Evaluate best model on Test set
         test_acc, y_pred, y_real = trainer.test(test_loader, seg=False)
         val_acc2, _ , _ = trainer.test(val_loader, seg=False)
@@ -233,7 +250,7 @@ class Experimenter(object):
         # vis_graph(val_loader, output_path)
         # write_pointcloud(val_loader,output_path)
 
-        return test_acc, epoch_losses, train_accuracies, val_accuracies, epoch_test
+        return test_acc, epoch_losses, train_accuracies, val_accuracies, epoch_test, mean_epoch_time, num_trainable_params, num_pos, num_ed
 
 
 if __name__ == '__main__':
@@ -242,6 +259,8 @@ if __name__ == '__main__':
 
     dataset_root_path = "../.."
     output_path = "../../out_roesti"
+    """dataset_root_path = ""
+    output_path = "/data/output"""
 
     # print set plots
     print_set_stats = False
@@ -250,15 +269,17 @@ if __name__ == '__main__':
     print_model_stats = True
 
     # pretrained model
-    pretrained = False
+    pretrained = False #os.path.join(output_path, "1_clas", "model_state_best_val.pth.tar")
     # pretrained = os.path.join(output_path, "0_clas", "model_state_best_val.pth.tar")
 
-    config['dataset_name'] = ['ModelNet10', 'BIM_PC_T1', 'BIM_PC_T2'] #BIM_PC_T1
-    config['n_epochs'] = [50]
+    config['dataset_name'] = ['BIM_PC_T4'] #BIM_PC_T1BIM_PC_T4
+    config['n_epochs'] = [100]
     config['learning_rate'] = [0.001]
-    config['batch_size'] = [10]
-    config['model_name'] = [GCN, GCN_nocat] #GCN GCN_nocat_pool GCN_nocat
-    config['knn'] = [5]
+    config['batch_size'] = [15]
+    config['model_name'] = [GCN] #GCN GCN_nocat_pool GCN_nocat,GCN, GCN_nocat #, GCN_cat GCN, GCN_cat, GCN_pool, GCN_cat,
+    config['knn'] = [10] #,10,15,20
+    config['rotation'] = [180]
+    config['samplePoints'] = [1024]
     # config['model_name'] = [, PN2Net, DGCNNNet, , DGCNNNet, UNetGCN]
     ex = Experimenter(config, dataset_root_path, output_path)
     ex.run(print_set_stats, print_model_stats, pretrained)

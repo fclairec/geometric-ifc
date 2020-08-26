@@ -1,6 +1,7 @@
 import os.path as osp
 
 import torch
+import pandas as pd
 from torch_geometric.data import InMemoryDataset, Data
 
 import glob
@@ -139,7 +140,13 @@ class BIM(InMemoryDataset):
     def process_set(self, dataset):
 
         categories = self.raw_file_names
+        feature_files = glob.glob(os.path.join(self.raw_dir, '*ifcfeatures_all.csv'))
         print(categories)
+
+        all_features = pd.DataFrame()
+        for ff in feature_files:
+            df = pd.read_csv(ff, index_col=0)
+            all_features = all_features.append(df)
 
         data_list = []
 
@@ -149,10 +156,43 @@ class BIM(InMemoryDataset):
 
             for path in paths:
                 data = read_ply(path)
-                data.y = torch.tensor([target])
+                label = list(self.classmap.keys())[list(self.classmap.values()).index(category)]
+                data.y = torch.tensor([label])
+
+                """feat_ind = category + "_" + path.split('/')[-1][:22]
+                try:
+                    feature = all_features.loc[feat_ind]
+                    # neigh=all_neighbours.loc[feat_ind]
+                except:
+                    print("no features found so not considered")
+                    continue
+                try:
+                    x1 = torch.tensor([feature['compactness']] * 1024).reshape(-1, 1)
+                    x2 = torch.tensor([feature['isWall']] * 1024, dtype=torch.long).reshape(-1, 1)
+                    x3 = torch.tensor([feature['isStair']] * 1024, dtype=torch.long).reshape(-1, 1)
+                    x4 = torch.tensor([feature['isSlab']] * 1024, dtype=torch.long).reshape(-1, 1)
+                    x5 = torch.tensor([feature['isFurn']] * 1024, dtype=torch.long).reshape(-1, 1)
+                    x6 = torch.tensor([feature['isCol']] * 1024, dtype=torch.long).reshape(-1, 1)
+                    x7 = torch.tensor([feature['isFlowT']] * 1024, dtype=torch.long).reshape(-1, 1)
+                    x8 = torch.tensor([feature['isFlowS']] * 1024, dtype=torch.long).reshape(-1, 1)
+                    x9 = torch.tensor([feature['isFlowF']] * 1024, dtype=torch.long).reshape(-1, 1)
+                    x10 = torch.tensor([feature['isFlowC']] * 1024, dtype=torch.long).reshape(-1, 1)
+                    x11 = torch.tensor([feature['isDist']] * 1024, dtype=torch.long).reshape(-1, 1)
+                    x12 = torch.tensor([feature['isWin']] * 1024, dtype=torch.long).reshape(-1, 1)
+                    x13 = torch.tensor([feature['isDoor']] * 1024, dtype=torch.long).reshape(-1, 1)
+                    x14 = torch.tensor([feature['Volume']] * 1024, dtype=torch.long).reshape(-1, 1)
+                    x15 = torch.tensor([feature['Area']] * 1024, dtype=torch.long).reshape(-1, 1)
+
+                except: print("not all features found skipping this ob")
+
+
+                data.x = torch.cat([x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13, x14, x15], dim=1)
+
+                assert data.y is not None
+                assert data.x is not None"""
 
                 data_list.append(data)
-            self.classmap.update({target:category})
+            #self.classmap.update({target:category})
 
         if self.pre_filter is not None:
             data_list = [d for d in data_list if self.pre_filter(d)]

@@ -17,6 +17,8 @@ import os.path as osp
 import matplotlib.pyplot as plt
 from numpy import concatenate as concat
 from torch_geometric.utils import intersection_and_union as i_and_u
+import time
+import statistics
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 # device = 'cpu'
@@ -49,7 +51,10 @@ class Trainer:
         epoch_losses = []
         train_accuracies = []
         val_accuracies = []
+        epoch_times = []
+
         for epoch in tqdm(range(num_epochs), 'processing epochs...'):
+            t0 = time.time()
             self.model.train()
             train_losses = []
             train_accuracies_batch = []
@@ -69,6 +74,7 @@ class Trainer:
                     acc = pred.eq(data.y).sum().item() / data.num_graphs
                     train_accuracies_batch.append(acc)
 
+
                 # for batch progress tracking in terminal
                 if (i + 1) % printout == 0:
                     print('\nBatches {}-{}/{} (BS = {}) with loss {} and accuracy {}'.format(i - printout + 1, i,
@@ -76,6 +82,9 @@ class Trainer:
                                                                                              train_loader.batch_size,
                                                                                              loss,
                                                                                              train_accuracies_batch[-1]))
+            epoch_time = time.time() - t0
+            epoch_times.append(epoch_time)
+
 
             epoch_losses.append(torch.mean(torch.stack(train_losses, dim=0)).item())
             train_accuracies.append(np.mean(train_accuracies_batch))
@@ -120,9 +129,11 @@ class Trainer:
                 checkpoint = torch.load(model_load)
                 epoch_test = checkpoint['epoch']
                 print("checkpoint from epoch {} loaded" .format(epoch_test))
-                self.model.load_state_dict(checkpoint['state_dict'], strict=False)
+                self.model.load_state_dict(checkpoint['state_dict'], strict=True)
+                optimizer.load_state_dict(checkpoint['optimizer'])
                 self.model.to(device)
-                return epoch_losses, train_accuracies, val_accuracies, epoch_test
+                mean_epoch_time = statistics.mean(epoch_times)
+                return epoch_losses, train_accuracies, val_accuracies, epoch_test, mean_epoch_time
         return
 
     def eval(self, data_loader, seg):

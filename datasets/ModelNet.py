@@ -51,7 +51,7 @@ class ModelNet(InMemoryDataset):  #
 
     # '40': 'https://shapenet.cs.stanford.edu/media/modelnet40_normal_resampled.zip'
 
-    def __init__(self, root, name='10', train=True, transform=None,
+    def __init__(self, root, name='10', features=None, train=True, transform=None,
                  pre_transform=None, pre_filter=None):
         assert name in ['10', '40']
         self.name = name

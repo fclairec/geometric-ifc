@@ -1,6 +1,6 @@
 import os
 import sys
-from data_preparation.indoor3d_util import collect_point_label, test
+from data_preparation.indoor3d_util import collect_point_label, test, collect_point_label_nonnorm
 
 
 def collect_indoor3d_data():
@@ -13,6 +13,7 @@ def collect_indoor3d_data():
 
     cloud_train_full = os.path.join(DATA_PATH, 'all-new-train.txt')
     cloud_test_full = os.path.join(DATA_PATH, 'all-new-test.txt')
+
     #cloud = os.path.join(DATA_PATH, 'all_subsampled.txt')
 
 
@@ -26,6 +27,7 @@ def collect_indoor3d_data():
 
     out_filename_train = 'asp_train.npy'
     out_filename_test = 'asp_test.npy'
+    out_filename_inf = 'asp_inf.npy'
 
 
     """collect_point_label(cloud_train, os.path.join(output_folder_small, out_filename_train), 'numpy')
@@ -38,6 +40,9 @@ def collect_indoor3d_data():
     test(os.path.join(output_folder_full, out_filename_train))
 
     collect_point_label(cloud_test_full, os.path.join(output_folder_full, out_filename_test), 'numpy')
+    test(os.path.join(output_folder_full, out_filename_test))
+
+    collect_point_label_nonnorm(cloud_test_full, os.path.join(output_folder_full, out_filename_test), 'numpy')
     test(os.path.join(output_folder_full, out_filename_test))
 
 
