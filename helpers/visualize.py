@@ -1,9 +1,13 @@
+import matplotlib
+
 import matplotlib.pyplot as plt
+
 import numpy
 import os
 
 from mpl_toolkits.mplot3d.art3d import Line3DCollection
 import struct
+
 
 
 
@@ -106,47 +110,48 @@ def vis_crit_points(test_loader,  output_path, output_path_error, prob, y_pred_l
             plt.savefig(out + '.png')
             plt.show()
 
-def vis_graph(loader, out_path):
+def vis_graph(data, out_path, classmap, title, i):
+    l = data.y.item()
+    label = classmap[l]
+    X = data.pos[:, 0].numpy()
+    Y = data.pos[:, 1].numpy()
+    Z = data.pos[:, 2].numpy()
+    xyzn = list(zip(X, Y, Z))
+    enlarged_label = numpy.repeat(l, len(X))
 
-    limit = 3
+    fig = plt.figure()
+    ax = fig.add_subplot(1, 1, 1, projection='3d')
+    ax.scatter(X, Y, Z, c=enlarged_label, depthshade=True, marker='o', s=2)
+    ax.set_xlim(left=1, right=-1)
+    ax.set_ylim(bottom=1, top=-1)
+    ax.set_zlim(-1, 1)
+    ax.set_xlabel('X')
+    ax.set_ylabel('Y')
+    ax.set_zlabel('Z')
 
-    for i, data in enumerate(loader):
-        l = data.y.item()
-        label = loader.dataset.classmap[l]
-        X = data.pos[:, 0].numpy()
-        Y = data.pos[:, 1].numpy()
-        Z = data.pos[:, 2].numpy()
-        xyzn = list(zip(X, Y, Z))
-        enlarged_label = numpy.repeat(l, len(X))
+    ax.set_title(str(label).replace("_"," ").capitalize() + title)
 
-        fig = plt.figure()
-        ax = fig.add_subplot(1, 1, 1, projection='3d')
-        ax.scatter(X, Y, Z, c=enlarged_label, depthshade=True, marker='o', s=2)
-        ax.set_xlim(left=1, right=-1)
-        ax.set_ylim(bottom=1, top=-1)
-        ax.set_zlim(-1, 1)
-        ax.set_xlabel('X')
-        ax.set_ylabel('Y')
-        ax.set_zlabel('Z')
-        ax.set_title("instance label " + str(label))
+    # if data.edge_index != None:
+    indexl = data.edge_index[0]
+    indexr = data.edge_index[1]
 
-        # if data.edge_index != None:
-        indexl = data.edge_index[0]
-        indexr = data.edge_index[1]
+    edges_test = []
+    for a, b in zip(indexl.numpy(), indexr.numpy()):
+        edges_test.append((a, b))
 
-        edges_test = []
-        for a, b in zip(indexl.numpy(), indexr.numpy()):
-            edges_test.append((a, b))
-
-        segments = [(xyzn[s], xyzn[t]) for s, t in edges_test]
-        edge_col = Line3DCollection(segments, lw=0.5, colors='b')
-        ax.add_collection3d(edge_col)
-        #plt.show()
+    segments = [(xyzn[s], xyzn[t]) for s, t in edges_test]
+    edge_col = Line3DCollection(segments, lw=0.5, colors='b')
+    ax.add_collection3d(edge_col)
+    #plt.show()
+    file = str(label).replace("_"," ")
+    filename =  file + str(i)+ '.png'
+    print(file)
+    path = os.path.join(out_path, filename)
+    plt.savefig(path)
+    plt.close()
 
 
-        filename = str(label) + str(i) +'.png'
-        path = os.path.join(out_path, filename)
-        plt.savefig(path)
+
 
 
 

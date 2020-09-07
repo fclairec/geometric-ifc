@@ -1,0 +1,73 @@
+nohup: ignoriere Eingabe
+Run 0 of 3
+Writing outputs to ../../out_roesti/output_classification_mesh/0_clas
+/home/fcollins/Dokumente/proj99_tum/bim-shape-learning
+../../BIM_PC_T4
+no mesh
+Rotation 180
+Meshing False
+Run with dataset BIM type T4
+Training 17044 graphs with 12 number of classes
+Validating on 4268 graphs with 12 number of classes 
+Testing on 5378 graphs with 12 number of classes 
+----------------------------------------------------------------
+     Layer.Parameter         Param Tensor Shape         Param #
+----------------------------------------------------------------
+        conv1.weight                    [8, 64]             512
+          conv1.bias                       [64]              64
+        conv2.weight                  [72, 128]            9216
+          conv2.bias                      [128]             128
+        conv3.weight                 [136, 256]           34816
+          conv3.bias                      [256]             256
+         lin1.weight                  [12, 256]            3072
+           lin1.bias                       [12]              12
+----------------------------------------------------------------
+Total params: 48076
+Trainable params: 48076
+Non-trainable params: 0
+processing epochs...:   0%|          | 0/100 [00:00<?, ?it/s]
+Batches 0-14/569 (BS = 30) with loss 6.287054061889648 and accuracy 0.06666666666666667
+
+Batches 15-29/569 (BS = 30) with loss 3.521799325942993 and accuracy 0.3
+
+Batches 30-44/569 (BS = 30) with loss 2.8095767498016357 and accuracy 0.43333333333333335
+
+Batches 45-59/569 (BS = 30) with loss 2.1396005153656006 and accuracy 0.36666666666666664
+
+Batches 60-74/569 (BS = 30) with loss 2.049381732940674 and accuracy 0.5
+
+Batches 75-89/569 (BS = 30) with loss 2.082859754562378 and accuracy 0.5666666666666667
+
+Batches 90-104/569 (BS = 30) with loss 2.6335957050323486 and accuracy 0.36666666666666664
+
+Batches 105-119/569 (BS = 30) with loss 2.299025297164917 and accuracy 0.36666666666666664
+
+Batches 120-134/569 (BS = 30) with loss 1.5450319051742554 and accuracy 0.4666666666666667
+
+Batches 135-149/569 (BS = 30) with loss 2.3039700984954834 and accuracy 0.4666666666666667
+
+Batches 150-164/569 (BS = 30) with loss 1.349929690361023 and accuracy 0.5333333333333333
+
+Batches 165-179/569 (BS = 30) with loss 1.7670196294784546 and accuracy 0.5333333333333333
+
+Batches 180-194/569 (BS = 30) with loss 1.347364068031311 and accuracy 0.5333333333333333
+
+Batches 195-209/569 (BS = 30) with loss 1.3010841608047485 and accuracy 0.5333333333333333
+
+Batches 210-224/569 (BS = 30) with loss 1.9203307628631592 and accuracy 0.5333333333333333
+
+Batches 225-239/569 (BS = 30) with loss 1.6737086772918701 and accuracy 0.5666666666666667
+
+Batches 240-254/569 (BS = 30) with loss 2.32004714012146 and accuracy 0.43333333333333335
+
+Batches 255-269/569 (BS = 30) with loss 1.2096890211105347 and accuracy 0.5333333333333333
+
+Batches 270-284/569 (BS = 30) with loss 1.1497455835342407 and accuracy 0.5666666666666667
+
+Batches 285-299/569 (BS = 30) with loss 1.385823369026184 and accuracy 0.5333333333333333
+
+Batches 300-314/569 (BS = 30) with loss 1.3125211000442505 and accuracy 0.5666666666666667
+
+Batches 315-329/569 (BS = 30) with loss 0.940639853477478 and accuracy 0.6333333333333333
+
+Batches 330-344/569 (BS = 30) with loss 1.2251921892166138 and accuracy 0.6666666666666666

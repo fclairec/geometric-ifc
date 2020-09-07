@@ -2,11 +2,14 @@ import os.path as osp
 from sklearn.metrics import accuracy_score
 import torch
 from pandas import DataFrame
-from sklearn.metrics import confusion_matrix, classification_report
+import pandas
+from sklearn.metrics import confusion_matrix, classification_report, accuracy_score
 import matplotlib as mpl
 import numpy as np
 import os
 from helpers.set_plot import Set_analyst
+from torch_geometric.utils import degree
+from helpers.visualize import vis_graph
 
 
 
@@ -97,20 +100,33 @@ def save_test_results(y_real, y_pred, test_acc, output_path, test_dataset, epoch
     if not seg:
         # Confusion matrix
         conf_mat = confusion_matrix(y_true=y_real, y_pred=y_pred, normalize='true')
+        conf_mat_nonorm = confusion_matrix(y_true=y_real, y_pred=y_pred)
+
+        cm = conf_mat_nonorm.astype('float') / conf_mat_nonorm.sum(axis=1)[:, np.newaxis]
+        acc_perclass = cm.diagonal()
+        df3 = DataFrame(acc_perclass, columns=["acc"])
+
 
         df1 = DataFrame(conf_mat, index=real_target_names, columns=real_target_names)
+        df12 = DataFrame(conf_mat_nonorm, index=real_target_names, columns=real_target_names)
 
         file_confmat_csv = output_path + '/confmat.csv'
+        file_confmat_csv_nonnorm = output_path + '/confmat_nonnorm.csv'
         df1.to_csv(file_confmat_csv)
+        df12.to_csv(file_confmat_csv_nonnorm)
         if 'to_latex' in WRITE_DF_TO_:
             file_confmat_tex = output_path + '/confmat' + plot_name + '.tex'
             df1.to_latex(file_confmat_tex, caption=plot_name)
+            print("latex written")
+            file_confmat_tex_nonnorm = output_path + '/confmat_nonorm' + plot_name + '.tex'
+            df12.to_latex(file_confmat_tex_nonnorm, caption=plot_name)
             print("latex written")
 
         # Classification report
         class_rep = classification_report(y_true=y_real, y_pred=y_pred, target_names=real_target_names,
                                           output_dict=True)
         df2 = DataFrame(class_rep).transpose()
+        df2= pandas.concat([df2, df3], axis=1)
         file_classrep_csv = output_path + '/class_report.csv'
         df2.to_csv(file_classrep_csv)
         if 'to_latex' in WRITE_DF_TO_:
@@ -185,6 +201,21 @@ def print_set_csv(l_trainset, l_testset,val_dataset, output_path, classmap, plot
 
 
 def save_set_stats(output_path, train_loader, test_loader, train_dataset, test_dataset, val_dataset, unbalanced_train_loader=None, val_loader=None, seg=False):
+    save_plot = False
+    if save_plot:
+        for i, data in enumerate(test_loader):
+            #if i ==20: break
+            idx, x = data.edge_index[1], data.x
+            deg = degree(idx, data.num_nodes, dtype=torch.long)
+            _, counts = train_dataset.data.y.unique(return_counts=True)
+            title = " , max node degrees " + str(deg.max().item()) + " , max edge length " + str(np.round(data.edge_attr.max().item(),2))
+
+            #data=train_dataset.__getitem__(1)
+            vis_graph(data, out_path=output_path, classmap=train_dataset.classmap, title = title, i=i)
+            a=0
+
+
+    print("printing set stats")
     Set_analyst(given_set=train_dataset).bar_plot("train_set", output_path)
     l_trainset = Set_analyst(given_set=train_dataset).class_counter()
     l_testset = Set_analyst(given_set=test_dataset).class_counter()
@@ -200,3 +231,6 @@ def save_set_stats(output_path, train_loader, test_loader, train_dataset, test_d
         #Set_analyst([train_loader, unbalanced_train_loader]).bar_plot("train", output_path)
         #Set_analyst([val_loader]).bar_plot("val", output_path)
         #Set_analyst([test_loader]).bar_plot("test", output_path)
+
+
+

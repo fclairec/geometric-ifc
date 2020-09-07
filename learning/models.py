@@ -14,44 +14,6 @@ import torch.nn as nn
 
 
 
-class STNkd(torch.nn.Module):
-    def __init__(self, k=64):
-        super(STNkd, self).__init__()
-        self.conv1 = torch.nn.Conv1d(k, 64, 1)
-        self.conv2 = torch.nn.Conv1d(64, 128, 1)
-        self.conv3 = torch.nn.Conv1d(128, 1024, 1)
-        self.fc1 = nn.Linear(1024, 512)
-        self.fc2 = nn.Linear(512, 256)
-        self.fc3 = nn.Linear(256, k*k)
-        self.relu = nn.ReLU()
-
-        self.bn1 = nn.BatchNorm1d(64)
-        self.bn2 = nn.BatchNorm1d(128)
-        self.bn3 = nn.BatchNorm1d(1024)
-        self.bn4 = nn.BatchNorm1d(512)
-        self.bn5 = nn.BatchNorm1d(256)
-
-        self.k = k
-
-    def forward(self, x):
-        batchsize = x.size()[0]
-        x = F.relu(self.bn1(self.conv1(x)))
-        x = F.relu(self.bn2(self.conv2(x)))
-        x = F.relu(self.bn3(self.conv3(x)))
-        x = torch.max(x, 2, keepdim=True)[0]
-        x = x.view(-1, 1024)
-
-        x = F.relu(self.bn4(self.fc1(x)))
-        x = F.relu(self.bn5(self.fc2(x)))
-        x = self.fc3(x)
-
-        iden = Variable(torch.from_numpy(np.eye(self.k).flatten().astype(np.float32))).view(1,self.k*self.k).repeat(batchsize,1)
-        if x.is_cuda:
-            iden = iden.cuda()
-        x = x + iden
-        x = x.view(-1, self.k, self.k)
-        return x
-
 class SAModule(torch.nn.Module):
     def __init__(self, ratio, r, nn):
         super(SAModule, self).__init__()
@@ -116,99 +78,8 @@ class PN2Net(torch.nn.Module):
         x = F.relu(self.lin2(x))
         x = F.dropout(x, p=0.5, training=self.training)
         x = self.lin3(x)
-        return F.log_softmax(x, dim=-1)  #, crit_points
+        return F.log_softmax(x, dim=-1)  , None
 
-
-
-
-class Tnet(nn.Module):
-    def __init__(self, k=3):
-        super().__init__()
-        self.k = k
-        self.conv1 = nn.Conv1d(k, 64, 1)
-        self.conv2 = nn.Conv1d(64, 128, 1)
-        self.conv3 = nn.Conv1d(128, 1024, 1)
-        self.fc1 = nn.Linear(1024, 512)
-        self.fc2 = nn.Linear(512, 256)
-        self.fc3 = nn.Linear(256, k * k)
-
-        self.bn1 = nn.BatchNorm1d(64)
-        self.bn2 = nn.BatchNorm1d(128)
-        self.bn3 = nn.BatchNorm1d(1024)
-        self.bn4 = nn.BatchNorm1d(512)
-        self.bn5 = nn.BatchNorm1d(256)
-
-    def forward(self, input):
-        # input.shape == (bs,n,3)
-
-        xb = F.relu(self.bn1(self.conv1(input)))
-        xb = F.relu(self.bn2(self.conv2(xb)))
-        xb = F.relu(self.bn3(self.conv3(xb)))
-        pool = nn.MaxPool1d(xb.size(-1))(xb)
-        flat = nn.Flatten(1)(pool)
-        xb = F.relu(self.bn4(self.fc1(flat)))
-        xb = F.relu(self.bn5(self.fc2(xb)))
-
-        # initialize as identity
-        init = torch.eye(self.k, requires_grad=True).repeat(bs, 1, 1)
-        if xb.is_cuda:
-            init = init.cuda()
-        matrix = self.fc3(xb).view(-1, self.k, self.k) + init
-        return matrix
-
-
-class Transform(nn.Module):
-    def __init__(self):
-        super().__init__()
-        self.input_transform = Tnet(k=3)
-        self.feature_transform = Tnet(k=64)
-        self.conv1 = nn.Conv1d(3, 64, 1)
-
-        self.conv2 = nn.Conv1d(64, 128, 1)
-        self.conv3 = nn.Conv1d(128, 1024, 1)
-
-        self.bn1 = nn.BatchNorm1d(64)
-        self.bn2 = nn.BatchNorm1d(128)
-        self.bn3 = nn.BatchNorm1d(1024)
-
-    def forward(self, input):
-        matrix3x3 = self.input_transform(input)
-        # batch matrix multiplication
-        xb = torch.bmm(torch.transpose(input, 1, 2), matrix3x3).transpose(1, 2)
-
-        xb = F.relu(self.bn1(self.conv1(xb)))
-
-        matrix64x64 = self.feature_transform(xb)
-        xb = torch.bmm(torch.transpose(xb, 1, 2), matrix64x64).transpose(1, 2)
-
-        xb = F.relu(self.bn2(self.conv2(xb)))
-        xb = self.bn3(self.conv3(xb))
-        xb = nn.MaxPool1d(xb.size(-1))(xb)
-        output = nn.Flatten(1)(xb)
-        return output, matrix3x3, matrix64x64
-
-
-class PointNet(nn.Module):
-    def __init__(self, classes=10):
-        super().__init__()
-        self.transform = Transform()
-        self.fc1 = nn.Linear(1024, 512)
-        self.fc2 = nn.Linear(512, 256)
-        self.fc3 = nn.Linear(256, classes)
-
-        self.bn1 = nn.BatchNorm1d(512)
-        self.bn2 = nn.BatchNorm1d(256)
-        self.dropout = nn.Dropout(p=0.3)
-        self.logsoftmax = nn.LogSoftmax(dim=1)
-
-    def forward(self, input):
-        #sa0_out = (input.x, input.pos, input.batch)
-        input=input.pos
-        xb, matrix3x3, matrix64x64 = self.transform(input)
-        xb = F.relu(self.bn1(self.fc1(xb)))
-        xb = F.relu(self.bn2(self.dropout(self.fc2(xb))))
-        output = self.fc3(xb)
-        return self.logsoftmax(output), matrix3x3, matrix64x64
 
 
 class DGCNNNet(torch.nn.Module):
@@ -234,176 +105,134 @@ class DGCNNNet(torch.nn.Module):
         return F.log_softmax(out, dim=1)
 
 
-class UNet(torch.nn.Module):
-    def __init__(self, num_features, num_classes, num_nodes):
-        super(UNet, self).__init__()
-        pool_ratios = [0.9, 0.9]
-        self.unet = GraphUNet(6, 32, num_classes,
-                              depth=3, pool_ratios=pool_ratios)
-        self.lin1 = MLP([32, 1024])
-        self.mlp = Seq(
-            MLP([1024, 512]), Dropout(0.5), MLP([512, 256]), Dropout(0.5),
-            Lin(256, num_classes))
-        """self.lin1 = Lin(32, 16)
-        self.lin2 = Lin(16, 8)
-        self.lin3 = Lin(8,num_classes)"""
-
-    def forward(self, data):
-        # TODO: needs node features!! now we are passing pos as x
-        x, batch = torch.cat([data.norm, data.pos], dim=1), data.batch
-        edge_index, _ = dropout_adj(data.edge_index, p=0.1,
-                                    force_undirected=True,
-                                    num_nodes=data.num_nodes,
-                                    training=self.training)
-        x1 = F.dropout(x, p=0.1, training=self.training)
-
-        x2, batch = self.unet(x1, edge_index, batch)
-        out, _ = global_max_pool(x2, batch)
-
-        out=self.lin1(out)
-        """x = F.relu(self.lin1(out))
-        x = F.dropout(x, p=0.5, training=self.training)
-        x = F.relu(self.lin2(x))
-        x = F.dropout(x, p=0.5, training=self.training)
-        x = self.lin3(x)"""
-        out = self.mlp(out)
-        a = F.log_softmax(out, dim=1)
-        return a, _
-
-class GraphConvLayer(torch.nn.Module):
-    def __init__(self, npoints, in_channel, mlp, dropout=0.5):
-        super(GraphConvLayer, self).__init__()
-        self.dropout=dropout
-        self.last_channel = in_channel
-
-    def forward(self, xyz, points):
-        a=0
-
-class GCN_cat(torch.nn.Module):
+class GCNCat(torch.nn.Module):
     def __init__(self, num_classes):
-        super(GCN_cat, self).__init__()
+        super(GCNCat, self).__init__()
 
-        self.conv1 = GCNConv(6, 64, cached=False, normalize=not True)
-        # self.conv12 = GCNConv(16, 32, cached=False, normalize=not True)
-        self.conv2 = GCNConv(64, 128, cached=False, normalize=not True)
-        self.conv3 = GCNConv(195, 256, cached=False, normalize=not True)
+        self.conv1 = GCNConv(6+2, 64, cached=False, normalize=not True)
+        self.conv2 = GCNConv(64+6+2, 128, cached=False, normalize=not True)
+        self.conv3 = GCNConv(192+12+4, 256, cached=False, normalize=not True)
         # CAREFUL: If modifying here, check line 202 in experiments.py for pretrained model
         self.lin1 = torch.nn.Linear(256, num_classes)
 
     def forward(self, data):
-        x, batch = torch.cat([data.norm, data.pos],dim=1), data.batch
-        #x, batch = data.pos, data.batch
+
+        #input = torch.cat([data.norm, data.pos], dim=1)
+        #i = torch.cat([data.norm, data.pos, data.x], dim=1)
+        input = torch.cat([data.norm, data.pos, data.x], dim=1)
+        x, batch = input, data.batch
+
         edge_index, edge_weight = data.edge_index, data.edge_attr
-        edge_weight = torch.ones((edge_index.size(1),), dtype=x.dtype,
-                                 device=edge_index.device)
+        edge_weight = torch.ones((edge_index.size(1),), dtype=x.dtype, device=edge_index.device)
 
         x = F.dropout(x, training=self.training, p=0.2)
         x = F.relu(self.conv1(x, edge_index, edge_weight))
 
+        x = torch.cat([x, input], dim=1)
         x1 = F.dropout(x, training=self.training, p=0.2)
         x1 = F.relu(self.conv2(x1, edge_index, edge_weight))
 
-        x = torch.cat([x, x1], dim=1)
-        x = F.dropout(x, training=self.training)
-        x = F.relu(self.conv3(torch.cat([x,data.pos], dim=1), edge_index, edge_weight))
+        x = torch.cat([x, x1, input], dim=1)
+        x = F.dropout(x, training=self.training, p=0.2)
+        x = F.relu(self.conv3(x, edge_index, edge_weight))
 
         out = global_max_pool(x, batch)
         out = self.lin1(out)
         out = F.log_softmax(out, dim=1)
-        return out
+        pred = F.softmax(out, dim=1)
+        return out, pred
+
 
 class GCN(torch.nn.Module):
     def __init__(self, num_classes):
         super(GCN, self).__init__()
 
-        self.conv1 = GCNConv(6, 64, cached=False, normalize=not True)
-        # self.conv12 = GCNConv(16, 32, cached=False, normalize=not True)
-        self.conv2 = GCNConv(64, 128, cached=False, normalize=not True)
-        self.conv3 = GCNConv(131, 256, cached=False, normalize=not True)
+        self.conv1 = GCNConv(6+2, 64, cached=False, normalize=not True)
+        self.conv2 = GCNConv(64+6+2, 128, cached=False, normalize=not True)
+        self.conv3 = GCNConv(128+6+2, 256, cached=False, normalize=not True)
         # CAREFUL: If modifying here, check line 202 in experiments.py for pretrained model
         self.lin1 = torch.nn.Linear(256, num_classes)
 
-
     def forward(self, data):
-        x, batch = torch.cat([data.norm, data.pos],dim=1), data.batch
-        #x, batch = data.pos, data.batch
+        i= torch.cat([data.norm, data.pos, data.x],dim=1)
+        input = torch.cat([data.norm, data.pos, data.x], dim=1)
+        #i = torch.cat([data.norm, data.pos], dim=1)
+        #input = torch.cat([data.norm, data.pos],dim=1)
+        x, batch = i, data.batch
+
         edge_index, edge_weight = data.edge_index, data.edge_attr
-        edge_weight = torch.ones((edge_index.size(1),), dtype=x.dtype,
-                                 device=edge_index.device)
+        edge_weight = torch.ones((edge_index.size(1),), dtype=x.dtype, device=edge_index.device)
 
         x = F.dropout(x, training=self.training, p=0.2)
         x = F.relu(self.conv1(x, edge_index, edge_weight))
 
+        x = torch.cat([x, input], dim=1)
         x = F.dropout(x, training=self.training, p=0.2)
         x = F.relu(self.conv2(x, edge_index, edge_weight))
-        if batch.size(0) != data.pos.size(0):
-            print("nooo")
-        x = F.relu(self.conv3(torch.cat([x,data.pos], dim=1), edge_index, edge_weight))
-        if batch.size(0) != data.pos.size(0):
-            print("nooo")
+        """if batch.size(0) != data.pos.size(0):
+            print("nooo")"""
+
+        x = torch.cat([x, input], dim=1)
+        x = F.dropout(x, training=self.training, p=0.2)
+        x = F.relu(self.conv3(x, edge_index, edge_weight))
+        """if batch.size(0) != data.pos.size(0):
+            print("nooo")"""
+
         out = global_max_pool(x, batch)
-        #out_features = global_max_pool(data.x, batch)
-        #out = torch.cat((out, out_features), dim=1)
         out = self.lin1(out)
         out = F.log_softmax(out, dim=1)
-        return out
+        pred = F.softmax(out, dim=1)
+        return out, pred
 
-class GCN_pool(torch.nn.Module):
+class GCNPool(torch.nn.Module):
     def __init__(self, num_classes):
-        super(GCN_pool, self).__init__()
+        super(GCNPool, self).__init__()
 
-        self.conv1 = GCNConv(6, 64, cached=False, normalize=not True)
+        self.conv1 = GCNConv(6+2, 64, cached=False, normalize=not True)
 
-        self.conv2 = GCNConv(64, 128, cached=False, normalize=not True)
+        self.conv2 = GCNConv(64+6+2, 128, cached=False, normalize=not True)
 
-        self.conv3 = GCNConv(134, 256, cached=False, normalize=not True)
+        self.conv3 = GCNConv(128+9+2, 256, cached=False, normalize=not True)
         # CAREFUL: If modifying here, check line 202 in experiments.py for pretrained model
         self.lin1 = torch.nn.Linear(256, num_classes)
         self.con_int = PointConv()
 
-
-
-
     def forward(self, data):
-        x, batch = torch.cat([data.norm, data.pos], dim=1), data.batch # torch.cat([data.norm, data.pos], dim=1), data.batch #torch.cat([data.norm, data.pos], dim=1)
+        #input = torch.cat([data.norm, data.pos], dim=1)
+        #i = torch.cat([data.norm, data.pos, data.x], dim=1)
+        input = torch.cat([data.norm, data.pos, data.x], dim=1)
+        x, batch = input, data.batch
+
         edge_index, edge_weight = data.edge_index, data.edge_attr
-        #needed in newer pytorch geometric versions (docker)
-        edge_weight = torch.ones((edge_index.size(1),), dtype=x.dtype,
-                                 device=edge_index.device)
+        edge_weight = torch.ones((edge_index.size(1),), dtype=x.dtype, device=edge_index.device)
 
         # first conv with full points
         x = F.dropout(x, training=self.training, p=0.2)
         x = F.relu(self.conv1(x, edge_index, edge_weight))
 
         # Second conv with full points
+        x = torch.cat([x, input], dim=1)
         x = F.dropout(x, training=self.training, p=0.2)
         x = F.relu(self.conv2(x, edge_index, edge_weight))
 
         #first downsampleing index generation
         idx = fps(data.pos, batch, ratio=0.5)
-        row, col = radius(data.pos, data.pos[idx], 0.4, batch, batch[idx],
-                          max_num_neighbors=64)
+        row, col = radius(data.pos, data.pos[idx], 0.4, batch, batch[idx], max_num_neighbors=64)
         edge_index_int = torch.stack([col, row], dim=0)
         x = self.con_int(x, (data.pos, data.pos[idx]), edge_index_int)
-        """x = self.con_int1((x,data.pos[idx]), edge_index_int)
-        x=x[idx]"""
 
         batch = batch[idx]
 
-        edge_index, edge_weight = self.filter_adj(edge_index, edge_weight, idx,
-                                           data.pos.size(0))
+        edge_index, edge_weight = self.filter_adj(edge_index, edge_weight, idx, data.pos.size(0))
 
+        x = torch.cat([x, input[idx]], dim=1)
+        x = F.relu(self.conv3(x, edge_index, edge_weight))
 
-        # Second conv with full points
-
-        x = F.relu(self.conv3(torch.cat([x, data.pos[idx]], dim=1), edge_index, edge_weight))
-
-
-        #x3 = F.relu(self.conv3(x1, edge_index, edge_weight))
         out = global_max_pool(x, batch)
         out = self.lin1(out)
         out = F.log_softmax(out, dim=1)
-        return out
+        pred = F.softmax(out, dim=1)
+        return out, pred
 
     def filter_adj(self, edge_index, edge_attr, perm, num_nodes=None):
         num_nodes = self.maybe_num_nodes(edge_index, num_nodes)

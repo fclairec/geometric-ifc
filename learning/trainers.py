@@ -62,7 +62,7 @@ class Trainer:
                 #if i == 3: break
                 data = data.to(device)
                 optimizer.zero_grad()
-                outputs = self.model(data)
+                outputs, _ = self.model(data)
                 loss = F.nll_loss(outputs, data.y)
                 loss.backward()
                 optimizer.step()
@@ -145,7 +145,8 @@ class Trainer:
             data = data.to(device)
             # loss = F.nll_loss(self.model(data)[0], data.y)
             with torch.no_grad():
-                pred = self.model(data).max(1)[1]
+                output, _ = self.model(data)
+                pred = output.max(1)[1]
             correct += pred.eq(data.y).sum().item()
 
         if seg:
@@ -175,7 +176,7 @@ class Trainer:
                 data = data.to(device)
                 # loss = F.nll_loss(self.model(data)[0], data.y)
                 with torch.no_grad():
-                    outputs = self.model(data)
+                    outputs,_ = self.model(data)
                     loss = F.nll_loss(outputs, data.y)
                     SM = torch.max(torch.exp(outputs))
                     pred = outputs.max(1)[1]
@@ -202,7 +203,7 @@ class Trainer:
                 data = data.to(device)
                 # loss = F.nll_loss(self.model(data)[0], data.y)
                 with torch.no_grad():
-                    outputs = self.model(data)
+                    outputs, _ = self.model(data)
                     loss = F.nll_loss(outputs, data.y)
                     SM = torch.max(torch.exp(outputs))
                     pred = outputs.max(1)[1]

@@ -10,7 +10,7 @@ from datasets.ModelNet import ModelNet
 from datasets.ModelNet_small import ModelNet_small
 from datasets.splits import random_splits, make_set_sampler
 
-from learning.models import PN2Net, DGCNNNet, UNet, PointNet, GCN, GCN_cat, GCN_pool
+from learning.models import PN2Net, DGCNNNet, GCN, GCNCat, GCNPool
 from learning.trainers import Trainer
 from torch.nn import Sequential as Seq, Dropout, Linear as Lin
 from learning.models import MLP
@@ -31,7 +31,7 @@ NUM_WORKERS = 6
 WRITE_DF_TO_ = ['to_csv']#, 'to_latex'
 
 
-def transform_setup(graph_u=False, graph_gcn=False, rotation=180, samplePoints=1024):
+def transform_setup(graph_u=False, graph_gcn=False, rotation=180, samplePoints=1024, mesh=False):
     if not graph_u and not graph_gcn:
         # Default transformation for scale noralization, centering, point sampling and rotating
         pretransform = T.Compose([T.NormalizeScale(), T.Center()])
@@ -42,17 +42,24 @@ def transform_setup(graph_u=False, graph_gcn=False, rotation=180, samplePoints=1
         transform = T.Compose([T.NormalizeScale(), T.Center(), T.SamplePoints(samplePoints, True, True), T.RandomRotate(rotation),
                                T.KNNGraph(k=graph_u)])
     elif graph_gcn:
+
         pretransform = T.Compose([T.NormalizeScale(), T.Center()])
-        transform = T.Compose([T.SamplePoints(samplePoints, True, True), T.RandomRotate(rotation),
-                               T.KNNGraph(k=graph_gcn)])
+
+        if mesh:
+            if mesh == "extraFeatures":
+                transform = T.Compose([T.RandomRotate(rotation), T.GenerateMeshNormals(),
+                               T.FaceToEdge(True),  T.Distance(norm=True),T.TargetIndegree(cat=True)]) #,
+            else:
+                transform = T.Compose([T.RandomRotate(rotation), T.GenerateMeshNormals(),
+                                       T.FaceToEdge(True), T.Distance(norm=True)])
+        else:
+            transform = T.Compose([T.SamplePoints(samplePoints, True, True), T.RandomRotate(rotation),
+                               T.KNNGraph(k=graph_gcn), T.Distance(norm=True)])
+            print("no mesh")
         print("Rotation {}" . format(rotation))
-        """transform = T.Compose([T.RandomRotate(rotation), T.GenerateMeshNormals(),
-                               T.FaceToEdge(True)])"""
-        """T.GDC(self_loop_weight=1, normalization_in='sym',
-              normalization_out='col',
-              diffusion_kwargs=dict(method='ppr', alpha=0.05),
-              sparsification_kwargs=dict(method='topk', k=10,
-                                         dim=0), exact=True)"""
+        print("Meshing {}" . format(mesh))
+
+
     else:
         print('no transfom')
 
@@ -84,6 +91,7 @@ class Experimenter(object):
             knn = params['knn']
             rotation =params['rotation']
             sample_points = params['samplePoints']
+            mesh = params['mesh']
 
             # Prepare result output
             result = params
@@ -104,7 +112,10 @@ class Experimenter(object):
                 if not os.path.exists(output_path_run):
                     os.makedirs(output_path_run)
 
+
             self.dataset_path = os.path.join(self.dataset_root_path, dataset_name)
+            print(os.getcwd())
+            print(self.dataset_path)
             assert os.path.exists(self.dataset_path)
 
             if dataset_name[0] == 'B':
@@ -117,10 +128,24 @@ class Experimenter(object):
                 self.dataset_name = ModelNet_small
                 self.dataset_type = '10'
 
+            if print_set_stats:
+
+                #only print set stats once
+                set_stats_path = os.path.join(output_path, dataset_name)
+                if os.path.exists(set_stats_path):
+                    #suppose if path exists we already have stats on the dataset
+                    print_set_stats_run=False
+
+                else:
+                    os.makedirs(set_stats_path)
+                    print_set_stats_run = set_stats_path
+            else: print_set_stats_run=False
+
+
             test_acc, epoch_losses, train_accuracies, val_accuracies, epoch_test, mean_epoch_time, num_train_params, num_pos, num_ed = self.subrun(output_path_run, model_name
                                                                                    , n_epochs, batch_size,
-                                                                                   learning_rate, knn, pretrained, plot_name, rotation, sample_points,
-                                                                                   print_set_stats=print_set_stats, print_model_stats=print_model_stats)
+                                                                                   learning_rate, knn, pretrained, plot_name, rotation, sample_points, mesh,
+                                                                                   print_set_stats=print_set_stats_run, print_model_stats=print_model_stats)
 
             result['test_acc'] = test_acc
             result['epoch_test'] = epoch_test
@@ -138,16 +163,16 @@ class Experimenter(object):
         pd.DataFrame(results).to_csv(os.path.join(output_path,'results_clas.csv'))
         torch.cuda.empty_cache()
 
-    def subrun(self, output_path_run, model_name, n_epochs, batch_size, learning_rate, knn,  pretrained=False, plot_name= False, rotation=180, sample_points=1024,
+    def subrun(self, output_path_run, model_name, n_epochs, batch_size, learning_rate, knn,  pretrained=False, plot_name= False, rotation=180, sample_points=1024, mesh=False,
                print_set_stats=False, print_model_stats=False):
 
         if model_name.__name__ is 'PN2Net':
-            transform, pretransform = transform_setup(rotation=rotation, samplePoints=sample_points)
+            transform, pretransform = transform_setup(rotation=rotation, samplePoints=sample_points, mesh = mesh)
         if model_name.__name__ is 'DGCNNNet':
             transform, pretransform = transform_setup()
         if model_name.__name__ is 'GCN' or 'GCN_cat' or 'GCN_pool':
             # number of knn to connect to as argument
-            transform, pretransform = transform_setup(graph_gcn=knn, rotation=rotation, samplePoints=sample_points)
+            transform, pretransform = transform_setup(graph_gcn=knn, rotation=rotation, samplePoints=sample_points, mesh = mesh)
 
         # Define datasets
         dataset = self.dataset_name(self.dataset_path, self.dataset_type, True, transform=transform, pre_transform=pretransform)
@@ -182,7 +207,7 @@ class Experimenter(object):
 
         if print_set_stats:
             # Plots class distributions
-            save_set_stats(output_path_run, train_loader, test_loader,
+            save_set_stats(print_set_stats, train_loader, test_loader,
                            train_dataset, test_dataset,val_dataset,unbalanced_train_loader, val_loader, seg=False)
 
         if pretrained:
@@ -212,7 +237,7 @@ class Experimenter(object):
             else:
                 model = model_name(out_channels=train_dataset.num_classes)
 
-        if model_name.__name__ in ['GCN', 'GCN_cat', 'GCN_pool']:
+        if model_name.__name__ in ['GCN', 'GCNCat', 'GCNPool']:
             if pretrained:
                 model = model_name(num_classes=dim_last_layer)
                 model.load_state_dict(checkpoint['state_dict'], strict=False)
@@ -258,12 +283,12 @@ if __name__ == '__main__':
     config = dict()
 
     dataset_root_path = "../.."
-    output_path = "../../out_roesti"
-    """dataset_root_path = ""
-    output_path = "/data/output"""
+    output_path = "../../out_roesti/output_classification_mesh"
+    """dataset_root_path = "proj99_tum/"
+    output_path = "/data/output_rep"""
 
     # print set plots
-    print_set_stats = False
+    print_set_stats = True
 
     # print model stats
     print_model_stats = True
@@ -272,14 +297,15 @@ if __name__ == '__main__':
     pretrained = False #os.path.join(output_path, "1_clas", "model_state_best_val.pth.tar")
     # pretrained = os.path.join(output_path, "0_clas", "model_state_best_val.pth.tar")
 
-    config['dataset_name'] = ['BIM_PC_T4'] #BIM_PC_T1BIM_PC_T4
+    config['dataset_name'] = ['BIM_PC_T4'] #BIM_PC_T1  #BIM_PC_T4 , 'ModelNet10'
     config['n_epochs'] = [100]
     config['learning_rate'] = [0.001]
-    config['batch_size'] = [15]
-    config['model_name'] = [GCN] #GCN GCN_nocat_pool GCN_nocat,GCN, GCN_nocat #, GCN_cat GCN, GCN_cat, GCN_pool, GCN_cat,
-    config['knn'] = [10] #,10,15,20
+    config['batch_size'] = [30]
+    config['model_name'] = [GCN, GCNCat, GCNPool] #GCN GCN_nocat_pool GCN_nocat,GCN, GCN_nocat #, GCN_cat GCN, GCN_cat, GCN_pool, GCN_cat,
+    config['knn'] = [5] #,10,15,20
     config['rotation'] = [180]
     config['samplePoints'] = [1024]
+    config['mesh'] = [False] # Set to False if KNN #FalseextraFeatures, True, 'extraFeatures', 'extraFeatures'
     # config['model_name'] = [, PN2Net, DGCNNNet, , DGCNNNet, UNetGCN]
     ex = Experimenter(config, dataset_root_path, output_path)
     ex.run(print_set_stats, print_model_stats, pretrained)
