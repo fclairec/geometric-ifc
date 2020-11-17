@@ -18,17 +18,31 @@ My own datasets come from
 
 ---
 ## Installation  
-
+See pytorch geometric documentation 
+https://pytorch-geometric.readthedocs.io/en/latest/notes/installation.html
 
 
 --- 
 ## Dataset proparation
+In folder dataset_preparation:
+- H5 file assembly for point cloud data
+- batch definition
+
+for dataset assembly of BIM object dataset please refer to other project submission
 
 
 ---
 ## Shape classification
+Training and inference for classification:
+- RUN python experiments.py
 
 ---
 ## Point cloud semantic segmentation
 
+Training and inference for classification:
+- RUN python experiments_seg.py
 
+
+
+NOTE: 
+Please configure your experiments before launch
