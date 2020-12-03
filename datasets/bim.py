@@ -238,7 +238,13 @@ class BIM(InMemoryDataset):
         # false_ones = [i for i, x in enumerate(tr) if not x]
         # if len(false_ones) != 0:
         #    pause = 0
-        return self.collate(data_list)
+        try:
+            self.collate(data_list)
+        except:
+            a=0
+
+
+        return
 
     def __repr__(self):
         return '{}{}({})'.format(self.__class__.__name__, self.name, len(self))

@@ -319,8 +319,8 @@ if __name__ == '__main__':
 
     dataset_root_path = "../"
     output_path = "../out_tmp"
-    dataset_root_path = "proj99_tum/"
-    output_path = "/data/out_ec3_1"
+    #dataset_root_path = "proj99_tum/"
+    #output_path = "/data/out_ec3_1"
 
     if not os.path.exists(output_path):
         os.makedirs(output_path)
@@ -332,18 +332,18 @@ if __name__ == '__main__':
 
 
     # pretrained model
-    pretrained = False#"/data/out_ec3/0_clas/model_state_best_val.pth.tar"
+    pretrained = "C:/Projekte/1_clas/model_state_best_val.pth.tar" #"/data/out_ec3/0_clas/model_state_best_val.pth.tar"
     #"/tmp/data/0_clas/model_state_best_val.pth.tar" #os.path.join(output_path, "1_clas", "model_state_best_val.pth.tar") (Flase, True or infer)
     # pretrained = False
     # pretrained = os.path.join(output_path, "0_clas", "model_state_best_val.pth.tar")
-    train = True #if set to false --> inference
+    train = False #if set to false --> inference
 
 
-    config['dataset_name'] = ['BIM_PC_C3'] #BIM_PC_T1  #BIM_PC_T4 , 'ModelNet10' 'Benchmark
-    config['n_epochs'] = [250]
+    config['dataset_name'] = ['Benchmark'] #BIM_PC_T1  #BIM_PC_T4 , 'ModelNet10' 'Benchmark
+    config['n_epochs'] = [2]
     config['learning_rate'] = [0.001]
     config['batch_size'] = [30]
-    config['model_name'] = [GCN, GCNCat, GCNPool] #GCN GCN_nocat_pool GCN_nocat,GCN, GCN_nocat #, GCN_cat GCN, GCN_cat, GCN_pool, GCN_cat,
+    config['model_name'] = [GCN] #GCN GCN_nocat_pool GCN_nocat,GCN, GCN_nocat #, GCN_cat GCN, GCN_cat, GCN_pool, GCN_cat,
 
     config['knn'] = [5] #,10,15,20
     config['rotation'] = [180]
