@@ -336,7 +336,7 @@ if __name__ == '__main__':
     #"/tmp/data/0_clas/model_state_best_val.pth.tar" #os.path.join(output_path, "1_clas", "model_state_best_val.pth.tar") (Flase, True or infer)
     # pretrained = False
     # pretrained = os.path.join(output_path, "0_clas", "model_state_best_val.pth.tar")
-    train = False #if set to false --> inference
+    train = True #if set to false --> inference
 
 
     config['dataset_name'] = ['Benchmark'] #BIM_PC_T1  #BIM_PC_T4 , 'ModelNet10' 'Benchmark
