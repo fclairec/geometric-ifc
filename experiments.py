@@ -323,8 +323,8 @@ if __name__ == '__main__':
 
     dataset_root_path = "../"
     output_path = "../out_tmp"
-    dataset_root_path = "proj99_tum/"
-    output_path = "/data/out_ec3_benchamrk"
+    #dataset_root_path = "proj99_tum/"
+    #output_path = "/data/out_ec3_benchamrk"
 
     if not os.path.exists(output_path):
         os.makedirs(output_path)
