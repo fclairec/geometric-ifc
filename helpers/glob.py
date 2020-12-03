@@ -69,7 +69,7 @@ def global_max_pool(x, batch, size=None):
 
     size = batch.max().item() + 1 if size is None else size
     out, crit_points = scatter(x, batch, dim=0, dim_size=size, reduce='max')
-    print("glob_max")
-    print(out)
-    print(crit_points)
+    #print("glob_max")
+    #print(out)
+    #print(crit_points)
     return out, crit_points

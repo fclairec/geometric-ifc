@@ -21,6 +21,8 @@ import pandas as pd
 from helpers.results import save_test_results, save_set_stats
 from helpers.results import summary
 
+NUM_WORKERS =6
+
 from helpers.visualize import vis_graph, write_pointcloud
 
 # Define depending on hardware
@@ -178,8 +180,8 @@ class Experimenter(object):
                                                                                                     optimizer)
         print('{} seconds'.format(time.time() - t0))
         # Evaluate best model on Test set
-        test_acc, y_pred, y_real, _ = trainer.test(test_loader, seg=False)
-        val_acc2, _, _, _ = trainer.test(val_loader, seg=False)
+        test_acc, y_pred, y_real, _, _ = trainer.test(test_loader, seg=False)
+        val_acc2, _, _, _ , _= trainer.test(val_loader, seg=False)
 
         print("Test accuracy = {}, Val accuracy = {}".format(test_acc, val_acc2))
 
@@ -245,7 +247,7 @@ class Experimenter(object):
             checkpoint = torch.load(pretrained)
             # say the class output dimension of the pretrained model, for correct loading
             # e.g. if pretrained model was on ModelNet10 -> set here 10
-            dim_last_layer = 5
+            dim_last_layer = 13
 
         # Define models depending on the setting
         if model_name.__name__ is 'PN2Net':
@@ -289,20 +291,24 @@ class Experimenter(object):
             test_acc, epoch_losses, train_accuracies, val_accuracies, epoch_test, mean_epoch_time =self.subtrain( output_path_run, n_epochs, model, optimizer, train_loader, val_loader, test_loader, test_dataset, plot_name)
 
         else:
+            print("here")
+            print(train)
             trainer = Trainer(model, output_path_run)
-            test_acc, y_pred, y_real, prob = trainer.test(test_loader, save_pred=True, seg=False)
+            test_acc, y_pred, y_real, prob, crit_points = trainer.test(test_loader, save_pred=True, seg=False)
             output_path_error = os.path.join(output_path_run, "error")
-            self.inference(test_loader,  output_path_run, output_path_error, prob, y_pred, y_real)
+            if not os.path.exists(output_path_error):
+                os.makedirs(output_path_error)
+            self.inference(test_loader,  output_path_run, output_path_error, prob, y_pred, y_real, crit_points)
 
         # vis_graph(val_loader, output_path)
         # write_pointcloud(val_loader,output_path)
 
         return test_acc, epoch_losses, train_accuracies, val_accuracies, epoch_test, mean_epoch_time, num_trainable_params, num_pos, num_ed
 
-    def inference(self, test_loader, output_path_run, output_path_error, prob, y_pred, y_real):
+    def inference(self, test_loader, output_path_run, output_path_error, prob, y_pred, y_real, crit_points):
         from helpers.visualize import vis_point, vis_crit_points
 
-        vis_point(test_loader, output_path_run, output_path_error, prob, y_pred, y_real)
+        vis_point(test_loader, output_path_run, output_path_error, prob, y_pred, y_real, crit_points)
 
 
 
@@ -314,7 +320,10 @@ if __name__ == '__main__':
     dataset_root_path = "../"
     output_path = "../out_tmp"
     dataset_root_path = "proj99_tum/"
-    output_path = "/data/out_ec3"
+    output_path = "/data/out_ec3_1"
+
+    if not os.path.exists(output_path):
+        os.makedirs(output_path)
 
 
     # print set plots
@@ -323,17 +332,18 @@ if __name__ == '__main__':
 
 
     # pretrained model
-    pretrained = "/tmp/data/0_clas/model_state_best_val.pth.tar" #os.path.join(output_path, "1_clas", "model_state_best_val.pth.tar") (Flase, True or infer)
+    pretrained = False#"/data/out_ec3/0_clas/model_state_best_val.pth.tar"
+    #"/tmp/data/0_clas/model_state_best_val.pth.tar" #os.path.join(output_path, "1_clas", "model_state_best_val.pth.tar") (Flase, True or infer)
     # pretrained = False
     # pretrained = os.path.join(output_path, "0_clas", "model_state_best_val.pth.tar")
-    train = False #if set to false --> inference
+    train = True #if set to false --> inference
 
 
     config['dataset_name'] = ['BIM_PC_C3'] #BIM_PC_T1  #BIM_PC_T4 , 'ModelNet10' 'Benchmark
-    config['n_epochs'] = [200]
+    config['n_epochs'] = [250]
     config['learning_rate'] = [0.001]
-    config['batch_size'] = [25]
-    config['model_name'] = [GCN, GCNCat] #GCN GCN_nocat_pool GCN_nocat,GCN, GCN_nocat #, GCN_cat GCN, GCN_cat, GCN_pool, GCN_cat,
+    config['batch_size'] = [30]
+    config['model_name'] = [GCN, GCNCat, GCNPool] #GCN GCN_nocat_pool GCN_nocat,GCN, GCN_nocat #, GCN_cat GCN, GCN_cat, GCN_pool, GCN_cat,
 
     config['knn'] = [5] #,10,15,20
     config['rotation'] = [180]

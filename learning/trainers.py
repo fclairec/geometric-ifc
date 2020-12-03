@@ -62,7 +62,7 @@ class Trainer:
                 #if i == 3: break
                 data = data.to(device)
                 optimizer.zero_grad()
-                outputs, _ = self.model(data)
+                outputs, _, _ = self.model(data)
                 loss = F.nll_loss(outputs, data.y)
                 loss.backward()
                 optimizer.step()
@@ -145,7 +145,7 @@ class Trainer:
             data = data.to(device)
             # loss = F.nll_loss(self.model(data)[0], data.y)
             with torch.no_grad():
-                output, _ = self.model(data)
+                output, _, _ = self.model(data)
                 pred = output.max(1)[1]
             correct += pred.eq(data.y).sum().item()
 
@@ -177,7 +177,7 @@ class Trainer:
                 data = data.to(device)
                 # loss = F.nll_loss(self.model(data)[0], data.y)
                 with torch.no_grad():
-                    outputs,_ = self.model(data)
+                    outputs,_, critical_points = self.model(data)
                     loss = F.nll_loss(outputs, data.y)
                     SM = torch.max(torch.exp(outputs))
                     pred = outputs.max(1)[1]
@@ -193,7 +193,7 @@ class Trainer:
 
                 y_pred = concat((y_pred, pred.cpu().numpy()))
                 y_real = concat((y_real, data.y.cpu().numpy()))
-                # crit_points_list.append(crit_points.cpu().numpy())
+                crit_points_list.append(critical_points.cpu().numpy())
                 prob.append(SM.cpu().numpy())
 
         else:
@@ -203,7 +203,7 @@ class Trainer:
                 data = data.to(device)
                 # loss = F.nll_loss(self.model(data)[0], data.y)
                 with torch.no_grad():
-                    outputs, _ = self.model(data)
+                    outputs, _, _ = self.model(data)
                     loss = F.nll_loss(outputs, data.y)
                     SM = torch.max(torch.exp(outputs))
                     pred = outputs.max(1)[1]
@@ -223,7 +223,7 @@ class Trainer:
             # average over the number of graphs
             acc = correct / len(data_loader.dataset)
 
-        return acc, y_pred, y_real, prob
+        return acc, y_pred, y_real, prob, crit_points_list
 
     def save_checkpoint(self, path, state, is_best):
         filename = 'model_state.pth.tar'

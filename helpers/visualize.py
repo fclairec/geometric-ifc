@@ -8,107 +8,118 @@ import os
 from mpl_toolkits.mplot3d.art3d import Line3DCollection
 import struct
 
+from matplotlib import rc
+rc("text", usetex=False)
 
 
 
 def vis_point(test_loader,  output_path, output_path_error, prob, y_pred_list, y_real_list, crit_points_list_ind=None):
+    printout = 15
 
     if crit_points_list_ind is not None:
-        vis_crit_points(test_loader,  output_path, output_path_error, prob, y_pred_list, y_real_list, crit_points_list_ind)
-        return
+        output_path_crit_p = os.path.join(output_path, "crit")
+        output_path_crit_p_ee = os.path.join(output_path, "crit_error")
+        if not os.path.exists(output_path_crit_p):
+            os.makedirs(output_path_crit_p)
+            os.makedirs(output_path_crit_p_ee)
+        print(crit_points_list_ind)
+        print(len(crit_points_list_ind))
+        vis_crit_points(test_loader, output_path_crit_p, output_path_crit_p_ee, prob, y_pred_list, y_real_list, crit_points_list_ind)
+
 
     for i, data in enumerate(test_loader):
-
-        if i == 3:
-            break
-
-        certainty = prob[i]
-        y_real = y_real_list[i]
-        y_pred = y_pred_list[i]
-        y_real_l = test_loader.dataset.classmap[y_real]
-        y_pred_l = test_loader.dataset.classmap[y_pred]
-        pos = data.pos.numpy()
-
-        xyz = numpy.array(
-            [list(a) for a in zip(data.pos[:, 0].numpy(), data.pos[:, 1].numpy(), data.pos[:, 2].numpy())])
-
-        ax = plt.axes(projection='3d')
-        ax.scatter(xyz[:, 0], xyz[:, 1], xyz[:, 2], color='black', s=10)
-
-        ax.set_xlim(left=1, right=-1)
-        ax.set_ylim(bottom=1, top=-1)
-        ax.set_zlim(-1, 1)
-
-        if y_pred != y_real:
-            out = output_path_error + "/" + str(i) + y_real_l + "-" + y_pred_l + "-with(" + str(certainty) + ")"
-            with open(out + ".txt", "w") as text_file:
-                for line in pos:
-                    text_file.write(str(line[0]) + ', ' + str(line[1]) + ', ' + str(line[2]) + '\n')
-            #plt.savefig(out + '.png')
-            plt.show()
-        else:
-            out = output_path + "/" + str(i) + y_real_l + "-" + y_pred_l + "-with(" + str(certainty) + ")"
-            with open(out + ".txt", "w") as text_file:
-                for line in pos:
-                    text_file.write(str(line[0]) + ', ' + str(line[1]) + ', ' + str(line[2]) + '\n')
-            #plt.savefig(out + '.png')
-            #plt.show()
+        if (i + 1) % printout == 0:
 
 
-def vis_crit_points(test_loader,  output_path, output_path_error, prob, y_pred_list, y_real_list, crit_points_list_ind=None):
 
+            certainty = prob[i]
+            y_real = y_real_list[i]
+            y_pred = y_pred_list[i]
+            y_real_l = test_loader.dataset.classmap[y_real]
+            y_pred_l = test_loader.dataset.classmap[y_pred]
+            pos = data.pos.numpy()
+
+            xyz = numpy.array(
+                [list(a) for a in zip(data.pos[:, 0].numpy(), data.pos[:, 1].numpy(), data.pos[:, 2].numpy())])
+
+            ax = plt.axes(projection='3d')
+            ax.scatter(xyz[:, 0], xyz[:, 1], xyz[:, 2], color='black', s=10)
+
+            ax.set_xlim(left=1, right=-1)
+            ax.set_ylim(bottom=1, top=-1)
+            ax.set_zlim(-1, 1)
+
+            if y_pred != y_real:
+                out = output_path_error + "/" + str(i) + y_real_l + "-" + y_pred_l + "-with(" + str(certainty) + ")"
+                with open(out + ".txt", "w") as text_file:
+                    for line in pos:
+                        text_file.write(str(line[0]) + ', ' + str(line[1]) + ', ' + str(line[2]) + '\n')
+                #plt.savefig(out + '.png')
+                plt.show()
+            else:
+                out = output_path + "/" + str(i) + y_real_l + "-" + y_pred_l + "-with(" + str(certainty) + ")"
+                with open(out + ".txt", "w") as text_file:
+                    for line in pos:
+                        text_file.write(str(line[0]) + ', ' + str(line[1]) + ', ' + str(line[2]) + '\n')
+                #plt.savefig(out + '.png')
+                #plt.show()
+
+
+def vis_crit_points(test_loader, output_path, output_path_error, prob, y_pred_list, y_real_list, crit_points_list_ind=None):
+    printout = 15
     for i, data in enumerate(test_loader):
 
-        """if i == 3:
-            break"""
+        if (i + 1) % printout == 0:
 
-        certainty = prob[i]
-        y_real = y_real_list[i]
-        y_pred = y_pred_list[i]
-        y_real_l = test_loader.dataset.classmap[y_real]
-        y_pred_l = test_loader.dataset.classmap[y_pred]
-        pos = data.pos.numpy()
+            certainty = prob[i]
+            y_real = y_real_list[i]
+            y_pred = y_pred_list[i]
+            y_real_l = test_loader.dataset.classmap[y_real]
+            y_pred_l = test_loader.dataset.classmap[y_pred]
+            pos = data.pos.numpy()
 
-        xyz = numpy.array(
-            [list(a) for a in zip(data.pos[:, 0].numpy(), data.pos[:, 1].numpy(), data.pos[:, 2].numpy())])
+            xyz = numpy.array(
+                [list(a) for a in zip(data.pos[:, 0].numpy(), data.pos[:, 1].numpy(), data.pos[:, 2].numpy())])
 
-        crit_unique_ind = numpy.unique(crit_points_list_ind[i])
-        crit_points = numpy.vstack([xyz[j] for j in crit_unique_ind])
-        # print("Shown {} critical points".format(len(crit_points)))
+            crit_unique_ind = numpy.unique(crit_points_list_ind[i])
+            print("crit ind")
+            print(crit_unique_ind)
+            crit_points = numpy.vstack([xyz[j] for j in crit_unique_ind])
+            # print("Shown {} critical points".format(len(crit_points)))
 
-        fig = plt.figure(figsize=plt.figaspect(0.5))
-        fig.suptitle('True label: {} / Predicted label: {}' .format(y_real_l, y_pred_l), fontsize=16)
+            fig = plt.figure(figsize=plt.figaspect(0.5))
+            fig.suptitle('True label: {} / Predicted label: {}' .format(y_real_l, y_pred_l), fontsize=16)
 
-        # full pointcloud
-        ax = fig.add_subplot(1, 2, 1, projection='3d')
-        ax.scatter(xyz[:, 0], xyz[:, 1], xyz[:, 2], color='black', s=10)
-        ax.set_xlim(left=1, right=-1)
-        ax.set_ylim(bottom=1, top=-1)
-        ax.set_zlim(-1, 1)
-        ax.title.set_text("full pointcloud")
+            # full pointcloud
+            ax = fig.add_subplot(1, 2, 1, projection='3d')
+            ax.scatter(xyz[:, 0], xyz[:, 1], xyz[:, 2], color='black', s=10)
+            ax.set_xlim(left=1, right=-1)
+            ax.set_ylim(bottom=1, top=-1)
+            ax.set_zlim(-1, 1)
+            ax.title.set_text("full pointcloud")
 
-        # critical point
-        ax = fig.add_subplot(1, 2, 2, projection='3d')
-        ax.scatter(crit_points[:, 0], crit_points[:, 1], crit_points[:, 2], color='red', s=20)
-        ax.set_xlim(left=1, right=-1)
-        ax.set_ylim(bottom=1, top=-1)
-        ax.set_zlim(-1, 1)
-        ax.title.set_text("critical points")
+            # critical point
+            ax = fig.add_subplot(1, 2, 2, projection='3d')
+            ax.scatter(crit_points[:, 0], crit_points[:, 1], crit_points[:, 2], color='red', s=20)
+            ax.set_xlim(left=1, right=-1)
+            ax.set_ylim(bottom=1, top=-1)
+            ax.set_zlim(-1, 1)
+            ax.title.set_text("critical points")
 
-        if y_pred != y_real:
-            out = output_path_error + "/" + str(i) + y_real_l + "-" + y_pred_l + "-with(" + str(certainty) + ")"
-            with open(out + ".txt", "w") as text_file:
-                for line in pos:
-                    text_file.write(str(line[0]) + ', ' + str(line[1]) + ', ' + str(line[2]) + '\n')
-            plt.savefig(out + '.png')
-            plt.show()
-        else:
-            out = output_path + "/" + str(i) + y_real_l + "-" + y_pred_l + "-with(" + str(certainty) + ")"
-            with open(out + ".txt", "w") as text_file:
-                for line in pos:
-                    text_file.write(str(line[0]) + ', ' + str(line[1]) + ', ' + str(line[2]) + '\n')
-            plt.savefig(out + '.png')
-            plt.show()
+            if y_pred != y_real:
+                out = output_path_error + "/" + str(i) + y_real_l + "-" + y_pred_l + "-with(" + str(certainty) + ")"
+                with open(out + ".txt", "w") as text_file:
+                    for line in pos:
+                        text_file.write(str(line[0]) + ', ' + str(line[1]) + ', ' + str(line[2]) + '\n')
+                plt.savefig(out + '.png')
+                #plt.show()
+            else:
+                out = output_path + "/" + str(i) + y_real_l + "-" + y_pred_l + "-with(" + str(certainty) + ")"
+                with open(out + ".txt", "w") as text_file:
+                    for line in pos:
+                        text_file.write(str(line[0]) + ', ' + str(line[1]) + ', ' + str(line[2]) + '\n')
+                plt.savefig(out + '.png')
+                #plt.show()
 
 def vis_graph(data, out_path, classmap, title, i):
     l = data.y.item()
