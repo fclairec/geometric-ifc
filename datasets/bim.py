@@ -50,18 +50,17 @@ class BIM(InMemoryDataset):
     """
 
     urls = {
-        'T1':  'https://drive.google.com/uc?export=download&id=1YrlVZpjbpxAMWswPa3gPlNMEPu4nKH8Z',
+        'T1': 'https://drive.google.com/uc?export=download&id=1YrlVZpjbpxAMWswPa3gPlNMEPu4nKH8Z',
         'T2': 'https://drive.google.com/uc?export=download&id=1uAbELJqkCCuB01iAbWDx8wZECaUZiGh1',
         # inter ifc generalization
         'T3': 'https://drive.google.com/uc?export=download&id=1uAbELJqkCCuB01iAbWDx8wZECaUZiGh1',
         # cross ifc generalization
         'T4': 'https://drive.google.com/uc?export=download&id=1uAbELJqkCCuB01iAbWDx8wZECaUZiGh1'
 
-
     }
 
     def __init__(self, root, name='T1', train=True, transform=None, pre_transform=None, pre_filter=None):
-        assert name in ['T1', 'T2', 'T3', 'T4', 'T5']
+        assert name in ['T1', 'T2', 'T3', 'T4', 'T5', 'C3', 'rk']
         self.name = name
 
         super(BIM, self).__init__(root, transform, pre_transform, pre_filter)
@@ -70,24 +69,29 @@ class BIM(InMemoryDataset):
 
     @property
     def raw_file_names(self):
-            if self.name == 'T1':
-                return [
-                    # corresponds to what is in the dataset
-                    'IfcColumn', 'IfcFurnishingElement', 'IfcStair', 'IfcDoor', 'IfcSlab', 'IfcWall', 'IfcWindow'
-                ]
-            elif self.name == 'T2':
-                return [
-                    # corresponds to what is in the dataset
-                    'IfcDistributionControlElement', 'IfcFlowController', 'IfcFlowFitting', 'IfcFlowSegment',
-                    'IfcFlowTerminal'
-                ]
-            elif self.name == 'T3' or 'T4' or 'T5':
-                return [
-                    # corresponds to what is in the dataset
-                    'IfcDistributionControlElement', 'IfcFlowController', 'IfcFlowFitting', 'IfcFlowSegment',
-                    'IfcFlowTerminal', 'IfcColumn', 'IfcFurnishingElement', 'IfcStair', 'IfcDoor', 'IfcSlab', 'IfcWall'
-                    , 'IfcWindow'
-                ]
+        if self.name == 'T1':
+            return [
+                # corresponds to what is in the dataset
+                'IfcColumn', 'IfcFurnishingElement', 'IfcStair', 'IfcDoor', 'IfcSlab', 'IfcWall', 'IfcWindow'
+            ]
+        elif self.name == 'T2':
+            return [
+                # corresponds to what is in the dataset
+                'IfcDistributionControlElement', 'IfcFlowController', 'IfcFlowFitting', 'IfcFlowSegment',
+                'IfcFlowTerminal'
+            ]
+        elif self.name == 'C3':
+            return [
+                # corresponds to what is in the dataset
+                'IfcDistributionControlElement', 'IfcFlowController', 'IfcFlowFitting', 'IfcFlowSegment',
+                'IfcFlowTerminal', 'IfcColumn','IfcRailing', 'IfcFurnishingElement', 'IfcStair', 'IfcDoor', 'IfcSlab', 'IfcWall'
+                , 'IfcWindow'
+            ]
+        elif self.name == 'rk':
+            return [
+                # corresponds to what is in the dataset
+                'IfcColumn', 'IfcStair', 'IfcDoor', 'IfcSlab', 'IfcWall', 'IfcWindow', 'IfcRailing'
+            ]
 
     @property
     def classmap(self):
@@ -95,20 +99,26 @@ class BIM(InMemoryDataset):
             return {
                 # corresponds to what is in the dataset
                 0: 'IfcColumn', 1: 'IfcFurnishingElement', 2: 'IfcStair', 3: 'IfcDoor', 4: 'IfcSlab', 5: 'IfcWall',
-                    6: 'IfcWindow'
+                6: 'IfcWindow'
             }
         elif self.name == 'T2':
             return {
                 # corresponds to what is in the dataset
                 0: 'IfcDistributionControlElement', 1: 'IfcFlowController', 2: 'IfcFlowFitting',
-                    3: 'IfcFlowSegment', 4: 'IfcFlowTerminal'
+                3: 'IfcFlowSegment', 4: 'IfcFlowTerminal'
             }
-        elif self.name == 'T3' or 'T4' or 'T5':
+        elif self.name == 'C3':
             return {
                 # corresponds to what is in the dataset
                 0: 'IfcDistributionControlElement', 1: 'IfcFlowController', 2: 'IfcFlowFitting',
-                    3: 'IfcFlowSegment', 4: 'IfcFlowTerminal', 5: 'IfcColumn', 6: 'IfcFurnishingElement', 7: 'IfcStair',
-                    8: 'IfcDoor', 9: 'IfcSlab', 10: 'IfcWall', 11: 'IfcWindow'
+                3: 'IfcFlowSegment', 4: 'IfcFlowTerminal', 5: 'IfcColumn', 6: 'IfcFurnishingElement', 7: 'IfcStair',
+                8: 'IfcDoor', 9: 'IfcSlab', 10: 'IfcWall', 11: 'IfcWindow', 12: 'IfcRailing'
+            }
+        elif self.name == 'rk':
+            return {
+                # corresponds to what is in the dataset
+                0: 'IfcColumn', 1: 'IfcStair', 2: 'IfcDoor', 3: 'IfcSlab', 4: 'IfcWall',
+                5: 'IfcWindow', 6: 'IfcRailing'
             }
 
     @property
@@ -117,7 +127,7 @@ class BIM(InMemoryDataset):
 
     def download(self):
 
-        path = download_url(self.urls[self.name], self.root)
+        """path = download_url(self.urls[self.name], self.root)
         extract_zip(path, self.root)
         os.unlink(path)
         folder = osp.join(self.root, 'BIM_PC_{}'.format(self.name))
@@ -127,7 +137,7 @@ class BIM(InMemoryDataset):
         # Delete osx metadata generated during compression of ModelNet10
         metadata_folder = osp.join(self.root, '__MACOSX')
         if osp.exists(metadata_folder):
-            shutil.rmtree(metadata_folder)
+            shutil.rmtree(metadata_folder)"""
 
         return
 
@@ -147,10 +157,10 @@ class BIM(InMemoryDataset):
         for ff in feature_files:
             df = pd.read_csv(ff, index_col=0)
             all_features = all_features.append(df)
-        all_features=all_features[~all_features.index.duplicated(keep='first')]
+        all_features = all_features[~all_features.index.duplicated(keep='first')]
 
         data_list = []
-        j=0
+        j = 0
 
         for target, category in enumerate(categories):
             folder = osp.join(self.raw_dir, category, dataset)
@@ -158,13 +168,13 @@ class BIM(InMemoryDataset):
 
             for i, path in enumerate(paths):
 
-                if j == 5738 or i==6010:
-                    pause=0
+                if j == 5738 or i == 6010:
+                    pause = 0
                 data = read_ply(path)
                 label = list(self.classmap.keys())[list(self.classmap.values()).index(category)]
                 data.y = torch.tensor([label])
 
-                feat_ind = category + "_" + path.split('/')[-1][:22]
+                """feat_ind = category + "_" + path.split('/')[-1][:22]
                 try:
                     feature = all_features.loc[feat_ind]
 
@@ -174,7 +184,7 @@ class BIM(InMemoryDataset):
                     continue
                 try:
                     x1 = torch.tensor([np.log(feature['compactness']+1)] * 1024).reshape(-1, 1)
-                    """x2 = torch.tensor([feature['isWall']] * 1024, dtype=torch.float).reshape(-1, 1)
+                    x2 = torch.tensor([feature['isWall']] * 1024, dtype=torch.float).reshape(-1, 1)
                     x3 = torch.tensor([feature['isStair']] * 1024, dtype=torch.float).reshape(-1, 1)
                     x4 = torch.tensor([feature['isSlab']] * 1024, dtype=torch.float).reshape(-1, 1)
                     x5 = torch.tensor([feature['isFurn']] * 1024, dtype=torch.float).reshape(-1, 1)
@@ -185,7 +195,7 @@ class BIM(InMemoryDataset):
                     x10 = torch.tensor([feature['isFlowC']] * 1024, dtype=torch.float).reshape(-1, 1)
                     x11 = torch.tensor([feature['isDist']] * 1024, dtype=torch.float).reshape(-1, 1)
                     x12 = torch.tensor([feature['isWin']] * 1024, dtype=torch.float).reshape(-1, 1)
-                    x13 = torch.tensor([feature['isDoor']] * 1024, dtype=torch.float).reshape(-1, 1)"""
+                    x13 = torch.tensor([feature['isDoor']] * 1024, dtype=torch.float).reshape(-1, 1)
                     x14 = torch.tensor([np.log(feature['Volume']+1)] * 1024, dtype=torch.float).reshape(-1, 1)
                     x15 = torch.tensor([np.log(feature['Area']+1)] * 1024, dtype=torch.float).reshape(-1, 1)
 
@@ -196,13 +206,12 @@ class BIM(InMemoryDataset):
                 data.x = torch.cat([x14, x15], dim=1)
 
                 assert data.y is not None
-                assert data.x is not None
-
+                assert data.x is not None"""
 
                 data_list.append(data)
                 j += 1
-                a=0
-            #self.classmap.update({target:category})
+                a = 0
+            # self.classmap.update({target:category})
 
         if self.pre_filter is not None:
             data_list = [d for d in data_list if self.pre_filter(d)]
@@ -210,9 +219,9 @@ class BIM(InMemoryDataset):
         if self.pre_transform is not None:
             data_list = [self.pre_transform(d) for d in data_list]
 
-        #tr = [t.x.shape[0] == 1024 and t.x.shape[1] == 14 for t in data_list]
-        #false_ones = [i for i, x in enumerate(tr) if not x]
-        #if len(false_ones) != 0:
+        # tr = [t.x.shape[0] == 1024 and t.x.shape[1] == 14 for t in data_list]
+        # false_ones = [i for i, x in enumerate(tr) if not x]
+        # if len(false_ones) != 0:
         #    pause = 0
         return self.collate(data_list)
 

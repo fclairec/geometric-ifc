@@ -51,7 +51,7 @@ def transform_setup(graph_u=False, graph_gcn=False, rotation=180, samplePoints=1
                                T.FaceToEdge(True),  T.Distance(norm=True),T.TargetIndegree(cat=True)]) #,
             else:
                 transform = T.Compose([T.RandomRotate(rotation), T.GenerateMeshNormals(),
-                                       T.FaceToEdge(True), T.Distance(norm=True)])
+                                       T.FaceToEdge(True), T.Distance(norm=True), T.TargetIndegree(cat=True)])
         else:
             transform = T.Compose([T.SamplePoints(samplePoints, True, True), T.RandomRotate(rotation),
                                T.KNNGraph(k=graph_gcn), T.Distance(norm=True)])
@@ -116,7 +116,7 @@ class Experimenter(object):
             self.dataset_path = os.path.join(self.dataset_root_path, dataset_name)
             print(os.getcwd())
             print(self.dataset_path)
-            assert os.path.exists(self.dataset_path)
+            "assert os.path.exists(self.dataset_path)"
 
             if dataset_name[0] == 'B':
                 self.dataset_name = BIM
@@ -181,24 +181,27 @@ class Experimenter(object):
         print("Run with dataset {} type {}".format(str(self.dataset_name.__name__), str(self.dataset_type)))
 
         # Split dataset randomly (respecting class imbalance) into train and val set (no cross validation for now)
-        _, train_index, val_index = random_splits(dataset, dataset.num_classes, train_ratio=0.8)
-        train_dataset = dataset[dataset.train_mask].copy_set(train_index)
-        val_dataset = dataset[dataset.val_mask].copy_set(val_index)
+        #_, train_index, val_index = random_splits(dataset, dataset.num_classes, train_ratio=0.8)
+        train_dataset = dataset
+        #train_dataset = dataset[dataset.train_mask].copy_set(train_index)
+        #val_dataset = dataset[dataset.val_mask].copy_set(val_index)
 
         print("Training {} graphs with {} number of classes".format(len(train_dataset), train_dataset.num_classes))
-        print("Validating on {} graphs with {} number of classes ".format(len(val_dataset), val_dataset.num_classes))
+        #print("Validating on {} graphs with {} number of classes ".format(len(val_dataset), val_dataset.num_classes))
         print("Testing on {} graphs with {} number of classes ".format(len(test_dataset), test_dataset.num_classes))
 
         # Imbalanced datasets: create sampler depending on the length of data per class
         sampler_train = make_set_sampler(train_dataset)
-        sampler_val = make_set_sampler(val_dataset)
+        #sampler_val = make_set_sampler(val_dataset)
         sampler_test = make_set_sampler(test_dataset)
 
         # Define dataloaders
         train_loader = DataLoader(train_dataset, batch_size=batch_size, num_workers=NUM_WORKERS, sampler=sampler_train)
         unbalanced_train_loader = DataLoader(train_dataset, batch_size=batch_size, num_workers=NUM_WORKERS)
-        val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False, num_workers=NUM_WORKERS,
-                                sampler=sampler_val)
+        val_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False, num_workers=NUM_WORKERS,
+                                sampler=sampler_test)
+        #val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False, num_workers=NUM_WORKERS,
+        #                        sampler=sampler_val)
         test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False, num_workers=NUM_WORKERS,
                                  sampler=sampler_test)
 
@@ -282,13 +285,13 @@ if __name__ == '__main__':
     torch.cuda.empty_cache()
     config = dict()
 
-    dataset_root_path = "../.."
-    output_path = "../../out_roesti/output_classification_mesh"
-    """dataset_root_path = "proj99_tum/"
-    output_path = "/data/output_rep"""
+    dataset_root_path = "../"
+    output_path = "../out_tmp"
+    dataset_root_path = "proj99_tum/"
+    output_path = "/data/out_ec3"
 
     # print set plots
-    print_set_stats = True
+    print_set_stats = False
 
     # print model stats
     print_model_stats = True
@@ -297,15 +300,15 @@ if __name__ == '__main__':
     pretrained = False #os.path.join(output_path, "1_clas", "model_state_best_val.pth.tar")
     # pretrained = os.path.join(output_path, "0_clas", "model_state_best_val.pth.tar")
 
-    config['dataset_name'] = ['BIM_PC_T4'] #BIM_PC_T1  #BIM_PC_T4 , 'ModelNet10'
-    config['n_epochs'] = [100]
+    config['dataset_name'] = ['BIM_PC_C3'] #BIM_PC_T1  #BIM_PC_T4 , 'ModelNet10' 'Benchmark
+    config['n_epochs'] = [200]
     config['learning_rate'] = [0.001]
-    config['batch_size'] = [30]
-    config['model_name'] = [GCN, GCNCat, GCNPool] #GCN GCN_nocat_pool GCN_nocat,GCN, GCN_nocat #, GCN_cat GCN, GCN_cat, GCN_pool, GCN_cat,
+    config['batch_size'] = [25]
+    config['model_name'] = [GCN, GCNCat] #GCN GCN_nocat_pool GCN_nocat,GCN, GCN_nocat #, GCN_cat GCN, GCN_cat, GCN_pool, GCN_cat,
     config['knn'] = [5] #,10,15,20
     config['rotation'] = [180]
     config['samplePoints'] = [1024]
-    config['mesh'] = [False] # Set to False if KNN #FalseextraFeatures, True, 'extraFeatures', 'extraFeatures'
+    config['mesh'] = [True] # Set to False if KNN #FalseextraFeatures, True, 'extraFeatures', 'extraFeatures'
     # config['model_name'] = [, PN2Net, DGCNNNet, , DGCNNNet, UNetGCN]
     ex = Experimenter(config, dataset_root_path, output_path)
     ex.run(print_set_stats, print_model_stats, pretrained)

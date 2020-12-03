@@ -63,8 +63,10 @@ class ModelNet(InMemoryDataset):  #
     @property
     def raw_file_names(self):
         return [
-            'bathtub', 'bed', 'chair', 'desk', 'dresser', 'monitor',
-            'night_stand', 'sofa', 'table', 'toilet'
+            'airplane', 'bathtub', 'bed', 'bench', 'bookshelf', 'bottle', 'bowl', 'car', 'chair', 'cone', 'cup', 'curtain', 'desk', 'door',
+            'dresser', 'flower_pot', 'glass_box', 'guitar', 'keyboard','lamp', 'laptop', 'mantel', 'monitor',
+            'night_stand', 'person', 'piano', 'plant', 'radio', 'range_hood', 'sink', 'sofa', 'stairs', 'stool', 'table', 'tent',
+            'toilet', 'tv_stand', 'vase', 'wardrobe', 'xbox'
 
         ]
 
@@ -74,8 +76,11 @@ class ModelNet(InMemoryDataset):  #
 
     @property
     def classmap(self):
-        return {0: 'bathtub', 1: 'bed', 2: 'chair', 3: 'desk', 4: 'dresser', 5: 'monitor', 6: 'night_stand', 7: 'sofa',
-                8: 'table', 9: 'toilet'
+        return {0: 'airplane', 1: 'bathtub', 2: 'bed', 3:'bench', 4:'bookshelf', 5:'bottle', 6:'bowl', 7:'car',8: 'chair',
+                9: 'cone', 10: 'cup', 11:'curtain', 12: 'desk',13: 'door', 14: 'dresser', 15: 'flower_pot', 16: 'glass_box',
+                17: 'guitar', 18:'keyboard', 19:'lamp', 20:'laptop', 21:'mantel',22: 'monitor', 23: 'night_stand', 24:'person',
+                25:'piano', 26:'plant', 27:'radio', 28:'range_hood', 29:'sink', 30: 'sofa', 31:'stairs', 32:'stool',
+                33: 'table', 34: 'tent', 35: 'toilet', 36:'tv_stand', 37:'vase', 38:'wardrobe', 39:'xbox'
                 }
 
     """
@@ -90,7 +95,7 @@ class ModelNet(InMemoryDataset):  #
 
     def download(self):
 
-        """path = download_url(self.urls[self.name], self.root)
+        path = download_url(self.urls[self.name], self.root)
         extract_zip(path, self.root)
         os.unlink(path)
         folder = osp.join(self.root, 'ModelNet{}'.format(self.name))
@@ -100,7 +105,7 @@ class ModelNet(InMemoryDataset):  #
         # Delete osx metadata generated during compression of ModelNet10
         metadata_folder = osp.join(self.root, '__MACOSX')
         if osp.exists(metadata_folder):
-            shutil.rmtree(metadata_folder)"""
+            shutil.rmtree(metadata_folder)
 
         return
 

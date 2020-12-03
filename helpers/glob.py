@@ -1,5 +1,5 @@
-from torch_geometric.utils import scatter_
-from helpers.scatter import scatter_
+#from torch_geometric.utils import scatter_
+from helpers.scatter import scatter
 
 
 def global_add_pool(x, batch, size=None):
@@ -22,7 +22,7 @@ def global_add_pool(x, batch, size=None):
     """
 
     size = batch.max().item() + 1 if size is None else size
-    return scatter_('add', x, batch, dim=1, dim_size=size)
+    return scatter('add', x, batch, dim=1, dim_size=size)
 
 
 def global_mean_pool(x, batch, size=None):
@@ -45,7 +45,7 @@ def global_mean_pool(x, batch, size=None):
     """
 
     size = batch.max().item() + 1 if size is None else size
-    return scatter_('mean', x, batch, dim=0, dim_size=size)
+    return scatter('mean', x, batch, dim=0, dim_size=size)
 
 
 def global_max_pool(x, batch, size=None):
@@ -68,5 +68,8 @@ def global_max_pool(x, batch, size=None):
     """
 
     size = batch.max().item() + 1 if size is None else size
-    out, crit_points = scatter_('max', x, batch, dim=0, dim_size=size)
+    out, crit_points = scatter(x, batch, dim=0, dim_size=size, reduce='max')
+    print("glob_max")
+    print(out)
+    print(crit_points)
     return out, crit_points

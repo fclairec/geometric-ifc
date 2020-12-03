@@ -20,6 +20,7 @@ class Set_analyst:
     def class_counter(self):
         if self.given_set is not None:
             self.l_per_class = Counter(np.array(self.given_set.data.y))
+            print(np.unique(np.array(self.given_set.data.y)))
             self.l_per_class = [self.l_per_class]
 
             return self.l_per_class

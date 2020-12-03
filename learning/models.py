@@ -4,6 +4,7 @@ import torch_geometric.transforms as T
 from torch.nn import Sequential as Seq, Linear as Lin, ReLU, Dropout, BatchNorm1d as BN
 from torch_geometric.nn import PointConv, fps, radius, global_max_pool,fps, avg_pool_x, voxel_grid, max_pool_x
 from torch_geometric.nn import DynamicEdgeConv, global_max_pool, GCNConv
+from helpers.glob import global_max_pool
 from helpers.graph_unet import GraphUNet
 from torch_geometric.utils import dropout_adj
 import numpy
@@ -109,9 +110,9 @@ class GCNCat(torch.nn.Module):
     def __init__(self, num_classes):
         super(GCNCat, self).__init__()
 
-        self.conv1 = GCNConv(6+2, 64, cached=False, normalize=not True)
-        self.conv2 = GCNConv(64+6+2, 128, cached=False, normalize=not True)
-        self.conv3 = GCNConv(192+12+4, 256, cached=False, normalize=not True)
+        self.conv1 = GCNConv(6, 64, cached=False, normalize=not True)
+        self.conv2 = GCNConv(64+6, 128, cached=False, normalize=not True)
+        self.conv3 = GCNConv(192+12, 256, cached=False, normalize=not True)
         # CAREFUL: If modifying here, check line 202 in experiments.py for pretrained model
         self.lin1 = torch.nn.Linear(256, num_classes)
 
@@ -119,7 +120,7 @@ class GCNCat(torch.nn.Module):
 
         #input = torch.cat([data.norm, data.pos], dim=1)
         #i = torch.cat([data.norm, data.pos, data.x], dim=1)
-        input = torch.cat([data.norm, data.pos, data.x], dim=1)
+        input = torch.cat([data.norm, data.pos], dim=1)
         x, batch = input, data.batch
 
         edge_index, edge_weight = data.edge_index, data.edge_attr
@@ -136,7 +137,7 @@ class GCNCat(torch.nn.Module):
         x = F.dropout(x, training=self.training, p=0.2)
         x = F.relu(self.conv3(x, edge_index, edge_weight))
 
-        out = global_max_pool(x, batch)
+        out, _ = global_max_pool(x, batch)
         out = self.lin1(out)
         out = F.log_softmax(out, dim=1)
         pred = F.softmax(out, dim=1)
@@ -147,15 +148,15 @@ class GCN(torch.nn.Module):
     def __init__(self, num_classes):
         super(GCN, self).__init__()
 
-        self.conv1 = GCNConv(6+2, 64, cached=False, normalize=not True)
-        self.conv2 = GCNConv(64+6+2, 128, cached=False, normalize=not True)
-        self.conv3 = GCNConv(128+6+2, 256, cached=False, normalize=not True)
+        self.conv1 = GCNConv(6, 64, cached=False, normalize=not True)
+        self.conv2 = GCNConv(64+6, 128, cached=False, normalize=not True)
+        self.conv3 = GCNConv(128+6, 256, cached=False, normalize=not True)
         # CAREFUL: If modifying here, check line 202 in experiments.py for pretrained model
         self.lin1 = torch.nn.Linear(256, num_classes)
 
     def forward(self, data):
-        i= torch.cat([data.norm, data.pos, data.x],dim=1)
-        input = torch.cat([data.norm, data.pos, data.x], dim=1)
+        i= torch.cat([data.norm, data.pos],dim=1)
+        input = torch.cat([data.norm, data.pos], dim=1)
         #i = torch.cat([data.norm, data.pos], dim=1)
         #input = torch.cat([data.norm, data.pos],dim=1)
         x, batch = i, data.batch
@@ -178,7 +179,7 @@ class GCN(torch.nn.Module):
         """if batch.size(0) != data.pos.size(0):
             print("nooo")"""
 
-        out = global_max_pool(x, batch)
+        out, _ = global_max_pool(x, batch)
         out = self.lin1(out)
         out = F.log_softmax(out, dim=1)
         pred = F.softmax(out, dim=1)

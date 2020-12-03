@@ -24,6 +24,10 @@ def random_splits(dataset, num_classes, train_ratio):
     train_index = torch.cat([i[:l] for i, l in zip(indices, lengths)], dim=0)
     rest_index = torch.cat([i[l:] for i, l in zip(indices, lengths)], dim=0)
 
+    print("len indexes")
+    print(len(train_index))
+    print(len(rest_index))
+
     rest_index = rest_index[torch.randperm(rest_index.size(0))]
 
     dataset.train_mask = index_to_mask(train_index, size=len(dataset))
@@ -35,6 +39,9 @@ def random_splits(dataset, num_classes, train_ratio):
 def make_set_sampler(dataset):
 
     l_per_class = Set_analyst(given_set=dataset).class_counter()[0]
+    print(dataset.num_classes)
+    print(l_per_class)
+    print(len(dataset.data.y))
 
     weights_dict = [(tup[0], 1 / tup[1]) for tup in list(l_per_class.items())]
     weights = [1 / tup[1] for tup in list(l_per_class.items())]
