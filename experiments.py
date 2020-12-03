@@ -27,7 +27,7 @@ from helpers.visualize import vis_graph, write_pointcloud
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 #device = 'cpu'
 
-NUM_WORKERS = 6
+
 WRITE_DF_TO_ = ['to_csv']#, 'to_latex'
 
 
@@ -75,7 +75,7 @@ class Experimenter(object):
         self.dataset_root_path = dataset_root
         self.output_path = output_path
 
-    def run(self, print_set_stats, print_model_stats, pretrained=False, inference=False):
+    def run(self, print_set_stats, pretrained=False, inference=False, train=True):
 
         grid_unfold = list(self.grid)
         results = []
@@ -99,24 +99,30 @@ class Experimenter(object):
             plot_name = ','.join(['%s' % value for (key, value) in result.items()])
             plot_name=plot_name.replace('_', '')
             # outputpaths
-            assert os.path.exists(output_path)
+            "assert os.path.exists(output_path)"
             output_path_run = os.path.join(output_path, str(i)+"_clas")
 
             print("Run {} of {}".format(i, len(grid_unfold)))
             print("Writing outputs to {}".format(output_path_run))
 
+            if pretrained and train:
+                output_path_run=os.path.join(os.path.dirname(pretrained), "transfer")
+            if pretrained and not train:
+                output_path_run = os.path.join(os.path.dirname(pretrained), "inference")
+                print("inference")
+
             if not os.path.exists(output_path_run):
                 os.makedirs(output_path_run)
-            if pretrained:
-                output_path_run = os.path.join(output_path, str(i), "_clas", "transfer")
-                if not os.path.exists(output_path_run):
-                    os.makedirs(output_path_run)
+
 
 
             self.dataset_path = os.path.join(self.dataset_root_path, dataset_name)
             print(os.getcwd())
             print(self.dataset_path)
-            "assert os.path.exists(self.dataset_path)"
+
+
+            #assert os.path.exists(self.dataset_path)
+
 
             if dataset_name[0] == 'B':
                 self.dataset_name = BIM
@@ -142,10 +148,8 @@ class Experimenter(object):
             else: print_set_stats_run=False
 
 
-            test_acc, epoch_losses, train_accuracies, val_accuracies, epoch_test, mean_epoch_time, num_train_params, num_pos, num_ed = self.subrun(output_path_run, model_name
-                                                                                   , n_epochs, batch_size,
-                                                                                   learning_rate, knn, pretrained, plot_name, rotation, sample_points, mesh,
-                                                                                   print_set_stats=print_set_stats_run, print_model_stats=print_model_stats)
+            test_acc, epoch_losses, train_accuracies, val_accuracies, epoch_test, mean_epoch_time, num_train_params, num_pos, num_ed = self.subrun( output_path_run, n_epochs, model_name, batch_size, learning_rate, knn, pretrained, plot_name, rotation, sample_points, mesh=mesh, train=train)
+
 
             result['test_acc'] = test_acc
             result['epoch_test'] = epoch_test
@@ -163,8 +167,32 @@ class Experimenter(object):
         pd.DataFrame(results).to_csv(os.path.join(output_path,'results_clas.csv'))
         torch.cuda.empty_cache()
 
-    def subrun(self, output_path_run, model_name, n_epochs, batch_size, learning_rate, knn,  pretrained=False, plot_name= False, rotation=180, sample_points=1024, mesh=False,
-               print_set_stats=False, print_model_stats=False):
+    def subtrain(self, output_path_run, n_epochs, model, optimizer, train_loader, val_loader, test_loader, test_dataset, plot_name):
+        # Initialize Trainer
+        trainer = Trainer(model, output_path_run)
+        # let Trainer run over epochs
+        t0 = time.time()
+        epoch_losses, train_accuracies, val_accuracies, epoch_test, mean_epoch_time = trainer.train(train_loader,
+                                                                                                    val_loader,
+                                                                                                    n_epochs,
+                                                                                                    optimizer)
+        print('{} seconds'.format(time.time() - t0))
+        # Evaluate best model on Test set
+        test_acc, y_pred, y_real, _ = trainer.test(test_loader, seg=False)
+        val_acc2, _, _, _ = trainer.test(val_loader, seg=False)
+
+        print("Test accuracy = {}, Val accuracy = {}".format(test_acc, val_acc2))
+
+        # save test results
+        save_test_results(y_real, y_pred, test_acc, output_path_run, test_dataset, epoch_losses, train_accuracies,
+                          val_accuracies, WRITE_DF_TO_, plot_name, seg=False)
+
+        return test_acc, epoch_losses, train_accuracies, val_accuracies, epoch_test, mean_epoch_time
+
+
+
+    def subrun(self, output_path_run, n_epochs, model_name, batch_size, learning_rate, knn, pretrained=False, plot_name= False, rotation=180, sample_points=1024, mesh=False,
+               print_set_stats=False, train=True):
 
         if model_name.__name__ is 'PN2Net':
             transform, pretransform = transform_setup(rotation=rotation, samplePoints=sample_points, mesh = mesh)
@@ -217,7 +245,7 @@ class Experimenter(object):
             checkpoint = torch.load(pretrained)
             # say the class output dimension of the pretrained model, for correct loading
             # e.g. if pretrained model was on ModelNet10 -> set here 10
-            dim_last_layer = 10
+            dim_last_layer = 5
 
         # Define models depending on the setting
         if model_name.__name__ is 'PN2Net':
@@ -248,37 +276,35 @@ class Experimenter(object):
             else:
                 model = model_name(num_classes=dataset.num_classes).to(device)
 
-        if print_model_stats:
-            num_trainable_params = summary(model)
-        else : num_trainanble_params = None
+
+        num_trainable_params = summary(model)
+
 
         model.to(device)
 
         # Define optimizer depending on settings
         optimizer = torch.optim.Adam(params=model.parameters(), lr=learning_rate, weight_decay=0.00001)
 
-        # Initialize Trainer
-        trainer = Trainer(model, output_path_run)
-        # let Trainer run over epochs
-        t0 = time.time()
-        epoch_losses, train_accuracies, val_accuracies, epoch_test, mean_epoch_time = trainer.train(train_loader, val_loader, n_epochs,
-                                                                       optimizer)
-        print('{} seconds'.format(time.time() - t0))
-        # Evaluate best model on Test set
-        test_acc, y_pred, y_real = trainer.test(test_loader, seg=False)
-        val_acc2, _ , _ = trainer.test(val_loader, seg=False)
+        if train:
+            test_acc, epoch_losses, train_accuracies, val_accuracies, epoch_test, mean_epoch_time =self.subtrain( output_path_run, n_epochs, model, optimizer, train_loader, val_loader, test_loader, test_dataset, plot_name)
 
-        print("Test accuracy = {}, Val accuracy = {}".format(test_acc, val_acc2))
-
-
-        # save test results
-        save_test_results(y_real, y_pred, test_acc, output_path_run, test_dataset, epoch_losses, train_accuracies,
-                          val_accuracies, WRITE_DF_TO_, plot_name, seg=False)
+        else:
+            trainer = Trainer(model, output_path_run)
+            test_acc, y_pred, y_real, prob = trainer.test(test_loader, save_pred=True, seg=False)
+            output_path_error = os.path.join(output_path_run, "error")
+            self.inference(test_loader,  output_path_run, output_path_error, prob, y_pred, y_real)
 
         # vis_graph(val_loader, output_path)
         # write_pointcloud(val_loader,output_path)
 
         return test_acc, epoch_losses, train_accuracies, val_accuracies, epoch_test, mean_epoch_time, num_trainable_params, num_pos, num_ed
+
+    def inference(self, test_loader, output_path_run, output_path_error, prob, y_pred, y_real):
+        from helpers.visualize import vis_point, vis_crit_points
+
+        vis_point(test_loader, output_path_run, output_path_error, prob, y_pred, y_real)
+
+
 
 
 if __name__ == '__main__':
@@ -290,25 +316,29 @@ if __name__ == '__main__':
     dataset_root_path = "proj99_tum/"
     output_path = "/data/out_ec3"
 
+
     # print set plots
     print_set_stats = False
 
-    # print model stats
-    print_model_stats = True
+
 
     # pretrained model
-    pretrained = False #os.path.join(output_path, "1_clas", "model_state_best_val.pth.tar")
+    pretrained = "/tmp/data/0_clas/model_state_best_val.pth.tar" #os.path.join(output_path, "1_clas", "model_state_best_val.pth.tar") (Flase, True or infer)
+    # pretrained = False
     # pretrained = os.path.join(output_path, "0_clas", "model_state_best_val.pth.tar")
+    train = False #if set to false --> inference
+
 
     config['dataset_name'] = ['BIM_PC_C3'] #BIM_PC_T1  #BIM_PC_T4 , 'ModelNet10' 'Benchmark
     config['n_epochs'] = [200]
     config['learning_rate'] = [0.001]
     config['batch_size'] = [25]
     config['model_name'] = [GCN, GCNCat] #GCN GCN_nocat_pool GCN_nocat,GCN, GCN_nocat #, GCN_cat GCN, GCN_cat, GCN_pool, GCN_cat,
+
     config['knn'] = [5] #,10,15,20
     config['rotation'] = [180]
     config['samplePoints'] = [1024]
     config['mesh'] = [True] # Set to False if KNN #FalseextraFeatures, True, 'extraFeatures', 'extraFeatures'
     # config['model_name'] = [, PN2Net, DGCNNNet, , DGCNNNet, UNetGCN]
     ex = Experimenter(config, dataset_root_path, output_path)
-    ex.run(print_set_stats, print_model_stats, pretrained)
+    ex.run(print_set_stats, pretrained, train=train)

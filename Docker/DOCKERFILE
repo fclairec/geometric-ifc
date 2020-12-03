@@ -115,8 +115,7 @@ RUN pip install torchnet
 # Install Requests, a Python library for making HTTP requests.
 RUN conda install -y requests=2.19.1 \
  && conda clean -ya
-
-# Install Graphviz.
+ # Install Graphviz.
 RUN conda install -y graphviz=2.40.1 python-graphviz=0.8.4 \
  && conda clean -ya
 
@@ -127,6 +126,8 @@ RUN sudo apt-get update && sudo apt-get install -y --no-install-recommends \
  && sudo rm -rf /var/lib/apt/lists/*
 RUN conda install -y -c menpo opencv3=3.1.0 \
  && conda clean -ya
+
+RUN conda install -c conda-forge openmesh-python
 
 # Install PyTorch Geometric.
 RUN CPATH=/usr/local/cuda/include:$CPATH \
@@ -139,12 +140,14 @@ RUN pip install torch-scatter==latest+cu101 -f https://pytorch-geometric.com/whl
  && pip install torch-spline-conv==latest+cu101 -f https://pytorch-geometric.com/whl/torch-1.5.0.html \
  && pip install torch-geometric
 
+RUN pwd
+
 # copy file 
 CMD ["echo", "hello world"]
-COPY proj99_tum /
+COPY geometric-ifc /
  
-#CMD ["nohup", "python3", "-u", "bim-shape-learning/experiments_seg.py", "&>", "/data/nohup.out", "&"]
-CMD ["python3", "../experiments_seg.py"]
+#CMD ["nohup", "python3", "-u", "geometric-ifc/experiments_seg.py", "&>", "/data/nohup.out", "&"]
+#CMD ["python3", "../experiments_seg.py"]
 
 # Set the default command to python3.
-#CMD ["python3"]
+CMD ["python3"]

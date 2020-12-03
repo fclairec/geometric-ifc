@@ -2,7 +2,7 @@ import torch
 from datasets.bim import BIM
 from datasets.ModelNet import ModelNet
 import os
-from learning.models import PN2Net, DGCNNNet, UNet
+from learning.models import PN2Net, DGCNNNet, GCN, GCNCat
 import learning.models
 from learning.trainers import Trainer_seg
 from torch_geometric.data import DataLoader
@@ -16,6 +16,8 @@ from experiments import Experimenter
 from helpers.visualize import vis_point, vis_graph
 from datasets.splits import random_splits
 
+from experiments import transform_setup
+
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 
@@ -28,6 +30,11 @@ class Inference(Experimenter):
     def infer(self, model_list, test=False, plot = False):
         self.model_list = model_list
 
+        output_path_run = os.path.join(os.path.dirname(pretrained), "inference")
+
+        self.subrun(output_path_run, n_epochs, model_name, batch_size, learning_rate, knn, pretrained, plot_name,
+                    rotation, sample_points, mesh)
+
         if test:
 
             for i, model_load in enumerate(self.model_list):
@@ -39,7 +46,7 @@ class Inference(Experimenter):
                     transform, pretransform = transform_setup(graph=False)
                 if model_name == 'DGCNNNet':
                     transform, pretransform = transform_setup(graph=False)
-                if model_name == 'UNet':
+                if model_name == 'GCN':
                     transform, pretransform = transform_setup(graph=True)
 
                 # Define datasets
@@ -111,13 +118,24 @@ class Inference(Experimenter):
 
 
 if __name__ == '__main__':
+    torch.cuda.empty_cache()
+    config = None
+
+    dataset_root_path = "../.."
+    output_path = "../../out_roesti/output_classification_mesh"
+    dataset_root_path = "/tmp/data"
+    output_path = "/tmp/data"
+
+
+    # pretrained model
+    pretrained = 'infer'  # os.path.join(output_path, "1_clas", "model_state_best_val.pth.tar") (Flase, True or infer)
+    # pretrained = os.path.join(output_path, "0_clas", "model_state_best_val.pth.tar")
 
     test = True
 
     # Name of Dataset, careful the string matters!
     dataset_name = 'BIM_PC_T2'  # BIM_PC_T2, ModelNet10, ModelNet40
-    config = None
-    ex = Experimenter(config, dataset_name)
+
 
     experiments = True
 
@@ -131,12 +149,13 @@ if __name__ == '__main__':
             break
         model_list.append(model_path + '/model_state_best_val.pth.tar')
         i += 1
+        print('inference for {} models with test {}'.format(i, test))
 
     # fills list with all models to perform inference on - custom models
     #model_list = [] # ['../out/0/model_state_best_val.pth.tar']
 
-    print('inference for {} models with test {}'.format(i, test))
+    model_list = ["/tmp/data/0_clas/model_state_best_val.pth.tar"]
 
-    inf = Inference(ex.dataset_path, ex.dataset_name, ex.dataset_type)
+    inf = Inference(dataset_root_path, dataset_name, '10')
 
     inf.infer(model_list, test=True, plot=True)

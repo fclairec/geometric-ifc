@@ -73,12 +73,13 @@ def calculate_sem_IoU(pred_np, seg_np, num_classes):
 def save_test_results(y_real, y_pred, test_acc, output_path, test_dataset, epoch_losses, train_accuracies,
                       val_accuracies, WRITE_DF_TO_, plot_name, seg=False):
     plt = mpl.pyplot
-    plt.rcParams['text.latex.preamble'] = [r"\usepackage{lmodern}"]
-    params = {'text.usetex': True,
+
+    #plt.rcParams['text.latex.preamble'] = [r"\usepackage{lmodern}"]
+    """params = {'text.usetex': True,
               'font.size': 11,
               'font.family': 'lmodern'
               }
-    plt.rcParams.update(params)
+    plt.rcParams.update(params)"""
 
 
     real_target_names = [test_dataset.classmap[i] for i in np.unique(np.array(test_dataset.data.y))]
