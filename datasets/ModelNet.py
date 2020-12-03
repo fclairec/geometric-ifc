@@ -90,7 +90,7 @@ class ModelNet(InMemoryDataset):  #
 
     def download(self):
 
-        """path = download_url(self.urls[self.name], self.root)
+        path = download_url(self.urls[self.name], self.root)
         extract_zip(path, self.root)
         os.unlink(path)
         folder = osp.join(self.root, 'ModelNet{}'.format(self.name))
@@ -100,7 +100,7 @@ class ModelNet(InMemoryDataset):  #
         # Delete osx metadata generated during compression of ModelNet10
         metadata_folder = osp.join(self.root, '__MACOSX')
         if osp.exists(metadata_folder):
-            shutil.rmtree(metadata_folder)"""
+            shutil.rmtree(metadata_folder)
 
         return
 

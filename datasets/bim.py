@@ -165,7 +165,7 @@ class BIM(InMemoryDataset):
                 data.y = torch.tensor([label])
 
                 feat_ind = category + "_" + path.split('/')[-1][:22]
-                try:
+                """try:
                     feature = all_features.loc[feat_ind]
 
                     # neigh=all_neighbours.loc[feat_ind]
@@ -173,8 +173,8 @@ class BIM(InMemoryDataset):
                     #print("no features found so not considered")
                     continue
                 try:
-                    x1 = torch.tensor([np.log(feature['compactness']+1)] * 1024).reshape(-1, 1)
-                    """x2 = torch.tensor([feature['isWall']] * 1024, dtype=torch.float).reshape(-1, 1)
+                    #x1 = torch.tensor([np.log(feature['compactness']+1)] * 1024).reshape(-1, 1)
+                    x2 = torch.tensor([feature['isWall']] * 1024, dtype=torch.float).reshape(-1, 1)
                     x3 = torch.tensor([feature['isStair']] * 1024, dtype=torch.float).reshape(-1, 1)
                     x4 = torch.tensor([feature['isSlab']] * 1024, dtype=torch.float).reshape(-1, 1)
                     x5 = torch.tensor([feature['isFurn']] * 1024, dtype=torch.float).reshape(-1, 1)
@@ -185,18 +185,18 @@ class BIM(InMemoryDataset):
                     x10 = torch.tensor([feature['isFlowC']] * 1024, dtype=torch.float).reshape(-1, 1)
                     x11 = torch.tensor([feature['isDist']] * 1024, dtype=torch.float).reshape(-1, 1)
                     x12 = torch.tensor([feature['isWin']] * 1024, dtype=torch.float).reshape(-1, 1)
-                    x13 = torch.tensor([feature['isDoor']] * 1024, dtype=torch.float).reshape(-1, 1)"""
-                    x14 = torch.tensor([np.log(feature['Volume']+1)] * 1024, dtype=torch.float).reshape(-1, 1)
-                    x15 = torch.tensor([np.log(feature['Area']+1)] * 1024, dtype=torch.float).reshape(-1, 1)
+                    x13 = torch.tensor([feature['isDoor']] * 1024, dtype=torch.float).reshape(-1, 1)
+                    #x14 = torch.tensor([np.log(feature['Volume']+1)] * 1024, dtype=torch.float).reshape(-1, 1)
+                    #x15 = torch.tensor([np.log(feature['Area']+1)] * 1024, dtype=torch.float).reshape(-1, 1)
 
-                except: print("not all features found skipping this ob")
+                except: print("not all features found skipping this ob")"""
 
 
                 #data.x = torch.cat([x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13, x14, x15], dim=1)
-                data.x = torch.cat([x14, x15], dim=1)
+                #data.x = torch.cat([x14, x15], dim=1)
 
                 assert data.y is not None
-                assert data.x is not None
+                #assert data.x is not None
 
 
                 data_list.append(data)

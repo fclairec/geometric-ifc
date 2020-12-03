@@ -25,8 +25,8 @@ def vis_point(test_loader,  output_path, output_path_error, prob, y_pred_list, y
         certainty = prob[i]
         y_real = y_real_list[i]
         y_pred = y_pred_list[i]
-        y_real_l = test_loader.test_data.classmap[y_real]
-        y_pred_l = test_loader.test_data.classmap[y_pred]
+        y_real_l = test_loader.dataset.classmap[y_real]
+        y_pred_l = test_loader.dataset.classmap[y_pred]
         pos = data.pos.numpy()
 
         xyz = numpy.array(
@@ -44,15 +44,15 @@ def vis_point(test_loader,  output_path, output_path_error, prob, y_pred_list, y
             with open(out + ".txt", "w") as text_file:
                 for line in pos:
                     text_file.write(str(line[0]) + ', ' + str(line[1]) + ', ' + str(line[2]) + '\n')
-            plt.savefig(out + '.png')
+            #plt.savefig(out + '.png')
             plt.show()
         else:
             out = output_path + "/" + str(i) + y_real_l + "-" + y_pred_l + "-with(" + str(certainty) + ")"
             with open(out + ".txt", "w") as text_file:
                 for line in pos:
                     text_file.write(str(line[0]) + ', ' + str(line[1]) + ', ' + str(line[2]) + '\n')
-            plt.savefig(out + '.png')
-            plt.show()
+            #plt.savefig(out + '.png')
+            #plt.show()
 
 
 def vis_crit_points(test_loader,  output_path, output_path_error, prob, y_pred_list, y_real_list, crit_points_list_ind=None):

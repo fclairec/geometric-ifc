@@ -165,13 +165,14 @@ class Trainer:
         correct = 0
         prob = []
         crit_points_list = []
-        if save_pred and inf_dataloader is not None:
-            print("running inference per batch with prediction printouts")
-            if not os.path.exists(prediction_path):
-                os.makedirs(prediction_path)
+        if save_pred:#and inf_dataloader is not None:
+            print("running inference per batch")
+            """if not os.path.exists(prediction_path):
+                os.makedirs(prediction_path)"""
 
-            for i, iterator in enumerate(zip(data_loader, inf_dataloader)):
-                data, inf_data = iterator
+            # for i, iterator in enumerate(zip(data_loader, data_loader)): #inf_dataloader
+            for i, data in enumerate(data_loader): #inf_dataloader
+
                 #i == 3: break
                 data = data.to(device)
                 # loss = F.nll_loss(self.model(data)[0], data.y)
@@ -181,20 +182,19 @@ class Trainer:
                     SM = torch.max(torch.exp(outputs))
                     pred = outputs.max(1)[1]
 
-                    one = inf_data.pos
                     # Check if normalized indexes correspond to real ones
-                    assert inf_data.y.numpy().all()==data.y.cpu().numpy().all()
+                    #assert inf_data.y.numpy().all()==data.y.cpu().numpy().all()
 
-                    nonnorm_labeled = np.concatenate((inf_data.pos.numpy(), data.y.cpu().numpy().reshape((-1, 1))), axis=1)
+                    #nonnorm_labeled = np.concatenate((inf_data.pos.numpy(), data.y.cpu().numpy().reshape((-1, 1))), axis=1)
                     # add print of labels
-                    np.savetxt(os.path.join(self.output_path, str(i) + ".txt"), nonnorm_labeled, delimiter=',')
+                    #np.savetxt(os.path.join(self.output_path, str(i) + ".txt"), nonnorm_labeled, delimiter=',')
 
                 correct += pred.eq(data.y).sum().item()
 
                 y_pred = concat((y_pred, pred.cpu().numpy()))
                 y_real = concat((y_real, data.y.cpu().numpy()))
                 # crit_points_list.append(crit_points.cpu().numpy())
-                # prob.append(SM.cpu().numpy())
+                prob.append(SM.cpu().numpy())
 
         else:
             # Loop for testing without writing results
@@ -223,7 +223,7 @@ class Trainer:
             # average over the number of graphs
             acc = correct / len(data_loader.dataset)
 
-        return acc, y_pred, y_real
+        return acc, y_pred, y_real, prob
 
     def save_checkpoint(self, path, state, is_best):
         filename = 'model_state.pth.tar'

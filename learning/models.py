@@ -147,17 +147,20 @@ class GCN(torch.nn.Module):
     def __init__(self, num_classes):
         super(GCN, self).__init__()
 
-        self.conv1 = GCNConv(6+2, 64, cached=False, normalize=not True)
-        self.conv2 = GCNConv(64+6+2, 128, cached=False, normalize=not True)
-        self.conv3 = GCNConv(128+6+2, 256, cached=False, normalize=not True)
+        #self.conv1 = GCNConv(6+2, 64, cached=False, normalize=not True)
+        #self.conv2 = GCNConv(64+6+2, 128, cached=False, normalize=not True)
+        #self.conv3 = GCNConv(128+6+2, 256, cached=False, normalize=not True)
+        self.conv1 = GCNConv(6, 64, cached=False, normalize=not True)
+        self.conv2 = GCNConv(64+6, 128, cached=False, normalize=not True)
+        self.conv3 = GCNConv(128+6, 256, cached=False, normalize=not True)
         # CAREFUL: If modifying here, check line 202 in experiments.py for pretrained model
         self.lin1 = torch.nn.Linear(256, num_classes)
 
     def forward(self, data):
-        i= torch.cat([data.norm, data.pos, data.x],dim=1)
-        input = torch.cat([data.norm, data.pos, data.x], dim=1)
-        #i = torch.cat([data.norm, data.pos], dim=1)
-        #input = torch.cat([data.norm, data.pos],dim=1)
+        #i= torch.cat([data.norm, data.pos, data.x],dim=1)
+        #input = torch.cat([data.norm, data.pos, data.x], dim=1)
+        i = torch.cat([data.norm, data.pos], dim=1)
+        input = torch.cat([data.norm, data.pos],dim=1)
         x, batch = i, data.batch
 
         edge_index, edge_weight = data.edge_index, data.edge_attr
