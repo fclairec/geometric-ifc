@@ -228,7 +228,10 @@ class Experimenter(object):
         if train:
             sampler_train = make_set_sampler(train_dataset)
         # sampler_val = make_set_sampler(val_dataset)
-        sampler_test = make_set_sampler(test_dataset)
+        if pretrained:
+            sampler_test = None
+        else:
+            sampler_test = make_set_sampler(test_dataset)
 
         # Define dataloaders
         if train:
@@ -240,9 +243,12 @@ class Experimenter(object):
             #                        sampler=sampler_val)
         test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False, num_workers=NUM_WORKERS,
                                  sampler=sampler_test)
-
-        num_pos = int(next(iter(train_loader)).pos.size(0) / batch_size)
-        num_ed = int(next(iter(train_loader)).edge_index.size(1) / batch_size)
+        if train:
+            num_pos = int(next(iter(train_loader)).pos.size(0) / batch_size)
+            num_ed = int(next(iter(train_loader)).edge_index.size(1) / batch_size)
+        else:
+            num_pos=0
+            num_ed = 0
 
         if print_set_stats:
             # Plots class distributions
@@ -250,7 +256,7 @@ class Experimenter(object):
                            train_dataset, test_dataset, val_dataset, unbalanced_train_loader, val_loader, seg=False)
 
         if pretrained:
-            checkpoint = torch.load(pretrained)
+            checkpoint = torch.load(pretrained, map_location=torch.device('cpu'))
             # say the class output dimension of the pretrained model, for correct loading
             # e.g. if pretrained model was on ModelNet10 -> set here 10
             dim_last_layer = 13
@@ -279,8 +285,10 @@ class Experimenter(object):
         if model_name.__name__ in ['GCN', 'GCNCat', 'GCNPool']:
             if pretrained:
                 model = model_name(num_classes=dim_last_layer)
-                model.load_state_dict(checkpoint['state_dict'], strict=False)
-                model.lin3 = Lin(254, train_dataset.num_classes)
+                model.load_state_dict(checkpoint['state_dict'], strict=True)
+                model.lin3 = Lin(254, 13)
+                # TODO: Make the loading dynamic
+                #model.lin3 = Lin(254, train_dataset.num_classes)
             else:
                 model = model_name(num_classes=dataset.num_classes).to(device)
 
@@ -290,6 +298,8 @@ class Experimenter(object):
 
         # Define optimizer depending on settings
         optimizer = torch.optim.Adam(params=model.parameters(), lr=learning_rate, weight_decay=0.00001)
+        """if pretrained:
+            optimizer.load_state_dict(checkpoint['optimizer'])"""
 
         if train:
             test_acc, epoch_losses, train_accuracies, val_accuracies, epoch_test, mean_epoch_time = self.subtrain(
@@ -301,13 +311,20 @@ class Experimenter(object):
             trainer = Trainer(model, output_path_run)
             test_acc, y_pred, y_real, prob, crit_points = trainer.test(test_loader, save_pred=True, seg=False)
             output_path_error = os.path.join(output_path_run, "error")
+            print("overal inference/test accuracy : {}" .format(test_acc))
             if not os.path.exists(output_path_error):
                 os.makedirs(output_path_error)
             #   TODO: make inference independant of test
             self.inference(test_loader, output_path_run, output_path_error, prob, y_pred, y_real, crit_points)
 
         # vis_graph(val_loader, output_path)
-        # write_pointcloud(val_loader,output_path)
+        # write_pointcloud(val_loader,output_path)$
+        if not train:
+            epoch_losses = []
+            train_accuracies=[]
+            val_accuracies=[]
+            epoch_test=[]
+            mean_epoch_time=[]
 
         return test_acc, epoch_losses, train_accuracies, val_accuracies, epoch_test, mean_epoch_time, num_trainable_params, num_pos, num_ed
 
@@ -333,17 +350,17 @@ if __name__ == '__main__':
     print_set_stats = False
 
     # pretrained model
-    pretrained = False  # "/data/out_ec3/0_clas/model_state_best_val.pth.tar"
+    pretrained = "../1_clas/model_state_best_val.pth.tar"  # "/data/out_ec3/0_clas/model_state_best_val.pth.tar"
     # "/tmp/data/0_clas/model_state_best_val.pth.tar" #os.path.join(output_path, "1_clas", "model_state_best_val.pth.tar") (Flase, True or infer)
     # pretrained = False
     # pretrained = os.path.join(output_path, "0_clas", "model_state_best_val.pth.tar")
-    train = True  # if set to false --> inference
+    train = False  # if set to false --> inference
 
     config['dataset_name'] = ['Benchmark']  # BIM_PC_T1  #BIM_PC_T4 , 'ModelNet10' 'Benchmark
     config['n_epochs'] = [2]
     config['learning_rate'] = [0.001]
     config['batch_size'] = [30]
-    config['model_name'] = [GCN]  # GCN GCN_nocat_pool GCN_nocat,GCN, GCN_nocat #, GCN_cat GCN, GCN_cat, GCN_pool, GCN_cat, GCN, GCNCat, GCNPool
+    config['model_name'] = [GCNCat]  # GCN GCN_nocat_pool GCN_nocat,GCN, GCN_nocat #, GCN_cat GCN, GCN_cat, GCN_pool, GCN_cat, GCN, GCNCat, GCNPool
 
     config['knn'] = [5]  # ,10,15,20
     config['rotation'] = [180]

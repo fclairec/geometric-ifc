@@ -11,11 +11,24 @@ import struct
 from matplotlib import rc
 rc("text", usetex=False)
 
+art_class_map = {
+                # corresponds to what is in the dataset
+                0: 'IfcDistributionControlElement', 1: 'IfcFlowController', 2: 'IfcFlowFitting',
+                3: 'IfcFlowSegment', 4: 'IfcFlowTerminal', 5: 'IfcColumn', 6: 'IfcFurnishingElement', 7: 'IfcStair',
+                8: 'IfcDoor', 9: 'IfcSlab', 10: 'IfcWall', 11: 'IfcWindow', 12: 'IfcRailing'
+            }
+
 
 
 def vis_point(test_loader,  output_path, output_path_error, prob, y_pred_list, y_real_list, crit_points_list_ind=None):
     printout = 15
 
+    art_class_map = {
+        # corresponds to what is in the dataset
+        0: 'IfcDistributionControlElement', 1: 'IfcFlowController', 2: 'IfcFlowFitting',
+        3: 'IfcFlowSegment', 4: 'IfcFlowTerminal', 5: 'IfcColumn', 6: 'IfcFurnishingElement', 7: 'IfcStair',
+        8: 'IfcDoor', 9: 'IfcSlab', 10: 'IfcWall', 11: 'IfcWindow', 12: 'IfcRailing'
+    }
     if crit_points_list_ind is not None:
         output_path_crit_p = os.path.join(output_path, "crit")
         output_path_crit_p_ee = os.path.join(output_path, "crit_error")
@@ -36,7 +49,10 @@ def vis_point(test_loader,  output_path, output_path_error, prob, y_pred_list, y
             y_real = y_real_list[i]
             y_pred = y_pred_list[i]
             y_real_l = test_loader.dataset.classmap[y_real]
-            y_pred_l = test_loader.dataset.classmap[y_pred]
+            try:
+                y_pred_l = test_loader.dataset.classmap[y_pred]
+            except:
+                y_pred_l = art_class_map[y_pred]
             pos = data.pos.numpy()
 
             xyz = numpy.array(
@@ -66,7 +82,14 @@ def vis_point(test_loader,  output_path, output_path_error, prob, y_pred_list, y
 
 
 def vis_crit_points(test_loader, output_path, output_path_error, prob, y_pred_list, y_real_list, crit_points_list_ind=None):
-    printout = 15
+    printout = 5
+    art_class_map = {
+        # corresponds to what is in the dataset
+        0: 'IfcDistributionControlElement', 1: 'IfcFlowController', 2: 'IfcFlowFitting',
+        3: 'IfcFlowSegment', 4: 'IfcFlowTerminal', 5: 'IfcColumn', 6: 'IfcFurnishingElement', 7: 'IfcStair',
+        8: 'IfcDoor', 9: 'IfcSlab', 10: 'IfcWall', 11: 'IfcWindow', 12: 'IfcRailing'
+    }
+
     for i, data in enumerate(test_loader):
 
         if (i + 1) % printout == 0:
@@ -75,7 +98,10 @@ def vis_crit_points(test_loader, output_path, output_path_error, prob, y_pred_li
             y_real = y_real_list[i]
             y_pred = y_pred_list[i]
             y_real_l = test_loader.dataset.classmap[y_real]
-            y_pred_l = test_loader.dataset.classmap[y_pred]
+            try:
+                y_pred_l = test_loader.dataset.classmap[y_pred]
+            except:
+                y_pred_l = art_class_map[y_pred]
             pos = data.pos.numpy()
 
             xyz = numpy.array(
