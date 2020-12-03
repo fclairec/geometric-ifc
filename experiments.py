@@ -1,4 +1,5 @@
 __author__ = 'fiona.collins'
+
 import time
 import torch
 from sklearn.model_selection import ParameterGrid
@@ -21,16 +22,16 @@ import pandas as pd
 from helpers.results import save_test_results, save_set_stats
 from helpers.results import summary
 
-NUM_WORKERS =6
+NUM_WORKERS = 6
 
 from helpers.visualize import vis_graph, write_pointcloud
 
 # Define depending on hardware
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-#device = 'cpu'
+# device = 'cpu'
 
 
-WRITE_DF_TO_ = ['to_csv']#, 'to_latex'
+WRITE_DF_TO_ = ['to_csv']  # , 'to_latex'
 
 
 def transform_setup(graph_u=False, graph_gcn=False, rotation=180, samplePoints=1024, mesh=False):
@@ -38,11 +39,12 @@ def transform_setup(graph_u=False, graph_gcn=False, rotation=180, samplePoints=1
         # Default transformation for scale noralization, centering, point sampling and rotating
         pretransform = T.Compose([T.NormalizeScale(), T.Center()])
         transform = T.Compose([T.SamplePoints(samplePoints), T.RandomRotate(rotation)])
-        print("pointnet rotation {}" .format(rotation))
+        print("pointnet rotation {}".format(rotation))
     elif graph_u:
         pretransform = T.Compose([T.NormalizeScale(), T.Center()])
-        transform = T.Compose([T.NormalizeScale(), T.Center(), T.SamplePoints(samplePoints, True, True), T.RandomRotate(rotation),
-                               T.KNNGraph(k=graph_u)])
+        transform = T.Compose(
+            [T.NormalizeScale(), T.Center(), T.SamplePoints(samplePoints, True, True), T.RandomRotate(rotation),
+             T.KNNGraph(k=graph_u)])
     elif graph_gcn:
 
         pretransform = T.Compose([T.NormalizeScale(), T.Center()])
@@ -50,22 +52,20 @@ def transform_setup(graph_u=False, graph_gcn=False, rotation=180, samplePoints=1
         if mesh:
             if mesh == "extraFeatures":
                 transform = T.Compose([T.RandomRotate(rotation), T.GenerateMeshNormals(),
-                               T.FaceToEdge(True),  T.Distance(norm=True),T.TargetIndegree(cat=True)]) #,
+                                       T.FaceToEdge(True), T.Distance(norm=True), T.TargetIndegree(cat=True)])  # ,
             else:
                 transform = T.Compose([T.RandomRotate(rotation), T.GenerateMeshNormals(),
                                        T.FaceToEdge(True), T.Distance(norm=True), T.TargetIndegree(cat=True)])
         else:
             transform = T.Compose([T.SamplePoints(samplePoints, True, True), T.RandomRotate(rotation),
-                               T.KNNGraph(k=graph_gcn), T.Distance(norm=True)])
+                                   T.KNNGraph(k=graph_gcn), T.Distance(norm=True)])
             print("no mesh")
-        print("Rotation {}" . format(rotation))
-        print("Meshing {}" . format(mesh))
+        print("Rotation {}".format(rotation))
+        print("Meshing {}".format(mesh))
 
 
     else:
         print('no transfom')
-
-
 
     return transform, pretransform
 
@@ -91,7 +91,7 @@ class Experimenter(object):
             learning_rate = params['learning_rate']
             model_name = params['model_name']
             knn = params['knn']
-            rotation =params['rotation']
+            rotation = params['rotation']
             sample_points = params['samplePoints']
             mesh = params['mesh']
 
@@ -99,16 +99,16 @@ class Experimenter(object):
             result = params
             result['model_name'] = params['model_name'].__name__
             plot_name = ','.join(['%s' % value for (key, value) in result.items()])
-            plot_name=plot_name.replace('_', '')
+            plot_name = plot_name.replace('_', '')
             # outputpaths
             "assert os.path.exists(output_path)"
-            output_path_run = os.path.join(output_path, str(i)+"_clas")
+            output_path_run = os.path.join(output_path, str(i) + "_clas")
 
             print("Run {} of {}".format(i, len(grid_unfold)))
             print("Writing outputs to {}".format(output_path_run))
 
             if pretrained and train:
-                output_path_run=os.path.join(os.path.dirname(pretrained), "transfer")
+                output_path_run = os.path.join(os.path.dirname(pretrained), "transfer")
             if pretrained and not train:
                 output_path_run = os.path.join(os.path.dirname(pretrained), "inference")
                 print("inference")
@@ -116,15 +116,11 @@ class Experimenter(object):
             if not os.path.exists(output_path_run):
                 os.makedirs(output_path_run)
 
-
-
             self.dataset_path = os.path.join(self.dataset_root_path, dataset_name)
             print(os.getcwd())
             print(self.dataset_path)
 
-
-            #assert os.path.exists(self.dataset_path)
-
+            # assert os.path.exists(self.dataset_path)
 
             if dataset_name[0] == 'B':
                 self.dataset_name = BIM
@@ -138,20 +134,21 @@ class Experimenter(object):
 
             if print_set_stats:
 
-                #only print set stats once
+                # only print set stats once
                 set_stats_path = os.path.join(output_path, dataset_name)
                 if os.path.exists(set_stats_path):
-                    #suppose if path exists we already have stats on the dataset
-                    print_set_stats_run=False
+                    # suppose if path exists we already have stats on the dataset
+                    print_set_stats_run = False
 
                 else:
                     os.makedirs(set_stats_path)
                     print_set_stats_run = set_stats_path
-            else: print_set_stats_run=False
+            else:
+                print_set_stats_run = False
 
-
-            test_acc, epoch_losses, train_accuracies, val_accuracies, epoch_test, mean_epoch_time, num_train_params, num_pos, num_ed = self.subrun( output_path_run, n_epochs, model_name, batch_size, learning_rate, knn, pretrained, plot_name, rotation, sample_points, mesh=mesh, train=train)
-
+            test_acc, epoch_losses, train_accuracies, val_accuracies, epoch_test, mean_epoch_time, num_train_params, num_pos, num_ed = self.subrun(
+                output_path_run, n_epochs, model_name, batch_size, learning_rate, knn, pretrained, plot_name, rotation,
+                sample_points, mesh=mesh, train=train)
 
             result['test_acc'] = test_acc
             result['epoch_test'] = epoch_test
@@ -159,17 +156,18 @@ class Experimenter(object):
             result['num_trainable_parameter'] = num_train_params
             result['num_pos'] = num_pos
             result['num_edge'] = num_ed
-            #result['loss'] = epoch_losses
+            # result['loss'] = epoch_losses
             # result['train_acc'] = train_accuracies
             # result['val_acc'] = val_accuracies
 
             results.append(result)
             pd.DataFrame(results).to_csv(os.path.join(output_path_run, 'results_clas.csv'))
 
-        pd.DataFrame(results).to_csv(os.path.join(output_path,'results_clas.csv'))
+        pd.DataFrame(results).to_csv(os.path.join(output_path, 'results_clas.csv'))
         torch.cuda.empty_cache()
 
-    def subtrain(self, output_path_run, n_epochs, model, optimizer, train_loader, val_loader, test_loader, test_dataset, plot_name):
+    def subtrain(self, output_path_run, n_epochs, model, optimizer, train_loader, val_loader, test_loader, test_dataset,
+                 plot_name):
         # Initialize Trainer
         trainer = Trainer(model, output_path_run)
         # let Trainer run over epochs
@@ -181,7 +179,7 @@ class Experimenter(object):
         print('{} seconds'.format(time.time() - t0))
         # Evaluate best model on Test set
         test_acc, y_pred, y_real, _, _ = trainer.test(test_loader, seg=False)
-        val_acc2, _, _, _ , _= trainer.test(val_loader, seg=False)
+        val_acc2, _, _, _, _ = trainer.test(val_loader, seg=False)
 
         print("Test accuracy = {}, Val accuracy = {}".format(test_acc, val_acc2))
 
@@ -191,57 +189,65 @@ class Experimenter(object):
 
         return test_acc, epoch_losses, train_accuracies, val_accuracies, epoch_test, mean_epoch_time
 
-
-
-    def subrun(self, output_path_run, n_epochs, model_name, batch_size, learning_rate, knn, pretrained=False, plot_name= False, rotation=180, sample_points=1024, mesh=False,
+    def subrun(self, output_path_run, n_epochs, model_name, batch_size, learning_rate, knn, pretrained=False,
+               plot_name=False, rotation=180, sample_points=1024, mesh=False,
                print_set_stats=False, train=True):
 
         if model_name.__name__ is 'PN2Net':
-            transform, pretransform = transform_setup(rotation=rotation, samplePoints=sample_points, mesh = mesh)
+            transform, pretransform = transform_setup(rotation=rotation, samplePoints=sample_points, mesh=mesh)
         if model_name.__name__ is 'DGCNNNet':
             transform, pretransform = transform_setup()
         if model_name.__name__ is 'GCN' or 'GCN_cat' or 'GCN_pool':
             # number of knn to connect to as argument
-            transform, pretransform = transform_setup(graph_gcn=knn, rotation=rotation, samplePoints=sample_points, mesh = mesh)
+            transform, pretransform = transform_setup(graph_gcn=knn, rotation=rotation, samplePoints=sample_points,
+                                                      mesh=mesh)
 
         # Define datasets
-        dataset = self.dataset_name(self.dataset_path, self.dataset_type, True, transform=transform, pre_transform=pretransform)
-        test_dataset = self.dataset_name(self.dataset_path, self.dataset_type, False, transform=transform, pre_transform=pretransform)
+        if train:
+            dataset = self.dataset_name(self.dataset_path, self.dataset_type, True, transform=transform,
+                                        pre_transform=pretransform)
+        test_dataset = self.dataset_name(self.dataset_path, self.dataset_type, False, transform=transform,
+                                         pre_transform=pretransform)
 
         print("Run with dataset {} type {}".format(str(self.dataset_name.__name__), str(self.dataset_type)))
 
         # Split dataset randomly (respecting class imbalance) into train and val set (no cross validation for now)
-        #_, train_index, val_index = random_splits(dataset, dataset.num_classes, train_ratio=0.8)
-        train_dataset = dataset
-        #train_dataset = dataset[dataset.train_mask].copy_set(train_index)
-        #val_dataset = dataset[dataset.val_mask].copy_set(val_index)
+        # _, train_index, val_index = random_splits(dataset, dataset.num_classes, train_ratio=0.8)
+        if train:
+            train_dataset = dataset
+            val_dataset = test_dataset  # for now
+        # train_dataset = dataset[dataset.train_mask].copy_set(train_index)
+        # val_dataset = dataset[dataset.val_mask].copy_set(val_index)
 
-        print("Training {} graphs with {} number of classes".format(len(train_dataset), train_dataset.num_classes))
-        #print("Validating on {} graphs with {} number of classes ".format(len(val_dataset), val_dataset.num_classes))
+        if train:
+            print("Training {} graphs with {} number of classes".format(len(train_dataset), train_dataset.num_classes))
+            # print("Validating on {} graphs with {} number of classes ".format(len(val_dataset), val_dataset.num_classes))
         print("Testing on {} graphs with {} number of classes ".format(len(test_dataset), test_dataset.num_classes))
 
         # Imbalanced datasets: create sampler depending on the length of data per class
-        sampler_train = make_set_sampler(train_dataset)
-        #sampler_val = make_set_sampler(val_dataset)
+        if train:
+            sampler_train = make_set_sampler(train_dataset)
+        # sampler_val = make_set_sampler(val_dataset)
         sampler_test = make_set_sampler(test_dataset)
 
         # Define dataloaders
-        train_loader = DataLoader(train_dataset, batch_size=batch_size, num_workers=NUM_WORKERS, sampler=sampler_train)
-        unbalanced_train_loader = DataLoader(train_dataset, batch_size=batch_size, num_workers=NUM_WORKERS)
-        val_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False, num_workers=NUM_WORKERS,
+        if train:
+            train_loader = DataLoader(train_dataset, batch_size=batch_size, num_workers=NUM_WORKERS, sampler=sampler_train)
+            unbalanced_train_loader = DataLoader(train_dataset, batch_size=batch_size, num_workers=NUM_WORKERS)
+            val_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False, num_workers=NUM_WORKERS,
                                 sampler=sampler_test)
-        #val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False, num_workers=NUM_WORKERS,
-        #                        sampler=sampler_val)
+            # val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False, num_workers=NUM_WORKERS,
+            #                        sampler=sampler_val)
         test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False, num_workers=NUM_WORKERS,
                                  sampler=sampler_test)
 
         num_pos = int(next(iter(train_loader)).pos.size(0) / batch_size)
-        num_ed = int(next(iter(train_loader)).edge_index.size(1)/batch_size)
+        num_ed = int(next(iter(train_loader)).edge_index.size(1) / batch_size)
 
         if print_set_stats:
             # Plots class distributions
             save_set_stats(print_set_stats, train_loader, test_loader,
-                           train_dataset, test_dataset,val_dataset,unbalanced_train_loader, val_loader, seg=False)
+                           train_dataset, test_dataset, val_dataset, unbalanced_train_loader, val_loader, seg=False)
 
         if pretrained:
             checkpoint = torch.load(pretrained)
@@ -278,9 +284,7 @@ class Experimenter(object):
             else:
                 model = model_name(num_classes=dataset.num_classes).to(device)
 
-
         num_trainable_params = summary(model)
-
 
         model.to(device)
 
@@ -288,17 +292,19 @@ class Experimenter(object):
         optimizer = torch.optim.Adam(params=model.parameters(), lr=learning_rate, weight_decay=0.00001)
 
         if train:
-            test_acc, epoch_losses, train_accuracies, val_accuracies, epoch_test, mean_epoch_time =self.subtrain( output_path_run, n_epochs, model, optimizer, train_loader, val_loader, test_loader, test_dataset, plot_name)
+            test_acc, epoch_losses, train_accuracies, val_accuracies, epoch_test, mean_epoch_time = self.subtrain(
+                output_path_run, n_epochs, model, optimizer, train_loader, val_loader, test_loader, test_dataset,
+                plot_name)
 
         else:
-            print("here")
-            print(train)
+            #   Class Trainer includes test function so its instanciated here
             trainer = Trainer(model, output_path_run)
             test_acc, y_pred, y_real, prob, crit_points = trainer.test(test_loader, save_pred=True, seg=False)
             output_path_error = os.path.join(output_path_run, "error")
             if not os.path.exists(output_path_error):
                 os.makedirs(output_path_error)
-            self.inference(test_loader,  output_path_run, output_path_error, prob, y_pred, y_real, crit_points)
+            #   TODO: make inference independant of test
+            self.inference(test_loader, output_path_run, output_path_error, prob, y_pred, y_real, crit_points)
 
         # vis_graph(val_loader, output_path)
         # write_pointcloud(val_loader,output_path)
@@ -311,8 +317,6 @@ class Experimenter(object):
         vis_point(test_loader, output_path_run, output_path_error, prob, y_pred, y_real, crit_points)
 
 
-
-
 if __name__ == '__main__':
     torch.cuda.empty_cache()
     config = dict()
@@ -320,35 +324,31 @@ if __name__ == '__main__':
     dataset_root_path = "../"
     output_path = "../out_tmp"
     dataset_root_path = "proj99_tum/"
-    output_path = "/data/out_ec3_1"
+    output_path = "/data/out_ec3_benchamrk"
 
     if not os.path.exists(output_path):
         os.makedirs(output_path)
 
-
     # print set plots
     print_set_stats = False
 
-
-
     # pretrained model
-    pretrained = False#"/data/out_ec3/0_clas/model_state_best_val.pth.tar"
-    #"/tmp/data/0_clas/model_state_best_val.pth.tar" #os.path.join(output_path, "1_clas", "model_state_best_val.pth.tar") (Flase, True or infer)
+    pretrained = False  # "/data/out_ec3/0_clas/model_state_best_val.pth.tar"
+    # "/tmp/data/0_clas/model_state_best_val.pth.tar" #os.path.join(output_path, "1_clas", "model_state_best_val.pth.tar") (Flase, True or infer)
     # pretrained = False
     # pretrained = os.path.join(output_path, "0_clas", "model_state_best_val.pth.tar")
-    train = True #if set to false --> inference
+    train = True  # if set to false --> inference
 
-
-    config['dataset_name'] = ['BIM_PC_C3'] #BIM_PC_T1  #BIM_PC_T4 , 'ModelNet10' 'Benchmark
-    config['n_epochs'] = [250]
+    config['dataset_name'] = ['Benchmark']  # BIM_PC_T1  #BIM_PC_T4 , 'ModelNet10' 'Benchmark
+    config['n_epochs'] = [2]
     config['learning_rate'] = [0.001]
     config['batch_size'] = [30]
-    config['model_name'] = [GCN, GCNCat, GCNPool] #GCN GCN_nocat_pool GCN_nocat,GCN, GCN_nocat #, GCN_cat GCN, GCN_cat, GCN_pool, GCN_cat,
+    config['model_name'] = [GCN]  # GCN GCN_nocat_pool GCN_nocat,GCN, GCN_nocat #, GCN_cat GCN, GCN_cat, GCN_pool, GCN_cat, GCN, GCNCat, GCNPool
 
-    config['knn'] = [5] #,10,15,20
+    config['knn'] = [5]  # ,10,15,20
     config['rotation'] = [180]
     config['samplePoints'] = [1024]
-    config['mesh'] = [True] # Set to False if KNN #FalseextraFeatures, True, 'extraFeatures', 'extraFeatures'
+    config['mesh'] = [True]  # Set to False if KNN #FalseextraFeatures, True, 'extraFeatures', 'extraFeatures'
     # config['model_name'] = [, PN2Net, DGCNNNet, , DGCNNNet, UNetGCN]
     ex = Experimenter(config, dataset_root_path, output_path)
     ex.run(print_set_stats, pretrained, train=train)
