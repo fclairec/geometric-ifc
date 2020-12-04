@@ -33,7 +33,7 @@ class Inference(Experimenter):
         output_path_run = os.path.join(os.path.dirname(pretrained), "inference")
 
         self.subrun(output_path_run, n_epochs, model_name, batch_size, learning_rate, knn, pretrained, plot_name,
-                    rotation, sample_points, mesh)
+                    rotation, sample_points, mesh, node_ranslation)
 
         if test:
 
