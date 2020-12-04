@@ -21,7 +21,7 @@ art_class_map = {
 
 
 def vis_point(test_loader,  output_path, output_path_error, prob, y_pred_list, y_real_list, crit_points_list_ind=None):
-    printout = 15
+    printout = 1
 
     art_class_map = {
         # corresponds to what is in the dataset
@@ -35,8 +35,8 @@ def vis_point(test_loader,  output_path, output_path_error, prob, y_pred_list, y
         if not os.path.exists(output_path_crit_p):
             os.makedirs(output_path_crit_p)
             os.makedirs(output_path_crit_p_ee)
-        print(crit_points_list_ind)
-        print(len(crit_points_list_ind))
+        print("crit point ind (sould be max 265):{} " .format(len(crit_points_list_ind)))
+        #print(len(crit_points_list_ind))
         vis_crit_points(test_loader, output_path_crit_p, output_path_crit_p_ee, prob, y_pred_list, y_real_list, crit_points_list_ind)
 
 
@@ -65,6 +65,18 @@ def vis_point(test_loader,  output_path, output_path_error, prob, y_pred_list, y
             ax.set_ylim(bottom=1, top=-1)
             ax.set_zlim(-1, 1)
 
+            # if data.edge_index != None:
+            indexl = data.edge_index[0]
+            indexr = data.edge_index[1]
+
+            edges_test = []
+            for a, b in zip(indexl.numpy(), indexr.numpy()):
+                edges_test.append((a, b))
+
+            segments = [(xyz[s], xyz[t]) for s, t in edges_test]
+            edge_col = Line3DCollection(segments, lw=0.5, colors='b')
+            ax.add_collection3d(edge_col)
+
             if y_pred != y_real:
                 out = output_path_error + "/" + str(i) + y_real_l + "-" + y_pred_l + "-with(" + str(certainty) + ")"
                 with open(out + ".txt", "w") as text_file:
@@ -78,7 +90,7 @@ def vis_point(test_loader,  output_path, output_path_error, prob, y_pred_list, y
                     for line in pos:
                         text_file.write(str(line[0]) + ', ' + str(line[1]) + ', ' + str(line[2]) + '\n')
                 #plt.savefig(out + '.png')
-                #plt.show()
+                plt.show()
 
 
 def vis_crit_points(test_loader, output_path, output_path_error, prob, y_pred_list, y_real_list, crit_points_list_ind=None):
@@ -123,6 +135,18 @@ def vis_crit_points(test_loader, output_path, output_path_error, prob, y_pred_li
             ax.set_ylim(bottom=1, top=-1)
             ax.set_zlim(-1, 1)
             ax.title.set_text("full pointcloud")
+
+            # if data.edge_index != None:
+            indexl = data.edge_index[0]
+            indexr = data.edge_index[1]
+
+            edges_test = []
+            for a, b in zip(indexl.numpy(), indexr.numpy()):
+                edges_test.append((a, b))
+
+            segments = [(xyz[s], xyz[t]) for s, t in edges_test]
+            edge_col = Line3DCollection(segments, lw=0.5, colors='b')
+            ax.add_collection3d(edge_col)
 
             # critical point
             ax = fig.add_subplot(1, 2, 2, projection='3d')

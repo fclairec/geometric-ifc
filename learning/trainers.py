@@ -178,6 +178,7 @@ class Trainer:
                 # loss = F.nll_loss(self.model(data)[0], data.y)
                 with torch.no_grad():
                     outputs,_, critical_points = self.model(data)
+                    print(critical_points.size())
                     loss = F.nll_loss(outputs, data.y)
                     SM = torch.max(torch.exp(outputs))
                     pred = outputs.max(1)[1]

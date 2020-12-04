@@ -161,12 +161,15 @@ class BIM(InMemoryDataset):
 
         data_list = []
         j = 0
+        path_list = []
 
         for target, category in enumerate(categories):
             folder = osp.join(self.raw_dir, category, dataset)
             paths = glob.glob('{}/*.ply'.format(folder))
 
+
             for i, path in enumerate(paths):
+                path_list.append(path)
 
                 if j == 5738 or i == 6010:
                     pause = 0
@@ -232,9 +235,17 @@ class BIM(InMemoryDataset):
             data_list = [d for d in data_list if self.pre_filter(d)]
 
         if self.pre_transform is not None:
-            data_list = [self.pre_transform(d) for d in data_list]
+            data_list2=[]
+            for i, d in enumerate(data_list):
+                try:
+                    self.pre_transform(d)
+                    data_list2.append(d)
+                except:
+                    print(d)
+                    print(path_list[i])
+            data_list=data_list2
 
-        # tr = [t.x.shape[0] == 1024 and t.x.shape[1] == 14 for t in data_list]
+            # tr = [t.x.shape[0] == 1024 and t.x.shape[1] == 14 for t in data_list]
         # false_ones = [i for i, x in enumerate(tr) if not x]
         # if len(false_ones) != 0:
         #    pause = 0
