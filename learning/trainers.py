@@ -58,30 +58,33 @@ class Trainer:
             self.model.train()
             train_losses = []
             train_accuracies_batch = []
-            for i, data in enumerate(train_loader):
-                #if i == 3: break
-                data = data.to(device)
-                optimizer.zero_grad()
-                outputs, _, _ = self.model(data)
-                loss = F.nll_loss(outputs, data.y)
-                loss.backward()
-                optimizer.step()
-                with torch.no_grad():
-                    # train losses per batch
-                    train_losses.append(loss.data*data.num_graphs)
-                    pred = outputs.max(1)[1]
-                    # train accuracies per batch
-                    acc = pred.eq(data.y).sum().item() / data.num_graphs
-                    train_accuracies_batch.append(acc)
+            try:
+                for i, data in enumerate(train_loader):
+                    #if i == 3: break
+                    data = data.to(device)
+                    optimizer.zero_grad()
+                    outputs, _, _ = self.model(data)
+                    loss = F.nll_loss(outputs, data.y)
+                    loss.backward()
+                    optimizer.step()
+                    with torch.no_grad():
+                        # train losses per batch
+                        train_losses.append(loss.data*data.num_graphs)
+                        pred = outputs.max(1)[1]
+                        # train accuracies per batch
+                        acc = pred.eq(data.y).sum().item() / data.num_graphs
+                        train_accuracies_batch.append(acc)
 
 
-                # for batch progress tracking in terminal
-                if (i + 1) % printout == 0:
-                    print('\nBatches {}-{}/{} (BS = {}) with loss {} and accuracy {}'.format(i - printout + 1, i,
-                                                                                             len(train_loader),
-                                                                                             train_loader.batch_size,
-                                                                                             loss,
-                                                                                             train_accuracies_batch[-1]))
+                    # for batch progress tracking in terminal
+                    if (i + 1) % printout == 0:
+                        print('\nBatches {}-{}/{} (BS = {}) with loss {} and accuracy {}'.format(i - printout + 1, i,
+                                                                                                 len(train_loader),
+                                                                                                 train_loader.batch_size,
+                                                                                                 loss,
+                                                                                                 train_accuracies_batch[-1]))
+            except:
+                print(data)
             epoch_time = time.time() - t0
             epoch_times.append(epoch_time)
 

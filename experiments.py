@@ -11,7 +11,7 @@ from datasets.ModelNet import ModelNet
 from datasets.ModelNet_small import ModelNet_small
 from datasets.splits import random_splits, make_set_sampler
 
-from learning.models import PN2Net, DGCNNNet, GCN, GCNCat, GCNPool
+from learning.models import PN2Net, DGCNNNet, GCN, GCNCat, GCNPool, GCNConv
 from learning.trainers import Trainer
 from torch.nn import Sequential as Seq, Dropout, Linear as Lin
 from learning.models import MLP
@@ -34,7 +34,7 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 WRITE_DF_TO_ = ['to_csv']  # , 'to_latex'
 
 
-def transform_setup(graph_u=False, graph_gcn=False, rotation=180, samplePoints=1024, mesh=False):
+def transform_setup(graph_u=False, graph_gcn=False, rotation=180, samplePoints=1024, mesh=False, node_ranslation=0.01):
     if not graph_u and not graph_gcn:
         # Default transformation for scale noralization, centering, point sampling and rotating
         pretransform = T.Compose([T.NormalizeScale(), T.Center()])
@@ -57,7 +57,7 @@ def transform_setup(graph_u=False, graph_gcn=False, rotation=180, samplePoints=1
                 transform = T.Compose([T.RandomRotate(rotation), T.GenerateMeshNormals(),
                                        T.FaceToEdge(True), T.Distance(norm=True), T.TargetIndegree(cat=True)])
         else:
-            transform = T.Compose([T.SamplePoints(samplePoints, True, True), T.RandomRotate(rotation),
+            transform = T.Compose([T.SamplePoints(samplePoints, True, True), T.RandomTranslate(node_ranslation), T.RandomRotate(rotation),
                                    T.KNNGraph(k=graph_gcn), T.Distance(norm=True)])
             print("no mesh")
         print("Rotation {}".format(rotation))
@@ -94,6 +94,7 @@ class Experimenter(object):
             rotation = params['rotation']
             sample_points = params['samplePoints']
             mesh = params['mesh']
+            node_ranslation = params['node_ranslation']
 
             # Prepare result output
             result = params
@@ -148,7 +149,7 @@ class Experimenter(object):
 
             test_acc, epoch_losses, train_accuracies, val_accuracies, epoch_test, mean_epoch_time, num_train_params, num_pos, num_ed = self.subrun(
                 output_path_run, n_epochs, model_name, batch_size, learning_rate, knn, pretrained, plot_name, rotation,
-                sample_points, mesh=mesh, train=train)
+                sample_points, node_ranslation, mesh=mesh, train=train)
 
             result['test_acc'] = test_acc
             result['epoch_test'] = epoch_test
@@ -190,7 +191,7 @@ class Experimenter(object):
         return test_acc, epoch_losses, train_accuracies, val_accuracies, epoch_test, mean_epoch_time
 
     def subrun(self, output_path_run, n_epochs, model_name, batch_size, learning_rate, knn, pretrained=False,
-               plot_name=False, rotation=180, sample_points=1024, mesh=False,
+               plot_name=False, rotation=180, sample_points=1024, node_ranslation=0.001, mesh=False,
                print_set_stats=False, train=True):
 
         if model_name.__name__ is 'PN2Net':
@@ -199,6 +200,8 @@ class Experimenter(object):
             transform, pretransform = transform_setup()
         if model_name.__name__ is 'GCN' or 'GCN_cat' or 'GCN_pool':
             # number of knn to connect to as argument
+            transform, pretransform = transform_setup(graph_gcn=knn, rotation=rotation, samplePoints=sample_points,
+                                                      mesh=mesh, node_ranslation=node_ranslation)
             if train:
                 transform, pretransform = transform_setup(graph_gcn=knn, rotation=rotation, samplePoints=sample_points,
                                                       mesh=mesh)
@@ -287,7 +290,7 @@ class Experimenter(object):
             else:
                 model = model_name(out_channels=train_dataset.num_classes)
 
-        if model_name.__name__ in ['GCN', 'GCNCat', 'GCNPool']:
+        if model_name.__name__ in ['GCN', 'GCNCat', 'GCNPool', 'GCNConv']:
             if pretrained:
                 model = model_name(num_classes=dim_last_layer)
                 model.load_state_dict(checkpoint['state_dict'], strict=True)
@@ -366,11 +369,12 @@ if __name__ == '__main__':
     config['n_epochs'] = [2]
     config['learning_rate'] = [0.001]
     config['batch_size'] = [1]
-    config['model_name'] = [GCN]  # GCN GCN_nocat_pool GCN_nocat,GCN, GCN_nocat #, GCN_cat GCN, GCN_cat, GCN_pool, GCN_cat, GCN, GCNCat, GCNPool
+    config['model_name'] = [GCNConv]  # GCN GCN_nocat_pool GCN_nocat,GCN, GCN_nocat #, GCN_cat GCN, GCN_cat, GCN_pool, GCN_cat, GCN, GCNCat, GCNPool
 
     config['knn'] = [5]  # ,10,15,20
     config['rotation'] = [180]
     config['samplePoints'] = [1024]
+    config['node_ranslation'] = [0.001, 0.01]
     config['mesh'] = [True]  # Set to False if KNN #FalseextraFeatures, True, 'extraFeatures', 'extraFeatures'
     # config['model_name'] = [, PN2Net, DGCNNNet, , DGCNNNet, UNetGCN]
     ex = Experimenter(config, dataset_root_path, output_path)

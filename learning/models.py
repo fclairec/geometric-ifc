@@ -3,7 +3,7 @@ import torch.nn.functional as F
 import torch_geometric.transforms as T
 from torch.nn import Sequential as Seq, Linear as Lin, ReLU, Dropout, BatchNorm1d as BN
 from torch_geometric.nn import PointConv, fps, radius, global_max_pool,fps, avg_pool_x, voxel_grid, max_pool_x
-from torch_geometric.nn import DynamicEdgeConv, global_max_pool, GCNConv
+from torch_geometric.nn import DynamicEdgeConv, global_max_pool, GCNConv, GraphConv
 from helpers.glob import global_max_pool
 from helpers.graph_unet import GraphUNet
 from torch_geometric.utils import dropout_adj
@@ -184,6 +184,44 @@ class GCN(torch.nn.Module):
         out = F.log_softmax(out, dim=1)
         pred = F.softmax(out, dim=1)
         return out, pred, critical_points
+
+class GCNConv(torch.nn.Module):
+    def __init__(self, num_classes):
+        super(GCNConv, self).__init__()
+
+        self.conv1 = GraphConv(6, 64, aggr='add')
+        self.conv2 = GraphConv(64 + 6, 128,aggr='add')
+        self.conv3 = GraphConv(192+12, 256, aggr='add')
+        # CAREFUL: If modifying here, check line 202 in experiments.py for pretrained model
+        self.lin1 = torch.nn.Linear(256, num_classes)
+
+
+    def forward(self, data):
+        input = torch.cat([data.norm, data.pos], dim=1)
+        x, batch = input, data.batch
+
+        edge_index, edge_weight = data.edge_index, data.edge_attr[0]
+        edge_weight = torch.ones((edge_index.size(1),), dtype=x.dtype, device=edge_index.device)
+
+        x = F.dropout(x, training=self.training, p=0.2)
+        x = F.relu(self.conv1(x, edge_index, edge_weight))
+
+        x = torch.cat([x, input], dim=1)
+        x1 = F.dropout(x, training=self.training, p=0.2)
+        x1 = F.relu(self.conv2(x1, edge_index, edge_weight))
+
+        x = torch.cat([x, x1, input], dim=1)
+        x = F.dropout(x, training=self.training, p=0.2)
+        x = F.relu(self.conv3(x, edge_index, edge_weight))
+
+        out, critical_points = global_max_pool(x, batch)
+        out = self.lin1(out)
+        out = F.log_softmax(out, dim=1)
+        pred = F.softmax(out, dim=1)
+        return out, pred, critical_points
+
+
+
 
 class GCNPool(torch.nn.Module):
     def __init__(self, num_classes):
