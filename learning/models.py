@@ -79,7 +79,10 @@ class PN2Net(torch.nn.Module):
         x = F.relu(self.lin2(x))
         x = F.dropout(x, p=0.5, training=self.training)
         x = self.lin3(x)
-        return F.log_softmax(x, dim=-1)  , None
+
+        out = F.log_softmax(x, dim=-1)
+
+        return out, None
 
 
 
@@ -100,7 +103,7 @@ class DGCNNNet(torch.nn.Module):
         x1 = self.conv1(pos, batch)
         x2 = self.conv2(x1, batch)
         out = self.lin1(torch.cat([x1, x2], dim=1))
-        out = global_max_pool(out, batch)
+        out, _ = global_max_pool(out, batch)
         out = self.mlp(out)
 
         return F.log_softmax(out, dim=1)
@@ -182,8 +185,7 @@ class GCN(torch.nn.Module):
         out, critical_points = global_max_pool(x, batch)
         out = self.lin1(out)
         out = F.log_softmax(out, dim=1)
-        pred = F.softmax(out, dim=1)
-        return out, pred, critical_points
+        return out, critical_points
 
 class GCNConv(torch.nn.Module):
     def __init__(self, num_classes):
@@ -217,8 +219,7 @@ class GCNConv(torch.nn.Module):
         out, critical_points = global_max_pool(x, batch)
         out = self.lin1(out)
         out = F.log_softmax(out, dim=1)
-        pred = F.softmax(out, dim=1)
-        return out, pred, critical_points
+        return out, critical_points
 
 
 
@@ -270,8 +271,7 @@ class GCNPool(torch.nn.Module):
         out, critical_points = global_max_pool(x, batch)
         out = self.lin1(out)
         out = F.log_softmax(out, dim=1)
-        pred = F.softmax(out, dim=1)
-        return out, pred, critical_points
+        return out,  critical_points
 
     def filter_adj(self, edge_index, edge_attr, perm, num_nodes=None):
         num_nodes = self.maybe_num_nodes(edge_index, num_nodes)

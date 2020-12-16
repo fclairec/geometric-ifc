@@ -34,11 +34,12 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 WRITE_DF_TO_ = ['to_csv']  # , 'to_latex'
 
 
-def transform_setup(graph_u=False, graph_gcn=False, rotation=180, samplePoints=1024, mesh=False, node_ranslation=0.01):
+def transform_setup(graph_u=False, graph_gcn=False, rotation=[0.0, 0.0 , 0.0], samplePoints=1024, mesh=False, node_ranslation=0.01):
     if not graph_u and not graph_gcn:
         # Default transformation for scale noralization, centering, point sampling and rotating
         pretransform = T.Compose([T.NormalizeScale(), T.Center()])
-        transform = T.Compose([T.SamplePoints(samplePoints), T.RandomRotate(rotation)])
+        transform = T.Compose([T.RandomRotate(rotation[0], axis=0), T.RandomRotate(rotation[1], axis=1), T.RandomRotate(rotation[2], axis=2),
+                               T.GenerateMeshNormals(), T.SamplePoints(samplePoints)])
         print("pointnet rotation {}".format(rotation))
     elif graph_u:
         pretransform = T.Compose([T.NormalizeScale(), T.Center()])
@@ -50,14 +51,16 @@ def transform_setup(graph_u=False, graph_gcn=False, rotation=180, samplePoints=1
         pretransform = T.Compose([T.NormalizeScale(), T.Center()])
 
         if mesh:
+            #   Mesh to graph
             if mesh == "extraFeatures":
-                transform = T.Compose([T.RandomRotate(rotation), T.GenerateMeshNormals(),
+                transform = T.Compose([T.RandomRotate(rotation, axis=0), T.RandomRotate(rotation, axis=1), T.RandomRotate(rotation, axis=2),T.GenerateMeshNormals(),
                                        T.FaceToEdge(True), T.Distance(norm=True), T.TargetIndegree(cat=True)])  # ,
             else:
-                transform = T.Compose([T.RandomRotate(rotation), T.GenerateMeshNormals(),
-                                       T.FaceToEdge(True), T.Distance(norm=True), T.TargetIndegree(cat=True)])
+                transform = T.Compose([T.RandomRotate(rotation[0], axis=0), T.RandomRotate(rotation[1], axis=1), T.RandomRotate(rotation[2], axis=2), T.GenerateMeshNormals(),
+                                       T.FaceToEdge(True), T.Distance(norm=True), T.TargetIndegree(cat=True), T.RandomTranslate(node_ranslation)])
         else:
-            transform = T.Compose([T.SamplePoints(samplePoints, True, True), T.RandomTranslate(node_ranslation), T.RandomRotate(rotation),
+            # Sample Points
+            transform = T.Compose([T.RandomRotate(rotation[0], axis=0), T.RandomRotate(rotation[1], axis=1), T.RandomRotate(rotation[2], axis=2), T.SamplePoints(samplePoints, True, True), T.RandomTranslate(node_ranslation),
                                    T.KNNGraph(k=graph_gcn), T.Distance(norm=True)])
             print("no mesh")
         print("Rotation {}".format(rotation))
@@ -325,13 +328,13 @@ if __name__ == '__main__':
     dataset_root_path = "../"
     output_path = "../out_tmp"
     dataset_root_path = "proj99_tum/"
-    output_path = "/data/out_ec3_2"
+    output_path = "/data/5_out_experiments"
 
     if not os.path.exists(output_path):
         os.makedirs(output_path)
 
     # print set plots
-    print_set_stats = False
+    print_set_stats = True
 
     # pretrained model
     pretrained = False  # "/data/out_ec3/0_clas/model_state_best_val.pth.tar"
@@ -341,16 +344,16 @@ if __name__ == '__main__':
     train = True  # if set to false --> inference
 
     config['dataset_name'] = ['BIM_PC_C3']  # BIM_PC_T1  #BIM_PC_T4 , 'ModelNet10' 'Benchmark
-    config['n_epochs'] = [250]
+    config['n_epochs'] = [200]
     config['learning_rate'] = [0.001]
     config['batch_size'] = [30]
-    config['model_name'] = [GCNConv]  # GCN GCN_nocat_pool GCN_nocat,GCN, GCN_nocat #, GCN_cat GCN, GCN_cat, GCN_pool, GCN_cat, GCN, GCNCat, GCNPool
+    config['model_name'] = [PN2Net]  # GCN GCN_nocat_pool GCN_nocat,GCN, GCN_nocat #, GCN_cat GCN, GCN_cat, GCN_pool, GCN_cat, GCN, GCNCat, GCNPool
 
     config['knn'] = [5]  # ,10,15,20
-    config['rotation'] = [180]
+    config['rotation'] = [ [0, 0, 180], [180, 180, 180]]
     config['samplePoints'] = [1024]
-    config['node_ranslation'] = [0.001, 0.01]
-    config['mesh'] = [True]  # Set to False if KNN #FalseextraFeatures, True, 'extraFeatures', 'extraFeatures'
+    config['node_ranslation'] = [0.00]
+    config['mesh'] = [False, True]  # Set to False if KNN #FalseextraFeatures, True, 'extraFeatures', 'extraFeatures'
     # config['model_name'] = [, PN2Net, DGCNNNet, , DGCNNNet, UNetGCN]
     ex = Experimenter(config, dataset_root_path, output_path)
     ex.run(print_set_stats, pretrained, train=train)

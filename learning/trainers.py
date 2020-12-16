@@ -39,7 +39,7 @@ def pointnetloss(outputs, labels, m3x3, m64x64, alpha=0.0001):
 
 
 class Trainer:
-    def __init__(self, model, output_path, max_patience=80):
+    def __init__(self, model, output_path, max_patience=30):
         self.model = model
         self.output_path = output_path
         self.max_patience = max_patience
@@ -58,33 +58,34 @@ class Trainer:
             self.model.train()
             train_losses = []
             train_accuracies_batch = []
-            try:
-                for i, data in enumerate(train_loader):
-                    #if i == 3: break
-                    data = data.to(device)
-                    optimizer.zero_grad()
-                    outputs, _, _ = self.model(data)
-                    loss = F.nll_loss(outputs, data.y)
-                    loss.backward()
-                    optimizer.step()
-                    with torch.no_grad():
-                        # train losses per batch
-                        train_losses.append(loss.data*data.num_graphs)
-                        pred = outputs.max(1)[1]
-                        # train accuracies per batch
-                        acc = pred.eq(data.y).sum().item() / data.num_graphs
-                        train_accuracies_batch.append(acc)
+
+            for i, data in enumerate(train_loader):
+                # if i == 3: break
+                data = data.to(device)
+                optimizer.zero_grad()
+                outputs, _ = self.model(data)
+                loss = F.nll_loss(outputs, data.y)
+                loss.backward()
+                optimizer.step()
+                with torch.no_grad():
+                    # train losses per batch
+                    train_losses.append(loss.data * data.num_graphs)
+                    pred = outputs.max(1)[1]
+                    # train accuracies per batch
+                    acc = pred.eq(data.y).sum().item() / data.num_graphs
+                    train_accuracies_batch.append(acc)
+
+                # for batch progress tracking in terminal
+                if (i + 1) % printout == 0:
+                    print('\nBatches {}-{}/{} (BS = {}) with loss {} and accuracy {}'.format(i - printout + 1, i,
+                                                                                             len(train_loader),
+                                                                                             train_loader.batch_size,
+                                                                                             loss,
+                                                                                             train_accuracies_batch[
+                                                                                                 -1]))
 
 
-                    # for batch progress tracking in terminal
-                    if (i + 1) % printout == 0:
-                        print('\nBatches {}-{}/{} (BS = {}) with loss {} and accuracy {}'.format(i - printout + 1, i,
-                                                                                                 len(train_loader),
-                                                                                                 train_loader.batch_size,
-                                                                                                 loss,
-                                                                                                 train_accuracies_batch[-1]))
-            except:
-                print(data)
+
             epoch_time = time.time() - t0
             epoch_times.append(epoch_time)
 
@@ -148,7 +149,7 @@ class Trainer:
             data = data.to(device)
             # loss = F.nll_loss(self.model(data)[0], data.y)
             with torch.no_grad():
-                output, _, _ = self.model(data)
+                output, _ = self.model(data)
                 pred = output.max(1)[1]
             correct += pred.eq(data.y).sum().item()
 
@@ -180,7 +181,7 @@ class Trainer:
                 data = data.to(device)
                 # loss = F.nll_loss(self.model(data)[0], data.y)
                 with torch.no_grad():
-                    outputs,_, critical_points = self.model(data)
+                    outputs, critical_points = self.model(data)
                     loss = F.nll_loss(outputs, data.y)
                     SM = torch.max(torch.exp(outputs))
                     pred = outputs.max(1)[1]
@@ -206,7 +207,7 @@ class Trainer:
                 data = data.to(device)
                 # loss = F.nll_loss(self.model(data)[0], data.y)
                 with torch.no_grad():
-                    outputs, _, _ = self.model(data)
+                    outputs, _ = self.model(data)
                     loss = F.nll_loss(outputs, data.y)
                     SM = torch.max(torch.exp(outputs))
                     pred = outputs.max(1)[1]
