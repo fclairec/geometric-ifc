@@ -4,7 +4,7 @@ This repository investigates methods of spatial graph convolutions for 3D Shape 
 
 Academic datasets such as ModelNet10 dataset is included as well as a self-assembled dataset of IFC geometries.
  
-![alt text](https://github.com/fclairec/geometric-ifc/blob/master/resources/dataset.png?raw=true)
+![alt text](https://github.com/fclairec/geometric-ifc/blob/master/resources/BIMGEOM.png?raw=true)
 
 
 
