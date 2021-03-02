@@ -117,8 +117,8 @@ class BIM(InMemoryDataset):
         elif self.name == 'rk':
             return {
                 # corresponds to what is in the dataset
-                0: 'IfcColumn', 1: 'IfcStair', 2: 'IfcDoor', 3: 'IfcSlab', 4: 'IfcWall',
-                5: 'IfcWindow', 6: 'IfcRailing'
+                5: 'IfcColumn', 7: 'IfcStair', 8: 'IfcDoor', 9: 'IfcSlab', 10: 'IfcWall',
+                11: 'IfcWindow', 12: 'IfcRailing'
             }
 
     @property
@@ -227,6 +227,7 @@ class BIM(InMemoryDataset):
 
 
                 data_list.append(data)
+                #print(data_list)
                 j += 1
                 a = 0
             # self.classmap.update({target:category})
@@ -237,25 +238,20 @@ class BIM(InMemoryDataset):
         if self.pre_transform is not None:
             data_list2=[]
             for i, d in enumerate(data_list):
-                try:
-                    self.pre_transform(d)
-                    data_list2.append(d)
-                except:
-                    print(d)
-                    print(path_list[i])
+
+                d= self.pre_transform(d)
+                data_list2.append(d)
+
+
             data_list=data_list2
 
             # tr = [t.x.shape[0] == 1024 and t.x.shape[1] == 14 for t in data_list]
         # false_ones = [i for i, x in enumerate(tr) if not x]
         # if len(false_ones) != 0:
         #    pause = 0
-        try:
-            self.collate(data_list)
-        except:
-            a=0
 
 
-        return
+        return self.collate(data_list)
 
     def __repr__(self):
         return '{}{}({})'.format(self.__class__.__name__, self.name, len(self))

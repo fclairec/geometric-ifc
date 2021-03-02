@@ -39,7 +39,7 @@ def pointnetloss(outputs, labels, m3x3, m64x64, alpha=0.0001):
 
 
 class Trainer:
-    def __init__(self, model, output_path, max_patience=80):
+    def __init__(self, model, output_path, max_patience=5):
         self.model = model
         self.output_path = output_path
         self.max_patience = max_patience
@@ -181,7 +181,7 @@ class Trainer:
                 # loss = F.nll_loss(self.model(data)[0], data.y)
                 with torch.no_grad():
                     outputs,_, critical_points = self.model(data)
-                    print(critical_points.size())
+                    #print(critical_points.size())
                     loss = F.nll_loss(outputs, data.y)
                     SM = torch.max(torch.exp(outputs))
                     pred = outputs.max(1)[1]
@@ -316,7 +316,7 @@ class Trainer_seg(Trainer):
                 self.patience -= 1
                 print("reduce parience")
 
-            if self.patience == 0 or epoch+1 == num_epochs:
+            if self.patience == 0 :
                 # early stopping
                 # load best model back into memory
                 model_load = self.output_path + '/model_state_best_val.pth.tar'

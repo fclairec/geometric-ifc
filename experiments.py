@@ -18,7 +18,7 @@ from learning.models import MLP
 
 import os
 import pandas as pd
-
+import numpy as np
 from helpers.results import save_test_results, save_set_stats
 from helpers.results import summary
 
@@ -54,10 +54,10 @@ def transform_setup(graph_u=False, graph_gcn=False, rotation=180, samplePoints=1
                 transform = T.Compose([T.RandomRotate(rotation), T.GenerateMeshNormals(),
                                        T.FaceToEdge(True), T.Distance(norm=True), T.TargetIndegree(cat=True)])  # ,
             else:
-                transform = T.Compose([T.RandomRotate(rotation), T.GenerateMeshNormals(),
+                transform = T.Compose([ T.GenerateMeshNormals(),
                                        T.FaceToEdge(True), T.Distance(norm=True), T.TargetIndegree(cat=True)])
         else:
-            transform = T.Compose([T.SamplePoints(samplePoints, True, True), T.RandomTranslate(node_ranslation), T.RandomRotate(rotation),
+            transform = T.Compose([T.SamplePoints(samplePoints, True, True),
                                    T.KNNGraph(k=graph_gcn), T.Distance(norm=True)])
             print("no mesh")
         print("Rotation {}".format(rotation))
@@ -198,17 +198,17 @@ class Experimenter(object):
             transform, pretransform = transform_setup(rotation=rotation, samplePoints=sample_points, mesh=mesh)
         if model_name.__name__ is 'DGCNNNet':
             transform, pretransform = transform_setup()
-        if model_name.__name__ is 'GCN' or 'GCN_cat' or 'GCN_pool':
+        if model_name.__name__ is 'GCN' or 'GCN_cat' or 'GCN_pool' or 'GCNConv':
             # number of knn to connect to as argument
             transform, pretransform = transform_setup(graph_gcn=knn, rotation=rotation, samplePoints=sample_points,
                                                       mesh=mesh, node_ranslation=node_ranslation)
             if train:
                 transform, pretransform = transform_setup(graph_gcn=knn, rotation=rotation, samplePoints=sample_points,
-                                                      mesh=mesh)
+                                                      mesh=mesh, node_ranslation=node_ranslation)
             else:
                 # no need for rotation in inference
                 transform, pretransform = transform_setup(graph_gcn=knn, rotation=0, samplePoints=sample_points,
-                                                          mesh=mesh)
+                                                          mesh=mesh, node_ranslation=node_ranslation)
 
         # Define datasets
         if train:
@@ -319,7 +319,10 @@ class Experimenter(object):
             #   Class Trainer includes test function so its instanciated here
             trainer = Trainer(model, output_path_run)
             test_acc, y_pred, y_real, prob, crit_points = trainer.test(test_loader, save_pred=True, seg=False)
+            #save_test_results(y_real, y_pred, test_acc, output_path_run, test_dataset, epoch_losses=[], train_accuracies=[],
+                              #val_accuracies=[], WRITE_DF_TO_=[], plot_name="dummmy", seg=False)
             output_path_error = os.path.join(output_path_run, "error")
+            np.savetxt(output_path_run+"/perclassacc.csv", np.stack((y_real, y_pred), axis=1), delimiter=",", fmt='%i')
             print("overal inference/test accuracy : {}" .format(test_acc))
             if not os.path.exists(output_path_error):
                 os.makedirs(output_path_error)
@@ -341,6 +344,7 @@ class Experimenter(object):
         from helpers.visualize import vis_point, vis_crit_points
 
         vis_point(test_loader, output_path_run, output_path_error, prob, y_pred, y_real, crit_points)
+        return
 
 
 if __name__ == '__main__':
@@ -359,23 +363,24 @@ if __name__ == '__main__':
     print_set_stats = False
 
     # pretrained model
-    pretrained = "../0_clas/model_state_best_val.pth.tar"  # "/data/out_ec3/0_clas/model_state_best_val.pth.tar"
+    pretrained_list = [ "../Resultate/6_out_experiments/3_clas/model_state_best_val.pth.tar", "../Resultate/6_out_experiments/2_clas/model_state_best_val.pth.tar"] # "/data/out_ec3/0_clas/model_state_best_val.pth.tar"
     # "/tmp/data/0_clas/model_state_best_val.pth.tar" #os.path.join(output_path, "1_clas", "model_state_best_val.pth.tar") (Flase, True or infer)
     # pretrained = False
     # pretrained = os.path.join(output_path, "0_clas", "model_state_best_val.pth.tar")
     train = False  # if set to false --> inference
 
-    config['dataset_name'] = ['Benchmark']  # BIM_PC_T1  #BIM_PC_T4 , 'ModelNet10' 'Benchmark
-    config['n_epochs'] = [2]
-    config['learning_rate'] = [0.001]
-    config['batch_size'] = [1]
-    config['model_name'] = [GCNConv]  # GCN GCN_nocat_pool GCN_nocat,GCN, GCN_nocat #, GCN_cat GCN, GCN_cat, GCN_pool, GCN_cat, GCN, GCNCat, GCNPool
+    for pretrained in pretrained_list:
+        config['dataset_name'] = ['BIM_PC_C3' ,'Benchmark']  # BIM_PC_T1  #BIM_PC_T4 , 'ModelNet10' 'Benchmark
+        config['n_epochs'] = [2]
+        config['learning_rate'] = [0.001]
+        config['batch_size'] = [1]
+        config['model_name'] = [GCNConv]  # GCN GCN_nocat_pool GCN_nocat,GCN, GCN_nocat #, GCN_cat GCN, GCN_cat, GCN_pool, GCN_cat, GCN, GCNCat, GCNPool
 
-    config['knn'] = [5]  # ,10,15,20
-    config['rotation'] = [180]
-    config['samplePoints'] = [1024]
-    config['node_ranslation'] = [0.001, 0.01]
-    config['mesh'] = [True]  # Set to False if KNN #FalseextraFeatures, True, 'extraFeatures', 'extraFeatures'
-    # config['model_name'] = [, PN2Net, DGCNNNet, , DGCNNNet, UNetGCN]
-    ex = Experimenter(config, dataset_root_path, output_path)
-    ex.run(print_set_stats, pretrained, train=train)
+        config['knn'] = [5]  # ,10,15,20
+        config['rotation'] = [0]
+        config['samplePoints'] = [1024]
+        config['node_ranslation'] = [0.0]
+        config['mesh'] = [True]  # Set to False if KNN #FalseextraFeatures, True, 'extraFeatures', 'extraFeatures'
+        # config['model_name'] = [, PN2Net, DGCNNNet, , DGCNNNet, UNetGCN]
+        ex = Experimenter(config, dataset_root_path, output_path)
+        ex.run(print_set_stats, pretrained, train=train)
