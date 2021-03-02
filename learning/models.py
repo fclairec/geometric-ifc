@@ -270,8 +270,7 @@ class GCNPool(torch.nn.Module):
         out, critical_points = global_max_pool(x, batch)
         out = self.lin1(out)
         out = F.log_softmax(out, dim=1)
-        pred = F.softmax(out, dim=1)
-        return out, pred, critical_points
+        return out,  critical_points
 
     def filter_adj(self, edge_index, edge_attr, perm, num_nodes=None):
         num_nodes = self.maybe_num_nodes(edge_index, num_nodes)
