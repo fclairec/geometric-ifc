@@ -68,8 +68,8 @@ class BIMGEOM(InMemoryDataset):
             return [
                 # all classes in the dataset is in the dataset
                 'IfcDistributionControlElement', 'IfcFlowController', 'IfcFlowFitting', 'IfcFlowSegment',
-                'IfcFlowTerminal', 'IfcColumn', 'IfcRailing', 'IfcFurnishingElement', 'IfcStair', 'IfcDoor', 'IfcSlab',
-                'IfcWall', 'IfcWindow'
+                'IfcFlowTerminal', 'IfcColumn', 'IfcFurnishingElement', 'IfcStair', 'IfcDoor', 'IfcSlab',
+                'IfcWall', 'IfcWindow', 'IfcRailing'
             ]
 
     @property
@@ -113,7 +113,8 @@ class BIMGEOM(InMemoryDataset):
 
         # check if a feature file exists for the originating ifc file (e.g. volume, area, neighborhood)
         feature_files = glob.glob(os.path.join(self.raw_dir, '*ifcfeatures_all.csv'))
-        if feature_files is not None:
+        print(feature_files)
+        if feature_files:
             print("global features considered")
             glob_feat = True
         else:
