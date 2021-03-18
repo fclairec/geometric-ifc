@@ -62,32 +62,35 @@ class ModelNet(InMemoryDataset):  #
 
     @property
     def raw_file_names(self):
-        return [
-            'airplane', 'bathtub', 'bed', 'bench', 'bookshelf', 'bottle', 'bowl', 'car', 'chair', 'cone', 'cup', 'curtain', 'desk', 'door',
-            'dresser', 'flower_pot', 'glass_box', 'guitar', 'keyboard','lamp', 'laptop', 'mantel', 'monitor',
-            'night_stand', 'person', 'piano', 'plant', 'radio', 'range_hood', 'sink', 'sofa', 'stairs', 'stool', 'table', 'tent',
-            'toilet', 'tv_stand', 'vase', 'wardrobe', 'xbox'
-
-        ]
-
-
-    #   'tv_stand'
-    # 'airplane', 'bottle',  'cone', 'bowl', 'bathtub',+'car','cup', 'laptop','flower_pot', 'glass_box', 'guitar', 'keyboard', 'mantel', 'person','piano', 'plant', 'radio', 'range_hood','tent', 'vase', 'xbox'
+        if self.name == '10':
+            return [
+                # all classes in the dataset is in the dataset
+                'bathtub', 'bed', 'chair', 'desk', 'dresser', 'monitor',
+                'night_stand', 'sofa', 'table', 'toilet'
+            ]
+        if self.name == '40':
+            return [
+                # all classes in the dataset is in the dataset
+                'airplane', 'bathtub', 'bed', 'bench', 'bookshelf', 'bottle', 'bowl', 'car', 'chair', 'cone', 'cup',
+                'curtain', 'desk', 'door', 'dresser', 'flower_pot', 'glass_box', 'guitar', 'keyboard', 'lamp', 'laptop',
+                'mantel', 'monitor', 'night_stand', 'person', 'piano', 'plant', 'radio', 'range_hood', 'sink', 'sofa',
+                'stairs', 'stool', 'table', 'tent', 'toilet', 'tv_stand', 'vase', 'wardrobe', 'xbox'
+            ]
 
     @property
     def classmap(self):
-        return {0: 'airplane', 1: 'bathtub', 2: 'bed', 3:'bench', 4:'bookshelf', 5:'bottle', 6:'bowl', 7:'car',8: 'chair',
-                9: 'cone', 10: 'cup', 11:'curtain', 12: 'desk',13: 'door', 14: 'dresser', 15: 'flower_pot', 16: 'glass_box',
-                17: 'guitar', 18:'keyboard', 19:'lamp', 20:'laptop', 21:'mantel',22: 'monitor', 23: 'night_stand', 24:'person',
-                25:'piano', 26:'plant', 27:'radio', 28:'range_hood', 29:'sink', 30: 'sofa', 31:'stairs', 32:'stool',
-                33: 'table', 34: 'tent', 35: 'toilet', 36:'tv_stand', 37:'vase', 38:'wardrobe', 39:'xbox'
-                }
-
-    """
-    #   18: 'tv_stand'
-
-    #10:'airplane', 14:'bottle', 17:'cone',16:'laptop', 16:'car', 13:'bowl', 18:'cup', 20: 'flower_pot',  9:'bathtub',22:'guitar', 23:'keyboard', 26:'mantel',29:'person', 30: 'piano', 31: 'plant', 32: 'radio', 33: 'range_hood', 38: 'vase', 39: 'xbox', 36: 'tent',21:'glass_box',
-    """
+        if self.name == '10':
+            return {0: 'bathtub', 1: 'bed', 2: 'chair', 3: 'desk', 4: 'dresser', 5: 'monitor', 6: 'night_stand',
+                    7: 'sofa', 8: 'table', 9: 'toilet'
+                    }
+        if self.name == '40':
+            return {0: 'airplane', 1: 'bathtub', 2: 'bed', 3: 'bench', 4: 'bookshelf', 5: 'bottle', 6: 'bowl', 7: 'car',
+                    8: 'chair', 9: 'cone', 10: 'cup', 11: 'curtain', 12: 'desk', 13: 'door', 14: 'dresser',
+                    15: 'flower_pot', 16: 'glass_box', 17: 'guitar', 18: 'keyboard', 19: 'lamp', 20: 'laptop',
+                    21: 'mantel', 22: 'monitor', 23: 'night_stand', 24: 'person', 25: 'piano', 26: 'plant', 27: 'radio',
+                    28: 'range_hood', 29: 'sink', 30: 'sofa', 31: 'stairs', 32: 'stool', 33: 'table', 34: 'tent',
+                    35: 'toilet', 36: 'tv_stand', 37: 'vase', 38: 'wardrobe', 39: 'xbox'
+                    }
 
     @property
     def processed_file_names(self):

@@ -12,10 +12,7 @@ from torch_geometric.utils import degree
 from helpers.visualize import vis_graph
 
 
-
-
-
-class Results():
+class Results:
     def __init__(self):
         self.train_losses = []
         self.val_accuracy = []

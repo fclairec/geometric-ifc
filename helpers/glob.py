@@ -1,4 +1,5 @@
-#from torch_geometric.utils import scatter_
+# source: pytorch geometric, slight changes applies to functions
+
 from helpers.scatter import scatter
 
 

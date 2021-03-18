@@ -1,3 +1,5 @@
+# source: pytorch geometric, slight changes applies to functions
+
 from itertools import repeat, product
 
 import torch

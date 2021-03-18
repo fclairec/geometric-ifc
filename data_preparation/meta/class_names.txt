@@ -1,6 +1,0 @@
-pipes
-walls
-slabs
-stairs
-doors
-columns

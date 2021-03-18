@@ -1,19 +1,12 @@
 import torch
 import torch.nn.functional as F
-import torch_geometric.transforms as T
 from torch.nn import Sequential as Seq, Linear as Lin, ReLU, Dropout, BatchNorm1d as BN
-from torch_geometric.nn import PointConv, fps, radius, global_max_pool,fps, avg_pool_x, voxel_grid, max_pool_x
+from torch_geometric.nn import PointConv, radius, fps
 from torch_geometric.nn import DynamicEdgeConv, global_max_pool, GCNConv, GraphConv
 from helpers.glob import global_max_pool
-from helpers.graph_unet import GraphUNet
-from torch_geometric.utils import dropout_adj
-import numpy
-from torch.autograd import Variable
-from torch_geometric.nn import global_add_pool, global_mean_pool
-import torch.nn as nn
-#from helpers.glob import global_max_pool, global_add_pool, global_mean_pool
 
 
+# from helpers.glob import global_max_pool, global_add_pool, global_mean_pool
 
 class SAModule(torch.nn.Module):
     def __init__(self, ratio, r, nn):
@@ -66,12 +59,12 @@ class PN2Net(torch.nn.Module):
 
     def forward(self, data):
         sa0_out = (data.norm, data.pos, data.batch)
-        #sa0_out = (torch.cat([data.norm, data.pos], dim=1), data.batch)
+        # sa0_out = (torch.cat([data.norm, data.pos], dim=1), data.batch)
 
-        #sa0_out = (data.pos, data.batch)
+        # sa0_out = (data.pos, data.batch)
         sa1_out = self.sa1_module(*sa0_out)
         sa2_out = self.sa2_module(*sa1_out)
-        #x, pos, batch, crit_points = self.sa3_module(*sa2_out)
+        # x, pos, batch, crit_points = self.sa3_module(*sa2_out)
         x, pos, batch = self.sa3_module(*sa2_out)
 
         x = F.relu(self.lin1(x))
@@ -79,8 +72,7 @@ class PN2Net(torch.nn.Module):
         x = F.relu(self.lin2(x))
         x = F.dropout(x, p=0.5, training=self.training)
         x = self.lin3(x)
-        return F.log_softmax(x, dim=-1)  , None
-
+        return F.log_softmax(x, dim=-1), None
 
 
 class DGCNNNet(torch.nn.Module):
@@ -111,15 +103,14 @@ class GCNCat(torch.nn.Module):
         super(GCNCat, self).__init__()
 
         self.conv1 = GCNConv(6, 64, cached=False, normalize=not True)
-        self.conv2 = GCNConv(64+6, 128, cached=False, normalize=not True)
-        self.conv3 = GCNConv(192+12, 256, cached=False, normalize=not True)
+        self.conv2 = GCNConv(64 + 6, 128, cached=False, normalize=not True)
+        self.conv3 = GCNConv(192 + 12, 256, cached=False, normalize=not True)
         # CAREFUL: If modifying here, check line 202 in experiments.py for pretrained model
         self.lin1 = torch.nn.Linear(256, num_classes)
 
     def forward(self, data):
-
-        #input = torch.cat([data.norm, data.pos], dim=1)
-        #i = torch.cat([data.norm, data.pos, data.x], dim=1)
+        # input = torch.cat([data.norm, data.pos], dim=1)
+        # i = torch.cat([data.norm, data.pos, data.x], dim=1)
         input = torch.cat([data.norm, data.pos], dim=1)
         x, batch = input, data.batch
 
@@ -149,16 +140,16 @@ class GCN(torch.nn.Module):
         super(GCN, self).__init__()
 
         self.conv1 = GCNConv(6, 64, cached=False, normalize=not True)
-        self.conv2 = GCNConv(64+6, 128, cached=False, normalize=not True)
-        self.conv3 = GCNConv(128+6, 256, cached=False, normalize=not True)
+        self.conv2 = GCNConv(64 + 6, 128, cached=False, normalize=not True)
+        self.conv3 = GCNConv(128 + 6, 256, cached=False, normalize=not True)
         # CAREFUL: If modifying here, check line 202 in experiments.py for pretrained model
         self.lin1 = torch.nn.Linear(256, num_classes)
 
     def forward(self, data):
-        i= torch.cat([data.norm, data.pos],dim=1)
+        i = torch.cat([data.norm, data.pos], dim=1)
         input = torch.cat([data.norm, data.pos], dim=1)
-        #i = torch.cat([data.norm, data.pos], dim=1)
-        #input = torch.cat([data.norm, data.pos],dim=1)
+        # i = torch.cat([data.norm, data.pos], dim=1)
+        # input = torch.cat([data.norm, data.pos],dim=1)
         x, batch = i, data.batch
 
         edge_index, edge_weight = data.edge_index, data.edge_attr
@@ -185,16 +176,16 @@ class GCN(torch.nn.Module):
         pred = F.softmax(out, dim=1)
         return out, pred, critical_points
 
+
 class GCNConv(torch.nn.Module):
     def __init__(self, num_classes):
         super(GCNConv, self).__init__()
 
         self.conv1 = GraphConv(6, 64, aggr='add')
-        self.conv2 = GraphConv(64 + 6, 128,aggr='add')
-        self.conv3 = GraphConv(192+12, 256, aggr='add')
+        self.conv2 = GraphConv(64 + 6, 128, aggr='add')
+        self.conv3 = GraphConv(192 + 12, 256, aggr='add')
         # CAREFUL: If modifying here, check line 202 in experiments.py for pretrained model
         self.lin1 = torch.nn.Linear(256, num_classes)
-
 
     def forward(self, data):
         input = torch.cat([data.norm, data.pos], dim=1)
@@ -221,24 +212,23 @@ class GCNConv(torch.nn.Module):
         return out, pred, critical_points
 
 
-
-
 class GCNPool(torch.nn.Module):
+    # reduces the amount of points for convolutions by half by furthest point sampling
     def __init__(self, num_classes):
         super(GCNPool, self).__init__()
 
         self.conv1 = GCNConv(6, 64, cached=False, normalize=not True)
 
-        self.conv2 = GCNConv(64+6, 128, cached=False, normalize=not True)
+        self.conv2 = GCNConv(64 + 6, 128, cached=False, normalize=not True)
 
-        self.conv3 = GCNConv(128+9, 256, cached=False, normalize=not True)
+        self.conv3 = GCNConv(128 + 9, 256, cached=False, normalize=not True)
         # CAREFUL: If modifying here, check line 202 in experiments.py for pretrained model
         self.lin1 = torch.nn.Linear(256, num_classes)
         self.con_int = PointConv()
 
     def forward(self, data):
-        #input = torch.cat([data.norm, data.pos], dim=1)
-        #i = torch.cat([data.norm, data.pos, data.x], dim=1)
+        # input = torch.cat([data.norm, data.pos], dim=1)
+        # i = torch.cat([data.norm, data.pos, data.x], dim=1)
         input = torch.cat([data.norm, data.pos], dim=1)
         x, batch = input, data.batch
 
@@ -254,7 +244,7 @@ class GCNPool(torch.nn.Module):
         x = F.dropout(x, training=self.training, p=0.2)
         x = F.relu(self.conv2(x, edge_index, edge_weight))
 
-        #first downsampleing index generation
+        # first down sampling index generation
         idx = fps(data.pos, batch, ratio=0.5)
         row, col = radius(data.pos, data.pos[idx], 0.4, batch, batch[idx], max_num_neighbors=64)
         edge_index_int = torch.stack([col, row], dim=0)
@@ -270,7 +260,7 @@ class GCNPool(torch.nn.Module):
         out, critical_points = global_max_pool(x, batch)
         out = self.lin1(out)
         out = F.log_softmax(out, dim=1)
-        return out,  critical_points
+        return out, critical_points
 
     def filter_adj(self, edge_index, edge_attr, perm, num_nodes=None):
         num_nodes = self.maybe_num_nodes(edge_index, num_nodes)
@@ -291,4 +281,3 @@ class GCNPool(torch.nn.Module):
 
     def maybe_num_nodes(self, index, num_nodes=None):
         return index.max().item() + 1 if num_nodes is None else num_nodes
-

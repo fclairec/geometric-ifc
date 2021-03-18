@@ -6,12 +6,12 @@ from sklearn.model_selection import ParameterGrid
 from torch_geometric.data import DataLoader
 import torch_geometric.transforms as T
 
-from datasets.bim import BIM
+from datasets.BIMGEOM import BIMGEOM
 from datasets.ModelNet import ModelNet
-from datasets.ModelNet_small import ModelNet_small
-from datasets.splits import random_splits, make_set_sampler
+from segmentation.ModelNet_small import ModelNet_small
+from datasets.splits import make_set_sampler
 
-from learning.models import PN2Net, DGCNNNet, GCN, GCNCat, GCNPool, GCNConv
+from learning.models import GCNConv
 from learning.trainers import Trainer
 from torch.nn import Sequential as Seq, Dropout, Linear as Lin
 from learning.models import MLP
@@ -23,8 +23,6 @@ from helpers.results import save_test_results, save_set_stats
 from helpers.results import summary
 
 NUM_WORKERS = 6
-
-from helpers.visualize import vis_graph, write_pointcloud
 
 # Define depending on hardware
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -124,7 +122,7 @@ class Experimenter(object):
             # assert os.path.exists(self.dataset_path)
 
             if dataset_name[0] == 'B':
-                self.dataset_name = BIM
+                self.dataset_name = BIMGEOM
                 self.dataset_type = dataset_name[-2:]
             if dataset_name[0] == 'M' and dataset_name[-1] == '0':
                 self.dataset_name = ModelNet
@@ -341,7 +339,7 @@ class Experimenter(object):
         return test_acc, epoch_losses, train_accuracies, val_accuracies, epoch_test, mean_epoch_time, num_trainable_params, num_pos, num_ed
 
     def inference(self, test_loader, output_path_run, output_path_error, prob, y_pred, y_real, crit_points):
-        from helpers.visualize import vis_point, vis_crit_points
+        from helpers.visualize import vis_point
 
         vis_point(test_loader, output_path_run, output_path_error, prob, y_pred, y_real, crit_points)
         return
@@ -351,10 +349,11 @@ if __name__ == '__main__':
     torch.cuda.empty_cache()
     config = dict()
 
-    dataset_root_path = "../"
-    output_path = "../out_tmp"
-    #dataset_root_path = "proj99_tum/"
-    #output_path = "/data/out_ec3_benchamrk"
+    # for
+    #dataset_root_path = "../"
+    #output_path = "../out_1703"
+    dataset_root_path = "proj99_tum/"
+    output_path = "/data/out_BIMGEOM"
 
     if not os.path.exists(output_path):
         os.makedirs(output_path)
@@ -362,18 +361,18 @@ if __name__ == '__main__':
     # print set plots
     print_set_stats = False
 
-    # pretrained model
-    pretrained_list = [ "../Resultate/6_out_experiments/3_clas/model_state_best_val.pth.tar", "../Resultate/6_out_experiments/2_clas/model_state_best_val.pth.tar"] # "/data/out_ec3/0_clas/model_state_best_val.pth.tar"
-    # "/tmp/data/0_clas/model_state_best_val.pth.tar" #os.path.join(output_path, "1_clas", "model_state_best_val.pth.tar") (Flase, True or infer)
-    # pretrained = False
-    # pretrained = os.path.join(output_path, "0_clas", "model_state_best_val.pth.tar")
-    train = False  # if set to false --> inference
+    # for transfer learning we list the pretrained model models here. In case we train from scratch use pretrained_list = [False]
+    # pretrained_list = [ "../Resultate/6_out_experiments/3_clas/model_state_best_val.pth.tar", "../Resultate/6_out_experiments/2_clas/model_state_best_val.pth.tar"] # "/data/out_ec3/0_clas/model_state_best_val.pth.tar"
+    pretrained_list = [False]
+
+    # Set to false if only performing inference
+    train = True
 
     for pretrained in pretrained_list:
-        config['dataset_name'] = ['BIM_PC_C3' ,'Benchmark']  # BIM_PC_T1  #BIM_PC_T4 , 'ModelNet10' 'Benchmark
+        config['dataset_name'] = ['BIMGEOMV1']  # 'BIM_PC_C3' ,'Benchmark'# BIM_PC_T1  #BIM_PC_T4 , 'ModelNet10' 'Benchmark
         config['n_epochs'] = [2]
         config['learning_rate'] = [0.001]
-        config['batch_size'] = [1]
+        config['batch_size'] = [20]
         config['model_name'] = [GCNConv]  # GCN GCN_nocat_pool GCN_nocat,GCN, GCN_nocat #, GCN_cat GCN, GCN_cat, GCN_pool, GCN_cat, GCN, GCNCat, GCNPool
 
         config['knn'] = [5]  # ,10,15,20

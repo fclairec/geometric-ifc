@@ -1,19 +1,24 @@
 version: "2.3"
 services:
-  torch_test152:
+  torch_test153:
     build:
-      context: ../
-      dockerfile: geometric-ifc/Docker/DOCKERFILE
+      context: .
+      dockerfile: Dockerfile
       args:
-        USER_ID: ${USER_ID:-1000}  # TODO: Exchange with "gpu: all" (instead of runtime: nvidia) in the future (see https://github.com/facebookresearch/detectron2/pull/197/commits/00545e1f376918db4a8ce264d427a07c1e896c5a).
+        USER_ID: ${USER_ID:-1000}
+    runtime: nvidia  # TODO: Exchange with "gpu: all" in the future (see https://github.com/facebookresearch/detectron2/pull/197/commits/00545e1f376918db4a8ce264d427a07c1e896c5a).
     shm_size: "8gb"
     ulimits:
       memlock: -1
       stack: 67108864
     volumes:
+      - type: bind
+        source: ../ozut
+        target: /data
+      - type: bind
+        source: ../geometric-ifc
+        target: /proj99_tum
       - /tmp/.X11-unix:/tmp/.X11-unix:ro
-      - C:/Projekte/data:/data:rw
-      - C:/Projekte/geometric-ifc:/geometric-ifc:rw
     environment:
       - DISPLAY=$DISPLAY
       - NVIDIA_VISIBLE_DEVICES=all

@@ -2,8 +2,8 @@ FROM ubuntu:18.04
 
 RUN apt-get update && apt-get install -y apt-transport-https ca-certificates && \
     rm -rf /var/lib/apt/lists/*
-ENV DEBIAN_FRONTEND=noninteractive 
-    
+ENV DEBIAN_FRONTEND=noninteractive
+
 RUN apt-get update && apt-get install -y --no-install-recommends apt-utils gnupg2 curl && \
     curl -fsSL https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub | apt-key add - && \
     echo "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64 /" > /etc/apt/sources.list.d/cuda.list && \
@@ -67,7 +67,7 @@ ENV NVIDIA_REQUIRE_CUDA "cuda>=10.0 brand=tesla,driver>=384,driver<385 brand=tes
 
 # PyTorch (Geometric) installation
 RUN rm /etc/apt/sources.list.d/cuda.list && \
-    rm /etc/apt/sources.list.d/nvidia-ml.list 
+    rm /etc/apt/sources.list.d/nvidia-ml.list
 
 RUN apt-get update &&  apt-get install -y \
     curl \
@@ -136,23 +136,20 @@ RUN CPATH=/usr/local/cuda/include:$CPATH \
  && LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH \
  && DYLD_LIBRARY_PATH=/usr/local/cuda/lib:$DYLD_LIBRARY_PATH
 
-RUN pip install torch-scatter==latest+cu101 -f https://pytorch-geometric.com/whl/torch-1.5.0.html \
- && pip install torch-sparse==latest+cu101 -f https://pytorch-geometric.com/whl/torch-1.5.0.html \
- && pip install torch-cluster==latest+cu101 -f https://pytorch-geometric.com/whl/torch-1.5.0.html \
- && pip install torch-spline-conv==latest+cu101 -f https://pytorch-geometric.com/whl/torch-1.5.0.html \
+RUN pip install --no-index torch-scatter -f https://pytorch-geometric.com/whl/torch-1.5.0+cu101.html \
+ && pip install --no-index torch-sparse -f https://pytorch-geometric.com/whl/torch-1.5.0+cu101.html \
+ && pip install --no-index torch-cluster -f https://pytorch-geometric.com/whl/torch-1.5.0+cu101.html \
+ && pip install --no-index torch-spline-conv -f https://pytorch-geometric.com/whl/torch-1.5.0+cu101.html \
  && pip install torch-geometric
 
 #RUN mkdir /home/fcollins/data/$(date +%M)
 
 
-RUN DEBIAN_FRONTEND='noninteractive' sudo apt-get update && DEBIAN_FRONTEND='noninteractive' sudo apt-get install  -y --no-install-recommends texlive
-# copy file 
-#RUN ["echo", "hello world"]
-COPY proj99_tum /
+# copy files (not needed if mounted from docker-compose)
+#COPY proj99_tum /
 CMD ["ls"]
-
 #CMD ["nohup", "python3", "-u", "proj99_tum/bim-shape-learning/experiments_seg.py", "&>", "/data/nohup.out", "&"]
-CMD ["python3", "proj99_tum/bim-shape-learning/experiments.py"]
+CMD ["python3", "experiments.py"]
 
 # Set the default command to python3.
 #CMD ["python3"]
