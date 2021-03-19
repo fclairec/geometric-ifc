@@ -14,6 +14,7 @@ from learning.models import GCNConv
 from learning.trainers import Trainer
 from torch.nn import Sequential as Seq, Dropout, Linear as Lin
 from learning.models import MLP
+from learning.models import PN2Net, GCNConv, GCNPool
 
 import os
 import pandas as pd
@@ -21,6 +22,7 @@ import numpy as np
 from helpers.results import save_test_results, save_set_stats
 from helpers.results import summary
 import argparse
+import ast
 
 NUM_WORKERS = 6
 
@@ -34,7 +36,7 @@ WRITE_DF_TO_ = ['to_csv']  # , 'to_latex'
 def parse_args():
     parser = argparse.ArgumentParser(description='Train 3D Geometric Classifier')
     parser.add_argument('--dataset', default=['BIMGEOMV1'], nargs='+', type=str, help='dataset name')
-    parser.add_argument('--num_epoch', default=[2], nargs='+', type=int, help='number of epochs')
+    parser.add_argument('--num_epoch', default=[250], nargs='+', type=int, help='number of epochs')
     parser.add_argument('--batch_size', nargs='+', default=[30], type=int, help='batch size')
     parser.add_argument('--learning_rate', nargs='+', default=[0.001], type=float, help='learning rate of optimizer')
     parser.add_argument('--model', default=[GCNConv], nargs='+', help='model to train')
@@ -59,12 +61,12 @@ def transform_setup(graph_u=False, graph_gcn=False, rotation=180, samplePoints=1
     if not graph_u and not graph_gcn:
         # Default transformation for scale noralization, centering, point sampling and rotating
         pretransform = T.Compose([T.NormalizeScale(), T.Center()])
-        transform = T.Compose([T.SamplePoints(samplePoints), T.RandomRotate(rotation)])
+        transform = T.Compose([T.SamplePoints(samplePoints), T.RandomRotate(rotation[0], rotation[1])])
         print("pointnet rotation {}".format(rotation))
     elif graph_u:
         pretransform = T.Compose([T.NormalizeScale(), T.Center()])
         transform = T.Compose(
-            [T.NormalizeScale(), T.Center(), T.SamplePoints(samplePoints, True, True), T.RandomRotate(rotation),
+            [T.NormalizeScale(), T.Center(), T.SamplePoints(samplePoints, True, True), T.RandomRotate(rotation[0], rotation[1]),
              T.KNNGraph(k=graph_u)])
     elif graph_gcn:
 
@@ -72,10 +74,10 @@ def transform_setup(graph_u=False, graph_gcn=False, rotation=180, samplePoints=1
 
         if mesh:
             if mesh == "extraFeatures":
-                transform = T.Compose([T.RandomRotate(rotation), T.GenerateMeshNormals(),
+                transform = T.Compose([T.RandomRotate(rotation[0], rotation[1]), T.GenerateMeshNormals(),
                                        T.FaceToEdge(True), T.Distance(norm=True), T.TargetIndegree(cat=True)])  # ,
             else:
-                transform = T.Compose([ T.GenerateMeshNormals(),
+                transform = T.Compose([T.RandomRotate(rotation[0], rotation[1]), T.GenerateMeshNormals(),
                                        T.FaceToEdge(True), T.Distance(norm=True), T.TargetIndegree(cat=True)])
         else:
             transform = T.Compose([T.SamplePoints(samplePoints, True, True),
@@ -395,11 +397,12 @@ if __name__ == '__main__':
         config['n_epochs'] = args.num_epoch
         config['learning_rate'] = args.learning_rate
         config['batch_size'] = args.batch_size
-        config['model_name'] = args.model  # GCN GCN_nocat_pool GCN_nocat,GCN, GCN_nocat #, GCN_cat GCN, GCN_cat, GCN_pool, GCN_cat, GCN, GCNCat, GCNPool
+        config['model_name'] = [globals()[i] for i in args.model]  # GCN GCN_nocat_pool GCN_nocat,GCN, GCN_nocat #, GCN_cat GCN, GCN_cat, GCN_pool, GCN_cat, GCN, GCNCat, GCNPool
 
         config['knn'] = args.knn  # ,10,15,20
-        config['rotation'] = args.rotation
+        config['rotation'] = [ast.literal_eval(i) for i in args.rotation]
         config['samplePoints'] = args.samplePoints
+        config['node_translation'] = args.node_translation
         config['node_translation'] = args.node_translation
         config['mesh'] = args.mesh  # Set to False if KNN #FalseextraFeatures, True, 'extraFeatures', 'extraFeatures'
 

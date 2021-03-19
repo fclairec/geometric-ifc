@@ -147,7 +147,9 @@ RUN pip install --no-index torch-scatter -f https://pytorch-geometric.com/whl/to
 #COPY proj99_tum /
 CMD ["ls"]
 #CMD ["nohup", "python3", "-u", "proj99_tum/bim-shape-learning/experiments_seg.py", "&>", "/data/nohup.out", "&"]
-CMD ["python3", "geometric-ifc/experiments.py --batch_size=30,40 --learning_rate=0.01,0.001 --rotation=[0,0,0],[0,0,180]"]
+CMD ["python3", "geometric-ifc/experiments.py --batch_size 30 40 --learning_rate=0.01 0.001 --samplePoints 1024"]
+
+
 
 # Set the default command to python3.
 #CMD ["python3"]
