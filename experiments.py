@@ -33,70 +33,60 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 WRITE_DF_TO_ = ['to_csv']  # , 'to_latex'
 
+
 def parse_args():
     parser = argparse.ArgumentParser(description='Train 3D Geometric Classifier')
     parser.add_argument('--dataset', default=['BIMGEOMV1'], nargs='+', type=str, help='dataset name')
     parser.add_argument('--num_epoch', default=[250], nargs='+', type=int, help='number of epochs')
     parser.add_argument('--batch_size', nargs='+', default=[30], type=int, help='batch size')
     parser.add_argument('--learning_rate', nargs='+', default=[0.001], type=float, help='learning rate of optimizer')
-    parser.add_argument('--model', default=[GCNConv], nargs='+', help='model to train')
+    parser.add_argument('--model', default=["GCNConv"], nargs='+', help='model to train')
     parser.add_argument('--knn', default=[5], nargs='+', help='k nearest point neighbors to connect')
-    parser.add_argument('--rotation', default=[0,0,0], nargs='+', help='rotation interval applied to each sample X,Y,Z direction')
-    parser.add_argument('--samplePoints', default=[1024], nargs='+', type=int, help='points to sample from mesh surface')
-    parser.add_argument('--node_translation', default=[0.0], nargs='+', type=float, help='translation interval applied to each point')
+    parser.add_argument('--rotation', default=["[0,0,0]"], nargs='+',
+                        help='rotation interval applied to each sample around a specific axis [x, y, z]')
+    parser.add_argument('--samplePoints', default=[1024], nargs='+', type=int,
+                        help='points to sample from mesh surface')
+    parser.add_argument('--node_translation', default=[0.0], nargs='+', type=float,
+                        help='translation interval applied to each point')
     parser.add_argument('--mesh', default=[True], nargs='+', help='is input a surface mesh?')
 
-
-    parser.add_argument('--data_path', default='/resources', type=str, help='path to dataset to train')
-    parser.add_argument('--output_path', default='/data/X', type=str, help='output path for experiments')
+    parser.add_argument('--data_path', default='~/resources', type=str, help='path to dataset to train')
+    parser.add_argument('--output_path', default='~/data/X', type=str, help='output path for experiments')
     parser.add_argument('--logdir', default='./log', type=str, help='path to directory to save log')
     parser.add_argument('--checkpoint_dir', default=False, help='path to directory to checkpoint')
 
     args = parser.parse_args()
-
     return args
 
 
-def transform_setup(graph_u=False, graph_gcn=False, rotation=180, samplePoints=1024, mesh=False, node_translation=0.01):
-    if not graph_u and not graph_gcn:
-        # Default transformation for scale noralization, centering, point sampling and rotating
-        pretransform = T.Compose([T.NormalizeScale(), T.Center()])
-        transform = T.Compose([T.SamplePoints(samplePoints), T.RandomRotate(rotation[0], rotation[1])])
-        print("pointnet rotation {}".format(rotation))
-    elif graph_u:
-        pretransform = T.Compose([T.NormalizeScale(), T.Center()])
-        transform = T.Compose(
-            [T.NormalizeScale(), T.Center(), T.SamplePoints(samplePoints, True, True), T.RandomRotate(rotation[0], rotation[1]),
-             T.KNNGraph(k=graph_u)])
-    elif graph_gcn:
 
-        pretransform = T.Compose([T.NormalizeScale(), T.Center()])
+def transform_setup(k=5, rotation=[0, 0, 0], samplePoints=1024, mesh=False, node_translation=0.00):
+    pre_transform = T.Compose([T.NormalizeScale(), T.Center()])
 
-        if mesh:
-            if mesh == "extraFeatures":
-                transform = T.Compose([T.RandomRotate(rotation[0], rotation[1]), T.GenerateMeshNormals(),
-                                       T.FaceToEdge(True), T.Distance(norm=True), T.TargetIndegree(cat=True)])  # ,
-            else:
-                transform = T.Compose([T.RandomRotate(rotation[0], rotation[1]), T.GenerateMeshNormals(),
-                                       T.FaceToEdge(True), T.Distance(norm=True), T.TargetIndegree(cat=True)])
-        else:
-            transform = T.Compose([T.SamplePoints(samplePoints, True, True),
-                                   T.KNNGraph(k=graph_gcn), T.Distance(norm=True)])
-            print("no mesh")
-        print("Rotation {}".format(rotation))
-        print("Meshing {}".format(mesh))
+    # Mesh-to-Graph approach
+    if mesh:
+        transform = T.Compose([T.RandomRotate(rotation[0], axis=0), T.RandomRotate(rotation[1], axis=1),
+                               T.RandomRotate(rotation[2], axis=2),
+                               T.GenerateMeshNormals(), T.RandomTranslate(node_translation),
+                               T.FaceToEdge(True), T.Distance(norm=True), T.TargetIndegree(cat=True)])
 
-
+    # Point Sampling & K-nn graph
     else:
-        print('no transfom')
+        transform = T.Compose([T.RandomRotate(rotation[0], axis=0), T.RandomRotate(rotation[1], axis=1),
+                               T.RandomRotate(rotation[2], axis=2),
+                               T.GenerateMeshNormals(), T.RandomTranslate(node_translation),
+                               T.SamplePoints(samplePoints, True, True), T.KNNGraph(k=k), T.Distance(norm=True)])
 
-    return transform, pretransform
+    print("The following sample pre-transforms are applied: {}".format(pre_transform))
+    print("The following sample transforms are applied: {}".format(transform))
+
+    return transform, pre_transform
 
 
 class Experimenter(object):
     def __init__(self, config, dataset_root, output_path):
-        if config is not None:
-            self.grid = ParameterGrid(config)
+
+        self.grid = ParameterGrid(config)
         self.dataset_root_path = dataset_root
         self.output_path = output_path
 
@@ -124,10 +114,8 @@ class Experimenter(object):
             result['model_name'] = params['model_name'].__name__
             plot_name = ','.join(['%s' % value for (key, value) in result.items()])
             plot_name = plot_name.replace('_', '')
-            # outputpaths
-            "assert os.path.exists(output_path)"
-            output_path_run = os.path.join(output_path, str(i) + "_clas")
 
+            output_path_run = os.path.join(output_path, str(i) + "_clas")
             print("Run {} of {}".format(i, len(grid_unfold)))
             print("Writing outputs to {}".format(output_path_run))
 
@@ -144,8 +132,6 @@ class Experimenter(object):
             print(os.getcwd())
             print(self.dataset_path)
 
-            # assert os.path.exists(self.dataset_path)
-
             if dataset_name[0] == 'B':
                 self.dataset_name = BIMGEOM
                 self.dataset_type = dataset_name[-2:]
@@ -154,11 +140,10 @@ class Experimenter(object):
                 self.dataset_type = dataset_name[-2:]
 
             if print_set_stats:
-
                 # only print set stats once
                 set_stats_path = os.path.join(output_path, dataset_name)
                 if os.path.exists(set_stats_path):
-                    # suppose if path exists we already have stats on the dataset
+                    # suppose if path exists we already have stats on the dataset and we skip the analysis from then on
                     print_set_stats_run = False
 
                 else:
@@ -215,27 +200,27 @@ class Experimenter(object):
                print_set_stats=False, train=True):
 
         if model_name.__name__ is 'PN2Net':
-            transform, pretransform = transform_setup(rotation=rotation, samplePoints=sample_points, mesh=mesh)
+            transform, pre_transform = transform_setup(rotation=rotation, samplePoints=sample_points, mesh=mesh)
         if model_name.__name__ is 'DGCNNNet':
-            transform, pretransform = transform_setup()
+            transform, pre_transform = transform_setup()
         if model_name.__name__ is 'GCN' or 'GCN_cat' or 'GCN_pool' or 'GCNConv':
             # number of knn to connect to as argument
-            transform, pretransform = transform_setup(graph_gcn=knn, rotation=rotation, samplePoints=sample_points,
-                                                      mesh=mesh, node_translation=node_translation)
+            transform, pre_transform = transform_setup(k=knn, rotation=rotation, samplePoints=sample_points,
+                                                       mesh=mesh, node_translation=node_translation)
             if train:
-                transform, pretransform = transform_setup(graph_gcn=knn, rotation=rotation, samplePoints=sample_points,
-                                                      mesh=mesh, node_translation=node_translation)
+                transform, pre_transform = transform_setup(k=knn, rotation=rotation, samplePoints=sample_points,
+                                                           mesh=mesh, node_translation=node_translation)
             else:
                 # no need for rotation in inference
-                transform, pretransform = transform_setup(graph_gcn=knn, rotation=0, samplePoints=sample_points,
-                                                          mesh=mesh, node_translation=node_translation)
+                transform, pre_transform = transform_setup(k=knn, rotation=0, samplePoints=sample_points,
+                                                           mesh=mesh, node_translation=node_translation)
 
         # Define datasets
         if train:
             dataset = self.dataset_name(self.dataset_path, self.dataset_type, True, transform=transform,
-                                        pre_transform=pretransform)
+                                        pre_transform=pre_transform)
         test_dataset = self.dataset_name(self.dataset_path, self.dataset_type, False, transform=transform,
-                                         pre_transform=pretransform)
+                                         pre_transform=pre_transform)
 
         print("Run with dataset {} type {}".format(str(self.dataset_name.__name__), str(self.dataset_type)))
 
@@ -263,10 +248,11 @@ class Experimenter(object):
 
         # Define dataloaders
         if train:
-            train_loader = DataLoader(train_dataset, batch_size=batch_size, num_workers=NUM_WORKERS, sampler=sampler_train)
+            train_loader = DataLoader(train_dataset, batch_size=batch_size, num_workers=NUM_WORKERS,
+                                      sampler=sampler_train)
             unbalanced_train_loader = DataLoader(train_dataset, batch_size=batch_size, num_workers=NUM_WORKERS)
             val_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False, num_workers=NUM_WORKERS,
-                                sampler=sampler_test)
+                                    sampler=sampler_test)
             # val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False, num_workers=NUM_WORKERS,
             #                        sampler=sampler_val)
         test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False, num_workers=NUM_WORKERS,
@@ -275,7 +261,7 @@ class Experimenter(object):
             num_pos = int(next(iter(train_loader)).pos.size(0) / batch_size)
             num_ed = int(next(iter(train_loader)).edge_index.size(1) / batch_size)
         else:
-            num_pos=0
+            num_pos = 0
             num_ed = 0
 
         if print_set_stats:
@@ -317,7 +303,7 @@ class Experimenter(object):
                 if train:
                     model.lin1 = Lin(254, 13)
                 # TODO: Make the loading dynamic
-                #model.lin3 = Lin(254, train_dataset.num_classes)
+                # model.lin3 = Lin(254, train_dataset.num_classes)
             else:
                 model = model_name(num_classes=dataset.num_classes).to(device)
 
@@ -339,11 +325,12 @@ class Experimenter(object):
             #   Class Trainer includes test function so its instanciated here
             trainer = Trainer(model, output_path_run)
             test_acc, y_pred, y_real, prob, crit_points = trainer.test(test_loader, save_pred=True, seg=False)
-            #save_test_results(y_real, y_pred, test_acc, output_path_run, test_dataset, epoch_losses=[], train_accuracies=[],
-                              #val_accuracies=[], WRITE_DF_TO_=[], plot_name="dummmy", seg=False)
+            # save_test_results(y_real, y_pred, test_acc, output_path_run, test_dataset, epoch_losses=[], train_accuracies=[],
+            # val_accuracies=[], WRITE_DF_TO_=[], plot_name="dummmy", seg=False)
             output_path_error = os.path.join(output_path_run, "error")
-            np.savetxt(output_path_run+"/perclassacc.csv", np.stack((y_real, y_pred), axis=1), delimiter=",", fmt='%i')
-            print("overal inference/test accuracy : {}" .format(test_acc))
+            np.savetxt(output_path_run + "/perclassacc.csv", np.stack((y_real, y_pred), axis=1), delimiter=",",
+                       fmt='%i')
+            print("overal inference/test accuracy : {}".format(test_acc))
             if not os.path.exists(output_path_error):
                 os.makedirs(output_path_error)
             #   TODO: make inference independant of test
@@ -353,10 +340,10 @@ class Experimenter(object):
         # write_pointcloud(val_loader,output_path)$
         if not train:
             epoch_losses = []
-            train_accuracies=[]
-            val_accuracies=[]
-            epoch_test=[]
-            mean_epoch_time=[]
+            train_accuracies = []
+            val_accuracies = []
+            epoch_test = []
+            mean_epoch_time = []
 
         return test_acc, epoch_losses, train_accuracies, val_accuracies, epoch_test, mean_epoch_time, num_trainable_params, num_pos, num_ed
 
@@ -368,13 +355,8 @@ class Experimenter(object):
 
 
 if __name__ == '__main__':
-    torch.cuda.empty_cache()
-    config = dict()
 
     args = parse_args()
-
-    # not used for now
-    rdm = np.random.RandomState(13)
 
     dataset_root_path = args.data_path
     output_path = args.output_path
@@ -391,20 +373,21 @@ if __name__ == '__main__':
 
     # Set to false if only performing inference
     train = True
-
+    config = dict()
     for pretrained in pretrained_list:
-        config['dataset_name'] = args.dataset  # 'BIM_PC_C3' ,'Benchmark'# BIM_PC_T1  #BIM_PC_T4 , 'ModelNet10' 'Benchmark
+        config['dataset_name'] = args.dataset
         config['n_epochs'] = args.num_epoch
         config['learning_rate'] = args.learning_rate
         config['batch_size'] = args.batch_size
-        config['model_name'] = [globals()[i] for i in args.model]  # GCN GCN_nocat_pool GCN_nocat,GCN, GCN_nocat #, GCN_cat GCN, GCN_cat, GCN_pool, GCN_cat, GCN, GCNCat, GCNPool
+        config['model_name'] = [globals()[i] for i in args.model]
 
         config['knn'] = args.knn  # ,10,15,20
         config['rotation'] = [ast.literal_eval(i) for i in args.rotation]
         config['samplePoints'] = args.samplePoints
         config['node_translation'] = args.node_translation
-        config['node_translation'] = args.node_translation
-        config['mesh'] = args.mesh  # Set to False if KNN #FalseextraFeatures, True, 'extraFeatures', 'extraFeatures'
+        config['mesh'] = args.mesh
 
+        # configure experiements
         ex = Experimenter(config, dataset_root_path, output_path)
+        # run experiments
         ex.run(print_set_stats, pretrained, train=train)

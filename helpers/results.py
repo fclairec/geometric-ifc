@@ -180,6 +180,7 @@ def save_test_results(y_real, y_pred, test_acc, output_path, test_dataset, epoch
 
     plt.close('all')
 
+
 def print_set_csv(l_trainset, l_testset,val_dataset, output_path, classmap, plotname):
 
     filename = 'results_dataset_' + plotname + '.csv'
@@ -196,7 +197,6 @@ def print_set_csv(l_trainset, l_testset,val_dataset, output_path, classmap, plot
             fp.write('{},{}\n'.format(tag, count))
 
     return
-
 
 def save_set_stats(output_path, train_loader, test_loader, train_dataset, test_dataset, val_dataset, unbalanced_train_loader=None, val_loader=None, seg=False):
     save_plot = False
@@ -229,6 +229,8 @@ def save_set_stats(output_path, train_loader, test_loader, train_dataset, test_d
         #Set_analyst([train_loader, unbalanced_train_loader]).bar_plot("train", output_path)
         #Set_analyst([val_loader]).bar_plot("val", output_path)
         #Set_analyst([test_loader]).bar_plot("test", output_path)
+
+
 
 
 

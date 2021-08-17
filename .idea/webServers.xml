@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="d521f55e-6d41-44a7-90c2-c140f1346653" name="appuser@localhost:2244 key (project level)">
+        <fileTransfer rootFolder="/home/appuser" accessType="SFTP" host="localhost" port="2244" sshConfigId="5a250939-3a35-4b6c-814b-ff77cf48ffed" sshConfig="appuser@localhost:2244 key" keyPair="true" />
+      </webServer>
+    </option>
+  </component>
+</project>

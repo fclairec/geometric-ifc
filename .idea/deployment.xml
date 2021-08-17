@@ -1,14 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" remoteFilesAllowedToDisappearOnAutoupload="false">
+  <component name="PublishConfigData" autoUpload="Always" serverName="appuser@localhost:2244" remoteFilesAllowedToDisappearOnAutoupload="false">
     <serverData>
-      <paths name="fcollins@10.152.49.67:22">
+      <paths name="appuser@localhost:2244">
         <serverdata>
           <mappings>
-            <mapping local="$PROJECT_DIR$" web="/" />
+            <mapping deploy="/home/appuser/geometric-ifc" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="appuser@localhost:2244 key (project level)">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/appuser/geometric-ifc" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="fio@10.152.49.246:22">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/appuser/geometric-ifc" local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>
     </serverData>
+    <option name="myAutoUpload" value="ALWAYS" />
   </component>
 </project>
