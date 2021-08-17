@@ -60,7 +60,7 @@ class Trainer:
             train_accuracies_batch = []
             try:
                 for i, data in enumerate(train_loader):
-                    #if i == 3: break
+                    if i == 3: break
                     data = data.to(device)
                     optimizer.zero_grad()
                     outputs, _, _ = self.model(data)
@@ -116,6 +116,7 @@ class Trainer:
                                      'num_output_classes': train_loader.dataset.num_classes
                                  }, is_best
                                  )
+            print("checkpoint saved to", self.output_path)
 
             # if we just found a better model (better validation accuracy)
             # then the window for early stop is set back to the max patience

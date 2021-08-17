@@ -4,6 +4,9 @@ RUN apt-get update && apt-get install -y apt-transport-https ca-certificates && 
     rm -rf /var/lib/apt/lists/*
 ENV DEBIAN_FRONTEND=noninteractive
 
+
+
+
 RUN apt-get update && apt-get install -y --no-install-recommends apt-utils gnupg2 curl && \
     curl -fsSL https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub | apt-key add - && \
     echo "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64 /" > /etc/apt/sources.list.d/cuda.list && \
@@ -58,7 +61,7 @@ RUN echo "/usr/local/nvidia/lib" >> /etc/ld.so.conf.d/nvidia.conf && \
     echo "/usr/local/nvidia/lib64" >> /etc/ld.so.conf.d/nvidia.conf
 
 ENV PATH /usr/local/nvidia/bin:/usr/local/cuda/bin:${PATH}
-ENV LD_LIBRARY_PATH /usr/local/nvidia/lib:/usr/local/nvidia/lib64
+ENV LD_LIBRARY_PATH /usr/local/cuda/lib:/usr/local/cuda/lib64
 
 # NVIDIA container runtime.
 ENV NVIDIA_VISIBLE_DEVICES all
@@ -78,25 +81,49 @@ RUN apt-get update &&  apt-get install -y \
     git \
     bzip2 \
     libx11-6 \
- && rm -rf /var/lib/apt/lists/*
+    openssh-server \
+ && rm -rf /var/lib/apt/lists/* \
+
+ # create a non-root user
+ARG USER_ID=1000
+#ARG USER_PW="lastlogin"
+RUN useradd -m --no-log-init --system  --uid   1000 appuser -g sudo
+RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 
+ # make ssh stuff
+ARG SSH_KEY
+RUN sudo mkdir -p /var/run/sshd
+RUN sudo mkdir "/home/appuser/.ssh"
+ADD ssh_keys.tar.gz /home/appuser
+RUN sudo cp /home/appuser/ssh_keys/authorized_keys /home/appuser/.ssh/authorized_keys
+RUN sudo chown -R appuser:sudo /home/appuser/.ssh/authorized_keys
+
+
+USER appuser
+WORKDIR /home/appuser
 
 # Install Miniconda.
-RUN sudo curl -so ~/miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh \
- && chmod +x ~/miniconda.sh \
- && sudo ~/miniconda.sh -b -p ~/miniconda \
- && sudo rm ~/miniconda.sh
 ENV PATH=/root/miniconda/bin:$PATH
+ENV PATH=/home/appuser/miniconda/bin:$PATH
+
+# Install Miniconda.
+RUN curl -so ~/miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh \
+ && chmod +x ~/miniconda.sh \
+ && ~/miniconda.sh -b -p ~/miniconda \
+ && rm ~/miniconda.sh
 ENV CONDA_AUTO_UPDATE_CONDA=false
 
+ENV sudo chown -R appuser ~/miniconda
+
 # Create a Python 3.6 environment.
-RUN sudo /root/miniconda/bin/conda install conda-build \
- && sudo /root/miniconda/bin/conda create -y --name py36 python=3.6.5 \
- && sudo /root/miniconda/bin/conda clean -ya
+RUN sudo ~/miniconda/bin/conda install conda-build \
+ && sudo ~/miniconda/bin/conda create -y --name py36 python=3.6.5 \
+ && sudo ~/miniconda/bin/conda clean -ya
 ENV CONDA_DEFAULT_ENV=py36
-ENV CONDA_PREFIX=/root/miniconda/envs/$CONDA_DEFAULT_ENV
+ENV CONDA_PREFIX=/home/appuser/miniconda/envs/$CONDA_DEFAULT_ENV
 ENV PATH=$CONDA_PREFIX/bin:$PATH
+
 
 # CUDA 10.0-specific steps.
 #RUN conda install -y -c pytorch torchvision cudatoolkit=10.1 -c pytorch && conda clean -ya
@@ -112,6 +139,8 @@ RUN conda install -y h5py=2.8.0 \
 RUN pip install h5py-cache==1.0
 RUN conda install -c conda-forge openmesh-python
 
+RUN conda install -c conda-forge matplotlib
+
 # Install TorchNet, a high-level framework for PyTorch.
 RUN pip install torchnet
 
@@ -122,6 +151,7 @@ RUN conda install -y requests=2.19.1 \
 # Install Graphviz.
 RUN conda install -y graphviz=2.40.1 python-graphviz=0.8.4 \
  && conda clean -ya
+
 
 # Install OpenCV3 Python bindings.
 RUN sudo apt-get update && sudo apt-get install -y --no-install-recommends \
@@ -143,11 +173,14 @@ RUN pip install --no-index torch-scatter -f https://pytorch-geometric.com/whl/to
  && pip install torch-geometric
 
 
+
+
 # copy files (not needed if mounted from docker-compose)
 #COPY proj99_tum /
 CMD ["ls"]
 #CMD ["nohup", "python3", "-u", "proj99_tum/bim-shape-learning/experiments_seg.py", "&>", "/data/nohup.out", "&"]
-CMD ["python3", "geometric-ifc/experiments.py --batch_size 30 40 --learning_rate=0.01 0.001 --samplePoints 1024"]
+#CMD ["python3", "geometric-ifc/experiments.py --batch_size 30 40 --learning_rate=0.01 0.001 --samplePoints 1024"]
+
 
 
 

@@ -7,6 +7,7 @@ from torch_geometric.data import DataLoader
 import torch_geometric.transforms as T
 
 from datasets.BIMGEOM import BIMGEOM
+from datasets.IFCNetCore import IFCNetCore
 from datasets.ModelNet import ModelNet
 from datasets.splits import make_set_sampler
 
@@ -33,11 +34,10 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 WRITE_DF_TO_ = ['to_csv']  # , 'to_latex'
 
-
 def parse_args():
     parser = argparse.ArgumentParser(description='Train 3D Geometric Classifier')
     parser.add_argument('--dataset', default=['BIMGEOMV1'], nargs='+', type=str, help='dataset name')
-    parser.add_argument('--num_epoch', default=[250], nargs='+', type=int, help='number of epochs')
+    parser.add_argument('--num_epoch', default=[1], nargs='+', type=int, help='number of epochs')
     parser.add_argument('--batch_size', nargs='+', default=[30], type=int, help='batch size')
     parser.add_argument('--learning_rate', nargs='+', default=[0.001], type=float, help='learning rate of optimizer')
     parser.add_argument('--model', default=["GCNConv"], nargs='+', help='model to train')
@@ -50,8 +50,8 @@ def parse_args():
                         help='translation interval applied to each point')
     parser.add_argument('--mesh', default=[True], nargs='+', help='is input a surface mesh?')
 
-    parser.add_argument('--data_path', default='~/resources', type=str, help='path to dataset to train')
-    parser.add_argument('--output_path', default='~/data/X', type=str, help='output path for experiments')
+    parser.add_argument('--data_path', default='../resources', type=str, help='path to dataset to train')
+    parser.add_argument('--output_path', default='../data/heute', type=str, help='output path for experiments')
     parser.add_argument('--logdir', default='./log', type=str, help='path to directory to save log')
     parser.add_argument('--checkpoint_dir', default=False, help='path to directory to checkpoint')
 
@@ -138,6 +138,9 @@ class Experimenter(object):
             if dataset_name[0] == 'M' and dataset_name[-1] == '0':
                 self.dataset_name = ModelNet
                 self.dataset_type = dataset_name[-2:]
+            if dataset_name[0] == 'I':
+                self.dataset_name = IFCNetCore
+                self.dataset_type = dataset_name[-3:]
 
             if print_set_stats:
                 # only print set stats once
