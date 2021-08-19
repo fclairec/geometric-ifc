@@ -15,7 +15,7 @@ from learning.models import GCNConv
 from learning.trainers import Trainer
 from torch.nn import Sequential as Seq, Dropout, Linear as Lin
 from learning.models import MLP
-from learning.models import PN2Net, GCNConv, GCNPool
+from learning.models import PN2Net, GCNConv, GCNPool, GCNCat, GCN
 
 import os
 import pandas as pd
@@ -29,6 +29,7 @@ NUM_WORKERS = 6
 
 # Define depending on hardware
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+print("running with:{}".format(device))
 # device = 'cpu'
 
 
@@ -37,10 +38,10 @@ WRITE_DF_TO_ = ['to_csv']  # , 'to_latex'
 def parse_args():
     parser = argparse.ArgumentParser(description='Train 3D Geometric Classifier')
     parser.add_argument('--dataset', default=['BIMGEOMV1'], nargs='+', type=str, help='dataset name')
-    parser.add_argument('--num_epoch', default=[1], nargs='+', type=int, help='number of epochs')
+    parser.add_argument('--num_epoch', default=[150], nargs='+', type=int, help='number of epochs')
     parser.add_argument('--batch_size', nargs='+', default=[30], type=int, help='batch size')
     parser.add_argument('--learning_rate', nargs='+', default=[0.001], type=float, help='learning rate of optimizer')
-    parser.add_argument('--model', default=["GCNConv"], nargs='+', help='model to train')
+    parser.add_argument('--model', default=["GCNPool", "GCNCat", "GCN"], nargs='+', help='model to train')
     parser.add_argument('--knn', default=[5], nargs='+', help='k nearest point neighbors to connect')
     parser.add_argument('--rotation', default=["[0,0,0]"], nargs='+',
                         help='rotation interval applied to each sample around a specific axis [x, y, z]')
@@ -48,7 +49,7 @@ def parse_args():
                         help='points to sample from mesh surface')
     parser.add_argument('--node_translation', default=[0.0], nargs='+', type=float,
                         help='translation interval applied to each point')
-    parser.add_argument('--mesh', default=[True], nargs='+', help='is input a surface mesh?')
+    parser.add_argument('--mesh', default=[False], nargs='+', help='is input a surface mesh?')
 
     parser.add_argument('--data_path', default='../resources', type=str, help='path to dataset to train')
     parser.add_argument('--output_path', default='../data/heute', type=str, help='output path for experiments')
@@ -383,7 +384,6 @@ if __name__ == '__main__':
         config['learning_rate'] = args.learning_rate
         config['batch_size'] = args.batch_size
         config['model_name'] = [globals()[i] for i in args.model]
-
         config['knn'] = args.knn  # ,10,15,20
         config['rotation'] = [ast.literal_eval(i) for i in args.rotation]
         config['samplePoints'] = args.samplePoints

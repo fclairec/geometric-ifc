@@ -114,7 +114,7 @@ RUN curl -so ~/miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-lates
  && rm ~/miniconda.sh
 ENV CONDA_AUTO_UPDATE_CONDA=false
 
-ENV sudo chown -R appuser ~/miniconda
+
 
 # Create a Python 3.6 environment.
 RUN sudo ~/miniconda/bin/conda install conda-build \
@@ -124,7 +124,7 @@ ENV CONDA_DEFAULT_ENV=py36
 ENV CONDA_PREFIX=/home/appuser/miniconda/envs/$CONDA_DEFAULT_ENV
 ENV PATH=$CONDA_PREFIX/bin:$PATH
 
-
+RUN sudo chown -R appuser ~/miniconda
 # CUDA 10.0-specific steps.
 #RUN conda install -y -c pytorch torchvision cudatoolkit=10.1 -c pytorch && conda clean -ya
 RUN conda install -y -c pytorch \

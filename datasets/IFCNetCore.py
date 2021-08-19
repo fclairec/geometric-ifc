@@ -132,7 +132,8 @@ class IFCNetCore(InMemoryDataset):
 
         data_list = []
         path_list = []
-        transform = T.GenerateMeshNormals()
+        transform = T.SamplePoints(1024, True, True)
+        trans2 = T.GenerateMeshNormals()
 
         for target, category in enumerate(categories):
             folder = osp.join(self.raw_dir, category, dataset)
@@ -143,9 +144,12 @@ class IFCNetCore(InMemoryDataset):
 
                 data = read_obj(path)
                 label = list(self.classmap.keys())[list(self.classmap.values()).index(category)]
-                data.y = torch.tensor([label])
+
                 try:
-                    transform(data)
+                    #trans2(data)
+                    #transform(data)
+
+                    a=0
                 except:
                     print("failed")
                     continue
@@ -188,7 +192,7 @@ class IFCNetCore(InMemoryDataset):
                     # check consistency
                     assert data.y is not None
                     assert data.x is not None
-
+                data.y = torch.tensor([label])
                 data_list.append(data)
 
         if self.pre_filter is not None:
