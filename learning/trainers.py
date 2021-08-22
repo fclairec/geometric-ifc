@@ -4,6 +4,7 @@ import numpy as np
 import torch
 import torch.nn.functional as F
 import os
+import pandas as pd
 from sklearn.metrics import roc_auc_score, average_precision_score
 from torch_geometric.utils import (negative_sampling, remove_self_loops,
                                    add_self_loops)
@@ -39,7 +40,7 @@ def pointnetloss(outputs, labels, m3x3, m64x64, alpha=0.0001):
 
 
 class Trainer:
-    def __init__(self, model, output_path, max_patience=5):
+    def __init__(self, model, output_path, max_patience=120):
         self.model = model
         self.output_path = output_path
         self.max_patience = max_patience
@@ -60,7 +61,7 @@ class Trainer:
             train_accuracies_batch = []
 
             for i, data in enumerate(train_loader):
-                #if i == 3: break
+                if i == 3: break
                 data = data.to(device)
                 optimizer.zero_grad()
                 outputs, _, _ = self.model(data)
@@ -116,6 +117,7 @@ class Trainer:
                                      'num_output_classes': train_loader.dataset.num_classes
                                  }, is_best
                                  )
+            self.save_training_info(self.output_path, train_loader.dataset.__class__.__name__, train_loader.dataset.num_classes, self.model.__class__.__name__, best_performance)
             print("checkpoint saved to", self.output_path)
 
             # if we just found a better model (better validation accuracy)
@@ -240,6 +242,21 @@ class Trainer:
             filename = 'model_state_best_val.pth.tar'
             path_out = osp.join(path, filename)
             torch.save(state, path_out)
+
+    def save_training_info(self, path, dataset, num_classes, model, best_perf):
+        filename = "checkpoint_info.csv"
+        infos = []
+        path_out = osp.join(path, filename)
+        info = {}
+        info['dataset'] = dataset
+        info['num_classes'] = num_classes
+        info['model'] = model
+        info['best_perf'] = best_perf
+        print(info)
+        infos.append(info)
+        pd_info = pd.DataFrame(infos)
+        print(pd_info)
+        pd_info.to_csv(path_out)
 
 
 class Trainer_seg(Trainer):

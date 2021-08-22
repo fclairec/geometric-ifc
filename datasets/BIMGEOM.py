@@ -139,6 +139,7 @@ class BIMGEOM(InMemoryDataset):
 
                 data = read_ply(path)
                 label = list(self.classmap.keys())[list(self.classmap.values()).index(category)]
+                data.x = path
                 data.y = torch.tensor([label])
 
                 if glob_feat:

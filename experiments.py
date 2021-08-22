@@ -38,12 +38,12 @@ WRITE_DF_TO_ = ['to_csv']  # , 'to_latex'
 def parse_args():
     parser = argparse.ArgumentParser(description='Train 3D Geometric Classifier')
     parser.add_argument('--dataset', default=['BIMGEOMV1'], nargs='+', type=str, help='dataset name')
-    parser.add_argument('--num_epoch', default=[150], nargs='+', type=int, help='number of epochs')
+    parser.add_argument('--num_epoch', default=[180], nargs='+', type=int, help='number of epochs')
     parser.add_argument('--batch_size', nargs='+', default=[30], type=int, help='batch size')
     parser.add_argument('--learning_rate', nargs='+', default=[0.001], type=float, help='learning rate of optimizer')
     parser.add_argument('--model', default=["GCNPool", "GCNCat", "GCN"], nargs='+', help='model to train')
     parser.add_argument('--knn', default=[5], nargs='+', help='k nearest point neighbors to connect')
-    parser.add_argument('--rotation', default=["[0,0,0]"], nargs='+',
+    parser.add_argument('--rotation', default=["[0,0,0]", "[180,180,0]"], nargs='+',
                         help='rotation interval applied to each sample around a specific axis [x, y, z]')
     parser.add_argument('--samplePoints', default=[1024], nargs='+', type=int,
                         help='points to sample from mesh surface')
@@ -52,9 +52,9 @@ def parse_args():
     parser.add_argument('--mesh', default=[False], nargs='+', help='is input a surface mesh?')
 
     parser.add_argument('--data_path', default='../resources', type=str, help='path to dataset to train')
-    parser.add_argument('--output_path', default='../data/heute', type=str, help='output path for experiments')
+    parser.add_argument('--output_path', default='../data/sunday', type=str, help='output path for experiments')
     parser.add_argument('--logdir', default='./log', type=str, help='path to directory to save log')
-    parser.add_argument('--checkpoint_dir', default=False, help='path to directory to checkpoint')
+    parser.add_argument('--checkpoint_dir', default=False, nargs='+', type=str, help='list of paths to directory to checkpoint')
 
     args = parser.parse_args()
     return args
@@ -95,6 +95,10 @@ class Experimenter(object):
 
         grid_unfold = list(self.grid)
         results = []
+
+        if pretrained:
+            self.grid = {'checkpoint_dir': self.grid['checkpoint_dir']}
+            a=0
 
         for i, params in enumerate(grid_unfold):
 
@@ -374,6 +378,13 @@ if __name__ == '__main__':
     # for transfer learning we list the pretrained model models here. In case we train from scratch use pretrained_list = [False]
     # pretrained_list = [ "../Resultate/6_out_experiments/3_clas/model_state_best_val.pth.tar", "../Resultate/6_out_experiments/2_clas/model_state_best_val.pth.tar"] # "/data/out_ec3/0_clas/model_state_best_val.pth.tar"
     pretrained_list = [args.checkpoint_dir]
+    # --checkpoint_dir
+    # ../data/heute/0_clas
+    # ../data/heute/1_clas
+    # ../data/heute/2_clas
+    # ../data/heute/3_clas
+    # ../data/heute/4_clas
+    # ../data/heute/5_clas
 
     # Set to false if only performing inference
     train = True
