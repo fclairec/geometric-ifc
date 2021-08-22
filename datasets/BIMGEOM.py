@@ -10,6 +10,7 @@ import shutil
 import numpy as np
 # Edited because newest push to master in PytorchGeom is not in pip package (yet)
 from helpers.in_memory_dataset import InMemoryDataset
+import torch_geometric.transforms as T
 
 
 class BIMGEOM(InMemoryDataset):
@@ -60,6 +61,7 @@ class BIMGEOM(InMemoryDataset):
         super(BIMGEOM, self).__init__(root, transform, pre_transform, pre_filter)
         path = self.processed_paths[0] if train else self.processed_paths[1]
         self.data, self.slices = torch.load(path)
+        a=0
 
     @property
     def raw_file_names(self):
@@ -85,7 +87,9 @@ class BIMGEOM(InMemoryDataset):
 
     @property
     def processed_file_names(self):
-        return ['training.pt', 'test.pt']
+        return ['training.pt', 'test.pt']\
+
+
 
     def download(self):
         path = download_url(self.urls[self.name], self.root)
@@ -102,9 +106,14 @@ class BIMGEOM(InMemoryDataset):
 
     def process(self):
         print(self.processed_paths[0])
-        torch.save(self.process_set('train'), self.processed_paths[0])
+        trainers, id_list_train = self.process_set('train')
+        torch.save(trainers, self.processed_paths[0])
+        self.id_list_train = id_list_train
 
-        torch.save(self.process_set('test'), self.processed_paths[1])
+        testers, id_list_test = self.process_set('test')
+        torch.save(testers, self.processed_paths[1])
+
+        self.id_list_test = id_list_test
 
     def process_set(self, dataset):
 
@@ -129,6 +138,7 @@ class BIMGEOM(InMemoryDataset):
 
         data_list = []
         path_list = []
+        id_list = []
 
         for target, category in enumerate(categories):
             folder = osp.join(self.raw_dir, category, dataset)
@@ -139,8 +149,17 @@ class BIMGEOM(InMemoryDataset):
 
                 data = read_ply(path)
                 label = list(self.classmap.keys())[list(self.classmap.values()).index(category)]
-                data.x = path
+                id_list.append(path)
+
                 data.y = torch.tensor([label])
+
+
+
+                """trans = T.SamplePoints(1025, True, True)
+                trans2 = T.GenerateMeshNormals()
+                trans2(data)
+                trans(data)
+                a=0"""
 
                 if glob_feat:
                     feat_ind = category + "_" + path.split('/')[-1][:22]
@@ -182,7 +201,8 @@ class BIMGEOM(InMemoryDataset):
                     assert data.y is not None
                     assert data.x is not None
 
-                data_list.append(data)
+                data_list.append(data), id_list
+
 
         if self.pre_filter is not None:
             data_list = [d for d in data_list if self.pre_filter(d)]
@@ -195,7 +215,10 @@ class BIMGEOM(InMemoryDataset):
 
             data_list = data_list2
 
-        return self.collate(data_list)
+
+        self.id_list = id_list
+
+        return self.collate(data_list), id_list
 
     def __repr__(self):
         return '{}{}({})'.format(self.__class__.__name__, self.name, len(self))

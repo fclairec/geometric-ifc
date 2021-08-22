@@ -233,7 +233,7 @@ class Experimenter(object):
         print("Run with dataset {} type {}".format(str(self.dataset_name.__name__), str(self.dataset_type)))
 
         # Split dataset randomly (respecting class imbalance) into train and val set (no cross validation for now)
-        # _, train_index, val_index = random_splits(dataset, dataset.num_classes, train_ratio=0.8)
+        # _, train_index, val_index = random_split(dataset, dataset.num_classes, train_ratio=0.8)
         if train:
             train_dataset = dataset
             val_dataset = test_dataset  # for now
@@ -373,7 +373,7 @@ if __name__ == '__main__':
         os.makedirs(output_path)
 
     # print set plots
-    print_set_stats = False
+    print_set_stats = True
 
     # for transfer learning we list the pretrained model models here. In case we train from scratch use pretrained_list = [False]
     # pretrained_list = [ "../Resultate/6_out_experiments/3_clas/model_state_best_val.pth.tar", "../Resultate/6_out_experiments/2_clas/model_state_best_val.pth.tar"] # "/data/out_ec3/0_clas/model_state_best_val.pth.tar"
