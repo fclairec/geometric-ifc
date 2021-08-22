@@ -105,9 +105,13 @@ class IFCNetCore(InMemoryDataset):
 
     def process(self):
         print(self.processed_paths[0])
-        torch.save(self.process_set('train'), self.processed_paths[0])
+        trainers, id_list_train = self.process_set('train')
+        torch.save(trainers, self.processed_paths[0])
+        self.id_list_train = id_list_train
 
-        torch.save(self.process_set('test'), self.processed_paths[1])
+        testers, id_list_test = self.process_set('test')
+        torch.save(testers, self.processed_paths[1])
+        self.id_list_test = id_list_test
 
     def process_set(self, dataset):
 
@@ -132,8 +136,9 @@ class IFCNetCore(InMemoryDataset):
 
         data_list = []
         path_list = []
-        transform = T.SamplePoints(1024, True, True)
-        trans2 = T.GenerateMeshNormals()
+        id_list = []
+        #transform = T.SamplePoints(1024, True, True)
+        #trans2 = T.GenerateMeshNormals()
 
         for target, category in enumerate(categories):
             folder = osp.join(self.raw_dir, category, dataset)
@@ -144,6 +149,7 @@ class IFCNetCore(InMemoryDataset):
 
                 data = read_obj(path)
                 label = list(self.classmap.keys())[list(self.classmap.values()).index(category)]
+                id_list.append(path)
 
                 try:
                     #trans2(data)
@@ -206,7 +212,7 @@ class IFCNetCore(InMemoryDataset):
 
             data_list = data_list2
 
-        return self.collate(data_list)
+        return self.collate(data_list), id_list
 
     def __repr__(self):
         return '{}{}({})'.format(self.__class__.__name__, self.name, len(self))

@@ -112,7 +112,6 @@ class BIMGEOM(InMemoryDataset):
 
         testers, id_list_test = self.process_set('test')
         torch.save(testers, self.processed_paths[1])
-
         self.id_list_test = id_list_test
 
     def process_set(self, dataset):
