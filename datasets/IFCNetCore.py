@@ -1,7 +1,7 @@
 import os.path as osp
 import torch
 import pandas as pd
-
+import pickle
 import glob
 from torch_geometric.io import read_ply, read_obj
 from torch_geometric.data import download_url, extract_zip
@@ -61,6 +61,9 @@ class IFCNetCore(InMemoryDataset):
         super(IFCNetCore, self).__init__(root, transform, pre_transform, pre_filter)
         path = self.processed_paths[0] if train else self.processed_paths[1]
         self.data, self.slices = torch.load(path)
+        path2 = "train.txt" if train else "test.txt"
+        with open(path2, "rb") as fp:  # Unpickling
+            self.id = pickle.load(fp)
 
     @property
     def raw_file_names(self):
@@ -90,6 +93,7 @@ class IFCNetCore(InMemoryDataset):
     def processed_file_names(self):
         return ['training.pt', 'test.pt']
 
+
     def download(self):
         path = download_url(self.urls[self.name], self.root)
         extract_zip(path, self.raw_dir)
@@ -107,11 +111,13 @@ class IFCNetCore(InMemoryDataset):
         print(self.processed_paths[0])
         trainers, id_list_train = self.process_set('train')
         torch.save(trainers, self.processed_paths[0])
-        self.id_list_train = id_list_train
+        with open("train.txt", "wb") as fp:
+            pickle.dump(id_list_train, fp)
 
         testers, id_list_test = self.process_set('test')
         torch.save(testers, self.processed_paths[1])
-        self.id_list_test = id_list_test
+        with open("test.txt", "wb") as fp:
+            pickle.dump(id_list_test, fp)
 
     def process_set(self, dataset):
 

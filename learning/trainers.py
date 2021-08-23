@@ -117,7 +117,7 @@ class Trainer:
                                      'num_output_classes': train_loader.dataset.num_classes
                                  }, is_best
                                  )
-            self.save_training_info(self.output_path, train_loader.dataset.__class__.__name__, train_loader.dataset.num_classes, self.model.__class__.__name__, best_performance)
+            self.save_training_info(self.output_path, train_loader.dataset, train_loader.dataset.num_classes, self.model.__class__.__name__, best_performance)
             print("checkpoint saved to", self.output_path)
 
             # if we just found a better model (better validation accuracy)
@@ -166,26 +166,27 @@ class Trainer:
 
         return acc
 
-    def test(self, data_loader, seg, save_pred=False, prediction_path=None, inf_dataloader=None):
+    def test(self, data_loader, seg, save_pred=False, prediction_path=None):
         self.model.eval()
+        self.dataset_info=data_loader.dataset
         y_pred = []
         y_real = []
         correct = 0
         prob = []
         crit_points_list = []
-        if save_pred:#and inf_dataloader is not None:
+        if save_pred:
             print("running inference per batch")
             """if not os.path.exists(prediction_path):
                 os.makedirs(prediction_path)"""
 
             # for i, iterator in enumerate(zip(data_loader, data_loader)): #inf_dataloader
-            for i, data in enumerate(data_loader): #inf_dataloader
+            for i, data in enumerate(data_loader):
 
                 #i == 3: break
                 data = data.to(device)
                 # loss = F.nll_loss(self.model(data)[0], data.y)
                 with torch.no_grad():
-                    outputs,_, critical_points = self.model(data)
+                    outputs,pred, critical_points = self.model(data)
                     #print(critical_points.size())
                     loss = F.nll_loss(outputs, data.y)
                     SM = torch.max(torch.exp(outputs))
@@ -248,7 +249,7 @@ class Trainer:
         infos = []
         path_out = osp.join(path, filename)
         info = {}
-        info['dataset'] = dataset
+        info['dataset'] = dataset.__class__.__name__+str(dataset.name)
         info['num_classes'] = num_classes
         info['model'] = model
         info['best_perf'] = best_perf
