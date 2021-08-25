@@ -11,6 +11,7 @@ from helpers.set_plot import Set_analyst
 from torch_geometric.utils import degree
 from helpers.visualize import vis_graph
 
+a=0
 
 class Results:
     def __init__(self):
@@ -21,6 +22,8 @@ class Results:
         # self.test_aps = []
         # self.test_rocs = []
         self.correct = 0
+        self.latex = 0
+
 
     def update(self, train_loss=None, val_accuracy=None, val_roc=None):
         if train_loss is not None:
@@ -82,6 +85,7 @@ def save_test_results(y_real, y_pred, test_acc, output_path, test_dataset, epoch
     real_target_names = [test_dataset.classmap[i] for i in np.unique(np.array(test_dataset.data.y))]
     plot_name.replace('_', ' ')
     print(plot_name)
+    latex=False
 
     if seg:
         test_ious = calculate_sem_IoU(y_pred, y_real, test_dataset.num_classes)
@@ -90,7 +94,7 @@ def save_test_results(y_real, y_pred, test_acc, output_path, test_dataset, epoch
         df0 = DataFrame(test_ious, index=real_target_names, columns=[plot_name])
         file_ious_csv = output_path + '/test_ious.csv'
         df0.to_csv(file_ious_csv)
-        if 'to_latex' in WRITE_DF_TO_:
+        if latex:
             file_ious_tex = output_path + '/test_ious' + plot_name + '.tex'
             df0.to_latex(file_ious_tex, caption=plot_name, index=False)
 
@@ -112,7 +116,7 @@ def save_test_results(y_real, y_pred, test_acc, output_path, test_dataset, epoch
         file_confmat_csv_nonnorm = output_path + '/confmat_nonnorm.csv'
         df1.to_csv(file_confmat_csv)
         df12.to_csv(file_confmat_csv_nonnorm)
-        if 'to_latex' in WRITE_DF_TO_:
+        if latex:
             file_confmat_tex = output_path + '/confmat' + plot_name + '.tex'
             df1.to_latex(file_confmat_tex, caption=plot_name)
             print("latex written")
@@ -127,7 +131,7 @@ def save_test_results(y_real, y_pred, test_acc, output_path, test_dataset, epoch
         df2= pandas.concat([df2, df3], axis=1)
         file_classrep_csv = output_path + '/class_report.csv'
         df2.to_csv(file_classrep_csv)
-        if 'to_latex' in WRITE_DF_TO_:
+        if latex:
             file_classrep_tex = output_path + '/class_report' + plot_name + '.tex'
             df2.to_latex(file_classrep_tex, caption=plot_name)
 
@@ -141,7 +145,7 @@ def save_test_results(y_real, y_pred, test_acc, output_path, test_dataset, epoch
     plt.ylabel('Loss', fontsize=16)
     ax.set_xticks(range(len(epoch_losses)))
     ax.set_xticklabels(range(len(epoch_losses)), fontsize=12)
-    if 'to_latex' in WRITE_DF_TO_:
+    if latex:
         plt.savefig(output_path + '/train_loss' + plot_name + '.pgf')
         import tikzplotlib
         tikzplotlib.save("test.tex")
@@ -162,7 +166,7 @@ def save_test_results(y_real, y_pred, test_acc, output_path, test_dataset, epoch
     ax2.set_xticks(range(len(train_accuracies)))
     ax2.set_xticklabels(range(len(train_accuracies)), fontsize=12)
     plot_name.replace('_', ' ')
-    if 'to_latex' in WRITE_DF_TO_:
+    if latex:
         plt.savefig(output_path + '/train-val_acc' + plot_name + '.pgf')
     #plt.savefig(output_path + '/train-val_acc.pdf')
     plt.close()
@@ -174,7 +178,7 @@ def save_test_results(y_real, y_pred, test_acc, output_path, test_dataset, epoch
     file_epochresults_csv = output_path + '/epoch_results.csv'
     df4.to_csv(file_epochresults_csv)
     plot_name.replace('_',' ')
-    if 'to_latex' in WRITE_DF_TO_:
+    if latex:
         file_epochresults_txt = output_path + '/epoch_results' + plot_name + '.tex'
         df4.to_latex(file_epochresults_txt, caption=plot_name, index=False)
 

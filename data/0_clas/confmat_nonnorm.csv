@@ -1,0 +1,14 @@
+,IfcDistributionControlElement,IfcFlowController,IfcFlowFitting,IfcFlowSegment,IfcFlowTerminal,IfcColumn,IfcFurnishingElement,IfcStair,IfcDoor,IfcSlab,IfcWall,IfcWindow,IfcRailing
+IfcDistributionControlElement,111,8,22,3,0,0,0,0,0,3,1,2,0
+IfcFlowController,15,82,34,14,0,0,0,2,0,0,0,0,3
+IfcFlowFitting,27,18,77,6,2,0,3,10,0,15,1,1,4
+IfcFlowSegment,5,2,4,104,0,21,0,2,0,11,0,0,7
+IfcFlowTerminal,18,15,30,12,15,2,7,16,2,15,8,8,12
+IfcColumn,2,0,1,6,0,133,0,0,2,0,1,0,0
+IfcFurnishingElement,38,1,7,11,0,7,59,8,5,14,4,9,2
+IfcStair,0,0,0,5,0,0,0,138,0,4,0,0,10
+IfcDoor,0,0,4,1,0,0,2,1,134,3,4,7,7
+IfcSlab,4,1,0,4,0,0,3,2,1,131,0,1,2
+IfcWall,4,0,2,5,1,10,6,2,6,1,115,7,8
+IfcWindow,1,1,1,3,0,0,1,2,21,7,1,105,11
+IfcRailing,0,1,4,9,2,0,6,14,8,1,1,4,105

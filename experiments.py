@@ -15,7 +15,7 @@ from learning.models import GCNConv
 from learning.trainers import Trainer
 from torch.nn import Sequential as Seq, Dropout, Linear as Lin
 from learning.models import MLP
-from learning.models import PN2Net, GCNConv, GCNPool, GCNCat, GCN
+from learning.models import PN2Net, GCNConv, GCNPool, GCNCat, GCN, DGCNNNet, PN2Net
 
 import os
 import pandas as pd
@@ -32,27 +32,29 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 print("running with:{}".format(device))
 # device = 'cpu'
 
+print(os.getcwd())
+
 
 WRITE_DF_TO_ = ['to_csv']  # , 'to_latex'
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Train 3D Geometric Classifier')
-    parser.add_argument('--dataset', default=['BIMGEOMV1'], nargs='+', type=str, help='dataset name')
+    parser.add_argument('--dataset', default=['BIMGEOMV1', 'IFCNetCoreObj'], nargs='+', type=str, help='dataset name')
     parser.add_argument('--num_epoch', default=[180], nargs='+', type=int, help='number of epochs')
     parser.add_argument('--batch_size', nargs='+', default=[30], type=int, help='batch size')
     parser.add_argument('--learning_rate', nargs='+', default=[0.001], type=float, help='learning rate of optimizer')
-    parser.add_argument('--model', default=["GCNPool", "GCNCat", "GCN"], nargs='+', help='model to train')
+    parser.add_argument('--model', default=["GCNPool", "GCNCat", "GCNCat", "PN2Net", "DGCNNNet"], nargs='+', help='model to train') #
     parser.add_argument('--knn', default=[5], nargs='+', help='k nearest point neighbors to connect')
-    parser.add_argument('--rotation', default=["[0,0,0]", "[180,180,0]"], nargs='+',
-                        help='rotation interval applied to each sample around a specific axis [x, y, z]')
+    parser.add_argument('--rotation', default=["[0,0,0]"], nargs='+',
+                        help='rotation interval applied to each sample around a specific axis [x, y, z]') #, "[180,180,0]"
     parser.add_argument('--samplePoints', default=[1024], nargs='+', type=int,
                         help='points to sample from mesh surface')
     parser.add_argument('--node_translation', default=[0.0], nargs='+', type=float,
                         help='translation interval applied to each point')
     parser.add_argument('--mesh', default=[False], nargs='+', help='is input a surface mesh?')
 
-    parser.add_argument('--data_path', default='../resources', type=str, help='path to dataset to train')
-    parser.add_argument('--output_path', default='../data/sunday', type=str, help='output path for experiments')
+    parser.add_argument('--data_path', default='./resources', type=str, help='path to dataset to train')
+    parser.add_argument('--output_path', default='./data/Wed_withoutbrake', type=str, help='output path for experiments')
     parser.add_argument('--logdir', default='./log', type=str, help='path to directory to save log')
     parser.add_argument('--checkpoint_dir', default=False, nargs='+', type=str, help='list of paths to directory to checkpoint')
 
@@ -168,16 +170,16 @@ class Experimenter(object):
                 set_stats_path = os.path.join(output_path, dataset_name)
                 if os.path.exists(set_stats_path):
                     # suppose if path exists we already have stats on the dataset and we skip the analysis from then on
-                    print_set_stats_run = False
+                    print_set_stats = False
                 else:
                     os.makedirs(set_stats_path)
-                    print_set_stats_run = set_stats_path
+                    print_set_stats = set_stats_path
             else:
-                print_set_stats_run = False
+                print_set_stats = False
 
             test_acc, epoch_losses, train_accuracies, val_accuracies, epoch_test, mean_epoch_time, num_train_params, num_pos, num_ed = self.subrun(
                 output_path_run, n_epochs, model_name, batch_size, learning_rate, knn, pretrained, plot_name, rotation,
-                sample_points, node_translation, mesh=mesh, train=train, inference=inference)
+                sample_points, node_translation, mesh=mesh, print_set_stats=print_set_stats, train=train, inference=inference)
 
             result['test_acc'] = test_acc
             result['epoch_test'] = epoch_test
@@ -389,17 +391,18 @@ if __name__ == '__main__':
     args = parse_args()
     #set the following
     mode = "EXP"
-    mode = "INF"
+    #mode = "INF"
     #mode = "TRANS"
 
     dataset_root_path = args.data_path
     output_path = args.output_path
 
+
     if not os.path.exists(output_path):
         os.makedirs(output_path)
 
     # print set plots
-    print_set_stats = True
+    print_set_stats = False
 
     # for transfer learning we list the pretrained model models here. In case we train from scratch use pretrained_list = [False]
     #pretrained_list = [ "../Resultate/6_out_experiments/3_clas/model_state_best_val.pth.tar", "../Resultate/6_out_experiments/2_clas/model_state_best_val.pth.tar"] # "/data/out_ec3/0_clas/model_state_best_val.pth.tar"

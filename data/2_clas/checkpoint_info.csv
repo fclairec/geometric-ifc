@@ -1,0 +1,2 @@
+,dataset,num_classes,model,best_perf
+0,BIMGEOMV1,13,DGCNNNet,0.6343980343980344

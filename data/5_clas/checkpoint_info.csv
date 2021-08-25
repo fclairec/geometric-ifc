@@ -1,0 +1,2 @@
+,dataset,num_classes,model,best_perf
+0,IFCNetCoreObj,20,DGCNNNet,0.6385035729298024

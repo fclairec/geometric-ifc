@@ -61,7 +61,7 @@ class Trainer:
             train_accuracies_batch = []
 
             for i, data in enumerate(train_loader):
-                if i == 3: break
+                #if i == 3: break
                 data = data.to(device)
                 optimizer.zero_grad()
                 outputs, _, _ = self.model(data)
@@ -186,7 +186,7 @@ class Trainer:
                 data = data.to(device)
                 # loss = F.nll_loss(self.model(data)[0], data.y)
                 with torch.no_grad():
-                    outputs,pred, critical_points = self.model(data)
+                    outputs,_, critical_points = self.model(data)
                     #print(critical_points.size())
                     loss = F.nll_loss(outputs, data.y)
                     SM = torch.max(torch.exp(outputs))
@@ -253,10 +253,10 @@ class Trainer:
         info['num_classes'] = num_classes
         info['model'] = model
         info['best_perf'] = best_perf
+        print("saving info")
         print(info)
         infos.append(info)
         pd_info = pd.DataFrame(infos)
-        print(pd_info)
         pd_info.to_csv(path_out)
 
 
