@@ -35,6 +35,7 @@ print("running with:{}".format(device))
 
 print(os.getcwd())
 
+print('Salman_version')
 
 WRITE_DF_TO_ = ['to_csv']  # , 'to_latex'
 
