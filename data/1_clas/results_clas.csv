@@ -1,3 +1,0 @@
-,batch_size,dataset_name,knn,learning_rate,mesh,model_name,n_epochs,node_translation,rotation,samplePoints,test_acc,epoch_test,mean_epoch_time,num_trainable_parameter,num_pos,num_edge
-0,30,BIMGEOMV1,5,0.001,False,GCNCat,250,0.0,"[0, 0, 0]",1024,0.6432432432432432,242,0.6424996843338012,65357,1024,5120
-1,30,BIMGEOMV1,5,0.001,False,PN2Net,250,0.0,"[0, 0, 0]",1024,0.6324324324324324,249,1.876546688079834,1467405,1024,5120

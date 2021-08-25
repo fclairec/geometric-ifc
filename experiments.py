@@ -397,7 +397,7 @@ class Experimenter(object):
         df_final_embedding.to_csv(os.path.join(output_path_run,"finalembeddings.csv"), index=False)
 
 
-        vis_point(test_loader, output_path_run, output_path_error, prob, y_pred, y_real, crit_points)
+        #vis_point(test_loader, output_path_run, output_path_error, prob, y_pred, y_real, crit_points)
         return
 
 

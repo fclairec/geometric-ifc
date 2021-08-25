@@ -1,0 +1,2 @@
+,checkpoint_dir,model_name,test_acc,epoch_test,mean_epoch_time,num_trainable_parameter,num_pos,num_edge
+0,../data/Wed_withoutbrake/0_clas,GCNPool,0.8329238329238329,[],[],48205,0,0
