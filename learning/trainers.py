@@ -171,6 +171,7 @@ class Trainer:
         self.dataset_info=data_loader.dataset
         y_pred = []
         y_real = []
+        final_embedding = []
         correct = 0
         prob = []
         crit_points_list = []
@@ -182,15 +183,17 @@ class Trainer:
             # for i, iterator in enumerate(zip(data_loader, data_loader)): #inf_dataloader
             for i, data in enumerate(data_loader):
 
-                #i == 3: break
+                #if i == 3: break
                 data = data.to(device)
                 # loss = F.nll_loss(self.model(data)[0], data.y)
                 with torch.no_grad():
-                    outputs,_, critical_points = self.model(data)
+                    outputs,global_vect, critical_points = self.model(data)
                     #print(critical_points.size())
                     loss = F.nll_loss(outputs, data.y)
                     SM = torch.max(torch.exp(outputs))
                     pred = outputs.max(1)[1]
+
+
 
                     # Check if normalized indexes correspond to real ones
                     #assert inf_data.y.numpy().all()==data.y.cpu().numpy().all()
@@ -205,6 +208,11 @@ class Trainer:
                 y_real = concat((y_real, data.y.cpu().numpy()))
                 crit_points_list.append(critical_points.cpu().numpy())
                 prob.append(SM.cpu().numpy())
+                """print(i)
+                print(data.num_graphs)"""
+                #print(global_vect.cpu().numpy())
+                final_embedding.append(global_vect.cpu().numpy())
+
 
         else:
             # Loop for testing without writing results
@@ -233,7 +241,7 @@ class Trainer:
             # average over the number of graphs
             acc = correct / len(data_loader.dataset)
 
-        return acc, y_pred, y_real, prob, crit_points_list
+        return acc, y_pred, y_real, prob, crit_points_list, final_embedding
 
     def save_checkpoint(self, path, state, is_best):
         filename = 'model_state.pth.tar'

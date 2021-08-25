@@ -24,6 +24,7 @@ from helpers.results import save_test_results, save_set_stats
 from helpers.results import summary
 import argparse
 import ast
+import shutil
 
 NUM_WORKERS = 6
 
@@ -40,7 +41,7 @@ WRITE_DF_TO_ = ['to_csv']  # , 'to_latex'
 def parse_args():
     parser = argparse.ArgumentParser(description='Train 3D Geometric Classifier')
     parser.add_argument('--dataset', default=['BIMGEOMV1', 'IFCNetCoreObj'], nargs='+', type=str, help='dataset name')
-    parser.add_argument('--num_epoch', default=[180], nargs='+', type=int, help='number of epochs')
+    parser.add_argument('--num_epoch', default=[1], nargs='+', type=int, help='number of epochs')
     parser.add_argument('--batch_size', nargs='+', default=[30], type=int, help='batch size')
     parser.add_argument('--learning_rate', nargs='+', default=[0.001], type=float, help='learning rate of optimizer')
     parser.add_argument('--model', default=["GCNPool", "GCNCat", "GCNCat", "PN2Net", "DGCNNNet"], nargs='+', help='model to train') #
@@ -53,8 +54,8 @@ def parse_args():
                         help='translation interval applied to each point')
     parser.add_argument('--mesh', default=[False], nargs='+', help='is input a surface mesh?')
 
-    parser.add_argument('--data_path', default='./resources', type=str, help='path to dataset to train')
-    parser.add_argument('--output_path', default='./data/Wed_withoutbrake', type=str, help='output path for experiments')
+    parser.add_argument('--data_path', default='../resources', type=str, help='path to dataset to train')
+    parser.add_argument('--output_path', default='../data/Wed_test_inf', type=str, help='output path for experiments')
     parser.add_argument('--logdir', default='./log', type=str, help='path to directory to save log')
     parser.add_argument('--checkpoint_dir', default=False, nargs='+', type=str, help='list of paths to directory to checkpoint')
 
@@ -92,6 +93,8 @@ class Experimenter(object):
         self.grid = ParameterGrid(config)
         self.dataset_root_path = dataset_root
         self.output_path = output_path
+
+
 
     def run(self, print_set_stats, pretrained, train, inference=False):
 
@@ -154,6 +157,8 @@ class Experimenter(object):
             self.dataset_path = os.path.join(self.dataset_root_path, dataset_name)
             print(os.getcwd())
             print(self.dataset_path)
+            """if os.path.exists(os.path.join(self.dataset_path, "processed")):
+                shutil.rmtree(os.path.join(self.dataset_path, "processed"))"""
 
             if dataset_name[0] == 'B':
                 self.dataset_name = BIMGEOM
@@ -209,8 +214,8 @@ class Experimenter(object):
                                                                                                     optimizer)
         print('{} seconds'.format(time.time() - t0))
         # Evaluate best model on Test set
-        test_acc, y_pred, y_real, _, _ = trainer.test(test_loader, seg=False)
-        val_acc2, _, _, _, _ = trainer.test(val_loader, seg=False)
+        test_acc, y_pred, y_real, _, _, _ = trainer.test(test_loader, seg=False)
+        val_acc2, _, _, _, _, _ = trainer.test(val_loader, seg=False)
 
         print("Test accuracy = {}, Val accuracy = {}".format(test_acc, val_acc2))
 
@@ -295,7 +300,7 @@ class Experimenter(object):
 
         if pretrained:
             # load checkpoints
-            pretrained_info = pd.read_csv(os.path.join(self.model_to_load_dir, "checkpoint_info"), index_col=0)
+            pretrained_info = pd.read_csv(os.path.join(self.model_to_load_dir, "checkpoint_info.csv"), index_col=0)
             checkpoint = torch.load(os.path.join(self.model_to_load_dir, "model_state_best_val.pth.tar"), map_location=torch.device('cpu'))
             # say the class output dimension of the pretrained model, for correct loading
             # e.g. if pretrained model was on ModelNet10 -> set here 10
@@ -351,8 +356,8 @@ class Experimenter(object):
             # Here inference jobs are done
             #   Class Trainer includes test function so its instanciated here
             trainer = Trainer(model, output_path_run)
-            test_acc, _, _, _, _ = trainer.test(test_loader, save_pred=True, seg=False)
-            inf_acc, inf_y_pred, inf_y_real, inf_prob, inf_crit_points = trainer.test(inf_loader, save_pred=True, seg=False)
+            test_acc, _, _, _, _ , _ = trainer.test(test_loader, save_pred=False, seg=False)
+            inf_acc, inf_y_pred, inf_y_real, inf_prob, inf_crit_points, final_embedding = trainer.test(inf_loader, save_pred=True, seg=False)
 
             output_path_error = os.path.join(output_path_run, "error")
 
@@ -361,7 +366,8 @@ class Experimenter(object):
             if not os.path.exists(output_path_error):
                 os.makedirs(output_path_error)
             #   TODO: make inference independant of test
-            self.inference(test_loader, output_path_run, output_path_error, inf_prob, inf_y_pred, inf_y_real, inf_crit_points)
+
+            self.inference(test_loader, output_path_run, output_path_error, inf_prob, inf_y_pred, inf_y_real, inf_crit_points, final_embedding)
 
         # vis_graph(val_loader, output_path)
         # write_pointcloud(val_loader,output_path)$
@@ -374,12 +380,21 @@ class Experimenter(object):
 
         return test_acc, epoch_losses, train_accuracies, val_accuracies, epoch_test, mean_epoch_time, num_trainable_params, num_pos, num_ed
 
-    def inference(self, test_loader, output_path_run, output_path_error, prob, y_pred, y_real, crit_points):
+    def inference(self, test_loader, output_path_run, output_path_error, prob, y_pred, y_real, crit_points, final_embedding):
         from helpers.visualize import vis_point
+        df2 = pd.DataFrame(np.concatenate(final_embedding))
+        print(df2)
+        df1 = pd.DataFrame(test_loader.dataset.id)
+
+        df_final_embedding = pd.concat([df1, df2], axis=1)
+
 
         # save true vs pred with id
         df_truepred = pd.DataFrame({'object_id': test_loader.dataset.id,'y_real': y_real, 'y_pred': y_pred, 'certainty': prob})
         df_truepred.to_csv(os.path.join(output_path_run,"trueVspred-withId.csv"), index=False)
+
+
+        df_final_embedding.to_csv(os.path.join(output_path_run,"finalembeddings.csv"), index=False)
 
 
         vis_point(test_loader, output_path_run, output_path_error, prob, y_pred, y_real, crit_points)
@@ -391,7 +406,7 @@ if __name__ == '__main__':
     args = parse_args()
     #set the following
     mode = "EXP"
-    #mode = "INF"
+    mode = "INF"
     #mode = "TRANS"
 
     dataset_root_path = args.data_path

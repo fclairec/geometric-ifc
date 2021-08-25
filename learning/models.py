@@ -58,7 +58,13 @@ class PN2Net(torch.nn.Module):
         self.lin3 = Lin(256, out_channels)
 
     def forward(self, data):
-        sa0_out = (data.normal, data.pos, data.batch)
+
+        if data.normal is not None:
+            used_normals = data.normal
+        else:
+            used_normals = data.norm
+
+        sa0_out = (used_normals, data.pos, data.batch)
         # sa0_out = (torch.cat([data.norm, data.pos], dim=1), data.batch)
 
         # sa0_out = (data.pos, data.batch)
@@ -70,9 +76,9 @@ class PN2Net(torch.nn.Module):
         x = F.relu(self.lin1(x))
         x = F.dropout(x, p=0.5, training=self.training)
         x = F.relu(self.lin2(x))
-        x = F.dropout(x, p=0.5, training=self.training)
-        x = self.lin3(x)
-        return F.log_softmax(x, dim=-1), None, crit_points
+        global_vect_256 = F.dropout(x, p=0.5, training=self.training)
+        global_vect_12 = self.lin3(global_vect_256)
+        return F.log_softmax(global_vect_12, dim=-1), global_vect_256, crit_points
 
 
 class DGCNNNet(torch.nn.Module):
@@ -92,10 +98,9 @@ class DGCNNNet(torch.nn.Module):
         x1 = self.conv1(pos, batch)
         x2 = self.conv2(x1, batch)
         out = self.lin1(torch.cat([x1, x2], dim=1))
-        out, critical_points = global_max_pool(out, batch)
-        out = self.mlp(out)
-        pred = "not used"
-        return F.log_softmax(out, dim=1), pred, critical_points
+        global_vect_256, critical_points = global_max_pool(out, batch)
+        global_vect_12 = self.mlp(global_vect_256)
+        return F.log_softmax(global_vect_12, dim=1), global_vect_256, critical_points
 
 
 class GCNCat(torch.nn.Module):
@@ -133,11 +138,10 @@ class GCNCat(torch.nn.Module):
         x = F.dropout(x, training=self.training, p=0.2)
         x = F.relu(self.conv3(x, edge_index, edge_weight))
 
-        out, critical_points = global_max_pool(x, batch)
-        out = self.lin1(out)
-        out = F.log_softmax(out, dim=1)
-        pred = "not used"
-        return out, pred, critical_points
+        global_vect_256, critical_points = global_max_pool(x, batch)
+        global_vect_12 = self.lin1(global_vect_256)
+        out = F.log_softmax(global_vect_12, dim=1)
+        return out, global_vect_256, critical_points
 
 
 class GCN(torch.nn.Module):
@@ -151,7 +155,12 @@ class GCN(torch.nn.Module):
         self.lin1 = torch.nn.Linear(256, num_classes)
 
     def forward(self, data):
-        i = torch.cat([data.normal, data.pos], dim=1)
+        if data.normal is not None:
+            used_normals = data.normal
+        else:
+            used_normals = data.norm
+
+        i = torch.cat([used_normals, data.pos], dim=1)
         input = torch.cat([data.normal, data.pos], dim=1)
         # i = torch.cat([data.norm, data.pos], dim=1)
         # input = torch.cat([data.norm, data.pos],dim=1)
@@ -175,12 +184,11 @@ class GCN(torch.nn.Module):
         """if batch.size(0) != data.pos.size(0):
             print("nooo")"""
 
-        out, critical_points = global_max_pool(x, batch)
-        out = self.lin1(out)
-        out = F.log_softmax(out, dim=1)
-        pred = "not used"
+        global_vect_256, critical_points = global_max_pool(x, batch)
+        global_vect_12 = self.lin1(global_vect_256)
+        out = F.log_softmax(global_vect_12, dim=1)
 
-        return out, pred, critical_points
+        return out, global_vect_256, critical_points
 
 
 
@@ -199,12 +207,17 @@ class GCNPool(torch.nn.Module):
         self.con_int = PointConv()
 
     def forward(self, data):
+        if data.normal is not None:
+            used_normals = data.normal
+        else:
+            used_normals = data.norm
+
         # input = torch.cat([data.norm, data.pos], dim=1)
         # i = torch.cat([data.norm, data.pos, data.x], dim=1)
         """print(data.norm.size())
         print(data.pos.size())
         print("here")"""
-        input = torch.cat([data.normal, data.pos], dim=1)
+        input = torch.cat([used_normals, data.pos], dim=1)
 
 
         x, batch = input, data.batch
@@ -234,11 +247,11 @@ class GCNPool(torch.nn.Module):
         x = torch.cat([x, input[idx]], dim=1)
         x = F.relu(self.conv3(x, edge_index, edge_weight))
 
-        out, critical_points = global_max_pool(x, batch)
-        out = self.lin1(out)
-        out = F.log_softmax(out, dim=1)
-        pred = F.softmax(out, dim=1)
-        return out, pred, critical_points
+        global_vect_256, critical_points = global_max_pool(x, batch)
+        global_vect_12 = self.lin1(global_vect_256)
+        out = F.log_softmax(global_vect_12, dim=1)
+
+        return out, global_vect_256, critical_points
 
     def filter_adj(self, edge_index, edge_attr, perm, num_nodes=None):
         num_nodes = self.maybe_num_nodes(edge_index, num_nodes)

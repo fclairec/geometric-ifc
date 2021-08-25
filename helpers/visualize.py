@@ -81,7 +81,7 @@ def vis_crit_points(test_loader, output_path, output_path_error, prob, y_pred_li
         fig.suptitle('True label: {} / Predicted label: {}, certainty {}'.format(y_real_l, y_pred_l, certainty),
                      fontsize=16)
 
-        print(crit_points)
+        #print(crit_points)
 
         with open(output_path_error + '/critpot.txt', "w") as text_file:
             for pt in crit_points:
