@@ -43,7 +43,7 @@ def parse_args():
     parser = argparse.ArgumentParser(description='Train 3D Geometric Classifier')
     parser.add_argument('--dataset', default=['BIMGEOMV1', 'IFCNetCoreObj'], nargs='+', type=str, help='dataset name')
     parser.add_argument('--num_epoch', default=[1], nargs='+', type=int, help='number of epochs')
-    parser.add_argument('--batch_size', nargs='+', default=[30], type=int, help='batch size')
+    parser.add_argument('--batch_size', nargs='+', default=[10], type=int, help='batch size')
     parser.add_argument('--learning_rate', nargs='+', default=[0.001], type=float, help='learning rate of optimizer')
     parser.add_argument('--model', default=["GCNPool", "GCNCat", "GCNCat", "PN2Net", "DGCNNNet"], nargs='+', help='model to train') #
     parser.add_argument('--knn', default=[5], nargs='+', help='k nearest point neighbors to connect')
@@ -230,11 +230,11 @@ class Experimenter(object):
                plot_name=False, rotation=180, sample_points=1024, node_translation=0.001, mesh=False,
                print_set_stats=False, train=True, inference=False):
 
-        if model_name.__name__ is 'PN2Net':
+        if model_name.__name__ == 'PN2Net':
             transform, pre_transform = transform_setup(rotation=rotation, samplePoints=sample_points, mesh=mesh)
-        if model_name.__name__ is 'DGCNNNet':
+        if model_name.__name__ == 'DGCNNNet':
             transform, pre_transform = transform_setup()
-        if model_name.__name__ is 'GCN' or 'GCN_cat' or 'GCN_pool' or 'GCNConv':
+        if model_name.__name__ == 'GCN' or 'GCN_cat' or 'GCN_pool' or 'GCNConv':
             # number of knn to connect to as argument
             transform, pre_transform = transform_setup(k=knn, rotation=rotation, samplePoints=sample_points,
                                                        mesh=mesh, node_translation=node_translation)
@@ -308,7 +308,7 @@ class Experimenter(object):
             dim_last_layer = pretrained_info['num_classes'].values[0]
 
         # Define models depending on the setting
-        if model_name.__name__ is 'PN2Net':
+        if model_name.__name__ == 'PN2Net':
             if pretrained:
                 model = model_name(dim_last_layer)
                 model.load_state_dict(checkpoint['state_dict'], strict=False)
@@ -318,7 +318,7 @@ class Experimenter(object):
             else:
                 model = model_name(out_channels=train_dataset.num_classes).to(device)
 
-        if model_name.__name__ is 'DGCNNNet':
+        if model_name.__name__ == 'DGCNNNet':
             if pretrained:
                 model = model_name(dim_last_layer)
                 model.load_state_dict(checkpoint['state_dict'], strict=False)
@@ -407,7 +407,7 @@ if __name__ == '__main__':
     args = parse_args()
     #set the following
     mode = "EXP"
-    mode = "INF"
+    #mode = "INF"
     #mode = "TRANS"
 
     dataset_root_path = args.data_path
@@ -429,7 +429,7 @@ if __name__ == '__main__':
 
     config = dict()
 
-    if mode is "EXP":
+    if mode == "EXP":
         train = True
         pretrained = False
         config['dataset_name'] = args.dataset
@@ -448,7 +448,7 @@ if __name__ == '__main__':
         # run experiments
         ex.run(print_set_stats, pretrained, train=train)
 
-    if mode is "INF":
+    if mode == "INF":
         pretrained = True
         train = False
         config['checkpoint_dir'] = args.checkpoint_dir
@@ -456,7 +456,7 @@ if __name__ == '__main__':
         # run experiments
         ex.run(print_set_stats, pretrained, train=train, inference=True)
 
-    if mode is "TRANS":
+    if mode == "TRANS":
         pretrained = True
         train = True
         #TODO
