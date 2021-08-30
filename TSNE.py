@@ -10,14 +10,14 @@ import pandas as pd
 
 
 sns.set(rc={'figure.figsize':(11.7,8.27)})
-palette = sns.color_palette("bright", 12)
+palette = sns.color_palette("tab20", 13)
 
 file = '/home/asalman/ifcwork/ifcworkspi2021/geometric-ifc/resources/feature_space.csv'
 file2 = '/home/asalman/ifcwork/ifcworkspi2021/geometric-ifc/resources/feature_space_withlabels.csv'
 reader = csv.reader(open(file, "rt"), delimiter=",")
 reader2 = csv.reader(open(file2, "rt"), delimiter=",")
 features = np.array(list(reader)).astype("float")
-labels = np.array(list(reader2)).astype("float")
+labels = np.array(list(reader2)).astype("str")
 
 
 def Extract(label):
@@ -30,14 +30,16 @@ labels = Extract(labels)
 
 
 
-#X, y = load_digits(return_X_y=True)
+X, y = load_digits(return_X_y=True)
+
 
 tsne = TSNE()
 
 X_embedded = tsne.fit_transform(features)
 
 sns.scatterplot(x=X_embedded[:,0], y=X_embedded[:,1], hue=labels,legend='full', palette = palette)
-print(X_embedded[:,0])
-print(X_embedded[:,1])
+
+#plt.scatter(X_embedded[:,0],y=X_embedded[:,1])
+
 plt.show()
 
