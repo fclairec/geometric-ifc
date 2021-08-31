@@ -18,18 +18,18 @@ reader = csv.reader(open(file, "rt"), delimiter=",")
 reader2 = csv.reader(open(file2, "rt"), delimiter=",")
 
 
-mode = "all"
-#mode = "two"
+#mode = "all"
+mode = "two"
 
 tsne = TSNE()
 
 if mode == "two":
-    palette = sns.color_palette("tab20", 2)
+    palette = sns.color_palette("bright", 2)
 
     features =[]
     labels =[]
     for row in reader2:
-        if row[0] == "IfcDistributionControlElement" or row[0] == "IfcFLowController":
+        if row[0] == "IfcSlab" or row[0] == "IfcDoor":
             labels.append(row[0])
             row = row[1:]
             features.append(row)
