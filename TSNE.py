@@ -10,6 +10,10 @@ import csv
 import pandas as pd
 import os
 
+
+
+
+
 sns.set_style("white")
 sns.set(rc={'figure.figsize':(11.7,8.27),'axes.facecolor':'white', 'figure.facecolor':'white'})
 
@@ -38,6 +42,7 @@ if method == "KNN":
 
     if mode == "allwithrotationvariant":
 
+        
         palette = sns.color_palette("tab20", 13)
 
         features = []
@@ -80,6 +85,14 @@ if method == "KNN":
 
         plt.show()
     if mode == "twowithrotationvariant":
+
+        
+        
+        
+        
+
+
+
         palette = sns.color_palette("bright", 3)
 
         features =[]
@@ -92,9 +105,29 @@ if method == "KNN":
 
         X_embedded = tsne.fit_transform(features)
 
-        sns.scatterplot(x=X_embedded[:,0], y=X_embedded[:,1], hue=labels,legend='full', palette = palette).set(title='kNN: Rotation Variant')
+        fig, ax = plt.subplots()
+        x = X_embedded[:,0]
+        y = X_embedded[:,1]
+        sns.scatterplot(x=X_embedded[:,0], y=X_embedded[:,1], hue=labels,legend='full', palette = palette)
 
         #plt.scatter(X_embedded[:,0],y=X_embedded[:,1])
+        lnx = plt.plot([60,60], [0,1.5], color='black', linewidth=0.3)
+        lny = plt.plot([0,100], [1.5,1.5], color='black', linewidth=0.3)
+        lnx[0].set_linestyle('None')
+        lny[0].set_linestyle('None')
+        plt.xlim(x.min()*0.95, x.max()*1.05)
+        plt.ylim(y.min()*0.95, y.max()*1.05)
+        
+        def hover(event):
+            
+            lnx[0].set_data([event.xdata, event.xdata], [0, 1.5])
+            lnx[0].set_linestyle('--')
+            lny[0].set_data([0,100], [event.ydata, event.ydata])
+            lny[0].set_linestyle('--')
+        
+        fig.canvas.mpl_connect("motion_notify_event", hover)
+
+        plt.title('kNN: Rotation Variant')
 
         plt.show()
 
@@ -120,12 +153,13 @@ if method == "KNN":
 
 if method == "Mesh":
 
-   
-    file1 = r"D:\HiWi_AI\Salman_Branch\geometric-ifc\resources\feature_space_results\mesh_rot2.csv"
-    file2 = r"D:\HiWi_AI\Salman_Branch\geometric-ifc\resources\feature_space_results\mesh_rot3.csv"
+    file1 = os.getcwd()
+    file1 = os.path.join(file1, "resources/mesh_rot2.csv")
+    file2 = os.getcwd()
+    file2 = os.path.join(file2, "resources/mesh_rot3.csv")
     
-    reader1 = csv.reader(open(file3, "rt"), delimiter=",")
-    reader2 = csv.reader(open(file4, "rt"), delimiter=",")
+    reader1 = csv.reader(open(file1, "rt"), delimiter=",")
+    reader2 = csv.reader(open(file2, "rt"), delimiter=",")
 
     method = "KNN"
     method = "Mesh"
@@ -195,7 +229,10 @@ if method == "Mesh":
 
         #plt.scatter(X_embedded[:,0],y=X_embedded[:,1])
 
-        plt.show()
+        fig, ax = plt.subplots()
+        #ax.scatter(X_embedded[:,0], X_embedded[:,1], c=labels.map(palette))
+        plt.show
+
 
     if mode == "twowithrotationinvariant":
         palette = sns.color_palette("bright", 2)
