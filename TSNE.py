@@ -135,7 +135,7 @@ def scatterplot(directory, numOfClasses, label):
             
                       
     fig.canvas.mpl_connect("motion_notify_event", hover)
-    plt.title(method + ': ' + mode)
+    plt.title(method + ': ' + mode + ' with ' +label+ ' labels')
     plt.show()  
 
 
