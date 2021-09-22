@@ -179,6 +179,7 @@ class BIMGEOM(InMemoryDataset):
                     try:
 
                         x1 = torch.tensor([np.log(feature['compactness'] + 1)] * 1024).reshape(-1, 1)
+                        
                         x2 = torch.tensor([feature['isWall']] * 1024, dtype=torch.float).reshape(-1, 1)
                         x3 = torch.tensor([feature['isStair']] * 1024, dtype=torch.float).reshape(-1, 1)
                         x4 = torch.tensor([feature['isSlab']] * 1024, dtype=torch.float).reshape(-1, 1)
@@ -194,6 +195,7 @@ class BIMGEOM(InMemoryDataset):
 
                         x14 = torch.tensor([np.log(feature['Volume'] + 1)] * 1024, dtype=torch.float).reshape(-1, 1)
                         x15 = torch.tensor([np.log(feature['Area'] + 1)] * 1024, dtype=torch.float).reshape(-1, 1)
+                        print(x2)
                     except:
                         print("not all features found skipping this ob")
 
@@ -226,3 +228,8 @@ class BIMGEOM(InMemoryDataset):
 
     def __repr__(self):
         return '{}{}({})'.format(self.__class__.__name__, self.name, len(self))
+
+
+if __name__ == '__main__':
+
+    print('salman')
