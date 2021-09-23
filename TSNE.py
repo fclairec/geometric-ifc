@@ -19,7 +19,7 @@ method = "KNN"
 #method = "Mesh"
 
 label = 'Real'
-#label = 'Predicted'
+#label_pred = 'Predicted'
 
 mode = "Rotation Variant"
 #mode = "Rotation Invariant"
@@ -27,14 +27,18 @@ mode = "Rotation Variant"
 numOfClasses  = 13
 #numOfClasses = 2
 #numOfClasses = 3
+#numOfClasses = 4
+
 
 subclasses = ['IfcFurnishingElement', 'IfcFlowSegment']
+subclasses = ['IfcFurnishingElement', 'IfcFlowTerminal', 'IfcFlowController']
 
 def scatterplot(directory, numOfClasses, label):
     
 
     dir = directory
-    featureSpaceFile = os.path.join(dir, 'featurespace.csv')
+    #featureSpaceFile = os.path.join(dir, 'featurespace.csv')
+    finalembeddings = os.path.join(dir, 'finalembeddings.csv')
     predictionsFile = os.path.join(dir, 'trueVspred-withId.csv')
 
     df = pd.read_csv(predictionsFile)
@@ -43,59 +47,51 @@ def scatterplot(directory, numOfClasses, label):
         9: 'IfcSlab',10: 'IfcWall',11: 'IfcWindow',12: 'IfcRailing',0: 'IfcDistributionControlElement'}
     df.y_pred = [dict_map[item] for item in df.y_pred]
     df.y_real = [dict_map[item] for item in df.y_real]
+    df.id = [item.split("/")[-1] for item in df.object_id]
    
-    print(featureSpaceFile)
+    print(finalembeddings)
 
-    featureSpace = csv.reader(open(featureSpaceFile, "rt"), delimiter=",")
+    finalembeddings = csv.reader(open(finalembeddings, "rt"), delimiter=",")
    
     
     features = []
     labels = []
     label = label
+    ids = []
+    pred_labels = []
     print(label)
             
-    next(featureSpace)
+    next(finalembeddings)
     
 
     if numOfClasses == 13:
 
-        for row in featureSpace:
-            
+        for row in finalembeddings:
+            class_name = row[0].split("/")[-1].split("_")[-1].split(".")[0]
+            labels.append(class_name)
+            ids.append(row[0].split("/")[-1])
+            pred = df.loc[df['object_id'] == row[0]].y_pred.values[0]
             row = row[1:]
             features.append(row)
-                 
-            
-        if label == 'Real':
-            for row in df.y_real:
-                
-                labels.append(row)
-                
+            pred_labels.append(pred)
+
+
+
+
+    for row in finalembeddings:
+        class_name = row[0].split("/")[-1].split("_")[-1].split(".")[0]
+        if class_name in subclasses:
+            labels.append(class_name)
+            ids.append(row[0].split("/")[-1])
+            pred = df.loc[df['object_id'] == row[0]].y_pred.values[0]
+            row = row[1:]
+            features.append(row)
+            pred_labels.append(pred)
+
         else:
-            for row in df.y_pred:
-                labels.append(row)
+            continue
 
-    if numOfClasses == 2:
 
-        for row in featureSpace:
-            if row[0] == subclasses[0] or row[0] == subclasses[1]:
-                labels.append(row[0])
-                row = row[1:]
-                features.append(row)
-
-    if numOfClasses == 3:
-        
-        while len(subclasses) == 3:
-            for row in featureSpace:
-                if row[0] == subclasses[0] or row[0] == subclasses[1] or row[0] == subclasses[2]:
-                    labels.append(row[0])
-                    row = row[1:]
-                    features.append(row)
-        else:
-            print('Error: Enter at least 3 subclasses')
-            exit()
-            
-        
-        
 
 
     tsne = TSNE()
@@ -105,15 +101,19 @@ def scatterplot(directory, numOfClasses, label):
 
     fig, ax = plt.subplots()
     labels, index = np.unique(labels, return_inverse=True)
-    
-    sc = ax.scatter(x, y, marker = '.', c = index, alpha = 1)
-    ax.legend(sc.legend_elements()[0], labels)
+
+
+    sc = ax.scatter(x, y, marker = '.', c = index, alpha = 1, cmap='tab20')
+    ax.legend(sc.legend_elements()[0], labels,loc=2, prop={'size': 6})
 
     plt.xlim(x.min()*0.95, x.max()*1.05)
     plt.ylim(y.min()*0.95, y.max()*1.05)
-            
+    plt.xlim(-60, 60)
+    plt.ylim(-60, 60)
+    plt.axis('off')
+
     annot = ax.annotate("", xy=(0,0), xytext=(5,5),textcoords="offset points")
-    annot.set_visible(False)
+    annot.set_visible(True)
 
     def hover(event):
 
@@ -121,11 +121,12 @@ def scatterplot(directory, numOfClasses, label):
         if event.inaxes == ax:
             
             cont, ind = sc.contains(event)
+            print(ind)
             if cont:
                 # change annotation position
                 annot.xy = (event.xdata, event.ydata)
                 # write the name of every point contained in the event
-                annot.set_text("{}".format(', '.join([str(n) for n in ind["ind"]])))
+                annot.set_text("{}".format(', '.join(["true:"+str(ids[n])+" and pred:"+str(pred_labels[n]) for n in ind["ind"]])))
                 annot.set_visible(True)    
             else:
                 annot.set_visible(False)
@@ -135,8 +136,7 @@ def scatterplot(directory, numOfClasses, label):
             
                       
     fig.canvas.mpl_connect("motion_notify_event", hover)
-    plt.title(method + ': ' + mode + ' with ' +label+ ' labels')
-    plt.show()  
+    plt.show()
 
 
 
@@ -148,13 +148,13 @@ tsne = TSNE()
 if method == "KNN":
 
     current_dir = os.getcwd()
-    file1 = os.path.join(current_dir, "resources/knn_easy")
+    file1 = os.path.join(current_dir, "../../data/05_kann/4_clas/inference")
     file2 = os.path.join(current_dir, "resources/knn_full")
 
 else:
 
     current_dir = os.getcwd()
-    file1 = os.path.join(current_dir, "resources/mesh_easy")
+    file1 = os.path.join(current_dir, "../../data/3_clas/inference")
     file2 = os.path.join(current_dir, "resources/mesh_full")
    
    
@@ -180,4 +180,3 @@ if mode == "Rotation Invariant":
 
 
         
-
