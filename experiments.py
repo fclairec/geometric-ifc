@@ -407,7 +407,7 @@ if __name__ == '__main__':
     args = parse_args()
     #set the following
     mode = "EXP"
-    mode = "INF"
+    #mode = "INF"
     #mode = "TRANS"
 
     dataset_root_path = args.data_path
