@@ -1,0 +1,2071 @@
+ply
+format binary_little_endian 1.0
+comment https://github.com/mikedh/trimesh
+element vertex 3371
+property float x
+property float y
+property float z
+element face 9196
+property list uchar int vertex_indices
+property uchar red
+property uchar green
+property uchar blue
+property uchar alpha
+end_header
+═р∙H#yuHd╘MA═р∙H#yuHHшNA═р∙H#yuHмлNA═р∙H#yuH/╧MA═р∙H#yuH\cKA═р∙H#yuHHАNA═р∙H#yuH ≥MA═р∙H#yuHз╒MA═р∙H#yuH╠MA═р∙H#yuHshKA═р∙H#yuHt_KA═р∙H#yuH╜ MA═р∙H#yuHу²MA═р∙H%yuHkшNA═р∙H%yuH~bKA═р∙H'yuH
+dKA═р∙H'yuHHшNA═р∙H)yuHHшNA═р∙H)yuH/╧MA═р∙H)yuH╪tKA═р∙H+yuHмлNA═р∙H+yuH╪tKA═р∙H+yuHHАNA═р∙H+yuHз╒MA═р∙H+yuH)\KA═р∙H-yuHмлNA═р∙H-yuH/╧MA═р∙H-yuH╪tKA═р∙H-yuHHАNA═р∙H/yuH╪tKA═р∙H/yuHHАNA═р∙H1yuH╪tKA═р∙H1yuH)\KA═р∙H3yuHЯcKA═р∙H5yuH<bKA═р∙H5yuH╪tKA═р∙H5yuH)\KA═р∙H9yuH≈cKA═р∙H;yuH╪tKA═р∙H;yuH?cKA═р∙H=yuHГbKA═р∙H?yuH╪tKA═р∙H$yuHЪ\KA═р∙H$yuH)\KA═р∙H&yuHмлNA═р∙H&yuH/╧MA═р∙H&yuH╪tKA═р∙H&yuHHАNA═р∙H&yuH ≥MA═р∙H&yuH)\KA═р∙H(yuHмлNA═р∙H(yuHHАNA═р∙H(yuHз╒MA═р∙H(yuH)\KA═р∙H*yuH┼cKA═р∙H,yuHHшNA═р∙H,yuH╥aKA═р∙H.yuHHшNA═р∙H.yuH)\KA═р∙H0yuHэbKA═р∙H2yuHHАNA═р∙H6yuHмbKA═р∙H8yuH╪tKA═р∙H8yuH)\KA║р∙H@yuH┴cKA║р∙H@yuHшNA║р∙H@yuHС╒MA║р∙HByuH/╧MA║р∙HByuH╪tKA║р∙HByuHHАNA║р∙HByuH ≥MA║р∙HByuH)\KA║р∙H#yuH╪tKA║р∙H#yuHпcKA║р∙H#yuH)\KA║р∙HDyuHмлNA║р∙HDyuHHАNA║р∙HDyuHОшNA║р∙HDyuHе╒MA║р∙HFyuHмлNA║р∙HFyuH/╧MA║р∙HFyuH╪tKA║р∙HFyuHHАNA║р∙HFyuH)\KA║р∙H)yuH ≥MA║р∙HJyuHncKA║р∙HJyuH╗зNA║р∙HLyuHHcKA║р∙HNyuH≥cKA║р∙HNyuHHАNA║р∙HPyuH╪tKA║р∙HPyuH)\KA║р∙H1yuH/╧MA║р∙H1yuH┘║MA║р∙H3yuH ≥MA║р∙HTyuH╪tKA║р∙HTyuH)\KA║р∙H5yuHмлNA║р∙H5yuHHэNA║р∙H7yuH╛║MA║р∙H7yuHмлNA║р∙H7yuHашNA║р∙H9yuH ≥MA║р∙H9yuH5эNA║р∙HZyuH\cKA║р∙HZyuH╪tKA║р∙H;yuH/╧MA║р∙H=yuHHАNA║р∙H=yuH╫╒MA║р∙H?yuHмлNA║р∙H?yuH/╧MA║р∙H?yuHHАNA║р∙H?yuH ≥MA║р∙H?yuH)\KA║р∙HAyuHмлNA║р∙HAyuHHАNA║р∙HCyuH9зNA║р∙HCyuH└cKA║р∙HEyuH=cKA║р∙HGyuH╥cKA║р∙HGyuHHАNA║р∙HGyuHQ╒MA║р∙HGyuHхшNA║р∙HIyuHмлNA║р∙HIyuH/╧MA║р∙HIyuH╪tKA║р∙HIyuHHАNA║р∙HIyuH)\KA║р∙HKyuH<эNA║р∙HKyuHHАNA║р∙H,yuH ≥MA║р∙HMyuH╪tKA║р∙HMyuHHАNA║р∙HMyuH)\KA║р∙H.yuH╒MA║р∙H0yuHфшNA║р∙H0yuHмлNA║р∙H0yuH ≥MA║р∙HQyuHgcKA║р∙H2yuHмлNA║р∙H2yuHгшNA║р∙HSyuHScKA║р∙H4yuH/╧MA║р∙H4yuHHАNA║р∙H4yuHх║MA║р∙HUyuHLcKA║р∙H6yuHHАNA║р∙H6yuH ≥MA║р∙HWyuH╪tKA║р∙HWyuH)\KA║р∙HWyuH`cKA║р∙H8yuH/╧MA║р∙H8yuHHАNA║р∙H:yuHмлNA║р∙H:yuHHАNA║р∙H:yuH&╒MA║р∙H<yuHмлNA║р∙H<yuHтшNA║р∙H<yuH ≥MA║р∙H<yuH)\KA║р∙H>yuH-шNA╒р∙HayuHмлNA╒р∙HayuH╪tKA╒р∙HayuHHАNA╒р∙HayuH%ёMA╒р∙HayuH)\KA╒р∙HcyuHмлNA╒р∙HcyuHHАNA╒р∙H#yuH╪tKA╒р∙H#yuH)\KA╒р∙HeyuHмлNA╒р∙HeyuH╪tKA╒р∙HeyuHHАNA╒р∙HeyuH)\KA╒р∙HgyuHЭшNA╒р∙HHyuH ≥MA╒р∙HiyuHHcKA╒р∙HJyuHш║MA╒р∙HkyuHncKA╒р∙HkyuH)\KA╒р∙HmyuH╥cKA╒р∙HNyuH√╓MA╒р∙HoyuH╪tKA╒р∙HoyuH)\KA╒р∙HPyuH/╧MA╒р∙HPyuHHАNA╒р∙HRyuHмлNA╒р∙HRyuHHАNA╒р∙HRyuH ≥MA╒р∙HRyuHsёMA╒р∙HsyuH6cKA╒р∙HsyuH╪tKA╒р∙HTyuHмлNA╒р∙HTyuH2щNA╒р∙HuyuH┴cKA╒р∙HVyuHмлNA╒р∙HVyuHМшNA╒р∙HXyuHмлNA╒р∙HXyuH ≥MA╒р∙HXyuH└ёMA╒р∙HXyuHAэNA╒р∙HZyuHмлNA╒р∙HZyuH┤зNA╒р∙HZyuH/╧MA╒р∙HZyuHHАNA╒р∙HZyuH)\KA╒р∙H\yuH\cKA╒р∙H\yuHHАNA╒р∙H\yuH ≥MA╒р∙H\yuH шNA╒р∙H^yuHN║MA╒р∙H^yuH/╧MA╒р∙H^yuH╪tKA╒р∙H^yuHHАNA╒р∙H^yuH)\KA╒р∙H`yuH{шNA╒р∙H`yuHHАNA╒р∙H`yuHLcKA╒р∙HbyuHЛшNA╒р∙HbyuH/╧MA╒р∙HbyuHScKA╒р∙HdyuHAзNA╒р∙HdyuHgcKA╒р∙HEyuH ≥MA╒р∙HfyuH≥cKA╒р∙HfyuH/╧MA╒р∙HfyuHHАNA╒р∙HhyuH╪tKA╒р∙HhyuHHАNA╒р∙HhyuH)\KA╒р∙HjyuHHАNA╒р∙HKyuHмлNA╒р∙HKyuH ≥MA╒р∙HlyuH╪tKA╒р∙HMyuHмлNA╒р∙HMyuH/╧MA╒р∙HMyuHКшNA╒р∙HOyuHмлNA╒р∙HOyuH ≥MA╒р∙HOyuHЪэNA╒р∙HpyuH=cKA╒р∙HQyuH3шNA╒р∙HryuH)\KA╒р∙HSyuH/╧MA╒р∙HSyuHHАNA╒р∙HSyuH▒зNA╒р∙HUyuHHАNA╒р∙HUyuH ≥MA╒р∙HUyuH┘╓MA╒р∙HvyuH╪tKA╒р∙HWyuH/╧MA╒р∙HWyuHHАNA╒р∙HYyuHHАNA╒р∙H[yuH╒MA╒р∙H]yuHмлNA╒р∙H]yuHрзNA╒р∙H_yuHмлNAёр∙H─yuH└║MAёр∙H─yuHмлNAёр∙H─yuH╪tKAёр∙H─yuHHАNAёр∙H─yuHtdKAёр∙H─yuH)\KAёр∙H┌yuHмлNAёр∙H┌yuH/╧MAёр∙H┌yuHHАNAёр∙H┌yuHЯcKAёр∙H#yuH╣bKAёр∙H#yuH╪tKAёр∙H#yuH)\KAёр∙H└yuH╪tKAёр∙H└yuHHАNAёр∙H├yuH╪tKAёр∙H┬yuH╪tKAёр∙HiyuHDшNAёр∙HiyuH╜╒MAёр∙H┼yuH╪tKAёр∙H┼yuH)\KAёр∙HkyuH|зNAёр∙HkyuH ≥MAёр∙H▄yuH╪tKAёр∙H▄yuH)\KAёр∙HmyuH/╧MAёр∙HmyuHHАNAёр∙H▌yuH)\KAёр∙HoyuHHАNAёр∙HoyuH ≥MAёр∙HqyuH6║MAёр∙HqyuH/╧MAёр∙HqyuHHАNAёр∙H▓yuH╪tKAёр∙H▓yuHHАNAёр∙H▓yuH`nKAёр∙HsyuHмлNAёр∙HsyuH ≥MAёр∙HuyuHмлNAёр∙HuyuH/╧MAёр∙HwyuHмлNAёр∙HwyuH ≥MAёр∙HwyuHГbKAёр∙HwyuHГёMAёр∙HyyuHмлNAёр∙HyyuH/╧MAёр∙HyyuH╪tKAёр∙HyyuHHАNAёр∙HyyuH)\KAёр∙H{yuHмлNAёр∙H{yuHHАNAёр∙H{yuH ≥MAёр∙H}yuH╪tKAёр∙H}yuHHАNAёр∙H}yuHsёMAёр∙H}yuH)\KAёр∙HyuH/╧MAёр∙HyuHHАNAёр∙HyuH╥шNAёр∙H`yuH ≥MAёр∙H┐yuH-эNAёр∙H┐yuH)\KAёр∙HdyuH ≥MAёр∙H┘yuHHАNAёр∙H┘yuHэbKAёр∙H┘yuHщшNAёр∙HfyuHъ═MAёр∙H┤yuHHАNAёр∙H┤yuH)\KAёр∙HhyuHмлNAёр∙HhyuH ≥MAёр∙H┴yuH╥aKAёр∙HjyuHмлNAёр∙HjyuH/╧MAёр∙H▀yuH┼cKAёр∙HlyuHмлNAёр∙HlyuHHАNAёр∙HlyuH╥╔MAёр∙H█yuH
+dKAёр∙HnyuHмлNAёр∙HnyuH/ёMAёр∙HnyuH8эNAёр∙H▐yuH╪tKAёр∙H▐yuH~bKAёр∙HpyuHмлNAёр∙HpyuH°шNAёр∙H▒yuH\cKAёр∙H▒yuHЪ\KAёр∙H▒yuHshKAёр∙H▒yuHt_KAёр∙HryuHHАNAёр∙HryuHЪзNAёр∙HtyuH╒MAёр∙HtyuHHАNAёр∙HtyuHбшNAёр∙HvyuHHАNAёр∙HvyuH)\KAёр∙HvyuH+зNAёр∙HxyuHHАNAёр∙HxyuHкшNAёр∙HzyuH&шNAёр∙HzyuH?cKAёр∙HzyuH(╓MAёр∙H|yuH/╧MAёр∙H|yuH≈cKAёр∙H|yuHЛзNAёр∙H~yuHмbKAёр∙H~yuHмлNA╓р∙H@yuH╝KA╓р∙H┌yuH ≥MA╓р∙HByuH╝KA╓р∙HByuH ≥MA╓р∙H#yuHbKA╓р∙H#yuH╪tKA╓р∙H#yuH)\KA╓р∙H└yuHмлNA╓р∙H└yuHQёMA╓р∙H├yuHмлNA╓р∙H├yuH ≥MA╓р∙H┬yuH/╧MA╓р∙H┼yuHЖёMA╓р∙H┼yuH ≥MA╓р∙H▄yuHHАNA╓р∙H▌yuH/╧MA╓р∙H▌yuHHАNA╓р∙H▌yuH ≥MA╓р∙H▌yuHsзNA╓р∙H░yuHHАNA╓р∙H░yuH╢ыNA╓р∙H7yuH╧╨KA╓р∙H9yuH╝KA╓р∙H9yuH≈MA╓р∙H9yuH▐бKA╓р∙H9yuH╢KA╓р∙H9yuH│MA╓р∙H9yuH▐MA╓р∙H;yuH╝KA╓р∙H;yuH▐бKA╓р∙H;yuH ≥MA╓р∙H;yuH│MA╓р∙H;yuH√╢KA╓р∙H;yuHвёLA╓р∙H=yuH╝KA╓р∙H=yuH╨√MA╓р∙H=yuH▐бKA╓р∙H=yuH╢KA╓р∙H=yuH ≥MA╓р∙H=yuH│MA╓р∙H=yuHк║LA╓р∙H=yuHвёLA╓р∙H=yuHи▌MA╓р∙H?yuHf╨KA╓р∙H?yuH╝KA╓р∙H?yuH ≥MA╓р∙H┘yuH/╧MA╓р∙H┤yuH╓MA╓р∙H┤yuHxзNA╓р∙H┴yuHмлNA╓р∙H┴yuHHАNA╓р∙H┴yuHэNA╓р∙H▀yuHмлNA╓р∙H▀yuH/╧MA╓р∙H▀yuHHАNA╓р∙H▀yuH╖шNA╓р∙H█yuHмлNA╓р∙H█yuHз╒MA╓р∙H▐yuHмлNA╓р∙H▒yuHd╘MA╓р∙H▒yuHHшNA╓р∙H▒yuHмлNA╓р∙H▒yuH/╧MA╓р∙H▒yuHHАNA╓р∙H▒yuH ≥MA╓р∙H▒yuHз╒MA╓р∙H▒yuH╠MA╓р∙H▒yuH)\KA╓р∙H▒yuH╜ MA╓р∙H▒yuHу²MA╓р∙H4yuH╝KA╓р∙H4yuH ≥MA╓р∙H6yuH╝KA╓р∙H6yuHвёLA╓р∙H8yuHf╨KA╓р∙H8yuH╝KA╓р∙H8yuH	░MA╓р∙H8yuH▐бKA╓р∙H8yuH ≥MA╓р∙H8yuH│MA╓р∙H8yuH≈ЁKA╓р∙H:yuH7┼MA╓р∙H:yuHA⌠MA╓р∙H:yuH╝KA╓р∙H:yuHг╞KA╓р∙H:yuH ≥MA╓р∙H:yuH╧╨KA╓р∙H<yuHг╞KA╓р∙H<yuH⌠MA╓р∙H<yuH\┼MA╓р∙H<yuH╧╨KA╓р∙H~yuH ≥MA╓р∙H>yuH╝KA╓р∙H>yuH▐бKA╓р∙H>yuH│MA╓р∙H>yuH~┼MA╓р∙H>yuH≈ЁKA╓р∙H>yuHN⌠MA╓р∙H>yuH╧╨KA╔р∙H@yuH╝KA╔р∙H@yuH▐бKA╔р∙H@yuH╢KA╔р∙H@yuH ≥MA╔р∙H@yuH│MA╔р∙HByuH╝KA╔р∙HByuH!√MA╔р∙HByuH▐бKA╔р∙HByuH ≥MA╔р∙HByuH│MA╔р∙HByuH√╢KA╔р∙HByuH╦▄MA╔р∙H#yuH)\KA╔р∙HDyuHД▄MA╔р∙HDyuH√MA╔р∙HDyuH ≥MA╔р∙HDyuHвёLA╔р∙HDyuH╧╨KA╔р∙H1yuH╝KA╔р∙H1yuH ≥MA╔р∙H1yuHвёLA╔р∙H3yuH╝KA╔р∙H3yuH▐бKA╔р∙H3yuH╢KA╔р∙H3yuHf≈MA╔р∙H3yuH ≥MA╔р∙H3yuH│MA╔р∙H3yuH/▒MA╔р∙H5yuH∙┼MA╔р∙H5yuHг╞KA╔р∙H5yuH▐бKA╔р∙H5yuH│MA╔р∙H5yuH√╢KA╔р∙H5yuHвёLA╔р∙H5yuHП▓MA╔р∙H5yuH╧╨KA╔р∙H7yuHр⌠MA╔р∙H7yuHс┼MA╔р∙H7yuH ≥MA╔р∙H9yuH ≥MA╔р∙H;yuH ≥MA╔р∙H=yuH ≥MA╔р∙H?yuHз▄MA╔р∙H?yuHЁ√MA╔р∙HAyuHг╞KA╔р∙HAyuH≤MA╔р∙HAyuHвёLA╔р∙HAyuH$▓MA╔р∙HAyuH╧╨KA╔р∙H"yuH╪tKA╔р∙HCyuH╝KA╔р∙HCyuHг╞KA╔р∙HCyuH▐бKA╔р∙HCyuH╢KA╔р∙HCyuHq≈MA╔р∙HCyuH ≥MA╔р∙HCyuH│MA╔р∙HCyuHк║LA╔р∙HCyuH≥░MA╔р∙HCyuH╧╨KA╔р∙HEyuH╝KA╔р∙HEyuH▐бKA╔р∙HEyuH ≥MA╔р∙HEyuH│MA╔р∙HEyuH≈ЁKA╔р∙H▒yuH╪tKA╔р∙H▒yuHьcKA╔р∙H▒yuH)\KA╔р∙H2yuHf╨KA╔р∙H2yuH╝KA╔р∙H2yuH■MA╔р∙H2yuH▐бKA╔р∙H2yuH│MA╔р∙H2yuH≈ЁKA╔р∙H2yuH5▄MA╔р∙H4yuH╝KA╔р∙H4yuHг╞KA╔р∙H4yuH ≥MA╔р∙H4yuH╓∙MA╔р∙H4yuH▄MA╔р∙H4yuH╧╨KA╔р∙H6yuH╓√MA╔р∙H6yuH╝KA╔р∙H6yuH²█MA╔р∙H6yuH▐бKA╔р∙H6yuH╢KA╔р∙H6yuH ≥MA╔р∙H6yuH│MA╔р∙H6yuHк║LA╔р∙H8yuH╕≈MA╔р∙H>yuH ≥MA╕р∙H#yuH)\KA╕р∙HFyuH╝KA╕р∙HFyuH▐бKA╕р∙HFyuH╢KA╕р∙HFyuHI▒MA╕р∙HFyuH ≥MA╕р∙HFyuH│MA╕р∙HFyuH÷≈MA╕р∙HHyuH╝KA╕р∙HHyuHг╞KA╕р∙HHyuHх⌠MA╕р∙HHyuH ≥MA╕р∙HHyuHи▀MA╕р∙H/yuH╝KA╕р∙H/yuHM┼MA╕р∙H/yuH▐бKA╕р∙H/yuH ≥MA╕р∙H/yuH│MA╕р∙H/yuHЗ▓MA╕р∙H/yuH≈ЁKA╕р∙H/yuH╧╨KA╕р∙HqyuH╣√MA╕р∙H1yuH╝KA╕р∙H1yuH ≥MA╕р∙H1yuH╗▀MA╕р∙H1yuHк║LA╕р∙H1yuH√⌠MA╕р∙H1yuHвёLA╕р∙H1yuH╧╨KA╕р∙HsyuHs┼MA╕р∙HsyuHи⌠MA╕р∙HuyuH▐бKA╕р∙HuyuH┐ЁKA╕р∙HuyuHЪ≈MA╕р∙HuyuH ≥MA╕р∙HuyuH│MA╕р∙HuyuHвёLA╕р∙HuyuHg▓MA╕р∙HwyuH╝KA╕р∙HwyuH▐бKA╕р∙HwyuH╢KA╕р∙HwyuH ≥MA╕р∙HwyuH│MA╕р∙HwyuHк║LA╕р∙HwyuHт⌠MA╕р∙HyyuH▐бKA╕р∙HyyuH ≥MA╕р∙HyyuH│MA╕р∙H"yuH╚cKA╕р∙HEyuHf╨KA╕р∙HEyuH ≥MA╕р∙HGyuHг╞KA╕р∙HGyuH▐бKA╕р∙HGyuH ≥MA╕р∙HGyuH│MA╕р∙HGyuH=⌠MA╕р∙HGyuHФ▀MA╕р∙HGyuH√╢KA╕р∙HGyuHвёLA╕р∙HGyuH╧╨KA╕р∙HIyuH╝KA╕р∙HIyuHвёLA╕р∙H.yuH╝KA╕р∙H.yuHвёLA╕р∙HpyuH ≥MA╕р∙H0yuHf╨KA╕р∙H0yuH╝KA╕р∙H0yuH╬▓MA╕р∙H0yuH▐бKA╕р∙H0yuH╢KA╕р∙H0yuH▀MA╕р∙H0yuH ≥MA╕р∙H0yuH│MA╕р∙H▒yuH╪tKA╕р∙H▒yuH6dKA╕р∙H▒yuH)\KA╕р∙HryuH▐бKA╕р∙HryuH ≥MA╕р∙HryuH│MA╕р∙HtyuH╝KA╕р∙HtyuH╓╞KA╕р∙HtyuHY╨KA╕р∙HtyuH▐бKA╕р∙HtyuH╢KA╕р∙HtyuH ≥MA╕р∙HtyuH│MA╕р∙HtyuHс▌MA╕р∙HvyuH╓╞KA╕р∙HvyuHY╨KA╕р∙HvyuHe▀MA╕р∙HvyuH≈MA╕р∙HxyuH╣√MA╕р∙HxyuHS█MA╕р∙HzyuH ≥MA╕р∙HzyuHи⌠MA╖р∙H#yuH)\KA╖р∙HHyuH ≥MA╖р∙HJyuH╝KA╖р∙HJyuH╓╞KA╖р∙HJyuHы╟KA╖р∙HJyuHM┼MA╖р∙HJyuH▐бKA╖р∙HJyuH	╥KA╖р∙HJyuH ≥MA╖р∙HJyuH│MA╖р∙HJyuHЗ▓MA╖р∙HkyuH╣√MA╖р∙HkyuHS█MA╖р∙HmyuH╝KA╖р∙HmyuH▐бKA╖р∙HmyuH╢KA╖р∙HmyuH ≥MA╖р∙HmyuH│MA╖р∙HmyuHс▌MA╖р∙HmyuHи⌠MA╖р∙HmyuHл╞KA╖р∙H-yuH╟KA╖р∙H-yuH╝KA╖р∙H-yuH▐бKA╖р∙H-yuH ≥MA╖р∙H-yuHо╦KA╖р∙H-yuH;▓MA╖р∙H-yuH│MA╖р∙H-yuH;┼MA╖р∙H-yuH1╠KA╖р∙HoyuH╝KA╖р∙HoyuHY╨KA╖р∙HoyuH▐бKA╖р∙HoyuH┐ЁKA╖р∙HoyuH ≥MA╖р∙HoyuH│MA╖р∙HoyuH≈MA╖р∙HoyuHвёLA╖р∙H/yuH ≥MA╖р∙HqyuH╝KA╖р∙HqyuH╓╞KA╖р∙HqyuH ≥MA╖р∙HqyuHS█MA╖р∙HsyuH╝KA╖р∙HsyuH ≥MA╖р∙HsyuHл╞KA╖р∙HuyuH╝KA╖р∙HuyuHвёLA╖р∙HwyuH╝KA╖р∙HwyuH ≥MA╖р∙HyyuH╝KA╖р∙HyyuHs┼MA╖р∙HyyuH╚╢KA╖р∙HyyuHл╞KA╖р∙H{yuH╓╞KA╖р∙H{yuHY╨KA╖р∙H{yuH╩┴MA╖р∙H}yuH╝KA╖р∙H}yuH╓╞KA╖р∙H}yuHY╨KA╖р∙H}yuH▐бKA╖р∙H}yuH╢KA╖р∙H}yuH ≥MA╖р∙H}yuH│MA╖р∙H}yuHe▀MA╖р∙H}yuH≈MA╖р∙HyuH▐бKA╖р∙HyuH╣√MA╖р∙HyuH ≥MA╖р∙HyuH│MA╖р∙HyuH╚╢KA╖р∙HyuHS█MA╖р∙H"yuH╪tKA╖р∙H"yuH?dKA╖р∙HIyuHN╨KA╖р∙HIyuHo▀MA╖р∙HIyuH▐бKA╖р∙HIyuH╢KA╖р∙HIyuH ≥MA╖р∙HIyuH│MA╖р∙HIyuH├∙MA╖р∙HIyuHк║LA╖р∙HIyuH╧╨KA╖р∙HKyuH╝KA╖р∙HlyuH▐бKA╖р∙HlyuHs┼MA╖р∙HlyuH ≥MA╖р∙HlyuH│MA╖р∙HlyuH╚╢KA╖р∙H.yuHp≈MA╖р∙H.yuH┬▓MA╖р∙H.yuH▓MA╖р∙H.yuH▐бKA╖р∙H.yuH╢KA╖р∙H.yuH ≥MA╖р∙H.yuH│MA╖р∙H.yuHк║LA╖р∙H.yuHч╥KA╖р∙H.yuH┬╞KA╖р∙H.yuHвёLA╖р∙H.yuH╧╨KA╖р∙H.yuHч≈MA╖р∙HnyuH,≤MA╖р∙HnyuH╝KA╖р∙HnyuH╓╞KA╖р∙HnyuHY╨KA╖р∙HnyuH ≥MA╖р∙HnyuHвёLA╖р∙HnyuHg▓MA╖р∙HpyuH╝KA╖р∙HpyuH╓╞KA╖р∙HpyuH▐бKA╖р∙HpyuH╢KA╖р∙HpyuH ≥MA╖р∙HpyuH│MA╖р∙HpyuHe▀MA╖р∙HpyuHк║LA╖р∙HpyuHт⌠MA╖р∙H▒yuH╪tKA╖р∙HryuH╝KA╖р∙HryuH╚╢KA╖р∙HtyuH╝KA╖р∙HxyuH╓╞KA╖р∙HzyuH╝KA╖р∙HzyuH▐бKA╖р∙HzyuH╢KA╖р∙HzyuH ≥MA╖р∙HzyuH│MA╖р∙HzyuHс▌MA╖р∙H|yuH╝KA╖р∙H|yuH▐бKA╖р∙H|yuH┐ЁKA╖р∙H|yuH ≥MA╖р∙H|yuH│MA╖р∙H|yuHвёLA╖р∙H|yuHg▓MA╖р∙H~yuH╝KA╖р∙H~yuH╓╞KA╖р∙H~yuH ≥MA╖р∙H~yuHк║LA╖р∙H~yuHт⌠MA╗р∙H─yuH╝KA╗р∙H─yuH▐бKA╗р∙H─yuH╢KA╗р∙H─yuHs┼MA╗р∙H─yuH ≥MA╗р∙H─yuH│MA╗р∙H─yuHи⌠MA╗р∙H─yuHл╞KA╗р∙H┌yuH╝KA╗р∙H┌yuHY╨KA╗р∙H┌yuH▐бKA╗р∙H┌yuH┐ЁKA╗р∙H┌yuH ≥MA╗р∙H┌yuH│MA╗р∙H┌yuHe▀MA╗р∙H┌yuH≈MA╗р∙H#yuH)\KA╗р∙HiyuH╥KA╗р∙HiyuH,≤MA╗р∙HiyuH╝KA╗р∙HiyuH╓╞KA╗р∙HiyuH▐бKA╗р∙HiyuH ≥MA╗р∙HiyuH│MA╗р∙HiyuHg▓MA╗р∙HJyuH┬▓MA╗р∙HJyuH▐бKA╗р∙HJyuH ≥MA╗р∙HJyuH│MA╗р∙HJyuHч≈MA╗р∙HkyuH╝KA╗р∙HkyuH╓╞KA╗р∙HkyuH▐бKA╗р∙HkyuH╢KA╗р∙HkyuH ≥MA╗р∙HkyuH│MA╗р∙HkyuHк║LA╗р∙HkyuHвёLA╗р∙HkyuHт⌠MA╗р∙HLyuH╝KA╗р∙HLyuH)╨KA╗р∙HLyuH ≥MA╗р∙HLyuH;┼MA╗р∙HLyuH█╟KA╗р∙HmyuH╝KA╗р∙HmyuH ≥MA╗р∙H-yuH╦▓MA╗р∙H-yuH▐бKA╗р∙H-yuH ≥MA╗р∙H-yuH│MA╗р∙H-yuH&╩KA╗р∙H;yuHьёKA╗р∙H;yuH╝KA╗р∙H;yuH┬╚KA╗р∙H;yuHD╛KA╗р∙H;yuHК╕KA╗р∙H;yuH├╔KA╗р∙H;yuH}╕KA╗р∙H;yuH╖╖KA╗р∙H;yuH ≥KA╗р∙H;yuH:╘KA╗р∙H;yuH╔╖KA╗р∙H;yuH(╕KA╗р∙H;yuHе╔KA╗р∙H;yuHН╖KA╗р∙H;yuHj╜KA╗р∙H;yuH°KA╗р∙H;yuH⌡╖KA╗р∙H;yuH╤╖KA╗р∙H;yuHо╘KA╗р∙H;yuHб╕KA╗р∙H=yuH;╖KA╗р∙H=yuHьёKA╗р∙H=yuH╝KA╗р∙H=yuHs╜KA╗р∙H=yuH▀╔KA╗р∙H=yuH?╘KA╗р∙H=yuH ≥KA╗р∙H=yuHд╔KA╗р∙H=yuHФ╕KA╗р∙H=yuH╔KA╗р∙H=yuHя╘KA╗р∙H=yuHе╔KA╗р∙H=yuHH╛KA╗р∙H=yuHН╖KA╗р∙H=yuH°KA╗р∙H=yuH╖KA╗р∙H=yuHз╕KA╗р∙H=yuH╗╔KA╗р∙H=yuHm╔KA╗р∙H=yuH╔╚KA╗р∙HyuH╝KA╗р∙H│yuH╝KA╗р∙H│yuH╓╞KA╗р∙H│yuHY╨KA╗р∙H│yuH ≥MA╗р∙H│yuHс▌MA╗р∙H│yuHвёLA╗р∙H│yuHg▓MA╗р∙H"yuHdKA╗р∙H"yuH╪tKA╗р∙H┐yuH ≥MA╗р∙HhyuH ≥MA╗р∙HjyuH╝KA╗р∙HjyuH╓╞KA╗р∙HjyuH ≥MA╗р∙HjyuHe▀MA╗р∙HjyuHb╨KA╗р∙HjyuH≈MA╗р∙HjyuHвёLA╗р∙HjyuHс╟KA╗р∙HKyuHp≈MA╗р∙HKyuH╝KA╗р∙HKyuH▓MA╗р∙HKyuH▐бKA╗р∙HKyuH╢KA╗р∙HKyuH ≥MA╗р∙HKyuH;▓MA╗р∙HKyuH│MA╗р∙HKyuHвёLA╗р∙HKyuHG╟KA╗р∙HKyuH╧╥KA╗р∙HKyuH╧╨KA╗р∙HlyuH╝KA╗р∙H,yuH╝KA╗р∙H,yuH▐бKA╗р∙H,yuH╢KA╗р∙H,yuH&■MA╗р∙H,yuH╧▓MA╗р∙H,yuH ≥MA╗р∙H,yuH│MA╗р∙H,yuH"·LA╗р∙H,yuHк║LA╗р∙H,yuHвёLA╗р∙H,yuH0▀MA╗р∙H,yuHц┴MA╗р∙H,yuH╜╟KA╗р∙H,yuH╦KA╗р∙H▒yuHmdKA╗р∙H▒yuH╪tKA╗р∙H▒yuH)\KA╗р∙H:yuH╝KA╗р∙H:yuHN╜KA╗р∙H:yuH╟╔KA╗р∙H<yuHьёKA╗р∙H<yuH╝KA╗р∙H<yuHW╕KA╗р∙H<yuH KA╗р∙H<yuH╓╖KA╗р∙H<yuH╥╖KA╗р∙H<yuH└╖KA╗р∙H<yuH╕KA╗р∙H<yuHщ≥KA╗р∙H<yuHu╕KA╗р∙H<yuH3 KA╗р∙H<yuH ≥KA╗р∙H<yuHт╔KA╗р∙H<yuH|╔KA╗р∙H<yuHU╛KA╗р∙H<yuH▌╕KA╗р∙H<yuHч≥KA╗р∙H<yuH⌠≥KA╗р∙H<yuHе╔KA╗р∙H<yuHН╖KA╗р∙H<yuH°KA╗р∙H<yuHz╔KA╗р∙H<yuH;╘KA╗р∙H<yuHZ╜KA╗р∙H<yuH]╙KA╗р∙H<yuHз╕KA╗р∙H<yuHu╔KA╗р∙H>yuHh╔KA╗р∙H>yuH╝KA╗р∙H>yuHN╜KA╗р∙H>yuH°KA╘р∙H┌yuHвёLA╘р∙H└yuH╝KA╘р∙H└yuH╥√MA╘р∙H└yuH╔╠KA╘р∙H└yuH▐бKA╘р∙H└yuHU█MA╘р∙H└yuH ≥MA╘р∙H└yuH│MA╘р∙H└yuHж⌠MA╘р∙H└yuHR╦KA╘р∙H└yuHw┼MA╘р∙H└yuH╧╨KA╘р∙HgyuH╝KA╘р∙HgyuHs≈MA╘р∙HgyuHц░MA╘р∙HgyuH
+╧KA╘р∙HgyuH ≥MA╘р∙HgyuHu╟KA╘р∙HiyuH╝KA╘р∙HiyuH6▌MA╘р∙HiyuH▐бKA╘р∙HiyuH╢KA╘р∙HiyuH│MA╘р∙H+yuH╝KA╘р∙H+yuH(qLA╘р∙H+yuH╠KA╘р∙H+yuH ≥MA╘р∙H+yuHвёLA╘р∙HLyuH╦▓MA╘р∙HLyuH╝KA╘р∙HLyuH╓╞KA╘р∙HLyuH▐бKA╘р∙HLyuH╢KA╘р∙HLyuH&■MA╘р∙HLyuH ≥MA╘р∙HLyuH│MA╘р∙HLyuH"·LA╘р∙HLyuHк║LA╘р∙HLyuH&╩KA╘р∙HLyuHвёLA╘р∙HLyuH0▀MA╘р∙H░yuH)\KA╘р∙H9yuHьёKA╘р∙H9yuH╝KA╘р∙H9yuH ≥KA╘р∙H9yuH_╛KA╘р∙H9yuHе╔KA╘р∙H9yuH°KA╘р∙H9yuHз╕KA╘р∙H9yuH╔╚KA╘р∙H;yuH>≥KA╘р∙H;yuHW╕KA╘р∙H;yuH KA╘р∙H;yuHe═KA╘р∙H;yuHJ≤KA╘р∙H;yuHа╒KA╘р∙H;yuH√KA╘р∙H;yuHЛ╒KA╘р∙H;yuH	√KA╘р∙H;yuH╖╓KA╘р∙H;yuHП√KA╘р∙H;yuH╕KA╘р∙H;yuHщ≥KA╘р∙H;yuHu╕KA╘р∙H;yuH3 KA╘р∙H;yuHт╔KA╘р∙H;yuHq╒KA╘р∙H;yuH6╒KA╘р∙H;yuHi╒KA╘р∙H;yuHZ√KA╘р∙H;yuHИ≤KA╘р∙H;yuH-ёKA╘р∙H;yuH┘√KA╘р∙H;yuHЛ∙KA╘р∙H;yuH≈≈KA╘р∙H;yuH≈╒KA╘р∙H;yuH≈KA╘р∙H;yuH5√KA╘р∙H;yuHЗ∙KA╘р∙H;yuH-√KA╘р∙H;yuH)╔KA╘р∙H;yuHч≥KA╘р∙H;yuH╔KA╘р∙H;yuHч╓KA╘р∙H;yuH⌠≥KA╘р∙H;yuH>ёKA╘р∙H;yuHН╖KA╘р∙H;yuH∙╒KA╘р∙H;yuH'╒KA╘р∙H;yuH°KA╘р∙H;yuHэ√KA╘р∙H;yuH)\KA╘р∙H;yuH÷≤KA╘р∙H;yuHт√KA╘р∙H;yuHЪ√KA╘р∙H;yuHU╒KA╘р∙H;yuHёKA╘р∙H;yuHY·KA╘р∙H;yuHg≤KA╘р∙H;yuHёKA╘р∙H;yuHE╒KA╘р∙H;yuHуёKA╘р∙H;yuH<ёKA╘р∙H;yuHY√KA╘р∙H;yuHN≥KA╘р∙H;yuH┴╓KA╘р∙H;yuHТ│KA╘р∙H;yuH╞√KA╘р∙H=yuH>≥KA╘р∙H=yuHe═KA╘р∙H=yuHJ≤KA╘р∙H=yuHа╒KA╘р∙H=yuH√KA╘р∙H=yuHЛ╒KA╘р∙H=yuH╖╓KA╘р∙H=yuHП√KA╘р∙H=yuH╕KA╘р∙H=yuHF╒KA╘р∙H=yuHт╔KA╘р∙H=yuHq╒KA╘р∙H=yuHi╒KA╘р∙H=yuHZ√KA╘р∙H=yuHИ≤KA╘р∙H=yuH-ёKA╘р∙H=yuH┘√KA╘р∙H=yuH≈╒KA╘р∙H=yuH5√KA╘р∙H=yuH-√KA╘р∙H=yuH)╔KA╘р∙H=yuHЖ╓KA╘р∙H=yuHч≥KA╘р∙H=yuH╔KA╘р∙H=yuHч╓KA╘р∙H=yuH⌠≥KA╘р∙H=yuH∙╒KA╘р∙H=yuHэ√KA╘р∙H=yuH)\KA╘р∙H=yuH÷≤KA╘р∙H=yuHт√KA╘р∙H=yuHЪ√KA╘р∙H=yuH≥KA╘р∙H=yuHщ≤KA╘р∙H=yuHU╒KA╘р∙H=yuHёKA╘р∙H=yuH√KA╘р∙H=yuHY·KA╘р∙H=yuHg≤KA╘р∙H=yuHёKA╘р∙H=yuH<ёKA╘р∙H=yuHY√KA╘р∙H=yuH┴╓KA╘р∙H=yuHТ│KA╘р∙H=yuH╞√KA╘р∙H?yuHьёKA╘р∙H?yuHf╖KA╘р∙H?yuH╝KA╘р∙H?yuHы╔KA╘р∙H?yuH╡╛KA╘р∙H?yuH╠╔KA╘р∙H?yuH~╔KA╘р∙H?yuHЖ╕KA╘р∙H?yuHa╜KA╘р∙H?yuH°KA╘р∙H?yuHd╚KA╘р∙H?yuH6╘KA╘р∙H"yuH╪tKA╘р∙H"yuH)\KA╘р∙H┐yuH╝KA╘р∙H┐yuH╓╞KA╘р∙H┐yuH▐бKA╘р∙H┐yuH╢KA╘р∙H┐yuH ≥MA╘р∙H┐yuH│MA╘р∙H┐yuHх╞KA╘р∙H┐yuHк║LA╘р∙H┐yuHт⌠MA╘р∙HhyuH╝KA╘р∙HhyuH╓╞KA╘р∙HhyuHг╞KA╘р∙HhyuH▐бKA╘р∙HhyuH ≥MA╘р∙HhyuH│MA╘р∙HhyuHк║LA╘р∙HhyuHг┼MA╘р∙HhyuHи⌠MA╘р∙HhyuHвёLA╘р∙HhyuHK╢KA╘р∙HKyuH ≥MA╘р∙H,yuH╝KA╘р∙H,yuH╓╞KA╘р∙H,yuH▐╢KA╘р∙H,yuH▐бKA╘р∙H,yuH╢KA╘р∙H,yuHZmLA╘р∙H,yuH ≥MA╘р∙H,yuH│MA╘р∙H,yuHк║LA╘р∙H,yuH┐╞KA╘р∙H,yuHфLA╘р∙H,yuHg▓MA╘р∙H,yuHC√MA╘р∙H,yuH█MA╘р∙HMyuH╝KA╘р∙HMyuH ≥MA╘р∙H▒yuHdKA╘р∙H▒yuH╪tKA╘р∙H:yuH>≥KA╘р∙H:yuHьёKA╘р∙H:yuHб╘KA╘р∙H:yuH╝KA╘р∙H:yuH╬╔KA╘р∙H:yuH/╕KA╘р∙H:yuHМ≥KA╘р∙H:yuHю╕KA╘р∙H:yuHD╛KA╘р∙H:yuH╞╖KA╘р∙H:yuH╘╔KA╘р∙H:yuH ≥KA╘р∙H:yuHс╕KA╘р∙H:yuHЧ╕KA╘р∙H:yuHx╕KA╘р∙H:yuH6 KA╘р∙H:yuHa╜KA╘р∙H:yuHв╔KA╘р∙H:yuHМ╙KA╘р∙H:yuH/╓KA╘р∙H:yuH$╖KA╘р∙H:yuHZ╓KA╘р∙H:yuH┘╓KA╘р∙H:yuHj╖KA╘р∙H:yuH∙╖KA╘р∙H:yuH√╕KA╘р∙H:yuHЭ╕KA╘р∙H:yuHП≈KA╘р∙H:yuH≤KA╘р∙H:yuH╟╖KA╘р∙H:yuHF≤KA╘р∙H:yuH╔KA╘р∙H:yuH╡╔KA╘р∙H:yuHp╓KA╘р∙H:yuHЪ╕KA╘р∙H:yuH(╘KA╘р∙H:yuHн╓KA╘р∙H:yuHе╔KA╘р∙H:yuHН╖KA╘р∙H:yuHF⌡KA╘р∙H:yuHy⌡KA╘р∙H:yuH⌡KA╘р∙H:yuH#╕KA╘р∙H:yuH?╜KA╘р∙H:yuH╔ KA╘р∙H:yuH°KA╘р∙H:yuH)\KA╘р∙H:yuHd╚KA╘р∙H:yuH1≤KA╘р∙H:yuHh╖KA╘р∙H:yuH▐≤KA╘р∙H:yuH-╖KA╘р∙H:yuH∙╔KA╘р∙H:yuHP╖KA╘р∙H:yuHblKA╘р∙H:yuH▌╖KA╘р∙H:yuHT╕KA╘р∙H:yuH┬╔KA╘р∙H:yuHТ│KA╘р∙H<yuH>≥KA╘р∙H<yuH╒KA╘р∙H<yuHц∙KA╘р∙H<yuHe═KA╘р∙H<yuHJ≤KA╘р∙H<yuHа╒KA╘р∙H<yuH√KA╘р∙H<yuHЛ╒KA╘р∙H<yuH╚∙KA╘р∙H<yuH╖╓KA╘р∙H<yuHП√KA╘р∙H<yuHF╒KA╘р∙H<yuHт╔KA╘р∙H<yuHq╒KA╘р∙H<yuHZ√KA╘р∙H<yuHИ≤KA╘р∙H<yuH-ёKA╘р∙H<yuH┘√KA╘р∙H<yuH≈╒KA╘р∙H<yuHЧ║KA╘р∙H<yuHФ║KA╘р∙H<yuH5√KA╘р∙H<yuH°∙KA╘р∙H<yuH)╔KA╘р∙H<yuHЖ╓KA╘р∙H<yuH▄∙KA╘р∙H<yuH╔KA╘р∙H<yuHз∙KA╘р∙H<yuHч╓KA╘р∙H<yuH⌠≥KA╘р∙H<yuH)\KA╘р∙H<yuH÷≤KA╘р∙H<yuHт√KA╘р∙H<yuHЪ√KA╘р∙H<yuHЕ≤KA╘р∙H<yuHU╒KA╘р∙H<yuH√KA╘р∙H<yuHY·KA╘р∙H<yuHg≤KA╘р∙H<yuHёKA╘р∙H<yuH<ёKA╘р∙H<yuHв║KA╘р∙H<yuHг║KA╘р∙H<yuH┴╓KA╘р∙H<yuHТ│KA╘р∙H<yuH╞√KA╘р∙H>yuH>≥KA╘р∙H>yuHьёKA╘р∙H>yuHб╘KA╘р∙H>yuH╝KA╘р∙H>yuHW╕KA╘р∙H>yuH KA╘р∙H>yuHe═KA╘р∙H>yuH╤╔KA╘р∙H>yuH╓╖KA╘р∙H>yuH┬╚KA╘р∙H>yuHх╕KA╘р∙H>yuH/╕KA╘р∙H>yuHМ≥KA╘р∙H>yuHD╛KA╘р∙H>yuH╕KA╘р∙H>yuHщ≥KA╘р∙H>yuHu╕KA╘р∙H>yuH3 KA╘р∙H>yuH ≥KA╘р∙H>yuHт╔KA╘р∙H>yuHИ≤KA╘р∙H>yuHв╔KA╘р∙H>yuH╫╖KA╘р∙H>yuH╣╖KA╘р∙H>yuH╤╕KA╘р∙H>yuHИ╕KA╘р∙H>yuH7╖KA╘р∙H>yuH)╔KA╘р∙H>yuH╖KA╘р∙H>yuH╔KA╘р∙H>yuHт╕KA╘р∙H>yuH⌠≥KA╘р∙H>yuH(╘KA╘р∙H>yuHн╓KA╘р∙H>yuHе╔KA╘р∙H>yuHН╖KA╘р∙H>yuH?╜KA╘р∙H>yuHj╜KA╘р∙H>yuH°KA╘р∙H>yuH)\KA╘р∙H>yuH▐≤KA╘р∙H>yuH∙╔KA╘р∙H>yuH▄╕KA╘р∙H>yuHZ╔KA╘р∙H>yuH╤╖KA╘р∙H>yuHY·KA╘р∙H>yuHМ╕KA╘р∙H>yuHТ│KA╙р∙H└yuH╝KA╙р∙H├yuH╝KA╙р∙H├yuHЭ╦KA╙р∙H├yuHз╞KA╙р∙H├yuH≈MA╙р∙H├yuH▀MA╙р∙H├yuH ≥MA╙р∙HgyuH╝KA╙р∙HgyuHЭ╟KA╙р∙HgyuH▐бKA╙р∙HgyuH╢KA╙р∙HgyuH_╞KA╙р∙HgyuH ≥MA╙р∙HgyuH│MA╙р∙HgyuH"·LA╙р∙HgyuH_▒MA╙р∙HgyuHк║LA╙р∙HgyuH ╦KA╙р∙H+yuH╝KA╙р∙H+yuHБ╞KA╙р∙H+yuHр╞KA╙р∙H+yuH ≥MA╙р∙HLyuH╝KA╙р∙HLyuHр╞KA╙р∙HLyuH▐бKA╙р∙HLyuH╢KA╙р∙HLyuHZmLA╙р∙HLyuH▄╣KA╙р∙HLyuH╧▓MA╙р∙HLyuH ≥MA╙р∙HLyuH│MA╙р∙HLyuHк║LA╙р∙HLyuHц┴MA╙р∙HLyuHфLA╙р∙HLyuHg▓MA╙р∙HLyuHC√MA╙р∙HLyuH█MA╙р∙H░yuH)\KA╙р∙HuyuHьёKA╙р∙HuyuHh╔KA╙р∙HuyuH╝KA╙р∙HuyuH▀╔KA╙р∙HuyuH┬╚KA╙р∙HuyuHD╛KA╙р∙HuyuH ≥KA╙р∙HuyuHФ╕KA╙р∙HuyuHе╔KA╙р∙HuyuHН╖KA╙р∙HuyuHj╜KA╙р∙HuyuH°KA╙р∙HuyuH∙╔KA╙р∙HuyuH╖KA╙р∙HuyuH╗╔KA╙р∙HuyuHо╘KA╙р∙HuyuHМ╕KA╙р∙HwyuHьёKA╙р∙HwyuH╝KA╙р∙HwyuHW╕KA╙р∙HwyuHs╜KA╙р∙HwyuH KA╙р∙HwyuH└╖KA╙р∙HwyuH?╘KA╙р∙HwyuH╖╖KA╙р∙HwyuH ≥KA╙р∙HwyuH|╔KA╙р∙HwyuH(╕KA╙р∙HwyuHе╔KA╙р∙HwyuHH╛KA╙р∙HwyuHН╖KA╙р∙HwyuH°KA╙р∙HwyuHz╔KA╙р∙HwyuHZ╜KA╙р∙HwyuH╤╖KA╙р∙HwyuHз╕KA╙р∙HwyuHб╕KA╙р∙HwyuH╔╚KA╙р∙H9yuH╝KA╙р∙H9yuHы╔KA╙р∙H9yuH╡╛KA╙р∙H9yuH~╔KA╙р∙H9yuHa╜KA╙р∙H9yuH6╘KA╙р∙H;yuH>≥KA╙р∙H;yuHe═KA╙р∙H;yuHJ≤KA╙р∙H;yuHа╒KA╙р∙H;yuH√KA╙р∙H;yuHЛ╒KA╙р∙H;yuH╖╓KA╙р∙H;yuHП√KA╙р∙H;yuH╕KA╙р∙H;yuHF╒KA╙р∙H;yuHт╔KA╙р∙H;yuHq╒KA╙р∙H;yuHi╒KA╙р∙H;yuHZ√KA╙р∙H;yuHИ≤KA╙р∙H;yuH-ёKA╙р∙H;yuH┘√KA╙р∙H;yuH≈╒KA╙р∙H;yuH5√KA╙р∙H;yuH-√KA╙р∙H;yuH)╔KA╙р∙H;yuHЖ╓KA╙р∙H;yuHч≥KA╙р∙H;yuH╔KA╙р∙H;yuHч╓KA╙р∙H;yuH⌠≥KA╙р∙H;yuHН╖KA╙р∙H;yuH∙╒KA╙р∙H;yuHэ√KA╙р∙H;yuH)\KA╙р∙H;yuH÷≤KA╙р∙H;yuHт√KA╙р∙H;yuHЪ√KA╙р∙H;yuH≥KA╙р∙H;yuHщ≤KA╙р∙H;yuHU╒KA╙р∙H;yuHёKA╙р∙H;yuH√KA╙р∙H;yuHY·KA╙р∙H;yuHg≤KA╙р∙H;yuHёKA╙р∙H;yuH<ёKA╙р∙H;yuHY√KA╙р∙H;yuH┴╓KA╙р∙H;yuHТ│KA╙р∙H;yuH╞√KA╙р∙H=yuH>≥KA╙р∙H=yuH╒KA╙р∙H=yuHW╕KA╙р∙H=yuH KA╙р∙H=yuHe═KA╙р∙H=yuHJ≤KA╙р∙H=yuHа╒KA╙р∙H=yuH√KA╙р∙H=yuHЛ╒KA╙р∙H=yuH	√KA╙р∙H=yuH╖╓KA╙р∙H=yuHП√KA╙р∙H=yuH╕KA╙р∙H=yuHu╕KA╙р∙H=yuH3 KA╙р∙H=yuHF╒KA╙р∙H=yuHт╔KA╙р∙H=yuHq╒KA╙р∙H=yuH6╒KA╙р∙H=yuHi╒KA╙р∙H=yuHZ√KA╙р∙H=yuHИ≤KA╙р∙H=yuH-ёKA╙р∙H=yuH┘√KA╙р∙H=yuHЛ∙KA╙р∙H=yuH≈≈KA╙р∙H=yuH≈╒KA╙р∙H=yuH≈KA╙р∙H=yuH5√KA╙р∙H=yuHЗ∙KA╙р∙H=yuH-√KA╙р∙H=yuH)╔KA╙р∙H=yuHч≥KA╙р∙H=yuH╔KA╙р∙H=yuHз∙KA╙р∙H=yuHч╓KA╙р∙H=yuH⌠≥KA╙р∙H=yuH>ёKA╙р∙H=yuHН╖KA╙р∙H=yuH∙╒KA╙р∙H=yuH'╒KA╙р∙H=yuHэ√KA╙р∙H=yuH)\KA╙р∙H=yuH÷≤KA╙р∙H=yuHт√KA╙р∙H=yuHЪ√KA╙р∙H=yuHU╒KA╙р∙H=yuHёKA╙р∙H=yuH√KA╙р∙H=yuHY·KA╙р∙H=yuHg≤KA╙р∙H=yuHёKA╙р∙H=yuHE╒KA╙р∙H=yuHуёKA╙р∙H=yuH<ёKA╙р∙H=yuHY√KA╙р∙H=yuHN≥KA╙р∙H=yuH┴╓KA╙р∙H=yuHТ│KA╙р∙H=yuH╞√KA╙р∙H?yuHьёKA╙р∙H?yuH╝KA╙р∙H?yuH╬╔KA╙р∙H?yuH ≥KA╙р∙H?yuH_╛KA╙р∙H?yuHМ╙KA╙р∙H?yuHj╖KA╙р∙H?yuHе╔KA╙р∙H?yuHН╖KA╙р∙H?yuH?╜KA╙р∙H?yuH°KA╙р∙H?yuHз╕KA╙р∙H?yuH╔╚KA╙р∙H"yuHСbKA╙р∙H"yuH╪tKA╙р∙H"yuH)\KA╙р∙H┘yuH╝KA╙р∙H┘yuH╓╞KA╙р∙H┘yuH▐бKA╙р∙H┘yuH╢KA╙р∙H┘yuHE╧KA╙р∙H┘yuH ≥MA╙р∙H┘yuH│MA╙р∙H┘yuH%╠KA╙р∙H┘yuHвёLA╙р∙H┘yuHg▓MA╙р∙H┘yuHЛ▌MA╙р∙HfyuH╝KA╙р∙HfyuH7█MA╙р∙HfyuH▐бKA╙р∙HfyuH╢KA╙р∙HfyuHz√MA╙р∙HfyuH ≥MA╙р∙HfyuH│MA╙р∙HfyuHg▓MA╙р∙HhyuHвёLA╙р∙H,yuH╝KA╙р∙H,yuH╓╞KA╙р∙H,yuH▐бKA╙р∙H,yuH╢KA╙р∙H,yuH▄╣KA╙р∙H,yuH╧▓MA╙р∙H,yuH ≥MA╙р∙H,yuH│MA╙р∙H,yuHц┴MA╙р∙H,yuHC√MA╙р∙H,yuH█MA╙р∙HMyuH╝KA╙р∙HMyuH(qLA╙р∙HMyuH╠KA╙р∙HMyuHБ╞KA╙р∙HMyuH ≥MA╙р∙HMyuHвёLA╙р∙H▒yuHЮcKA╙р∙HvyuH;╖KA╙р∙HvyuHьёKA╙р∙HvyuH╝KA╙р∙HvyuHW╕KA╙р∙HvyuH KA╙р∙HvyuH╓╖KA╙р∙HvyuH╥╖KA╙р∙HvyuH╕KA╙р∙HvyuHщ≥KA╙р∙HvyuHu╕KA╙р∙HvyuH3 KA╙р∙HvyuH ≥KA╙р∙HvyuHд╔KA╙р∙HvyuH:╘KA╙р∙HvyuHU╛KA╙р∙HvyuH▌╕KA╙р∙HvyuH╔KA╙р∙HvyuHе╔KA╙р∙HvyuHН╖KA╙р∙HvyuH°KA╙р∙HvyuH;╘KA╙р∙HvyuH]╙KA╙р∙HvyuHз╕KA╙р∙HvyuHu╔KA╙р∙HvyuHm╔KA╙р∙HxyuHьёKA╙р∙HxyuH╝KA╙р∙HxyuH}╕KA╙р∙HxyuH ≥KA╙р∙HxyuHN╜KA╙р∙HxyuHя╘KA╙р∙HxyuHе╔KA╙р∙HxyuH°KA╙р∙HxyuH⌡╖KA╙р∙H:yuH>≥KA╙р∙H:yuHьёKA╙р∙H:yuHf╖KA╙р∙H:yuHб╘KA╙р∙H:yuH╝KA╙р∙H:yuHW╕KA╙р∙H:yuH KA╙р∙H:yuHe═KA╙р∙H:yuH╤╔KA╙р∙H:yuH╓╖KA╙р∙H:yuH┬╚KA╙р∙H:yuHх╕KA╙р∙H:yuH/╕KA╙р∙H:yuHМ≥KA╙р∙H:yuHD╛KA╙р∙H:yuH╕KA╙р∙H:yuHщ≥KA╙р∙H:yuH╠╔KA╙р∙H:yuHu╕KA╙р∙H:yuH3 KA╙р∙H:yuH ≥KA╙р∙H:yuHт╔KA╙р∙H:yuHЖ╕KA╙р∙H:yuHИ≤KA╙р∙H:yuHв╔KA╙р∙H:yuH╫╖KA╙р∙H:yuH╣╖KA╙р∙H:yuH╤╕KA╙р∙H:yuHИ╕KA╙р∙H:yuH7╖KA╙р∙H:yuH)╔KA╙р∙H:yuH╖KA╙р∙H:yuH╔KA╙р∙H:yuHт╕KA╙р∙H:yuH⌠≥KA╙р∙H:yuH(╘KA╙р∙H:yuHн╓KA╙р∙H:yuHе╔KA╙р∙H:yuHН╖KA╙р∙H:yuH?╜KA╙р∙H:yuHj╜KA╙р∙H:yuH°KA╙р∙H:yuH)\KA╙р∙H:yuHd╚KA╙р∙H:yuH▐≤KA╙р∙H:yuH∙╔KA╙р∙H:yuH▄╕KA╙р∙H:yuHZ╔KA╙р∙H:yuH╤╖KA╙р∙H:yuHY·KA╙р∙H:yuHМ╕KA╙р∙H:yuHТ│KA╙р∙H<yuH>≥KA╙р∙H<yuHц∙KA╙р∙H<yuHe═KA╙р∙H<yuHJ≤KA╙р∙H<yuHа╒KA╙р∙H<yuH√KA╙р∙H<yuHЛ╒KA╙р∙H<yuH╚∙KA╙р∙H<yuH╖╓KA╙р∙H<yuHП√KA╙р∙H<yuHF╒KA╙р∙H<yuHт╔KA╙р∙H<yuHq╒KA╙р∙H<yuHZ√KA╙р∙H<yuHИ≤KA╙р∙H<yuH-ёKA╙р∙H<yuH┘√KA╙р∙H<yuH≈╒KA╙р∙H<yuHЧ║KA╙р∙H<yuHФ║KA╙р∙H<yuH5√KA╙р∙H<yuH°∙KA╙р∙H<yuH)╔KA╙р∙H<yuHЖ╓KA╙р∙H<yuH╔KA╙р∙H<yuHч╓KA╙р∙H<yuH⌠≥KA╙р∙H<yuH)\KA╙р∙H<yuH÷≤KA╙р∙H<yuHт√KA╙р∙H<yuHЪ√KA╙р∙H<yuHЕ≤KA╙р∙H<yuHU╒KA╙р∙H<yuH√KA╙р∙H<yuHY·KA╙р∙H<yuHg≤KA╙р∙H<yuHёKA╙р∙H<yuH<ёKA╙р∙H<yuHв║KA╙р∙H<yuH┴╓KA╙р∙H<yuHТ│KA╙р∙H<yuH╞√KA╙р∙H>yuH>≥KA╙р∙H>yuHьёKA╙р∙H>yuHб╘KA╙р∙H>yuH╝KA╙р∙H>yuHW╕KA╙р∙H>yuH KA╙р∙H>yuH/╕KA╙р∙H>yuHМ≥KA╙р∙H>yuHю╕KA╙р∙H>yuHD╛KA╙р∙H>yuH╕KA╙р∙H>yuHщ≥KA╙р∙H>yuH╞╖KA╙р∙H>yuH╘╔KA╙р∙H>yuH ≥KA╙р∙H>yuHс╕KA╙р∙H>yuHт╔KA╙р∙H>yuHЧ╕KA╙р∙H>yuHx╕KA╙р∙H>yuH6 KA╙р∙H>yuHa╜KA╙р∙H>yuHв╔KA╙р∙H>yuH/╓KA╙р∙H>yuH$╖KA╙р∙H>yuHZ╓KA╙р∙H>yuH┘╓KA╙р∙H>yuH∙╖KA╙р∙H>yuH√╕KA╙р∙H>yuHЭ╕KA╙р∙H>yuHП≈KA╙р∙H>yuH≤KA╙р∙H>yuH╟╖KA╙р∙H>yuHF≤KA╙р∙H>yuH╔KA╙р∙H>yuH╡╔KA╙р∙H>yuH⌠≥KA╙р∙H>yuHp╓KA╙р∙H>yuHЪ╕KA╙р∙H>yuH(╘KA╙р∙H>yuHн╓KA╙р∙H>yuHе╔KA╙р∙H>yuHН╖KA╙р∙H>yuHF⌡KA╙р∙H>yuHy⌡KA╙р∙H>yuH⌡KA╙р∙H>yuH#╕KA╙р∙H>yuH╔ KA╙р∙H>yuH°KA╙р∙H>yuH)\KA╙р∙H>yuHd╚KA╙р∙H>yuH1≤KA╙р∙H>yuHh╖KA╙р∙H>yuH▐≤KA╙р∙H>yuH-╖KA╙р∙H>yuH∙╔KA╙р∙H>yuHP╖KA╙р∙H>yuHblKA╙р∙H>yuH▌╖KA╙р∙H>yuHT╕KA╙р∙H>yuH┬╔KA╙р∙H>yuHТ│KA╚р∙HeyuH ≥MA╚р∙H├yuHy╞KA╚р∙H├yuH╝KA╚р∙H├yuH▐бKA╚р∙H├yuH╢KA╚р∙H├yuH▀MA╚р∙H├yuH ≥MA╚р∙H├yuH│MA╚р∙H├yuH"·LA╚р∙H├yuHк║LA╚р∙H├yuH`⌠MA╚р∙H├yuHА⌠MA╚р∙H├yuH╧╨KA╚р∙HgyuH╝KA╚р∙HgyuH ≥MA╚р∙HgyuHвёLA╚р∙HLyuH╝KA╚р∙HLyuH╓╞KA╚р∙HLyuH▐╢KA╚р∙HLyuH▐бKA╚р∙HLyuH╢KA╚р∙HLyuH╧▓MA╚р∙HLyuH ≥MA╚р∙HLyuH│MA╚р∙HLyuH┐╞KA╚р∙HLyuHц┴MA╚р∙HLyuHC√MA╚р∙HLyuH█MA╚р∙H-yuHp≈MA╚р∙H-yuH╝KA╚р∙H-yuH ≥MA╚р∙H-yuH;▓MA╚р∙H░yuH▒cKA╚р∙HuyuH>≥KA╚р∙HuyuHьёKA╚р∙HuyuHW╕KA╚р∙HuyuH KA╚р∙HuyuHe═KA╚р∙HuyuHJ≤KA╚р∙HuyuHа╒KA╚р∙HuyuH╤╔KA╚р∙HuyuHЛ╒KA╚р∙HuyuH╖╓KA╚р∙HuyuHП√KA╚р∙HuyuH╕KA╚р∙HuyuHщ≥KA╚р∙HuyuHu╕KA╚р∙HuyuH3 KA╚р∙HuyuH ≥KA╚р∙HuyuHт╔KA╚р∙HuyuHN╜KA╚р∙HuyuHi╒KA╚р∙HuyuHZ√KA╚р∙HuyuHИ≤KA╚р∙HuyuH-ёKA╚р∙HuyuH┘√KA╚р∙HuyuH≈≈KA╚р∙HuyuH/╓KA╚р∙HuyuH≈╒KA╚р∙HuyuHZ╓KA╚р∙HuyuH┘╓KA╚р∙HuyuH7╖KA╚р∙HuyuH-√KA╚р∙HuyuHП≈KA╚р∙HuyuH)╔KA╚р∙HuyuH≤KA╚р∙HuyuHч≥KA╚р∙HuyuHF≤KA╚р∙HuyuH╔KA╚р∙HuyuHч╓KA╚р∙HuyuH⌠≥KA╚р∙HuyuHp╓KA╚р∙HuyuHн╓KA╚р∙HuyuHе╔KA╚р∙HuyuHН╖KA╚р∙HuyuH∙╒KA╚р∙HuyuH°KA╚р∙HuyuHэ√KA╚р∙HuyuH)\KA╚р∙HuyuH÷≤KA╚р∙HuyuHт√KA╚р∙HuyuH1≤KA╚р∙HuyuHЪ√KA╚р∙HuyuH▐≤KA╚р∙HuyuH≥KA╚р∙HuyuHёKA╚р∙HuyuHY·KA╚р∙HuyuHg≤KA╚р∙HuyuHёKA╚р∙HuyuHуёKA╚р∙HuyuH<ёKA╚р∙HuyuHY√KA╚р∙HuyuH┴╓KA╚р∙HuyuHТ│KA╚р∙HuyuH╞√KA╚р∙HwyuH>≥KA╚р∙HwyuHe═KA╚р∙HwyuHJ≤KA╚р∙HwyuHа╒KA╚р∙HwyuH√KA╚р∙HwyuHЛ╒KA╚р∙HwyuH╖╓KA╚р∙HwyuHП√KA╚р∙HwyuH╕KA╚р∙HwyuHF╒KA╚р∙HwyuHт╔KA╚р∙HwyuHq╒KA╚р∙HwyuHi╒KA╚р∙HwyuHZ√KA╚р∙HwyuHИ≤KA╚р∙HwyuH-ёKA╚р∙HwyuH┘√KA╚р∙HwyuH≈╒KA╚р∙HwyuH5√KA╚р∙HwyuH-√KA╚р∙HwyuH)╔KA╚р∙HwyuHЖ╓KA╚р∙HwyuHч≥KA╚р∙HwyuH╔KA╚р∙HwyuHч╓KA╚р∙HwyuH⌠≥KA╚р∙HwyuH∙╒KA╚р∙HwyuHэ√KA╚р∙HwyuH)\KA╚р∙HwyuH÷≤KA╚р∙HwyuHт√KA╚р∙HwyuHЪ√KA╚р∙HwyuHЕ≤KA╚р∙HwyuHU╒KA╚р∙HwyuHёKA╚р∙HwyuH√KA╚р∙HwyuHY·KA╚р∙HwyuHg≤KA╚р∙HwyuHёKA╚р∙HwyuH<ёKA╚р∙HwyuHY√KA╚р∙HwyuHN≥KA╚р∙HwyuH┴╓KA╚р∙HwyuHТ│KA╚р∙HwyuH╞√KA╚р∙HyyuHьёKA╚р∙HyyuHб╘KA╚р∙HyyuH╝KA╚р∙HyyuH╬╔KA╚р∙HyyuH╡╛KA╚р∙HyyuH╞╖KA╚р∙HyyuH╘╔KA╚р∙HyyuH ≥KA╚р∙HyyuHЧ╕KA╚р∙HyyuHa╜KA╚р∙HyyuH√╕KA╚р∙HyyuHЭ╕KA╚р∙HyyuHЪ╕KA╚р∙HyyuHе╔KA╚р∙HyyuHН╖KA╚р∙HyyuH?╜KA╚р∙HyyuH°KA╚р∙HyyuHd╚KA╚р∙HyyuH∙╔KA╚р∙HyyuH6╘KA╚р∙HyyuH▌╖KA╚р∙HyyuH┬╔KA╚р∙H;yuH;╖KA╚р∙H;yuHьёKA╚р∙H;yuH╝KA╚р∙H;yuHs╜KA╚р∙H;yuH▀╔KA╚р∙H;yuH?╘KA╚р∙H;yuH ≥KA╚р∙H;yuHд╔KA╚р∙H;yuHФ╕KA╚р∙H;yuHя╘KA╚р∙H;yuHе╔KA╚р∙H;yuHH╛KA╚р∙H;yuHН╖KA╚р∙H;yuH°KA╚р∙H;yuH╖KA╚р∙H;yuH╗╔KA╚р∙H;yuHm╔KA╚р∙H;yuH╔╚KA╚р∙H=yuHьёKA╚р∙H=yuH╝KA╚р∙H=yuHD╛KA╚р∙H=yuHК╕KA╚р∙H=yuH├╔KA╚р∙H=yuH}╕KA╚р∙H=yuH╖╖KA╚р∙H=yuH ≥KA╚р∙H=yuH:╘KA╚р∙H=yuH╔╖KA╚р∙H=yuH(╕KA╚р∙H=yuHе╔KA╚р∙H=yuHН╖KA╚р∙H=yuHj╜KA╚р∙H=yuH°KA╚р∙H=yuH⌡╖KA╚р∙H=yuH╤╖KA╚р∙H=yuHо╘KA╚р∙H=yuHб╕KA╚р∙H"yuH▒cKA╚р∙H"yuH╪tKA╚р∙H┘yuHвёLA╚р∙HfyuHa▀MA╚р∙HfyuH╝KA╚р∙HfyuH	⌠MA╚р∙HfyuH▐бKA╚р∙HfyuH╢KA╚р∙HfyuH╥┴MA╚р∙HfyuHZmLA╚р∙HfyuH ≥MA╚р∙HfyuH╘ЁKA╚р∙HfyuH│MA╚р∙HfyuH╩KA╚р∙HfyuHк║LA╚р∙HfyuHg▓MA╚р∙HfyuH}LA╚р∙HfyuHR╩KA╚р∙HfyuH╧╨KA╚р∙HfyuH╩≈MA╚р∙H┤yuH ≥MA╚р∙H,yuH╦▓MA╚р∙H,yuH╝KA╚р∙H,yuH▐бKA╚р∙H,yuH╢KA╚р∙H,yuH)╨KA╚р∙H,yuH&■MA╚р∙H,yuH│MA╚р∙H,yuH"·LA╚р∙H,yuH;┼MA╚р∙H,yuHк║LA╚р∙H,yuH&╩KA╚р∙H,yuHвёLA╚р∙H,yuH0▀MA╚р∙H,yuH█╟KA╚р∙H▒yuH╪tKA╚р∙HtyuH>≥KA╚р∙HtyuHьёKA╚р∙HtyuHf╖KA╚р∙HtyuHб╘KA╚р∙HtyuH╝KA╚р∙HtyuH╓╖KA╚р∙HtyuHы╔KA╚р∙HtyuHх╕KA╚р∙HtyuH/╕KA╚р∙HtyuHМ≥KA╚р∙HtyuHD╛KA╚р∙HtyuH╠╔KA╚р∙HtyuH~╔KA╚р∙HtyuH ≥KA╚р∙HtyuH_╛KA╚р∙HtyuHс╕KA╚р∙HtyuHЖ╕KA╚р∙HtyuHx╕KA╚р∙HtyuH6 KA╚р∙HtyuHa╜KA╚р∙HtyuHв╔KA╚р∙HtyuHМ╙KA╚р∙HtyuH╫╖KA╚р∙HtyuH╣╖KA╚р∙HtyuH╤╕KA╚р∙HtyuHИ╕KA╚р∙HtyuH╖KA╚р∙HtyuH╔KA╚р∙HtyuHт╕KA╚р∙HtyuH(╘KA╚р∙HtyuHе╔KA╚р∙HtyuHН╖KA╚р∙HtyuHF⌡KA╚р∙HtyuHy⌡KA╚р∙HtyuH⌡KA╚р∙HtyuH?╜KA╚р∙HtyuH╔ KA╚р∙HtyuH°KA╚р∙HtyuH)\KA╚р∙HtyuHd╚KA╚р∙HtyuHh╖KA╚р∙HtyuH-╖KA╚р∙HtyuH▄╕KA╚р∙HtyuHZ╔KA╚р∙HtyuH╤╖KA╚р∙HtyuHblKA╚р∙HtyuHз╕KA╚р∙HtyuHT╕KA╚р∙HtyuH╔╚KA╚р∙HtyuHТ│KA╚р∙HvyuH>≥KA╚р∙HvyuHe═KA╚р∙HvyuHJ≤KA╚р∙HvyuHа╒KA╚р∙HvyuH√KA╚р∙HvyuHЛ╒KA╚р∙HvyuH╖╓KA╚р∙HvyuHП√KA╚р∙HvyuHF╒KA╚р∙HvyuHт╔KA╚р∙HvyuHq╒KA╚р∙HvyuHZ√KA╚р∙HvyuHИ≤KA╚р∙HvyuH-ёKA╚р∙HvyuH┘√KA╚р∙HvyuH≈╒KA╚р∙HvyuH5√KA╚р∙HvyuH)╔KA╚р∙HvyuHЖ╓KA╚р∙HvyuH╔KA╚р∙HvyuHч╓KA╚р∙HvyuH⌠≥KA╚р∙HvyuH)\KA╚р∙HvyuH÷≤KA╚р∙HvyuHт√KA╚р∙HvyuHЪ√KA╚р∙HvyuHщ≤KA╚р∙HvyuHU╒KA╚р∙HvyuH√KA╚р∙HvyuHY·KA╚р∙HvyuHg≤KA╚р∙HvyuHёKA╚р∙HvyuH<ёKA╚р∙HvyuH┴╓KA╚р∙HvyuHТ│KA╚р∙HvyuH╞√KA╚р∙HxyuH>≥KA╚р∙HxyuHьёKA╚р∙HxyuH╝KA╚р∙HxyuHW╕KA╚р∙HxyuH KA╚р∙HxyuHe═KA╚р∙HxyuHJ≤KA╚р∙HxyuH╖╓KA╚р∙HxyuH┬╚KA╚р∙HxyuHю╕KA╚р∙HxyuHD╛KA╚р∙HxyuHК╕KA╚р∙HxyuH╕KA╚р∙HxyuH├╔KA╚р∙HxyuHщ≥KA╚р∙HxyuHu╕KA╚р∙HxyuH3 KA╚р∙HxyuH ≥KA╚р∙HxyuHт╔KA╚р∙HxyuHИ≤KA╚р∙HxyuH$╖KA╚р∙HxyuH╔╖KA╚р∙HxyuH∙╖KA╚р∙HxyuH)╔KA╚р∙HxyuHч≥KA╚р∙HxyuH╟╖KA╚р∙HxyuH╔KA╚р∙HxyuH╡╔KA╚р∙HxyuHч╓KA╚р∙HxyuH⌠≥KA╚р∙HxyuH(╘KA╚р∙HxyuHе╔KA╚р∙HxyuHН╖KA╚р∙HxyuH#╕KA╚р∙HxyuHj╜KA╚р∙HxyuH°KA╚р∙HxyuH)\KA╚р∙HxyuH÷≤KA╚р∙HxyuHP╖KA╚р∙HxyuH╟╔KA╚р∙HxyuHY·KA╚р∙HxyuHg≤KA╚р∙HxyuH┴╓KA╚р∙HxyuHТ│KA╚р∙H:yuHh╔KA╚р∙H:yuHN╜KA╚р∙H<yuHьёKA╚р∙H<yuH╝KA╚р∙H<yuHW╕KA╚р∙H<yuH KA╚р∙H<yuH╓╖KA╚р∙H<yuH└╖KA╚р∙H<yuH╕KA╚р∙H<yuHщ≥KA╚р∙H<yuHu╕KA╚р∙H<yuH3 KA╚р∙H<yuH ≥KA╚р∙H<yuHт╔KA╚р∙H<yuH|╔KA╚р∙H<yuHU╛KA╚р∙H<yuH▌╕KA╚р∙H<yuHч≥KA╚р∙H<yuH⌠≥KA╚р∙H<yuHе╔KA╚р∙H<yuHН╖KA╚р∙H<yuH°KA╚р∙H<yuHz╔KA╚р∙H<yuH;╘KA╚р∙H<yuHZ╜KA╚р∙H<yuH]╙KA╚р∙H<yuHз╕KA╚р∙H>yuH╝KA╚р∙H>yuH┬╚KA╚р∙H>yuHN╜KA╚р∙H>yuH╟╔KA╛р∙H├yuH╝KA╛р∙H├yuH▐бKA╛р∙H├yuH╢KA╛р∙H├yuH ≥MA╛р∙H├yuH│MA╛р∙H├yuHю╡KA╛р∙H├yuHвёLA╛р∙H├yuHH╨KA╛р∙HgyuH╝KA╛р∙HgyuH ≥MA╛р∙HLyuH╝KA╛р∙HLyuH▐бKA╛р∙HLyuH&■MA╛р∙HLyuH ≥MA╛р∙HLyuH│MA╛р∙HLyuH"·LA╛р∙HLyuHк║LA╛р∙HLyuHвёLA╛р∙HLyuH╜╟KA╛р∙HLyuH╦KA╛р∙H-yuH╝KA╛р∙H-yuH▓MA╛р∙H-yuH▐бKA╛р∙H-yuH╢KA╛р∙H-yuH ≥MA╛р∙H-yuH│MA╛р∙H-yuHвёLA╛р∙H-yuHG╟KA╛р∙H-yuH╧╥KA╛р∙H-yuH╧╨KA╛р∙H-yuHч≈MA╛р∙H░yuHСbKA╛р∙H░yuH╪tKA╛р∙H░yuH)\KA╛р∙HuyuH>≥KA╛р∙HuyuHьёKA╛р∙HuyuHW╕KA╛р∙HuyuH KA╛р∙HuyuHe═KA╛р∙HuyuHJ≤KA╛р∙HuyuHа╒KA╛р∙HuyuHЛ╒KA╛р∙HuyuH╖╓KA╛р∙HuyuHП√KA╛р∙HuyuH╕KA╛р∙HuyuHщ≥KA╛р∙HuyuHu╕KA╛р∙HuyuH3 KA╛р∙HuyuHт╔KA╛р∙HuyuHi╒KA╛р∙HuyuHZ√KA╛р∙HuyuHИ≤KA╛р∙HuyuH-ёKA╛р∙HuyuH┘√KA╛р∙HuyuH≈╒KA╛р∙HuyuH≈KA╛р∙HuyuH-√KA╛р∙HuyuH)╔KA╛р∙HuyuHч≥KA╛р∙HuyuH╔KA╛р∙HuyuHч╓KA╛р∙HuyuH⌠≥KA╛р∙HuyuH>ёKA╛р∙HuyuHн╓KA╛р∙HuyuHН╖KA╛р∙HuyuH∙╒KA╛р∙HuyuH°KA╛р∙HuyuHэ√KA╛р∙HuyuH)\KA╛р∙HuyuH÷≤KA╛р∙HuyuHт√KA╛р∙HuyuHЪ√KA╛р∙HuyuH▐≤KA╛р∙HuyuHёKA╛р∙HuyuHY·KA╛р∙HuyuHg≤KA╛р∙HuyuHёKA╛р∙HuyuH<ёKA╛р∙HuyuHY√KA╛р∙HuyuHN≥KA╛р∙HuyuH┴╓KA╛р∙HuyuHТ│KA╛р∙HuyuH╞√KA╛р∙HwyuH>≥KA╛р∙HwyuH╒KA╛р∙HwyuHц∙KA╛р∙HwyuHe═KA╛р∙HwyuHJ≤KA╛р∙HwyuHа╒KA╛р∙HwyuH√KA╛р∙HwyuHЛ╒KA╛р∙HwyuH╚∙KA╛р∙HwyuH	√KA╛р∙HwyuH╖╓KA╛р∙HwyuHП√KA╛р∙HwyuH╕KA╛р∙HwyuHF╒KA╛р∙HwyuHт╔KA╛р∙HwyuHq╒KA╛р∙HwyuH6╒KA╛р∙HwyuHi╒KA╛р∙HwyuHZ√KA╛р∙HwyuHИ≤KA╛р∙HwyuH-ёKA╛р∙HwyuH┘√KA╛р∙HwyuHЛ∙KA╛р∙HwyuH≈╒KA╛р∙HwyuHЧ║KA╛р∙HwyuHФ║KA╛р∙HwyuH≈KA╛р∙HwyuH5√KA╛р∙HwyuHЗ∙KA╛р∙HwyuH-√KA╛р∙HwyuH)╔KA╛р∙HwyuHЖ╓KA╛р∙HwyuHч≥KA╛р∙HwyuH╔KA╛р∙HwyuHз∙KA╛р∙HwyuHч╓KA╛р∙HwyuH⌠≥KA╛р∙HwyuH>ёKA╛р∙HwyuH∙╒KA╛р∙HwyuH'╒KA╛р∙HwyuHэ√KA╛р∙HwyuH)\KA╛р∙HwyuH÷≤KA╛р∙HwyuHт√KA╛р∙HwyuHЪ√KA╛р∙HwyuH≥KA╛р∙HwyuHщ≤KA╛р∙HwyuHU╒KA╛р∙HwyuHёKA╛р∙HwyuH√KA╛р∙HwyuHY·KA╛р∙HwyuHg≤KA╛р∙HwyuHёKA╛р∙HwyuHE╒KA╛р∙HwyuH<ёKA╛р∙HwyuHY√KA╛р∙HwyuH┴╓KA╛р∙HwyuHТ│KA╛р∙HwyuH╞√KA╛р∙HyyuHьёKA╛р∙HyyuHf╖KA╛р∙HyyuH╝KA╛р∙HyyuHы╔KA╛р∙HyyuHх╕KA╛р∙HyyuH╠╔KA╛р∙HyyuH~╔KA╛р∙HyyuH ≥KA╛р∙HyyuH_╛KA╛р∙HyyuHс╕KA╛р∙HyyuHЖ╕KA╛р∙HyyuHa╜KA╛р∙HyyuHМ╙KA╛р∙HyyuH╫╖KA╛р∙HyyuHj╖KA╛р∙HyyuH╖KA╛р∙HyyuHе╔KA╛р∙HyyuHН╖KA╛р∙HyyuHF⌡KA╛р∙HyyuHy⌡KA╛р∙HyyuH⌡KA╛р∙HyyuH?╜KA╛р∙HyyuH╔ KA╛р∙HyyuH°KA╛р∙HyyuHd╚KA╛р∙HyyuHh╖KA╛р∙HyyuH-╖KA╛р∙HyyuHз╕KA╛р∙HyyuH╔╚KA╛р∙H"yuHЮcKA╛р∙H"yuH)\KA╛р∙HfyuHa▀MA╛р∙HfyuH╝KA╛р∙HfyuH>╨KA╛р∙HfyuH	⌠MA╛р∙HfyuH▐бKA╛р∙HfyuH╢KA╛р∙HfyuH ≥MA╛р∙HfyuH│MA╛р∙HfyuHю╡KA╛р∙HfyuHg▓MA╛р∙HfyuHH╨KA╛р∙HfyuH╧╨KA╛р∙HfyuH╩≈MA╛р∙H┤yuHa▀MA╛р∙H┤yuH╝KA╛р∙H┤yuH>╨KA╛р∙H┤yuH	⌠MA╛р∙H┤yuH▐бKA╛р∙H┤yuH╥┴MA╛р∙H┤yuHZmLA╛р∙H┤yuH ≥MA╛р∙H┤yuH│MA╛р∙H┤yuHк║LA╛р∙H┤yuHg▓MA╛р∙H┤yuH}LA╛р∙H┤yuHR╩KA╛р∙H┤yuH╩≈MA╛р∙HKyuH╦▓MA╛р∙HKyuH╟KA╛р∙HKyuH╝KA╛р∙HKyuH▐бKA╛р∙HKyuH╢KA╛р∙HKyuH ≥MA╛р∙HKyuHо╦KA╛р∙HKyuH;▓MA╛р∙HKyuH│MA╛р∙HKyuH;┼MA╛р∙HKyuH&╩KA╛р∙HKyuH0▀MA╛р∙H,yuH╝KA╛р∙H,yuH ≥MA╛р∙H.yuH╝KA╛р∙H.yuH╓╞KA╛р∙H.yuH┬▓MA╛р∙H.yuHM┼MA╛р∙H.yuH▐бKA╛р∙H.yuH ≥MA╛р∙H.yuH│MA╛р∙H.yuHЗ▓MA╛р∙HtyuH>≥KA╛р∙HtyuHьёKA╛р∙HtyuHб╘KA╛р∙HtyuH╝KA╛р∙HtyuH╬╔KA╛р∙HtyuH┬╚KA╛р∙HtyuH/╕KA╛р∙HtyuH╡╛KA╛р∙HtyuHМ≥KA╛р∙HtyuHю╕KA╛р∙HtyuHD╛KA╛р∙HtyuH╞╖KA╛р∙HtyuH╘╔KA╛р∙HtyuH ≥KA╛р∙HtyuHЧ╕KA╛р∙HtyuHa╜KA╛р∙HtyuHв╔KA╛р∙HtyuH$╖KA╛р∙HtyuHj╖KA╛р∙HtyuH∙╖KA╛р∙HtyuH√╕KA╛р∙HtyuHЭ╕KA╛р∙HtyuH╟╖KA╛р∙HtyuH╔KA╛р∙HtyuH╡╔KA╛р∙HtyuHЪ╕KA╛р∙HtyuH(╘KA╛р∙HtyuHе╔KA╛р∙HtyuHН╖KA╛р∙HtyuH#╕KA╛р∙HtyuH?╜KA╛р∙HtyuHj╜KA╛р∙HtyuH°KA╛р∙HtyuH)\KA╛р∙HtyuHd╚KA╛р∙HtyuH∙╔KA╛р∙HtyuHP╖KA╛р∙HtyuH╟╔KA╛р∙HtyuH6╘KA╛р∙HtyuH▌╖KA╛р∙HtyuHT╕KA╛р∙HtyuH┬╔KA╛р∙HtyuHТ│KA╛р∙HvyuH>≥KA╛р∙HvyuH╒KA╛р∙HvyuHц∙KA╛р∙HvyuHe═KA╛р∙HvyuHJ≤KA╛р∙HvyuHа╒KA╛р∙HvyuH√KA╛р∙HvyuHЛ╒KA╛р∙HvyuH╚∙KA╛р∙HvyuH	√KA╛р∙HvyuH╖╓KA╛р∙HvyuHП√KA╛р∙HvyuHF╒KA╛р∙HvyuHq╒KA╛р∙HvyuH6╒KA╛р∙HvyuHZ√KA╛р∙HvyuHИ≤KA╛р∙HvyuH-ёKA╛р∙HvyuH┘√KA╛р∙HvyuHЛ∙KA╛р∙HvyuH≈╒KA╛р∙HvyuHЧ║KA╛р∙HvyuHФ║KA╛р∙HvyuH5√KA╛р∙HvyuH°∙KA╛р∙HvyuHЗ∙KA╛р∙HvyuH)╔KA╛р∙HvyuHЖ╓KA╛р∙HvyuH▄∙KA╛р∙HvyuH╔KA╛р∙HvyuHз∙KA╛р∙HvyuHч╓KA╛р∙HvyuH'╒KA╛р∙HvyuH)\KA╛р∙HvyuH÷≤KA╛р∙HvyuHт√KA╛р∙HvyuHЪ√KA╛р∙HvyuHЕ≤KA╛р∙HvyuHU╒KA╛р∙HvyuH√KA╛р∙HvyuHY·KA╛р∙HvyuHg≤KA╛р∙HvyuHёKA╛р∙HvyuHE╒KA╛р∙HvyuH<ёKA╛р∙HvyuHв║KA╛р∙HvyuHг║KA╛р∙HvyuH┴╓KA╛р∙HvyuHТ│KA╛р∙HvyuH╞√KA╛р∙HxyuH>≥KA╛р∙HxyuHьёKA╛р∙HxyuHб╘KA╛р∙HxyuH╝KA╛р∙HxyuHW╕KA╛р∙HxyuH KA╛р∙HxyuHe═KA╛р∙HxyuH╓╖KA╛р∙HxyuH/╕KA╛р∙HxyuHМ≥KA╛р∙HxyuHD╛KA╛р∙HxyuH╕KA╛р∙HxyuHщ≥KA╛р∙HxyuHu╕KA╛р∙HxyuH3 KA╛р∙HxyuH ≥KA╛р∙HxyuHт╔KA╛р∙HxyuHИ≤KA╛р∙HxyuHx╕KA╛р∙HxyuH6 KA╛р∙HxyuHв╔KA╛р∙HxyuH≈≈KA╛р∙HxyuH/╓KA╛р∙HxyuHZ╓KA╛р∙HxyuH╣╖KA╛р∙HxyuH╤╕KA╛р∙HxyuHИ╕KA╛р∙HxyuH┘╓KA╛р∙HxyuHП≈KA╛р∙HxyuH)╔KA╛р∙HxyuH≤KA╛р∙HxyuHF≤KA╛р∙HxyuH╔KA╛р∙HxyuHч╓KA╛р∙HxyuHт╕KA╛р∙HxyuH⌠≥KA╛р∙HxyuHp╓KA╛р∙HxyuH(╘KA╛р∙HxyuHн╓KA╛р∙HxyuHе╔KA╛р∙HxyuHН╖KA╛р∙HxyuH°KA╛р∙HxyuH)\KA╛р∙HxyuH÷≤KA╛р∙HxyuH1≤KA╛р∙HxyuH▐≤KA╛р∙HxyuH▄╕KA╛р∙HxyuHZ╔KA╛р∙HxyuH╤╖KA╛р∙HxyuHblKA╛р∙HxyuHY·KA╛р∙HxyuHуёKA╛р∙HxyuHT╕KA╛р∙HxyuHТ│KA╜р∙H!yuHdKA╜р∙H!yuH╪tKA╜р∙H├yuHa▀MA╜р∙H├yuH╝KA╜р∙H├yuH▐бKA╜р∙H├yuH╢KA╜р∙H├yuH╘ЁKA╜р∙H├yuH│MA╜р∙H├yuH╩KA╜р∙H├yuHg▓MA╜р∙H├yuH╧╨KA╜р∙HgyuHy╞KA╜р∙HgyuH╝KA╜р∙HgyuHЭ╦KA╜р∙HgyuHз╞KA╜р∙HgyuH▐бKA╜р∙HgyuH≈MA╜р∙HgyuH▀MA╜р∙HgyuH ≥MA╜р∙HgyuH│MA╜р∙HgyuHвёLA╜р∙HJyuHp≈MA╜р∙HJyuH╝KA╜р∙HJyuH▓MA╜р∙HJyuH▐бKA╜р∙HJyuH╢KA╜р∙HJyuH ≥MA╜р∙HJyuH│MA╜р∙HJyuHк║LA╜р∙HJyuHч╥KA╜р∙HJyuH┬╞KA╜р∙HJyuHвёLA╜р∙HJyuH╧╨KA╜р∙HJyuHч≈MA╜р∙H/yuH╝KA╜р∙H/yuHN╨KA╜р∙H/yuHo▀MA╜р∙H/yuH▐бKA╜р∙H/yuH╢KA╜р∙H/yuH ≥MA╜р∙H/yuH│MA╜р∙H/yuH├∙MA╜р∙H/yuHк║LA╜р∙H/yuHвёLA╜р∙H/yuH╧╨KA╜р∙H░yuH╪tKA╜р∙H░yuH)\KA╜р∙HuyuHьёKA╜р∙HuyuH╝KA╜р∙HuyuHК╕KA╜р∙HuyuH├╔KA╜р∙HuyuH}╕KA╜р∙HuyuH?╘KA╜р∙HuyuH╖╖KA╜р∙HuyuH ≥KA╜р∙HuyuHN╜KA╜р∙HuyuH╔╖KA╜р∙HuyuH(╕KA╜р∙HuyuHя╘KA╜р∙HuyuHе╔KA╜р∙HuyuHH╛KA╜р∙HuyuHН╖KA╜р∙HuyuH°KA╜р∙HuyuH⌡╖KA╜р∙HuyuH╤╖KA╜р∙HuyuHб╕KA╜р∙HwyuH;╖KA╜р∙HwyuHьёKA╜р∙HwyuH╝KA╜р∙HwyuH▀╔KA╜р∙HwyuHD╛KA╜р∙HwyuH ≥KA╜р∙HwyuHд╔KA╜р∙HwyuHФ╕KA╜р∙HwyuH:╘KA╜р∙HwyuHе╔KA╜р∙HwyuHН╖KA╜р∙HwyuH°KA╜р∙HwyuH;╘KA╜р∙HwyuH╖KA╜р∙HwyuH╗╔KA╜р∙HwyuHо╘KA╜р∙HwyuHm╔KA╜р∙H"yuH)\KA╜р∙HfyuH╢KA╜р∙HfyuH▀MA╜р∙HfyuH ≥MA╜р∙HfyuH"·LA╜р∙HfyuHк║LA╜р∙HfyuH`⌠MA╜р∙HfyuHА⌠MA╜р∙H┤yuH	⌠MA╜р∙H┤yuH ≥MA╜р∙H┤yuH╩≈MA╜р∙HIyuH╝KA╜р∙HIyuH┬▓MA╜р∙HIyuHM┼MA╜р∙HIyuH ≥MA╜р∙HIyuHЗ▓MA╜р∙HIyuH╧╨KA╜р∙HKyuH╝KA╜р∙HKyuH▐бKA╜р∙HKyuH ≥MA╜р∙HKyuH│MA╜р∙HKyuH1╠KA╜р∙H.yuH╝KA╜р∙H.yuHы╟KA╜р∙H.yuH▐бKA╜р∙H.yuH	╥KA╜р∙H.yuH ≥MA╜р∙H.yuH│MA╜р∙H0yuH╝KA╜р∙H0yuHг╞KA╜р∙H0yuHх⌠MA╜р∙H0yuH ≥MA╜р∙H0yuHи▀MA╜р∙HtyuH╝KA╜р∙HvyuH>≥KA╜р∙HvyuHьёKA╜р∙HvyuH╝KA╜р∙HvyuHW╕KA╜р∙HvyuHs╜KA╜р∙HvyuH KA╜р∙HvyuHe═KA╜р∙HvyuH╓╖KA╜р∙HvyuH└╖KA╜р∙HvyuH╕KA╜р∙HvyuHщ≥KA╜р∙HvyuHu╕KA╜р∙HvyuH3 KA╜р∙HvyuH ≥KA╜р∙HvyuHт╔KA╜р∙HvyuH|╔KA╜р∙HvyuHU╛KA╜р∙HvyuH▌╕KA╜р∙HvyuHч≥KA╜р∙HvyuH╔KA╜р∙HvyuH⌠≥KA╜р∙HvyuHе╔KA╜р∙HvyuHН╖KA╜р∙HvyuH°KA╜р∙HvyuHz╔KA╜р∙HvyuH)\KA╜р∙HvyuHZ╜KA╜р∙HvyuH]╙KA╜р∙HvyuHз╕KA╜р∙HvyuHY·KA╜р∙HvyuH╔╚KA╜р∙HxyuHьёKA╜р∙HxyuHh╔KA╜р∙HxyuH╝KA╜р∙HxyuH╤╔KA╜р∙HxyuH┬╚KA╜р∙HxyuHN╜KA╜р∙HxyuH7╖KA╜р∙HxyuHН╖KA╜р∙HxyuHj╜KA╜р∙HxyuH°KA╜р∙HxyuH∙╔KA╜р∙HxyuHМ╕KA╝р∙H!yuHmdKA╝р∙H!yuH╪tKA╝р∙H├yuH╝KA╝р∙H├yuH7█MA╝р∙H├yuHЭ╟KA╝р∙H├yuH▐бKA╝р∙H├yuH╢KA╝р∙H├yuHz√MA╝р∙H├yuH_╞KA╝р∙H├yuH ≥MA╝р∙H├yuH│MA╝р∙H├yuH"·LA╝р∙H├yuH_▒MA╝р∙H├yuHк║LA╝р∙H├yuH ╦KA╝р∙HFyuHf╨KA╝р∙HFyuH╝KA╝р∙HFyuH■MA╝р∙HFyuH▐бKA╝р∙HFyuH│MA╝р∙HFyuH≈ЁKA╝р∙HFyuH5▄MA╝р∙HgyuH╝KA╝р∙HgyuH▐бKA╝р∙HgyuHE╧KA╝р∙HgyuH ≥MA╝р∙HgyuH│MA╝р∙HgyuH%╠KA╝р∙HgyuHвёLA╝р∙HgyuHg▓MA╝р∙HHyuHf╨KA╝р∙HHyuH╝KA╝р∙HHyuH╬▓MA╝р∙HHyuH╢KA╝р∙HHyuH▀MA╝р∙HHyuH ≥MA╝р∙H░yuHdKA╝р∙H░yuH╪tKA╝р∙H░yuH)\KA╝р∙H1yuHг╞KA╝р∙H1yuH▐бKA╝р∙H1yuH ≥MA╝р∙H1yuH│MA╝р∙H1yuH=⌠MA╝р∙H1yuHФ▀MA╝р∙H1yuHвёLA╝р∙H1yuH╧╨KA╝р∙H3yuHf╨KA╝р∙H3yuH╝KA╝р∙H3yuH▐бKA╝р∙H3yuH ≥MA╝р∙H3yuH│MA╝р∙H3yuH≈ЁKA╝р∙H5yuHq≈MA╝р∙H"yuH)\KA╝р∙H┘yuH╝KA╝р∙H┘yuHs≈MA╝р∙H┘yuH▐бKA╝р∙H┘yuH
+╧KA╝р∙H┘yuH ≥MA╝р∙H┘yuH│MA╝р∙H┘yuHвёLA╝р∙H┘yuHu╟KA╝р∙HEyuHf≈MA╝р∙HEyuH ≥MA╝р∙HEyuH/▒MA╝р∙HGyuH╝KA╝р∙HGyuH▐бKA╝р∙HGyuH ≥MA╝р∙HGyuH│MA╝р∙HGyuH╗▀MA╝р∙HGyuHк║LA╝р∙HGyuH√⌠MA╝р∙HGyuHвёLA╝р∙HGyuH╧╨KA╝р∙HhyuH╝KA╝р∙HhyuH╓╞KA╝р∙HhyuH╔╠KA╝р∙HhyuH▐бKA╝р∙HhyuH╢KA╝р∙HhyuH ≥MA╝р∙HhyuH│MA╝р∙HhyuHж⌠MA╝р∙HhyuHw┼MA╝р∙HhyuHЛ▌MA╝р∙HhyuH╧╨KA╝р∙HIyuH╝KA╝р∙HIyuH▐бKA╝р∙HIyuH ≥MA╝р∙HIyuH│MA╝р∙HIyuH≈ЁKA╝р∙H0yuH╝KA╝р∙H0yuH ≥MA╝р∙H0yuH√╢KA╝р∙H2yuH╝KA╝р∙H2yuH▐бKA╝р∙H2yuH╢KA╝р∙H2yuHI▒MA╝р∙H2yuH ≥MA╝р∙H2yuH│MA╝р∙H2yuH÷≈MA╝р∙H4yuHД▄MA╝р∙H4yuH√MA╝р∙H4yuH ≥MA╝р∙H4yuH╧╨KA╞р∙H@yuH╝KA╞р∙H@yuH	░MA╞р∙H@yuH╕≈MA╞р∙H@yuH▐бKA╞р∙H@yuH│MA╞р∙H@yuH≈ЁKA╞р∙H!yuH╪tKA╞р∙H┌yuH╝KA╞р∙H┌yuH ≥MA╞р∙HByuH╓√MA╞р∙HByuH╝KA╞р∙HByuH²█MA╞р∙HByuH▐бKA╞р∙HByuH╢KA╞р∙HByuH ≥MA╞р∙HByuH│MA╞р∙HByuHк║LA╞р∙HByuHвёLA╞р∙H└yuH,≤MA╞р∙H└yuH╝KA╞р∙H└yuH╓╞KA╞р∙H└yuH6▌MA╞р∙H└yuH▐бKA╞р∙H└yuH╢KA╞р∙H└yuH ≥MA╞р∙H└yuH│MA╞р∙H└yuHк║LA╞р∙H└yuHи⌠MA╞р∙H└yuHвёLA╞р∙HDyuH╝KA╞р∙HDyuHг╞KA╞р∙HDyuH ≥MA╞р∙HDyuH╓∙MA╞р∙HDyuH▄MA╞р∙HDyuH╧╨KA╞р∙HiyuH╝KA╞р∙HiyuH╥√MA╞р∙HiyuH▐бKA╞р∙HiyuHU█MA╞р∙HiyuH ≥MA╞р∙HiyuH│MA╞р∙HiyuHх╞KA╞р∙HiyuHR╦KA╞р∙HkyuH╝KA╞р∙HkyuHвёLA╞р∙H░yuH╪tKA╞р∙H░yuH?dKA╞р∙H3yuH╝KA╞р∙H3yuH ≥MA╞р∙H5yuH╝KA╞р∙H5yuHг╞KA╞р∙H5yuH▐бKA╞р∙H5yuH╢KA╞р∙H5yuH ≥MA╞р∙H5yuH│MA╞р∙H5yuHк║LA╞р∙H5yuH≥░MA╞р∙H5yuH╧╨KA╞р∙H7yuHг╞KA╞р∙H7yuH≤MA╞р∙H7yuHвёLA╞р∙H7yuH$▓MA╞р∙H7yuH╧╨KA╞р∙H9yuHf╨KA╞р∙H9yuH╝KA╞р∙H9yuH ≥MA╞р∙H9yuHз▄MA╞р∙H9yuHЁ√MA╞р∙H;yuH╝KA╞р∙H;yuH╨√MA╞р∙H;yuH▐бKA╞р∙H;yuH╢KA╞р∙H;yuH ≥MA╞р∙H;yuH│MA╞р∙H;yuHк║LA╞р∙H;yuHи▌MA╞р∙H=yuH╝KA╞р∙H=yuH▐бKA╞р∙H=yuH ≥MA╞р∙H=yuH│MA╞р∙H=yuH√╢KA╞р∙H=yuHвёLA╞р∙H?yuHf╨KA╞р∙H?yuH╝KA╞р∙H?yuH▐бKA╞р∙H?yuH╢KA╞р∙H?yuH ≥MA╞р∙H?yuH│MA╞р∙H?yuH▐MA╞р∙HAyuHр⌠MA╞р∙HAyuH╝KA╞р∙HAyuHс┼MA╞р∙HAyuH ≥MA╞р∙HAyuH╧╨KA╞р∙H┐yuH╥KA╞р∙H┐yuH╝KA╞р∙H┐yuH╓╞KA╞р∙H┐yuH ≥MA╞р∙H┐yuHвёLA╞р∙H┐yuHg▓MA╞р∙HCyuH∙┼MA╞р∙HCyuHг╞KA╞р∙HCyuH▐бKA╞р∙HCyuH│MA╞р∙HCyuH√╢KA╞р∙HCyuHвёLA╞р∙HCyuHП▓MA╞р∙HCyuH╧╨KA╞р∙H┘yuH╝KA╞р∙H┘yuHг╞KA╞р∙H┘yuH▐бKA╞р∙H┘yuHц░MA╞р∙H┘yuH ≥MA╞р∙H┘yuH│MA╞р∙H┘yuHг┼MA╞р∙H┘yuHK╢KA╞р∙HEyuH╝KA╞р∙HEyuH▐бKA╞р∙HEyuH╢KA╞р∙HEyuH│MA╞р∙HGyuH╝KA╞р∙HGyuH ≥MA╞р∙HhyuH ≥MA╞р∙HjyuH╝KA╞р∙HjyuH╓╞KA╞р∙HjyuHY╨KA╞р∙HjyuH▐бKA╞р∙HjyuH╢KA╞р∙HjyuH ≥MA╞р∙HjyuH│MA╞р∙HjyuHe▀MA╞р∙HjyuHк║LA╞р∙HjyuHт⌠MA╞р∙H▐yuH)\KA╞р∙H4yuHвёLA╞р∙H6yuH╝KA╞р∙H6yuH!√MA╞р∙H6yuH▐бKA╞р∙H6yuH ≥MA╞р∙H6yuH│MA╞р∙H6yuH√╢KA╞р∙H6yuH╦▄MA╞р∙H8yuH╝KA╞р∙H8yuH▐бKA╞р∙H8yuH╢KA╞р∙H8yuH ≥MA╞р∙H8yuH│MA╞р∙H:yuH▐бKA╞р∙H:yuH│MA╞р∙H:yuH~┼MA╞р∙H:yuH≈ЁKA╞р∙H:yuHN⌠MA╞р∙H:yuH╧╨KA╞р∙H<yuHг╞KA╞р∙H<yuH⌠MA╞р∙H<yuH\┼MA╞р∙H<yuH╧╨KA╞р∙H>yuH7┼MA╞р∙H>yuHA⌠MA╞р∙H>yuH╝KA╞р∙H>yuHг╞KA╞р∙H>yuH≈MA╞р∙H>yuH ≥MA╞р∙H>yuH╧╨KA╟р∙H─yuH╝KA╟р∙H─yuHs┼MA╟р∙H─yuH╚╢KA╟р∙H─yuHл╞KA╟р∙H@yuH╝KA╟р∙H@yuH ≥MA╟р∙H!yuH╪tKA╟р∙H!yuH6dKA╟р∙H!yuH)\KA╟р∙H┌yuH╝KA╟р∙H┌yuH╓╞KA╟р∙H┌yuH▐бKA╟р∙H┌yuH╢KA╟р∙H┌yuH ≥MA╟р∙H┌yuH│MA╟р∙H┌yuHe▀MA╟р∙H┌yuHb╨KA╟р∙H┌yuHвёLA╟р∙H┌yuHт⌠MA╟р∙HkyuHY╨KA╟р∙HkyuH▐бKA╟р∙HkyuH┐ЁKA╟р∙HkyuH ≥MA╟р∙HkyuH│MA╟р∙HkyuHвёLA╟р∙HkyuHg▓MA╟р∙HmyuH╝KA╟р∙HmyuH▐бKA╟р∙HmyuHs┼MA╟р∙HmyuH ≥MA╟р∙HmyuH│MA╟р∙HmyuH╚╢KA╟р∙HmyuHи⌠MA╟р∙HmyuHл╞KA╟р∙HoyuH╝KA╟р∙HoyuH ≥MA╟р∙H░yuH╚cKA╟р∙H9yuH╝KA╟р∙H9yuH ≥MA╟р∙H;yuHвёLA╟р∙H=yuH╝KA╟р∙H=yuH ≥MA╟р∙HyuH╝KA╟р∙HyuH ≥MA╟р∙H│yuH╝KA╟р∙H│yuH╓╞KA╟р∙H│yuH▐бKA╟р∙H│yuH╣√MA╟р∙H│yuH ≥MA╟р∙H│yuH│MA╟р∙H│yuHк║LA╟р∙H│yuHS█MA╟р∙H┐yuH▐бKA╟р∙H┐yuH ≥MA╟р∙H┐yuH│MA╟р∙H┐yuH≈MA╟р∙H┐yuHс╟KA╟р∙HjyuH≈MA╟р∙HlyuH╝KA╟р∙HlyuH╓╞KA╟р∙HlyuH▐бKA╟р∙HlyuH╢KA╟р∙HlyuH ≥MA╟р∙HlyuH│MA╟р∙HlyuHс▌MA╟р∙HnyuH╝KA╟р∙HnyuH╓╞KA╟р∙HnyuH╣√MA╟р∙HnyuHS█MA╟р∙H▐yuH)\KA╠р∙H─yuHи⌠MA╠р∙H!yuH╪tKA╠р∙H!yuHьcKA╠р∙H!yuH)\KA╠р∙HoyuH╝KA╠р∙HoyuH▐бKA╠р∙HoyuH╢KA╠р∙HoyuH ≥MA╠р∙HoyuH│MA╠р∙HoyuHк║LA╠р∙HoyuHт⌠MA╠р∙H░yuH╪tKA╠р∙HqyuH╝KA╠р∙HqyuH╓╞KA╠р∙HqyuHY╨KA╠р∙HqyuHвёLA╠р∙HqyuH╩┴MA╠р∙HqyuHg▓MA╠р∙HsyuHs┼MA╠р∙HsyuHи⌠MA╠р∙HsyuHл╞KA╠р∙HuyuH╝KA╠р∙HuyuH╓╞KA╠р∙HuyuH▐бKA╠р∙HuyuH╢KA╠р∙HuyuH ≥MA╠р∙HuyuH│MA╠р∙HuyuHк║LA╠р∙HuyuHт⌠MA╠р∙HwyuH╝KA╠р∙HwyuH▐бKA╠р∙HwyuH┐ЁKA╠р∙HwyuH│MA╠р∙HwyuH≈MA╠р∙HwyuHвёLA╠р∙HyyuH╝KA╠р∙HyyuH▐бKA╠р∙HyyuH╢KA╠р∙HyyuH ≥MA╠р∙HyyuH│MA╠р∙HyyuHс▌MA╠р∙H{yuH╓╞KA╠р∙H{yuH╣√MA╠р∙H{yuH ≥MA╠р∙H{yuHS█MA╠р∙H}yuH╓╞KA╠р∙H}yuHY╨KA╠р∙H}yuHe▀MA╠р∙H}yuH≈MA╠р∙H}yuHвёLA╠р∙HyuH╝KA╠р∙HyuH▐бKA╠р∙HyuH╢KA╠р∙HyuH ≥MA╠р∙HyuH│MA╠р∙HyuHс▌MA╠р∙H▐yuH)\KA╠р∙HpyuH╓╞KA╠р∙HpyuHY╨KA╠р∙HpyuH▐бKA╠р∙HpyuH┐ЁKA╠р∙HpyuH ≥MA╠р∙HpyuH│MA╠р∙HpyuHe▀MA╠р∙HpyuH≈MA╠р∙HpyuHвёLA╠р∙HryuH╝KA╠р∙HryuH▐бKA╠р∙HryuH╢KA╠р∙HryuH ≥MA╠р∙HryuH│MA╠р∙HryuHс▌MA╠р∙HtyuH╝KA╠р∙HtyuH▐бKA╠р∙HtyuH╣√MA╠р∙HtyuH ≥MA╠р∙HtyuH│MA╠р∙HtyuH╚╢KA╠р∙HtyuHS█MA╠р∙HvyuH╓╞KA╠р∙HvyuHY╨KA╠р∙HvyuHe▀MA╠р∙HxyuH╓╞KA╠р∙HxyuHY╨KA╠р∙HxyuHЪ≈MA╠р∙HxyuHg▓MA╠р∙HzyuH╝KA╠р∙HzyuH▐бKA╠р∙HzyuHs┼MA╠р∙HzyuH│MA╠р∙HzyuH╚╢KA╠р∙HzyuHи⌠MA╠р∙HzyuHл╞KA╠р∙H|yuH╝KA╠р∙H|yuH▐бKA╠р∙H|yuH╢KA╠р∙H|yuH ≥MA╠р∙H|yuH│MA╠р∙H|yuHк║LA╠р∙H|yuHт⌠MA╠р∙H~yuH,≤MA╠р∙H~yuH╝KA╠р∙H~yuH╓╞KA╠р∙H~yuHY╨KA╠р∙H~yuH▐бKA╠р∙H~yuH┐ЁKA╠р∙H~yuH ≥MA╠р∙H~yuH│MA╠р∙H~yuHвёLA╠р∙H~yuHg▓MA╡р∙H!yuH4≤MA╡р∙H!yuH ≥MA╡р∙H!yuH)\KA╡р∙H!yuH■MA╡р∙H░yuH╪tKA╡р∙HwyuH ≥MA╡р∙H$yuH ≥MA╡р∙H▐yuHbKA╡р∙H▐yuH)\KAЁр∙H@yuH ≥MAЁр∙H!yuH╓pMAЁр∙H!yuH>{MAЁр∙H!yuH┘MAЁр∙H!yuH\cKAЁр∙H!yuH╪tKAЁр∙H!yuHЪ\KAЁр∙H!yuHshKAЁр∙H!yuHt_KAЁр∙H!yuH`nKAЁр∙H!yuH █MAЁр∙H#yuH╪tKAЁр∙H#yuH~bKAЁр∙H%yuH
+dKAЁр∙H'yuH╓pMAЁр∙H'yuH┼cKAЁр∙H+yuH╓pMAЁр∙H+yuH ≥MAЁр∙H+yuH)\KAЁр∙H-yuHэbKAЁр∙H/yuH ≥MAЁр∙H/yuH)\KAЁр∙H1yuH╓pMAЁр∙H5yuH╓pMAЁр∙H5yuH╪tKAЁр∙H5yuH ≥MAЁр∙H9yuH╪tKAЁр∙H9yuH ≥MAЁр∙H9yuH)\KAЁр∙H;yuHГbKAЁр∙H$yuH╓pMAЁр∙H$yuH)\KAЁр∙H&yuH╪tKAЁр∙H&yuH)\KAЁр∙H&yuH █MAЁр∙H(yuH╪tKAЁр∙H(yuH ≥MAЁр∙H(yuH)\KAЁр∙H*yuH╪tKAЁр∙H*yuHо▄MAЁр∙H*yuH╥aKAЁр∙H,yuH╪tKAЁр∙H.yuHХ█MAЁр∙H.yuH╓pMAЁр∙H.yuH╪tKAЁр∙H▐yuH╣bKAЁр∙H▐yuH╪tKAЁр∙H▐yuH)\KAЁр∙H0yuHЯcKAЁр∙H2yuH╪tKAЁр∙H2yuH ≥MAЁр∙H2yuHtdKAЁр∙H2yuH)\KAЁр∙H4yuHмbKAЁр∙H4yuH_▌MAЁр∙H6yuH≈cKAЁр∙H6yuH)\KAЁр∙H8yuH╓pMAЁр∙H8yuHe█MAЁр∙H8yuH?cKAЁр∙H<yuH ≥MAЁр∙H<yuH)\KA╢р∙H@yuH╪tKA╢р∙H@yuH)\KA╢р∙HByuH╓pMA╢р∙HByuHц█MA╢р∙HFyuH╓pMA╢р∙HFyuH╘█MA╢р∙HJyuH╪tKA╢р∙HJyuH ≥MA╢р∙HJyuH)\KA╢р∙HLyuH╓pMA╢р∙HLyuH≥cKA╢р∙HNyuHgcKA╢р∙HPyuH╓pMA╢р∙HPyuHс█MA╢р∙HPyuHScKA╢р∙HTyuH╪tKA╢р∙HTyuHф█MA╢р∙HTyuH ≥MA╢р∙HTyuH)\KA╢р∙HVyuH\cKA╢р∙HXyuH ≥MA╢р∙HXyuH)\KA╢р∙H=yuH┴cKA╢р∙H?yuH╓pMA╢р∙H?yuH6cKA╢р∙HCyuH╪tKA╢р∙HCyuH ≥MA╢р∙HCyuH)\KA╢р∙HCyuH=cKA╢р∙HEyuH╥cKA╢р∙HGyuHncKA╢р∙HGyuH╪tKA╢р∙HGyuH ≥MA╢р∙HGyuH)\KA╢р∙HIyuH╓pMA╢р∙HIyuHHcKA╢р∙HKyuH█▄MA╢р∙HMyuH╪tKA╢р∙HMyuH ≥MA╢р∙HMyuH)\KA╢р∙H▐yuH╪tKA╢р∙H▐yuH)\KA╢р∙HQyuH╪tKA╢р∙HQyuH ≥MA╢р∙HQyuH)\KA╢р∙HSyuH╓pMA╢р∙HSyuHLcKA╢р∙H[yuH ≥MA╢р∙H<yuH╓pMA╢р∙H<yuH╪tKA╢р∙H>yuHi▄MA╢р∙H_yuH ≥MA╣р∙HayuH╓pMA╣р∙HeyuH╓pMA╣р∙HeyuH)\KA╣р∙HiyuHncKA╣р∙HiyuH╪tKA╣р∙HiyuH ≥MA╣р∙HiyuH)\KA╣р∙HiyuH@▌MA╣р∙HkyuH╥cKA╣р∙HmyuH²▄MA╣р∙HmyuH=cKA╣р∙HoyuH╓pMA╣р∙HoyuH└cKA╣р∙HsyuH┴cKA╣р∙HsyuH ≥MA╣р∙HsyuH)\KA╣р∙HVyuH╓pMA╣р∙HwyuH ≥MA╣р∙HwyuH)\KA╣р∙HXyuH\cKA╣р∙HXyuH╪tKA╣р∙HXyuHJ▄MA╣р∙HZyuH╓pMA╣р∙H\yuHI▐MA╣р∙H`yuHЁ▌MA╣р∙HbyuH╪tKA╣р∙HbyuH ≥MA╣р∙HbyuHgcKA╣р∙HbyuH)\KA╣р∙HdyuH≥cKA╣р∙HdyuHj▌MA╣р∙HfyuH╪tKA╣р∙HfyuH ≥MA╣р∙HfyuHHcKA╣р∙HhyuH╓pMA╣р∙HlyuH╓pMA╣р∙HlyuH╪tKA╣р∙HlyuH ≥MA╣р∙HlyuH)\KA╣р∙H▐yuH╪tKA╣р∙H▐yuHпcKA╣р∙H▐yuH)\KA╣р∙HpyuH╪tKA╣р∙HpyuH ≥MA╣р∙HpyuH)\KA╣р∙HryuHe▌MA╣р∙HzyuH ≥MA╣р∙H[yuH╪tKA╣р∙H[yuH)\KA╣р∙H[yuH`cKA╣р∙H]yuH╓pMA╣р∙H]yuHLcKA╣р∙H_yuH╪tKA╣р∙H_yuH)\KA╣р∙H_yuHScKA╤р∙H─yuHЯcKA╤р∙H┌yuHэbKA╤р∙H└yuH╓pMA╤р∙H└yuH ≥MA╤р∙H└yuH)\KA╤р∙H├yuH╥aKA╤р∙H┬yuH╓pMA╤р∙H┬yuH ≥MA╤р∙H┬yuH┼cKA╤р∙H┬yuH)\KA╤р∙H┼yuH)\KA╤р∙H┼yuH █MA╤р∙H▄yuH╪tKA╤р∙H▄yuH)\KA╤р∙H▌yuH)\KA╤р∙HsyuH╓pMA╤р∙HsyuH╪tKA╤р∙HuyuHГbKA╤р∙HwyuH╪tKA╤р∙HwyuH?cKA╤р∙HyyuH≈cKA╤р∙H{yuH┤┼MA╤р∙H}yuH╓pMA╤р∙H}yuH)\KA╤р∙HyuH&▌MA╤р∙H│yuH╓pMA╤р∙H│yuH╪tKA╤р∙H│yuH ≥MA╤р∙H│yuH)\KA╤р∙H┐yuH╪tKA╤р∙H┘yuH╪tKA╤р∙H┘yuH █MA╤р∙H┤yuH╪tKA╤р∙H┴yuH╪tKA╤р∙H▀yuH╓pMA╤р∙H▀yuH
+dKA╤р∙H▀yuH ≥MA╤р∙H█yuH~bKA╤р∙H▐yuH4≤MA╤р∙H▐yuH┘MA╤р∙H▐yuH\cKA╤р∙H▐yuH ≥MA╤р∙H▐yuHЪ\KA╤р∙H▐yuHshKA╤р∙H▐yuHt_KA╤р∙H▐yuH █MA╤р∙H▐yuH■MA╤р∙HvyuH╓pMA╤р∙HxyuHs▌MA╤р∙HzyuH╓pMA╤р∙HzyuH╪tKA╤р∙HzyuH)\KA╤р∙H|yuHмbKA╤р∙H~yuH<bKA╤р∙H~yuH╪tKA╤р∙H~yuH ≥MA╥р∙H▐yuH╓pMA╥р∙H▐yuH>{MA╥р∙H▐yuH╪tKA╥р∙H▐yuH`nKA÷р∙H#yuH╪tKA÷р∙H#yuHHАNA÷р∙H#yuH`nKAx    x  [еЪx  	  x  [еЪx  ╛	  ╤	  [еЪ  ┴	  	  [еЪ!  @  -  [еЪ@  -  -  [еЪ	  	  		  [еЪ	  		  	  [еЪ	  	  
+	  [еЪ	  	  
+	  [еЪx  	  
+	  [еЪ@  !  -  [еЪ@  -  @  [еЪ?  5  @  [еЪ╦	  @  +  [еЪx  ╛	    [еЪ@  x  п	  [еЪx  п	    [еЪ©	  @  п	  [еЪ+  у  :  [еЪ@  ©	  ╦	  [еЪM  ?  щ  [еЪ2    '  [еЪ0  B  V  [еЪ0    у  [еЪЛ  п  г  [еЪу  :    [еЪ(       [еЪB  F  V  [еЪ2  #  )  [еЪ?  :  5  [еЪ5  @  !  [еЪ  2  Ы  [еЪ?    :  [еЪ  r  ?  [еЪr  )  h  [еЪr  T  ;  [еЪr  Q  r  [еЪ2  )  r  [еЪr  [  d  [еЪ=  K  #  [еЪY  `  =  [еЪg  [  Y  [еЪr  d  r  [еЪI  X  g  [еЪI  K  [  [еЪB  X  `  [еЪr  X  I  [еЪB  d  Z  [еЪ  Y  X  [еЪF  #  K  [еЪ0  V  у  [еЪ+  ╦	  у  [еЪX  Z  B  [еЪ(    (  [еЪX  d  r  [еЪH  в  N  [еЪЩ  ▐	  s	  [еЪd  Y  B  [еЪF  K  V  [еЪd  Z  X  [еЪY  `  B  [еЪп	  б	  о	  [еЪп	  о	  а	  [еЪ©	  п	  а	  [еЪЛ  И  Г  [еЪЛ  Г  Х  [еЪЛ  Х  Л  [еЪЛ  И  Л  [еЪЛ  И  Л  [еЪc  Y  g  [еЪg  c  N  [еЪY  c  K  [еЪK  =  Y  [еЪK  H  N  [еЪM  Щ  ┴	  [еЪN  в  д  [еЪM  щ  я  [еЪr  I    [еЪM  H  я  [еЪr  Q  T  [еЪg  N  K  [еЪ?  ╫  щ  [еЪ^  0  2  [еЪg  H  K  [еЪ[  K  g  [еЪK  H  M  [еЪK  g  H  [еЪd  Z  Z  [еЪШ      [еЪШ       [еЪX  Y  g  [еЪ     Y  [еЪI  g  K  [еЪ[  Y  d  [еЪ?  ц  ^  [еЪ^  ^  ц  [еЪ^  ц  ╫  [еЪ?  H  M  [еЪM  K  H  [еЪЩ  █	  ┴	  [еЪ?  ┴	  ц  [еЪH  ┴	  ?  [еЪ      [еЪ┴	  H  M  [еЪ  █	  Щ  [еЪШ       [еЪ)  2  )  [еЪ/    -  [еЪ/  -    [еЪ/      [еЪ)  2  2  [еЪ+    0  [еЪ  2  2  [еЪ'  2  2  [еЪ^  "  Щ  [еЪ^  Щ    [еЪЫ  2    [еЪ0  +    [еЪ^  Щ  ^  [еЪЛ  И  К  [еЪ      [еЪx  	  
+	  [еЪ     Ш  [еЪ      [еЪ  ┼	  └	  [еЪЛ  Л  К  [еЪ    Ы  [еЪЛ  /  Л  [еЪ      [еЪ  3  +  [еЪ^    0  [еЪ0       [еЪ,    3  [еЪ^    "  [еЪШ    Ш  [еЪ(  	  (  [еЪH  в  я  [еЪh  r  Q  [еЪ(      [еЪ   (  ^  [еЪЛ  п  Л  [еЪЛ  ы  п  [еЪ	  (     [еЪЛ      [еЪЛ  Л  г  [еЪx  	  ╤	  [еЪ   ^    [еЪ3  +  )  [еЪ;  I  [  [еЪ  +  )  [еЪ	  ÷  "  [еЪ+  @  @  [еЪ÷  "  Щ  [еЪ(    	  [еЪЩ    ÷  [еЪЛ  /  г  [еЪЛ  К  ы  [еЪ7  ,  :  [еЪ  3    [еЪ^  ^    [еЪ  Л  (  [еЪЛ  ы  Л  [еЪЛ  ы  Л  [еЪ       [еЪ  (     [еЪ      [еЪ      [еЪx  x  ╤	  [еЪx  x  ╤	  [еЪ      [еЪ	      [еЪ      [еЪ  	    [еЪ      [еЪШ       [еЪ'  2  #  [еЪЩ  	  ┴	  [еЪ@  !  @  [еЪ█	  Щ    [еЪ  █	    [еЪЩ  ┴	  █	  [еЪ  Щ  ┴	  [еЪ    y	  [еЪr  [  r  [еЪ  Щ  s	  [еЪЩ    y	  [еЪy	  Щ  ┴	  [еЪ	  Щ    [еЪ+  @  !  [еЪ0  .  .  [еЪ@  @  ╦	  [еЪ0  2    [еЪx  ╛	  x  [еЪ      [еЪ3    )  [еЪ  0  .  [еЪ  ÷  )  [еЪ?  ^  ╫  [еЪ	    ÷  [еЪ       [еЪ    ,  [еЪ      [еЪ  s	  y	  [еЪ  z	  ┼	  [еЪ    ┼	  [еЪ,    7  [еЪr  ;  [  [еЪ:  7    [еЪ	  └	  ▐	  [еЪ3  ,    [еЪ:      [еЪ	    └	  [еЪЩ  	  ▐	  [еЪЛ  /    [еЪ0  .     [еЪF	  f	  f	  [еЪК  f	  f	  [еЪы  f	  N	  [еЪb
+  `
+  e
+  [еЪ█  f	  ≈  [еЪZ
+  e
+  S
+  [еЪ╛	  ё	  л	  [еЪ≈  ╙  █  [еЪ≈  f	  ╙  [еЪ╒  
+  
+  [еЪ  f	  ∙  [еЪN	  F	  f	  [еЪ╟  f	  f	  [еЪ╟  F	  f	  [еЪ╟  f	    [еЪ÷  ∙  ╔  [еЪ    f	  [еЪ┴	  ─	  ┬	  [еЪИ  f	  f	  [еЪИ  f	  f	  [еЪГ  И  f	  [еЪХ  Г  f	  [еЪЛ  Х  f	  [еЪ╚  ⌡  ╜  [еЪ÷  ⌡  ┼  [еЪ≈  ╙  ≈  [еЪ÷  ╔  ┼  [еЪ╚  ╜  Ё  [еЪv
+  ╗	  ╠	  [еЪ╒  
+  ╔  [еЪ
+  █  ╒  [еЪ╔  
+  ┼  [еЪ
+  ┼  
+  [еЪS
+  e
+  Z
+  [еЪ
+	  	  	  [еЪq	  e
+  b
+  [еЪX
+  e
+  e
+  [еЪв  я  м  [еЪК  И  f	  [еЪZ
+  e
+  e
+  [еЪ╥  
+  √	  [еЪ
+  ⌡  ╜  [еЪ╜  Ё  ⌠  [еЪ√	  ■	  ╒	  [еЪ▐	  w	  ┬	  [еЪ    ╟  [еЪ-    ╟  [еЪ  -  ╟  [еЪЕ  Х  н  [еЪ■	  ⌠	   	  [еЪ╒	  │	  ⌠	  [еЪо	  б	  п	  [еЪа	  о	  п	  [еЪ©	  а	  п	  [еЪ√	  ┐	  │	  [еЪ╥  ╞  ⌠  [еЪ|	   	  u	  [еЪu	  ∙	  u	  [еЪХ  ф  Г  [еЪ²  ▐  Ё  [еЪ÷    ∙  [еЪ÷  ╚  ⌡  [еЪ⌠  ╜  ╞  [еЪ╜  
+  ╥  [еЪ⌡  ┼  
+  [еЪ╝  Ё  ⌠  [еЪb
+  e
+  X
+  [еЪЁ  ▐  ╝  [еЪ╞  ╜  ╥  [еЪ²  ╚  Ё  [еЪ²  ▐  ▐  [еЪ		  	  	  [еЪ	  		  	  [еЪ
+	  	  	  [еЪ
+	  	  	  [еЪ
+	  	  	  [еЪ╤  ╝  ╨  [еЪ┴	  w	  ┬	  [еЪ╤  ²  ╝  [еЪ²  ▐  ╝  [еЪ═  ²     [еЪ╠	  v
+  v
+  [еЪ┼	  z	  ═  [еЪ└	  ▐	  ┬	  [еЪ╫  щ  а  [еЪ└	     ┬	  [еЪ   ═  ┼	  [еЪ═  ╨  ²  [еЪs	  ▐	  w	  [еЪ╥  
+  
+  [еЪ╒	  √	  ┐	  [еЪ─	  ╒	  ┐	  [еЪ─	  ┐	  ╒	  [еЪ■	  ╥  √	  [еЪe
+  S
+  `
+  [еЪ⌠  ╥  ■	  [еЪ═  ╤  ╨  [еЪ│	  ┐	  ╒	  [еЪы  f	  f	  [еЪы  f	  f	  [еЪ╒	  ⌠	  ■	  [еЪ■	   	  |	  [еЪ┐	  ┬	  ─	  [еЪw	  ≤	  y	  [еЪy	  ≤	  ≤	  [еЪs	  y	  ≤	  [еЪ┬	  w	  ─	  [еЪ─	  ┬	  ┐	  [еЪw	  ┴	  █	  [еЪy	  w	  ┴	  [еЪv
+  ╗	  ╠	  [еЪ┴	  w	  ─	  [еЪ╤	  	  	  [еЪ╤	  	  	  [еЪ─	  ┴	  ┬	  [еЪ█	  w	  ≤	  [еЪ█  ╙  
+  [еЪ|	  u	  ∙	  [еЪe
+  Z
+  Z
+  [еЪe
+  Z
+  e
+  [еЪe
+  И  &
+  [еЪe
+  `
+  e
+  [еЪ╩  &
+  ъ  [еЪ&
+  н  ╩  [еЪe
+  b
+  N
+  [еЪХ  ф  Е  [еЪ╩  &
+  &
+  [еЪ√	  q	  │	  [еЪ╒	  ⌠	  │	  [еЪu	  |	   	  [еЪ■	   	  ⌠	  [еЪ	  	  	  [еЪN
+  │	  И  [еЪN
+  e
+  И  [еЪп  ©  ©  [еЪЕ  ф  Н  [еЪ&
+  Х  н  [еЪИ  ф  Х  [еЪН  Ф  ©  [еЪъ  &
+  ш  [еЪu	  ∙	  ∙	  [еЪv
+  ╞	  л	  [еЪ└	  ┼	     [еЪe
+  X
+  S
+  [еЪ╠	  ╠	  v
+  [еЪ&
+  ╗	  v
+  [еЪ╛	  	  л	  [еЪ╤	  	  ╛	  [еЪ╞	  v
+  ╗	  [еЪ╦	  ©	  л	  [еЪё	  л	  л	  [еЪы  К  f	  [еЪш  &
+  ╗	  [еЪЦ  Н  н	  [еЪ√	  
+  e
+  [еЪЦ  ╢	  н	  [еЪу  ╞	  ф	  [еЪ∙  f	  f	  [еЪф	  у  ё	  [еЪл	  ╦	  ╞	  [еЪу  ╢	  ё	  [еЪп	  ё	  л	  [еЪ╤	  	  	  [еЪР  Ф  У  [еЪп  ©  Н  [еЪш  &
+  &
+  [еЪ╦	  л	  л	  [еЪ|	   	  ■	  [еЪ⌠	  ■	  ╒	  [еЪ│	  п  И  [еЪ╒	  м  п  [еЪ┐	  ─	  ж  [еЪf	    f	  [еЪ╒	  ┐	  м  [еЪж  ┐	  м  [еЪ╒	  │	  п  [еЪu	  ∙	  |	  [еЪ┴	  w	  ┬	  [еЪп	  л	  л	  [еЪ≤	  █	  w	  [еЪ█	  ≤	  ≤	  [еЪ█	  w	  ┴	  [еЪ┴	  ─	  а  [еЪц  Л  Л  [еЪХ  &
+  &
+  [еЪ╫  Л  а  [еЪа  ц  Л  [еЪ┴	  а  ц  [еЪа  ─	  ж  [еЪ∙  f	  █  [еЪГ  Г  Х  [еЪп  И  У  [еЪИ  &
+  Х  [еЪN	  f	  f	  [еЪИ  У  Ф  [еЪп  Ц  Н  [еЪф  Х  Г  [еЪу  ╢	  Ц  [еЪs	  ≤	  w	  [еЪ╦	  у  ╞	  [еЪИ  Ф  ф  [еЪ©  п  Ф  [еЪь  п  м  [еЪ╫  ц  Л  [еЪд  в  ь  [еЪм  в  ь  [еЪп  Р  Ф  [еЪ√	  e
+  q	  [еЪР  ь  У  [еЪя  щ  ж  [еЪН  Ф  ф  [еЪУ  ь  п  [еЪя  м  ж  [еЪщ  а  ж  [еЪл	  ©	  п	  [еЪ╞  ╞  ╥  [еЪ@  U  G  [еЪF  Б  ╪  [еЪa  U  >  [еЪ@  G  >  [еЪ\  F  ╪  [еЪL  >  G  [еЪк  L  G  [еЪD  с  т  [еЪФ  Ф  О  [еЪФ  О  П  [еЪФ  Ф  П  [еЪФ  Ф  П  [еЪ)  ж	  Ю  [еЪ=  ж	  ╧	  [еЪ4  Ю  ]  [еЪ$  >  ]  [еЪR  q  P  [еЪO  b  b  [еЪO  J  b  [еЪP  >  @  [еЪA  a  J  [еЪ>  e  a  [еЪq  O  q  [еЪЪ  &  
+  [еЪD  D  т  [еЪF  L  Б  [еЪ  1    [еЪ    ├	  [еЪт  \  D  [еЪФ  о  ш  [еЪФ  ш  Б  [еЪ  F  ·	  [еЪ  ÷	    [еЪL  \  F  [еЪ\  ·	  т  [еЪ	      [еЪ>  F  L  [еЪ	  	  	  [еЪ	  	  	  [еЪ	  	  	  [еЪv  	  	  [еЪ    r	  [еЪ÷	    ·	  [еЪL  ·	  \  [еЪ>  O  P  [еЪ>  @  L  [еЪP  q  O  [еЪG  к  П  [еЪL  @  >  [еЪи	  ╧	  ╨	  [еЪи	  ╨	  г	  [еЪи	  г	  ╬	  [еЪ=  ,  ,  [еЪ  \  \  [еЪ\  ╪  с  [еЪ  1  &  [еЪ  Ъ  a  [еЪ@  a  S  [еЪ@  O  >  [еЪL  >  F  [еЪ@  P  a  [еЪ      [еЪD  \  с  [еЪ      [еЪ=  7  и	  [еЪv  в	  v  [еЪv  в	  v  [еЪ=  ж	  )  [еЪЮ  )  /  [еЪ$  Ф    [еЪv  	  Ъ  [еЪ9  4  ]  [еЪ/  Ю  7  [еЪ  
+    [еЪ1  &  "  [еЪ7  4  Ю  [еЪ$  9  ]  [еЪ  1  1  [еЪv  в	  ╚	  [еЪv  7  ╥	  [еЪv  ╥	  ╚	  [еЪ)  =     [еЪ=  и	  =  [еЪ=     ,  [еЪ=  =     [еЪ)  =     [еЪv  ╚	  v  [еЪv  ╚	  v  [еЪ   =  =  [еЪv  Ъ  ╣	  [еЪe  G  >  [еЪU  a  @  [еЪ&  &  Ъ  [еЪa  A  e  [еЪ  	  ▒	  [еЪ(  q  f  [еЪ@  S  O  [еЪS  J  A  [еЪO  R  P  [еЪv  7  v  [еЪ=  7  v  [еЪa  P  J  [еЪa  Ъ  S  [еЪ    Ъ  [еЪR  E  q  [еЪO  =  7  [еЪP  J  O  [еЪ/  =  )  [еЪ7  =  /  [еЪO  J  S  [еЪ$    #  [еЪ$  #    [еЪ  $    [еЪq  O  =  [еЪP  q  q  [еЪ(  1  q  [еЪ(  1  (  [еЪq  C  q  [еЪ&  
+  
+  [еЪE  C  q  [еЪ=  =  ,  [еЪJ  O  b  [еЪ=  )  =  [еЪ$  G  >  [еЪФ  Ф  ж  [еЪФ  Ф  ж  [еЪ=  ╧	  и	  [еЪ  ÷	    [еЪ·	    ÷	  [еЪ┤	    ·	  [еЪФ  Ф  Ж  [еЪФ  Ф  Ж  [еЪ┤	      [еЪ  ·	    [еЪ    ·	  [еЪ    ·	  [еЪ      [еЪЧ      [еЪ=  ж	  =  [еЪ      [еЪ  Ъ    [еЪ  Э    [еЪ    Э  [еЪЭ  
+  Ч  [еЪ  Э  Ч  [еЪ  Ч  Э  [еЪf  q  C  [еЪФ  Ж  о  [еЪЧ    Э  [еЪ    ┤	  [еЪ      [еЪ  ├	  ┤	  [еЪЪ  \    [еЪ  r	  ▒	  [еЪ  r	  ├	  [еЪ    6  [еЪ    ▒	  [еЪ      [еЪ4  '    [еЪ'  4    [еЪ      [еЪ  	  °	  [еЪ      [еЪ  !    [еЪv  ╣	  в	  [еЪ6      [еЪ4      [еЪ  8  4  [еЪ  1    [еЪ  1  ╕  [еЪ  !    [еЪ  6  6  [еЪ   =  ,  [еЪ  5  ╕  [еЪ  Ъ    [еЪЧ  
+    [еЪ    Ъ  [еЪv  Ъ  v  [еЪv  Ъ  v  [еЪ8    8  [еЪ    '  [еЪ\      [еЪL  ·	  F  [еЪЭ    
+  [еЪ    !  [еЪ4  8    [еЪ  1    [еЪ1      [еЪ&  1  1  [еЪ1  (  1  [еЪ      [еЪ     \  [еЪ\      [еЪ\       [еЪL  Б  к  [еЪ&  Ъ  \  [еЪФ  ь  ж  [еЪ    Ч  [еЪO  q  O  [еЪ"  1  (  [еЪO  S  O  [еЪ5  Ф  &  [еЪ!    1  [еЪ\    1  [еЪ     ╕  [еЪ  !  1  [еЪ╕       [еЪ╕      [еЪФ  5    [еЪФ  $  Б  [еЪ$  Ф  Ф  [еЪ8      [еЪ\    \  [еЪ  &  Ъ  [еЪ&  &  
+  [еЪФ  Ж  ь  [еЪФ  Ф  Б  [еЪФ  П  ж  [еЪ5  &    [еЪФ  Ф  о  [еЪо  Ф  Ф  [еЪ
+  &  Ъ  [еЪ  ÷	    [еЪ╘  ≥  ▒  [еЪ▒	  r	  ~	  [еЪ╘  ░  ╢  [еЪ▒  ≥  ░  [еЪr	  ≈	  ~	  [еЪ≥  ·  ░  [еЪ·  ≥  	  [еЪ├	  ┤	  }	  [еЪЪ  	  	  [еЪЪ  	  	  [еЪ5  ╕  ■  [еЪ  5  b	  [еЪ╕  ╠  ║  [еЪ░  ╠  ▓  [еЪ╖  b	    [еЪ╣  ╣  ║  [еЪ║  °  ╣  [еЪ5  b	  b	  [еЪ▓  ╢  °  [еЪ░  ╦  ╢  [еЪ║  
+  
+  [еЪ	  	  	  [еЪ	  	  	  [еЪ	  	  	  [еЪ	  	  	  [еЪ┤	  }	  }	  [еЪd
+  \
+  a
+  [еЪс  х  Й  [еЪ#    ╖  [еЪ  #  ╖  [еЪ    ╖  [еЪ≈	  }	  ┤	  [еЪ°	  	  ≥  [еЪ·	  ~	  ≈	  [еЪ≈	  ~	  ┘	  [еЪ≈	  ┤	  ·	  [еЪ~	  ┘	  v	  [еЪ╘  ╢  ▒  [еЪ▀	  a
+  з  [еЪ≈	  ÷	  }	  [еЪ≈	  ·	  ÷	  [еЪ┘	  ≈	  ·	  [еЪ▄	  v	  ▀	  [еЪx	  ┘	  v	  [еЪ║  
+  ▄	  [еЪ╖	  t
+  ╟	  [еЪv	  ┘	  x	  [еЪ╥	  ц	  к	  [еЪ╚	  ╥	  к	  [еЪd
+  з  %
+  [еЪ{	  ⌡	  ┌	  [еЪ░	  x	  ⌡	  [еЪ▀	  v	  x	  [еЪv	  ~	  ┘	  [еЪ▄	  ⌡	  x	  [еЪ═	  ²	  ═	  [еЪ├	  }	  ≈	  [еЪ═	  ┌	  ²	  [еЪ]	  ╖  b	  [еЪ
+  ║  ║  [еЪb	  5  ■  [еЪ■  ╕  ≤  [еЪ╧	  к	  и	  [еЪ║  ╣  °  [еЪ╠  ╓  ║  [еЪ≤  ╕  ё  [еЪж  П  b	  [еЪ╕  ё  ║  [еЪ╠  ▓  ╓  [еЪж	  к	  к	  [еЪn	  L	  b	  [еЪО  Ф  b	  [еЪП  b	  b	  [еЪП  b	  b	  [еЪП  О  b	  [еЪV	  L	  b	  [еЪ]	  V	  b	  [еЪ■  b	  ▄  [еЪ╖  b	  b	  [еЪ▄  ╗  √  [еЪ▄  ╗  b	  [еЪ
+  ▄  ■  [еЪL	  b	  b	  [еЪb	  L	  b	  [еЪ▄  ╗  
+  [еЪ╨	  ╧	  и	  [еЪг	  ╨	  и	  [еЪ╬	  г	  и	  [еЪ░  ╦  ╦  [еЪ╖	  t
+  к	  [еЪБ  к  р  [еЪ▓  ╦  ╢  [еЪь  ж  b	  [еЪ▀	  x	  ░	  [еЪ°  ▓  ╓  [еЪ▄	  ▀	  ▌	  [еЪ▄	  °  ⌡	  [еЪо  ы  Я  [еЪ░	  ⌡	  {	  [еЪ┌	  {	  ═	  [еЪ▌	  d
+  \
+  [еЪ║  ё  
+  [еЪ║  °  ▄	  [еЪ
+  ■  ≤  [еЪ
+  ≤  ё  [еЪ°  ╓  ║  [еЪ■  
+  
+  [еЪ
+  ║  
+  [еЪ%
+  ы  %
+  [еЪd
+  Y
+  d
+  [еЪY
+  d
+  Y
+  [еЪW
+  d
+  d
+  [еЪ\
+  d
+  W
+  [еЪв	  ╚	  	  [еЪd
+  Q
+  W
+  [еЪ░  ▓  ╦  [еЪ÷	  }	  ≈	  [еЪ≈	  ÷	  ·	  [еЪ·	  Й  т  [еЪd
+  W
+  \
+  [еЪв	  	  	  [еЪв	  	  	  [еЪт  Й  х  [еЪ┘	  ·	  ~	  [еЪ╪  й  Й  [еЪ·	  ┘	  Й  [еЪ┘	  Й  й  [еЪ░	  ⌡	  x	  [еЪ√  √  ╗  [еЪ²	  ═	  ┌	  [еЪr	  ├	  ≈	  [еЪ{	  ┌	  ⌡	  [еЪр  к  л  [еЪv	  ┘	  й  [еЪv	  й  р  [еЪ▀	  x	  ю  [еЪx	  р  ю  [еЪx	  v	  р  [еЪd
+  W
+  Q
+  [еЪ┘	  ·	  ~	  [еЪ%
+  ы  %
+  [еЪз  ю  б  [еЪт  х  х  [еЪ²	  ═	  ²	  [еЪт  с  х  [еЪ%
+  г  ╖	  [еЪ╪  Б  й  [еЪ╪  с  Й  [еЪ▄	  x	  v	  [еЪБ  й  р  [еЪб  л  ю  [еЪА  ю  О  [еЪА  О  б  [еЪл  ю  р  [еЪк  П  л  [еЪз  О  о  [еЪn	  b	  b	  [еЪn	  b	  b	  [еЪы  ч  ы  [еЪь  n	  b	  [еЪы  о  Я  [еЪО  е  о  [еЪю  С  О  [еЪК  ю  е  [еЪЮ  К  ю	  [еЪы  о  ч  [еЪЯ  ы  Я  [еЪ╗  √  ▄  [еЪж	  Ю  ╝	  [еЪ√  ╗  ╗  [еЪ═	  ┌	  {	  [еЪ╟	  ╟	  t
+  [еЪ▀	  ░	  x	  [еЪ{	  ⌡	  ░	  [еЪж  b	  b	  [еЪb	  ж  b	  [еЪю  С  С  [еЪл  А  б  [еЪ%
+  ы  ы  [еЪ·	  ~	  ≈	  [еЪ▀	  ю  з  [еЪч  о  е  [еЪе  О  С  [еЪ%
+  з  ы  [еЪa
+  d
+  з  [еЪ
+  ▄	  d
+  [еЪd
+  W
+  d
+  [еЪ]	  b	  b	  [еЪ]	  b	  b	  [еЪd
+  Y
+  d
+  [еЪd
+  Q
+  Y
+  [еЪз  о  ы  [еЪ%
+  ы  э  [еЪи  %
+  г  [еЪэ  %
+  и  [еЪ	  ▒	  ·  [еЪ╖	  t
+  %
+  [еЪЪ  ╣	  	  [еЪз  б  О  [еЪ▒	  ~	  ·  [еЪY
+  d
+  Q
+  [еЪ║  ╓  ║  [еЪК  д	  е  [еЪ▄	  d
+  ▌	  [еЪЮ  ц	  ю	  [еЪК  ю	  д	  [еЪЮ  Ё	  ц	  [еЪЮ  ╝	  Ё	  [еЪж	  ╧	  к	  [еЪи	  ц	  к	  [еЪи	  к	  к	  [еЪю  С  е  [еЪ%
+  г  %
+  [еЪ╝	  к	  ╖	  [еЪ╟	  t
+  t
+  [еЪ╣	  	  в	  [еЪц	  к	  к	  [еЪЪ  	  	  [еЪк	  ж	  ╝	  [еЪ╚	  к	  	  [еЪ╚	  к	  к	  [еЪ╖	  t
+  ╟	  [еЪ÷	  }	  }	  [еЪ<  X  I  [еЪ<      [еЪ<  X    [еЪШ      [еЪI  _  ;  [еЪ<  _  I  [еЪ<  Ъ  S  [еЪ  <  Ъ  [еЪ<  O  S  [еЪЗ  
+    [еЪШ  Ш    [еЪ  Ш    [еЪЗ      [еЪ  З    [еЪ    Ы  [еЪЗ      [еЪЗ      [еЪ  З  Ъ  [еЪ
+    З  [еЪЪ  З    [еЪO  R  <  [еЪШ      [еЪ    Ы  [еЪ_  T  ;  [еЪ  "  )  [еЪ#    )  [еЪ'    #  [еЪ    З  [еЪ  З    [еЪ  "  &  [еЪ  &    [еЪ)  (  "  [еЪ)  )  (  [еЪ)  _  h  [еЪ  '    [еЪ<  E  _  [еЪR  E  <  [еЪQ  _  T  [еЪ_  h  Q  [еЪ)  (  f  [еЪf  _  )  [еЪ_  C  f  [еЪE  C  _  [еЪ)  (  (  [еЪL  H  K  [еЪЩ  M    [еЪF  H  M  [еЪ  Щ    [еЪL  >  K  [еЪM  F    [еЪЩ      [еЪL  F  H  [еЪ      [еЪЩ      [еЪ    	  [еЪЩ  	    [еЪ      [еЪЩ      [еЪ      [еЪ  Э    [еЪ	      [еЪ      [еЪЭ      [еЪ       [еЪ       [еЪЧ      [еЪЭ  Ч    [еЪ       [еЪЧ      [еЪ      [еЪ      [еЪ       [еЪ>  K  g  [еЪ@  Y  g  [еЪ   Y  a  [еЪ      [еЪ     a  [еЪa  @  Y  [еЪ@  >  g  [еЪ      [еЪ/  г  $  [еЪ$  г  Б  [еЪ$    /  [еЪ  /    [еЪ  ╖  ╟  [еЪ╖  F	  ]	  [еЪF	  ╟  ╖  [еЪ╟      [еЪN	  F	  ]	  [еЪN	  L	  V	  [еЪ]	  N	  V	  [еЪn	  L	  ы  [еЪь  n	  ы  [еЪL	  ы  N	  [еЪг  п  Б  [еЪы  о  п  [еЪп  Б  ш  [еЪп  ш  о  [еЪЖ  ь  ы  [еЪо  Ж  ы  [еЪ7      [еЪ  7    [еЪ    '  [еЪ  '    [еЪ  °	    [еЪ  °	  z	  [еЪ°	  ≥  ═  [еЪ²  ░  ╘  [еЪ≥  ²  ╘  [еЪ╤  ²  ≥  [еЪ═  ╤  ≥  [еЪ═  °	  z	  [еЪ²  ╚  ░  [еЪ╚  ░  ╠  [еЪ╕  ╠  ÷  [еЪ╠  ÷  ╚  [еЪ)      [еЪ÷  1  )  [еЪ  )  1  [еЪ╕  1  ÷  [еЪ+      [еЪ8  3    [еЪ3    +  [еЪ8  3    [еЪ  2  Щ  [еЪ  2    [еЪ  !    [еЪ    8  [еЪ!      [еЪ!      [еЪ    8  [еЪ3    8  [еЪ+      [еЪ3    +  [еЪ  Щ  2  [еЪ  2    [еЪ8  3    [еЪ    !  [еЪ       [еЪ    8  [еЪ       [еЪ  8  8  [еЪ"  2  Щ  [еЪ"  Щ  2  [еЪ2  Ъ    [еЪ     2  [еЪ   	  2  [еЪ       [еЪ    2  [еЪ2    Ъ  [еЪ  2    [еЪЪ  
+    [еЪ
+      [еЪ     2  [еЪ"  2  	  [еЪ       [еЪ2      [еЪ2  "    [еЪ   2    [еЪ  Ъ  
+  [еЪ2    Ъ  [еЪ2  Ъ    [еЪ  2    [еЪ
+  
+    [еЪ      [еЪ  Щ  	  [еЪ  	    [еЪ    Щ  [еЪ  Э    [еЪ    	  [еЪ    Щ  [еЪ      [еЪ      [еЪЩ      [еЪ  	    [еЪ	  Щ    [еЪ      [еЪЩ      [еЪ      [еЪ      [еЪ	      [еЪ      [еЪ    :  [еЪ  .    [еЪ4  ,    [еЪ  :  ,  [еЪ    :  [еЪ4      [еЪ  4  ,  [еЪ6    .  [еЪ6  .  .  [еЪ.       [еЪ    Э  [еЪ    Ч  [еЪ       [еЪ.  6    [еЪ       [еЪ    Ч  [еЪ  Ч  Э  [еЪ6  6  .  [еЪ┼  ╔  ╡  [еЪ╔  ╡  ┼  [еЪ╡  ▄  ≈  [еЪ≈  █  ╡  [еЪ█  ╒  ╡  [еЪ▌  ≤  ё  [еЪ╡  ≤  ▌  [еЪ╡  ▄  ■  [еЪ≤  ╡  ■  [еЪ≈  √  ▄  [еЪ√  √  ≈  [еЪ╡  █  ≈  [еЪ╔  ╡  ╒  [еЪ▌  ≤  ╡  [еЪё  ≤  ▌  [еЪ∙  ╔  ╡  [еЪ╡  █  ∙  [еЪ√  ▄  ≈  [еЪ≈  ▄  ╡  [еЪ▄  ■  ╡  [еЪ■  ≤  ╡  [еЪ√  ≈  ≈  [еЪ╜  ⌡  ▌  [еЪ╦  Ё  ▌  [еЪЁ  ▌  ╜  [еЪ▐  Ё  ╦  [еЪ╡  ⌡  ▌  [еЪ┼  ⌡  ╡  [еЪ▌  ▓  ╓  [еЪ▌  ▓  ╦  [еЪ╓  ▌  ║  [еЪ▌  ║  ╓  [еЪ▐  ╦  ╦  [еЪ╦  Ё  ▐  [еЪ▌  ⌡  ╜  [еЪ▌  ╜  Ё  [еЪ╡  ⌡  ┼  [еЪ▌  ⌡  ╡  [еЪ▌  ╦  Ё  [еЪ▓  ╓  ▌  [еЪё  ║  ▌  [еЪ╦  ▌  ▓  [еЪ║  ▌  ё  [еЪ▐  ▐  ╦  [еЪ┐	  ╒	  v	  [еЪ╞  ⌠  °  [еЪ⌠  ■	  ⌡	  [еЪ■	  ╒	  x	  [еЪ╒	  x	  v	  [еЪ⌠  ⌡	  °  [еЪ■	  x	  ⌡	  [еЪ╞  °  ╣  [еЪ╣  ╣  ╞  [еЪ°  ╞  ⌠  [еЪ░  ²  ╨  [еЪ▒  ╨  ╝  [еЪ╢  ╝  ⌠  [еЪ°  ╣  ╞  [еЪ╢  °  ⌠  [еЪ╢  ▒  ╝  [еЪ▒  ░  ╨  [еЪ╣  ╞  ╞  [еЪ   ²  ·  [еЪw	  ┬	  ≈	  [еЪ   ┬	  ~	  [еЪ≤	  w	  }	  [еЪ²  ░  ·  [еЪ┬	  ~	  ≈	  [еЪw	  ≈	  }	  [еЪ   ·  ~	  [еЪ≤	  }	  }	  [еЪ}	  w	  ≤	  [еЪ~	  ─	  ┬	  [еЪ≈	  w	  ┬	  [еЪ┘	  ┐	  ─	  [еЪ}	  ≈	  w	  [еЪ~	  ┘	  ─	  [еЪ┘	  v	  ┐	  [еЪ~	  ≈	  ┬	  [еЪ≤	  ≤	  }	  [еЪb
+  k
+  N
+  [еЪ≥	  b
+  q	  [еЪk
+  Q
+  Z
+  [еЪk
+  Z
+  S
+  [еЪk
+  S
+  `
+  [еЪ\
+  a
+  T
+  [еЪ\
+  T
+  k
+  [еЪk
+  W
+  Q
+  [еЪ\
+  W
+  k
+  [еЪZ
+  Q
+  Y
+  [еЪZ
+  Y
+  Y
+  [еЪ≥	  S
+  Z
+  [еЪk
+  `
+  b
+  [еЪt	  \
+  ≥	  [еЪ▌	  \
+  t	  [еЪX
+  ≥	  b
+  [еЪX
+  ≥	  S
+  [еЪZ
+  Q
+  Y
+  [еЪQ
+  ≥	  Z
+  [еЪ≥	  Q
+  W
+  [еЪ\
+  W
+  ≥	  [еЪZ
+  Z
+  Y
+  [еЪt	  ⌠	  │	  [еЪt	  ═	   	  [еЪt	   	  ⌠	  [еЪu	   	  ═	  [еЪ│	  ≥	  q	  [еЪt	  ≥	  │	  [еЪ░	  t	  {	  [еЪt	  {	  ═	  [еЪt	  ▀	  ░	  [еЪT
+  ▀	  ░	  [еЪu	  ═	  ═	  [еЪ 	  u	  ═	  [еЪT
+  ⌠	  │	  [еЪT
+  ⌠	   	  [еЪk
+  │	  N
+  [еЪT
+  │	  k
+  [еЪT
+  ═	   	  [еЪT
+  {	  ░	  [еЪ▀	  a
+  T
+  [еЪT
+  ═	  {	  [еЪ▌	  ▀	  t	  [еЪu	  u	  ═	  [еЪv	  ┐	  ╒	  [еЪ∙	  |	  ┌	  [еЪ■	  |	  ⌡	  [еЪx	  ■	  ╒	  [еЪv	  x	  ╒	  [еЪ|	  ⌡	  ┌	  [еЪx	  ⌡	  ■	  [еЪ∙	  ┌	  ²	  [еЪ∙	  ²	  ²	  [еЪ∙	  |	  ┌	  [еЪv	  ┐	  ╒	  [еЪx	  ╒	  ■	  [еЪ|	  ■	  ⌡	  [еЪ∙	  ²	  ┌	  [еЪ|	  ┌	  ⌡	  [еЪ⌡	  x	  ■	  [еЪx	  v	  ╒	  [еЪ∙	  ∙	  ²	  [еЪ┘	  ─	  ┐	  [еЪw	  ┬	  ≈	  [еЪ~	  ─	  ┬	  [еЪ≤	  w	  }	  [еЪ┘	  v	  ┐	  [еЪ┬	  ≈	  ~	  [еЪw	  ≈	  }	  [еЪ┘	  ~	  ─	  [еЪ≤	  }	  }	  [еЪw	  ≤	  }	  [еЪ~	  ─	  ┬	  [еЪw	  ┬	  ≈	  [еЪ┘	  ┐	  ─	  [еЪw	  ≈	  }	  [еЪ~	  ┘	  ─	  [еЪ┘	  v	  ┐	  [еЪ┬	  ~	  ≈	  [еЪ≤	  ≤	  }	  [еЪн  ╬  Е  [еЪ╬  С  Н  [еЪ╬  Е  Н  [еЪС  Н  ©  [еЪн  М  ╩  [еЪ╬  М  н  [еЪе  ╬  ч  [еЪС  ╬  е  [еЪ╬  ы  ч  [еЪ╘	  ю	  д	  [еЪ©  ©  С  [еЪН  ©  С  [еЪ╘	  ╢	  н	  [еЪ╘	  н	  Н  [еЪ╢	  ё	  у	  [еЪ╢	  у	  ╘	  [еЪ╘	  С  Н  [еЪе  д	  ╘	  [еЪю	  ╘	  ц	  [еЪС  ╘	  е  [еЪэ  ы  ╬  [еЪ©  С  С  [еЪф	  у	  ё	  [еЪъ  ╩  М  [еЪ╖	  ╠	  у	  [еЪу	  ╠	  ╗	  [еЪу	  ╗	  ╞	  [еЪЁ	  ц	  ╘	  [еЪЁ	  ╘	  у	  [еЪ╖	  у	  ╝	  [еЪ╝	  Ё	  у	  [еЪ╖	  ╟	  ╠	  [еЪ╟	  ╠	  ╠	  [еЪМ  ╠	  ╗	  [еЪ╞	  ф	  у	  [еЪи  ╬  э  [еЪМ  ╬  и  [еЪш  М  ъ  [еЪМ  ╗	  ш  [еЪ╠	  ╟	  ╖	  [еЪ╠	  ╖	  М  [еЪ╖	  г  М  [еЪг  и  М  [еЪ╟	  ╟	  ╠	  [еЪр  м  п  [еЪЙ  а  ж  [еЪй  ж  м  [еЪх  Л  а  [еЪр  ю  п  [еЪЙ  й  ж  [еЪЙ  х  а  [еЪр  й  м  [еЪЛ  Л  х  [еЪа  Л  х  [еЪм  ж  й  [еЪж  а  Й  [еЪп  м  р  [еЪа  Й  х  [еЪм  р  й  [еЪп  р  ю  [еЪж  й  Й  [еЪЛ  х  х  [еЪю  п  У  [еЪо  Г  ф  [еЪО  Ф  ф  [еЪб  У  Ф  [еЪб  ю  У  [еЪО  о  ф  [еЪб  О  Ф  [еЪЯ  о  Г  [еЪЯ  Г  Г  [еЪф  Г  о  [еЪУ  п  ю  [еЪФ  У  б  [еЪФ  ф  О  [еЪГ  Я  о  [еЪф  о  О  [еЪФ  О  б  [еЪУ  б  ю  [еЪЯ  Я  Г  [еЪ╛	    7  [еЪ╛	  ╚	  ╥	  [еЪ7  ╛	  ╥	  [еЪв	  ╚	  ╤	  [еЪ╣	  в	  ╤	  [еЪ╚	  ╤	  ╛	  [еЪё	  ╛	  ц	  [еЪ╚	  ╤	  ╛	  [еЪ╛	  ц	  ╥	  [еЪ╛	  ╥	  ╚	  [еЪв	  ╣	  ╤	  [еЪ╚	  в	  ╤	  [еЪп	  ё	  и	  [еЪи	  ё	  ц	  [еЪ╬	  и	  п	  [еЪ╬	  п	  б	  [еЪ╬	  и	  п	  [еЪи	    7  [еЪ  п	  и	  [еЪ╬	  п	  б	  [еЪK  V  >  [еЪV  >  ]  [еЪЮ  ]  у  [еЪ]  у  V  [еЪЦ  п  ю  [еЪК  у  Ц  [еЪю  Ц  К  [еЪЮ  К  у  [еЪР  ь  л  [еЪп  Р  л  [еЪп  л  А  [еЪп  А  ю  [еЪП  л  ь  [еЪП  ь  д  [еЪП  G  N  [еЪK  >  U  [еЪG  K  U  [еЪc  K  G  [еЪN  c  G  [еЪП  N  д  [еЪ  :  E  [еЪ:  E    [еЪ   -  E  [еЪE  !  -  [еЪE  !  5  [еЪ"  /  7  [еЪE  /  "  [еЪ   )  E  [еЪ)  /  E  [еЪ-     ,  [еЪ,  ,  -  [еЪ-  E  !  [еЪ5  :  E  [еЪ"  /  E  [еЪ7  /  "  [еЪ:  E  +  [еЪ!  +  E  [еЪ   ,  -  [еЪE  -     [еЪE     )  [еЪ/  E  )  [еЪ,  -  -  [еЪ0  "  B  [еЪ"  G  F  [еЪ"  B  F  [еЪ#  F  G  [еЪE  0  "  [еЪ  0  E  [еЪ$  9  "  [еЪG  "  $  [еЪ"  4  9  [еЪS  O  "  [еЪ#  G  e  [еЪe  `  =  [еЪX  "  I  [еЪ`  X  "  [еЪE  I    [еЪ"  I  E  [еЪe  `  "  [еЪ"  A  S  [еЪO  7  "  [еЪ"  A  e  [еЪ4  "  7  [еЪ=  #  e  [еЪK  g  >  [еЪZ  B  J  [еЪB  Y  a  [еЪY  g  @  [еЪg  >  @  [еЪB  a  J  [еЪY  @  a  [еЪZ  J  b  [еЪb  b  Z  [еЪJ  Z  B  [еЪ>  K  g  [еЪ@  g  Y  [еЪa  B  Y  [еЪJ  b  Z  [еЪa  J  B  [еЪa  @  Y  [еЪ@  >  g  [еЪb  Z  Z  [еЪH  K  L  [еЪ?  M  \  [еЪH  M  F  [еЪ^  ?  D  [еЪK  >  L  [еЪM  F  \  [еЪ?  \  D  [еЪH  L  F  [еЪ^  D  D  [еЪD  ?  ^  [еЪF  H  M  [еЪ\  ?  M  [еЪL  K  H  [еЪD  \  ?  [еЪF  L  H  [еЪ>  L  K  [еЪF  \  M  [еЪ^  ^  D  [еЪ	  v  	  [еЪ	  	  	  [еЪ	  	  	  [еЪv  v  	  [еЪp  v  v  [еЪp  v  v  [еЪk  t  }  [еЪt  	  k  [еЪс  р  в  [еЪh  n  h  [еЪФ  в  Ф  [еЪФ  в  Ф  [еЪv  p  m  [еЪ|  t  v  [еЪD  (  *  [еЪq  v  i  [еЪи  У  Ф  [еЪu  w  @  [еЪn  w  k  [еЪ/     6  [еЪх  м  х  [еЪв  Ф  и  [еЪъ  н  х  [еЪn  z  p  [еЪЮ  С  Я  [еЪ}  h  k  [еЪЮ      [еЪн  А  щ  [еЪr  t  |  [еЪА  в  р  [еЪи  м  с  [еЪ	  k  Ж  [еЪS     7  [еЪm  r  |  [еЪЦ  ч  ъ  [еЪn  d  w  [еЪ5  1  %  [еЪZ  \    [еЪ6  3  &  [еЪ  *  D  [еЪл  щ  н  [еЪ  Ю  Р  [еЪ=  1  =  [еЪи  в  с  [еЪ8  1  >  [еЪ1  3  >  [еЪ(  D  C  [еЪh  Ж  k  [еЪC  =  =  [еЪC  =  =  [еЪ@  2  :  [еЪ>  &  3  [еЪ  &  h  [еЪЖ  	  Ж  [еЪЯ  х  х  [еЪk  	  	  [еЪ	  	  	  [еЪt  }  r  [еЪr  h  }  [еЪp  r  m  [еЪn  z  h  [еЪr  h  h  [еЪh  }  h  [еЪh  }  h  [еЪ&  n  s  [еЪ6  =  v  [еЪm  v  v  [еЪm  v  v  [еЪm  |  v  [еЪv  t  	  [еЪ|  v  v  [еЪ|  v  v  [еЪЮ  С  Ф  [еЪЮ  Ф  &  [еЪФ  С  Ф  [еЪЧ  _  Ч  [еЪa  V  S  [еЪ  &  c  [еЪи  Ф  Ф  [еЪФ  и  Ф  [еЪФ  и  Ф  [еЪФ  и  Ф  [еЪР  Ю  Я  [еЪи  м  У  [еЪУ  х  м  [еЪс  м  х  [еЪс  х  х  [еЪх  х  с  [еЪх  р  с  [еЪr  p  z  [еЪн  р  А  [еЪл  Ф  щ  [еЪА  Ф  в  [еЪл  Ф  Ф  [еЪФ  л  Ф  [еЪщ  Ф  А  [еЪщ  Ф  Ф  [еЪФ  щ  Ф  [еЪъ  л  н  [еЪч  ъ  л  [еЪх  н  р  [еЪЦ  ъ  х  [еЪх  х  р  [еЪр  х  х  [еЪх  х  ъ  [еЪz  h  r  [еЪh  z  h  [еЪp  s  n  [еЪ&  n  h  [еЪs  v  p  [еЪ&  s  6  [еЪ6  s  v  [еЪ6  =  =  [еЪ3  =  6  [еЪ1  =  3  [еЪ8    *  [еЪk  q  u  [еЪ%  1  1  [еЪ1  1  %  [еЪs  n  d  [еЪ  Z  7  [еЪ   d  m  [еЪ`  \  \  [еЪ`  &  \  [еЪ  1  1  [еЪ\  1    [еЪD    8  [еЪD      [еЪC  D  8  [еЪC  1  =  [еЪ(  =  C  [еЪ8      [еЪC  8  1  [еЪ8  >    [еЪ>  &    [еЪС  Ф  ч  [еЪ2  =  =  [еЪ=  =  2  [еЪЯ  Ц  С  [еЪх  Ц  Я  [еЪР  Я  х  [еЪЧ  Р  х  [еЪР  Ч    [еЪ_  T  Ч  [еЪ_      [еЪc  &  `  [еЪT  Ч  S  [еЪЮ    &  [еЪС  ч  Ц  [еЪ&    &  [еЪ&    &  [еЪФ  ч  л  [еЪ:  (  2  [еЪ8  :  d  [еЪw  d  :  [еЪq  i  k  [еЪq  q  k  [еЪd  n  d  [еЪi  n  k  [еЪd  s  d  [еЪ1  q  $  [еЪq  $  q  [еЪd  m  s  [еЪq  i  q  [еЪi  s  v  [еЪn  s  i  [еЪs  v  m  [еЪ%  $  1  [еЪ.     6  [еЪ5  .  6  [еЪ`  c  T  [еЪ\  `  \  [еЪ`  \  Z  [еЪV  S  7  [еЪ+  7    [еЪ7  V  Z  [еЪ7  +     [еЪ  1  5  [еЪ   /     [еЪ5    +  [еЪZ  V  `  [еЪa  `  T  [еЪ*  (  :  [еЪ*  8  :  [еЪT  S  a  [еЪT  _  c  [еЪS  S  a  [еЪV  a  `  [еЪ  _  c  [еЪ  Ч  _  [еЪ(  2  =  [еЪ@  2  =  [еЪq  =  @  [еЪ:  w  @  [еЪv  m  .  [еЪm  .     [еЪ.  5  %  [еЪ%  .  $  [еЪv  .  $  [еЪ$  q  v  [еЪ/  6  5  [еЪ      6  [еЪ5  +  /  [еЪ+     /  [еЪk  w  u  [еЪu  q  @  [еЪb	  X	  b	  [еЪb	  X	  b	  [еЪb	  X	  b	  [еЪФ  X	  b	  [еЪb	  T	  b	  [еЪb	  T	  b	  [еЪo	  J	  _	  [еЪ_	  X	  J	  [еЪЭ  Ш   	  [еЪG	  G	  R	  [еЪ 	  	  	  [еЪ 	  	  	  [еЪT	  Q	  b	  [еЪ_	  b	  m	  [еЪ
+
+  
+  k	  [еЪV
+  d
+  j
+  [еЪ	  	  В  [еЪ
+  
+  
+  [еЪ
+  
+  
+  [еЪO
+  ]
+  O
+  [еЪЗ  ╓	  ╪	  [еЪВ   	  	  [еЪЖ  Ы  Ж  [еЪG	  G	  i	  [еЪ╫	  с	  я	  [еЪJ	  o	  G	  [еЪs
+  p
+  ╫	  [еЪЗ  	  	  [еЪZ	  _	  m	  [еЪ	   	  Ш  [еЪЭ  В  Ы  [еЪJ	  У  G	  [еЪ
+  +
+  
+  [еЪm	  Q	  Z	  [еЪ╪	  е	  ╩	  [еЪ
+  
+  
+  [еЪU
+  j
+  d
+  [еЪ
+  "
+  %
+  [еЪ\	  Y	  O	  [еЪk	  ▀  
+  [еЪ	  З  ╙	  [еЪp
+  ╫	  р	  [еЪW	  b	  b	  [еЪВ   	  Э  [еЪc	  ^	  W	  [еЪY	  c	  W	  [еЪk	  j	  
+
+  [еЪG	  J	  G	  [еЪ╗  j	  ╗  [еЪb	  j	  ╗  [еЪ
+  
+  
+  [еЪO	  Y	  c	  [еЪG	  G	  O	  [еЪG	  х  У  [еЪ╓	  ╓	  я	  [еЪУ  J	  X	  [еЪФ  У  X	  [еЪZ	  _	  o	  [еЪo	  Z	  G	  [еЪT	  Z	  Q	  [еЪi	  G	  R	  [еЪG	  Z	  G	  [еЪo	  G	  G	  [еЪG	  G	  o	  [еЪO	  R	  [	  [еЪ\	  b	  b	  [еЪb	  Q	  b	  [еЪb	  Q	  b	  [еЪm	  b	  Q	  [еЪX	  b	  _	  [еЪb	  m	  b	  [еЪb	  m	  b	  [еЪк	  ╫	  с	  [еЪк	  к	  ╫	  [еЪк	  с	  к	  [еЪ╓	  m
+  w
+  [еЪ
+  
+  )
+  [еЪt
+  x
+  s
+  [еЪВ  	  	  [еЪВ  	  	  [еЪ	  	  В  [еЪ	  	  В  [еЪя	  р	  ╫	  [еЪ	  Ы  В  [еЪЫ  	  Ж  [еЪЫ  Ж  Э  [еЪЖ  Э  Ж  [еЪЖ  Э  Ж  [еЪЭ  Ж  Ш  [еЪZ	  T	  i	  [еЪЗ  Ш  	  [еЪк	  	  ╙	  [еЪ	   	  	  [еЪк	  к	  ╙	  [еЪк	  к	  ╙	  [еЪ	  	  	  [еЪ	  к	  	  [еЪ	  	  	  [еЪЗ  ╪	  ╙	  [еЪ╙	  ╩	  ╪	  [еЪШ  ╓	  З  [еЪе	  ╪	  ╓	  [еЪЖ  Ш  Ж  [еЪШ  ╓	  Ж  [еЪ╓	  ╓	  ╪	  [еЪZ	  G	  i	  [еЪi	  R	  T	  [еЪT	  [	  R	  [еЪO	  R	  G	  [еЪb	  T	  [	  [еЪO	  [	  \	  [еЪb	  \	  [	  [еЪb	  \	  b	  [еЪb	  \	  Y	  [еЪY	  W	  b	  [еЪ▀  
+  
+  [еЪ
+  
+  
+  [еЪ(
+  n
+  x
+  [еЪ
+  
+  f
+  [еЪ
+  "
+  +
+  [еЪO
+  j
+  _
+  [еЪ%
+  (
+  %
+  [еЪ(
+  t
+  %
+  [еЪ%
+  
+  %
+  [еЪd
+  
+  %
+  [еЪ^	  k	  G	  [еЪG	  k	  ▀  [еЪ^	  j	  k	  [еЪW	  b	  j	  [еЪj	  
+
+  ╗  [еЪG	  ^	  G	  [еЪ^	  W	  j	  [еЪG	  ^	  c	  [еЪO	  G	  c	  [еЪк	  ╩	  с	  [еЪ
+  
+  
+  [еЪ╗  
+  
+  [еЪя	  е	  с	  [еЪ╓	  е	  я	  [еЪя	  ╓	  р	  [еЪ╓	  ╓	  р	  [еЪ╓	  p
+  р	  [еЪn
+  m
+  w
+  [еЪp
+  s
+  w
+  [еЪt
+  (
+  x
+  [еЪm
+  
+  n
+  [еЪк	  ╫	  s
+  [еЪ╩	  е	  с	  [еЪt
+  s
+  к	  [еЪt
+  s
+  t
+  [еЪ╙	  к	  ╩	  [еЪ
+  
+
+  
+  [еЪ
+  
+  
+  [еЪ
+  
+  
+  [еЪ
+  
+  V
+  [еЪ
+  
+  
+  [еЪ
+  
+  
+  [еЪ
+  V
+  
+  [еЪ
+  f
+  O
+  [еЪd
+  U
+  d
+  [еЪd
+  U
+  d
+  [еЪf
+  ]
+  O
+  [еЪ
+  V
+  d
+  [еЪj
+  V
+  f
+  [еЪf
+  V
+  
+  [еЪj
+  ]
+  f
+  [еЪ_
+  j
+  U
+  [еЪ!
+  O
+  j
+  [еЪU
+  U
+  _
+  [еЪO
+  O
+  _
+  [еЪ%
+  (
+  %
+  [еЪ%
+  "
+  (
+  [еЪ+
+  
+  
+  [еЪ+
+  
+  !
+  [еЪ
+  "
+  +
+  [еЪ!
+  
+  +
+  [еЪd
+  j
+  
+  [еЪO
+  !
+  
+  [еЪj
+  
+  !
+  [еЪ(
+  "
+  
+  [еЪn
+  (
+  )
+  [еЪ
+  
+  
+
+  [еЪ
+  
+  
+  [еЪn
+  
+  )
+  [еЪw
+  x
+  n
+  [еЪ
+  
+  )
+  [еЪ)
+  (
+  
+  [еЪx
+  s
+  w
+  [еЪ╓	  w
+  p
+  [еЪ╗  
+
+  
+  [еЪ
+  
+  
+  [еЪ
+  
+  
+  [еЪ
+  
+  
+  [еЪ_
+  j
+  ]
+  [еЪ_
+  O
+  ]
+  [еЪd
+  j
+  U
+  [еЪU
+  U
+  d
+  [еЪd
+  U
+  d
+  [еЪd
+  U
+  d
+  [еЪ_
+  j
+  U
+  [еЪ
+  
+  
+  [еЪ
+  
+  
+  [еЪ@  h  x  [еЪ  h  @  [еЪ  @  @  [еЪ    @  [еЪ@    @  [еЪ  @  @  [еЪ    @  [еЪ@    @  [еЪ8  @  ?  [еЪ8    @  [еЪ	  Ж  	  [еЪЖ  	  	  [еЪЖ  	  x  [еЪЖ  Ж  	  [еЪh  x  x  [еЪh  Ж  x  [еЪh  x  x  [еЪh  x  x  [еЪh  h  x  [еЪh  h  x  [еЪh  x  x  [еЪh  h  x  [еЪh  h  x  [еЪx  h  x  [еЪh  h  x  [еЪЛ  х  Л  [еЪх  х  Л  [еЪх  х  Л  [еЪЛ  х  Л  [еЪх  Л  Л  [еЪх  х  Л  [еЪЛ  х  Л  [еЪх  Л  Л  [еЪх  х  Л  [еЪх  Л  Л  [еЪх  х  Л  [еЪЛ  х  Л  [еЪх  Л  Л  [еЪх  х  Л  [еЪ^  S  ^  [еЪЧ  ^  (  [еЪЧ  S  ^  [еЪ(  Ч  (  [еЪЧ  (  (  [еЪЧ  Ч  (  [еЪх  (  Л  [еЪх  Ч  (  [еЪх  Л  Л  [еЪх  х  Л  [еЪr  2     [еЪd  r     [еЪr  r  d  [еЪr  d  d  [еЪr  r  d  [еЪr  d  d  [еЪr  r  d  [еЪ?  d  8  [еЪ?  r  d  [еЪ^  ^  S  [еЪ^  S  S  [еЪ2  S     [еЪ2  ^  S  [еЪ2        [еЪ2  2     [еЪ2  2     [еЪ   2     [еЪ2  2     [еЪf	  х  Л  [еЪG	  f	  f	  [еЪG	  f	  f	  [еЪG	  х  f	  [еЪG	  f	  f	  [еЪG	  G	  f	  [еЪG	  f	  f	  [еЪG	  f	  f	  [еЪG	  G	  f	  [еЪG	  G	  f	  [еЪG	  f	  f	  [еЪG	  G	  f	  [еЪG	  G	  f	  [еЪf	  G	  f	  [еЪG	  G	  f	  [еЪe
+  e
+  O
+  [еЪO
+  e
+  O
+  [еЪe
+  e
+  O
+  [еЪ
+  O
+  
+  [еЪ
+  e
+  O
+  [еЪ
+  
+  
+  [еЪ
+  
+  
+  [еЪ
+  
+  
+  [еЪ
+  
+  
+  [еЪ
+  
+  
+  [еЪ▀  
+  
+  [еЪ╙  
+  ▀  [еЪf	  ╙  ▀  [еЪG	  f	  ▀  [еЪf	  f	  G	  [еЪG	  f	  G	  [еЪf	  f	  G	  [еЪG	  f	  G	  [еЪf	  f	  G	  [еЪл	  ╓	  л	  [еЪ╓	  ╓	  л	  [еЪЖ  ╓	  л	  [еЪ	  Ж  л	  [еЪЖ  	  	  [еЪЖ  Ж  	  [еЪ	  Ж  	  [еЪЖ  	  	  [еЪЖ  Ж  	  [еЪЖ  	  	  [еЪЖ  Ж  	  [еЪ	  Ж  	  [еЪЖ  	  	  [еЪЖ  Ж  	  [еЪ&
+  
+  &
+  [еЪm
+  &
+  v
+  [еЪm
+  
+  &
+  [еЪv
+  m
+  v
+  [еЪ╓	  v
+  л	  [еЪ╓	  m
+  v
+  [еЪ╓	  л	  л	  [еЪ╓	  ╓	  л	  [еЪ╓	  л	  л	  [еЪ╓	  ╓	  л	  [еЪ&
+  &
+  
+  [еЪ&
+  
+  
+  [еЪ&
+  
+  
+  [еЪ&
+  &
+  
+  [еЪO
+  &
+  
+  [еЪe
+  &
+  O
+  [еЪe
+  e
+  O
+  [еЪO
+  e
+  O
+  [еЪe
+  e
+  O
+  [еЪа  а  ■  [еЪа  а  ю  [еЪа  ё     [еЪ#  Щ  	  [еЪ  З    [еЪ      [еЪа  ╩  ╪  [еЪа  ╪  У  [еЪа  ╫  ╩  [еЪа  ╫  а  [еЪа  ╫  а  [еЪY    З  [еЪY      [еЪY  Y    [еЪа      [еЪа  ■     [еЪа    ╞  [еЪа  ф  ■  [еЪф  а  ╞  [еЪ      [еЪ%  ©  я  [еЪ%  я  ╫  [еЪ╪  %  ╫  [еЪ1    -  [еЪ"       [еЪ  Ь    [еЪ╩  ╥  ╙  [еЪ    Ь  [еЪ╩  Я  ╩  [еЪ(  "     [еЪ#  м  h  [еЪ  Y    [еЪЗ  Y    [еЪY    Ь  [еЪY  Ь  Y  [еЪ╩  ╙  ╠  [еЪ╩  .  Я  [еЪо  ╩  ╦  [еЪ╩  ╥  ╩  [еЪ╩  ╠  ╩  [еЪ$  .    [еЪl  о  S  [еЪа  ё  ю  [еЪЭ  Э    [еЪ(  Э  #  [еЪЮ  Я  ч  [еЪ"    Y  [еЪН  О  У  [еЪч  Э  Н  [еЪ"  (    [еЪ#  Я  Э  [еЪы  У  с  [еЪП  с  П  [еЪЭ  (    [еЪ       [еЪ      [еЪф  д  ╡  [еЪф  ╞  ╟  [еЪф  ╟  д  [еЪ╩  ╙  ╞  [еЪ"    $  [еЪE  й  ╤  [еЪ.    #  [еЪ(       [еЪ$  "  .  [еЪ(  #    [еЪ"  Y  .  [еЪl  R  l  [еЪ#  -  1  [еЪh  м  к  [еЪ#    -  [еЪ  Э  #  [еЪ      [еЪЧ    Й  [еЪ       [еЪ  Й    [еЪ#  м  ╡  [еЪ      [еЪЗ  Y  Y  [еЪ1      [еЪС  С  й  [еЪС  й  и  [еЪС  и  к  [еЪh  С  к  [еЪh  h  к  [еЪЧ  я  Й  [еЪЮ  щ  Э  [еЪЯ  Э  Ю  [еЪЭ  щ  Ю  [еЪщ  Д  Ю  [еЪН  Э  О  [еЪч  Ю  Э  [еЪ.  #  Я  [еЪУ  О  ы  [еЪД  Ю  щ  [еЪB  S  ^  [еЪу  С  в  [еЪС  С  в  [еЪщ  у  Е  [еЪС  в  я  [еЪу  в  Е  [еЪщ  Е  Д  [еЪу  Х  С  [еЪС  Х  С  [еЪу  Е  Х  [еЪД  у  щ  [еЪ.  Y  ╩  [еЪс  ы  П  [еЪ9  R  Q  [еЪ╩  ╠  ╩  [еЪ    З  [еЪ╞  ╩  l  [еЪl  S  l  [еЪ#      [еЪ9  R  O  [еЪЯ  ч  о  [еЪу  Д  Е  [еЪо  Л  l  [еЪl  2  K  [еЪl  2  l  [еЪ  #  #  [еЪч  Н  Э  [еЪ      [еЪс  ы  У  [еЪО  У  Н  [еЪY  Ь    [еЪS  9  R  [еЪO  9  X  [еЪl  R  @  [еЪо  ч  S  [еЪ@  l  2  [еЪK  l  H  [еЪс  П  с  [еЪ╩  ╦  ╥  [еЪ#    #  [еЪ?  D  е  [еЪ#  #  ╡  [еЪ#  #  ╡  [еЪ#      [еЪе    #  [еЪ#  	  #  [еЪ#  	  ╡  [еЪ#      [еЪ#  ф  ╪  [еЪ#  Щ  #  [еЪ#      [еЪ6  v  о  [еЪO  X  M  [еЪO    M  [еЪ.  $  $  [еЪ  х    [еЪЯ  ╩  о  [еЪх    Щ  [еЪ#  ф    [еЪЩ    х  [еЪ#  %  Щ  [еЪа  а     [еЪа  ё  а  [еЪа  ё  а  [еЪ4  X  B  [еЪl  е  H  [еЪ#  ф  #  [еЪ╩  ╠  ╙  [еЪS  l  R  [еЪR  O  @  [еЪН  О  Э  [еЪы  У  О  [еЪ┼  щ  Д  [еЪЭ  ч  B  [еЪщ  Ю  D  [еЪl  ╞  Л  [еЪЭ  Ю  ?  [еЪЭ  ?  B  [еЪч  B  S  [еЪс  П  ы  [еЪХ  у  ┼  [еЪщ  6  D  [еЪу  Д  ┼  [еЪ┼  щ  6  [еЪС  Ч  я  [еЪ#  %  #  [еЪV  V  |  [еЪV  6  v  [еЪ|  6  V  [еЪ6  ┼  |  [еЪD  Ю  ?  [еЪС  Х  у  [еЪа    а  [еЪ?  е  й  [еЪR  Q  Q  [еЪа  ф  а  [еЪH  е    [еЪR  9  Q  [еЪS  P  9  [еЪ  ф  х  [еЪ╪  #  %  [еЪX  B  M  [еЪ  х  M  [еЪX  P  9  [еЪS  ^  P  [еЪ4  4  B  [еЪ?  B  E  [еЪY      [еЪV  |  v  [еЪа  ю  ╫  [еЪ?  й  E  [еЪP  B  [  [еЪ[  P  ^  [еЪ^  [  E  [еЪD  е  о  [еЪ4  B  P  [еЪE  ^  B  [еЪ    а  [еЪD  6  о  [еЪX  P  4  [еЪ╠  ╩  ╠  [еЪ÷  н  н  [еЪм  н  н  [еЪ╡  н  ╕  [еЪ[  R  ^  [еЪн  ╓  ╩  [еЪй  С  С  [еЪи  й  С  [еЪк  С  н  [еЪк  н  н  [еЪк  и  С  [еЪё  j  j  [еЪё  j  j  [еЪ╟  ·  ╩  [еЪ╩  ·  н  [еЪм  ·  ·  [еЪф  н  ╙  [еЪ÷  ╕  н  [еЪ╪  ф  н  [еЪс  ÷  н  [еЪ╪  н  с  [еЪ╙  х  б  [еЪ  ▄  ▒  [еЪ╕  н  н  [еЪя  Й  ┐  [еЪж  ь  б  [еЪх  б  ╜  [еЪG  j  T  [еЪб  х  ╜  [еЪж  ъ  ь  [еЪ÷  ═  ├  [еЪ·  я  м  [еЪ·  м  ╟  [еЪ╜  ·  я  [еЪ╜  ·  ·  [еЪ╟  ╞  m  [еЪд  ╟  m  [еЪ╡  д  m  [еЪT  ^  N  [еЪ■  ^  Е  [еЪu  [  ^  [еЪД  к  Х  [еЪN  ^  R  [еЪ^  R  ^  [еЪ^  T  ^  [еЪЕ  ╦  з  [еЪЕ  ^  ·  [еЪд  ╡  ╡  [еЪы  ъ  ╡  [еЪ┘  ┐  ■  [еЪA  N  j  [еЪ▓  ≤  ▒  [еЪ┐  ▒  ·  [еЪ╦  ь  ъ  [еЪй  а  к  [еЪь  ·  б  [еЪ■  Х  ы  [еЪx  ~  ≤  [еЪx  ⌠  x  [еЪд  ╡  ъ  [еЪх  ж  б  [еЪх  ф  ╙  [еЪя  ©  с  [еЪ╫  я  с  [еЪ╪  ╫  с  [еЪ╩  ╩  ·  [еЪ╦  з  ь  [еЪк  м  н  [еЪы  Е  ╦  [еЪд  ж  ъ  [еЪЕ  з  ь  [еЪъ  ы  ╦  [еЪ·  Е  ь  [еЪы  Д  Х  [еЪ╘  ·  ╛  [еЪд  Д  ы  [еЪд  ╡  ы  [еЪк  а  д  [еЪс  н  н  [еЪй  ╤  к  [еЪе  о  и  [еЪ    ▄  [еЪе  и  а  [еЪG  j  ∙  [еЪХ  к  д  [еЪо  v  ╢  [еЪ┌  ·  ┘  [еЪ┘  ■  Х  [еЪ┘  ·  ┌  [еЪ┴  ┘  ┌  [еЪё  ю  j  [еЪ·  ▓  ▒  [еЪо  ╢  и  [еЪ╫  ю  j  [еЪ┐  ·  ┘  [еЪZ  ^  N  [еЪ·  ╟  ·  [еЪ■  ы  Е  [еЪ≤  ~  ▓  [еЪ┘  ┌  ┴  [еЪ|  z  √  [еЪ|  щ  √  [еЪ┼  ┌  z  [еЪ|  v  щ  [еЪ┼  z  |  [еЪ┼  ┌  ┴  [еЪ√  Х  z  [еЪХ  √  √  [еЪХ  z  ┼  [еЪ     ▓  [еЪz  ┌  ┴  [еЪз  з  Е  [еЪ⌠  x  ~  [еЪю  j  j  [еЪ┐  u  ■  [еЪT  ^  ^  [еЪZ  ^  ^  [еЪ▀  ║  ^  [еЪ^  u  ▐  [еЪ  ▀  ▀  [еЪ▀  ≤    [еЪ├  ²  ═  [еЪ║  ^  u  [еЪm  j  j  [еЪм  ╡  н  [еЪ·  ┐  ▒  [еЪ≤  ~  x  [еЪ▒  ▓  ≤  [еЪ├  ═  ║  [еЪ²  ╕  ├  [еЪ▀  █  ═  [еЪ║  u  ┐  [еЪ▀    █  [еЪ∙  ▀  ≤  [еЪx  ⌠  ⌠  [еЪб  ·  ╜  [еЪQ  j  j  [еЪT  j  j  [еЪе  й  а  [еЪT  j  T  [еЪG  j  j  [еЪ╫  j  j  [еЪ╫  j  а  [еЪ╩  ╫  а  [еЪ╪  ╩  а  [еЪУ  ╪  а  [еЪN  j  j  [еЪё  N  j  [еЪQ  j  G  [еЪ╞    j  [еЪA  j  j  [еЪн  ╙  ╓  [еЪT  j  G  [еЪ⌡  ²  ╕  [еЪ⌡  ²  X  [еЪ  Q  c  [еЪ^  u  ■  [еЪ  c  A  [еЪ  j  Q  [еЪ  X  A  [еЪm  A  j  [еЪ┼  z  ┴  [еЪ╡  н  н  [еЪ╡  н  н  [еЪ▐  │  ╕  [еЪ∙  j  ▀  [еЪ  j  j  [еЪ▀  ═  ║  [еЪ·  ▒  ▓  [еЪ≤  ▓  ~  [еЪ■  ^  ^  [еЪ▐  ┐  ·  [еЪ┌  ·  ┘  [еЪ┌  ▐  ·  [еЪ┌  ┴  ┘  [еЪ║  ▐  ┐  [еЪ~  x  ⌠  [еЪ┌  z  Е  [еЪЕ  ┴  z  [еЪz  Е  Х  [еЪz  ┴  ┌  [еЪ▀  ═  ▀  [еЪв  √  ╓  [еЪя  ┐  ╓  [еЪв  √  z  [еЪв  z  Е  [еЪ┴  ┘  ┌  [еЪХ  z  √  [еЪ║  ╛  ▐  [еЪф  н  н  [еЪ²  █  ═  [еЪ÷  ═  ÷  [еЪЕ  ┌  ┴  [еЪN  ^  T  [еЪ═  ├  ÷  [еЪ├  ║  ·  [еЪ    Q  [еЪm  j  ╞  [еЪ▐  ⌡  ╕  [еЪ  X  ⌡  [еЪ·  ╕  ├  [еЪ·  ║  ╛  [еЪ▐  │  │  [еЪ▓  ▐  ▄  [еЪя  в  ╓  [еЪv  щ  ╢  [еЪ  ▓  ▄  [еЪ╘  ▐  ·  [еЪ^  ▐  Z  [еЪ▓  ╘  ╛  [еЪЙ    ▒  [еЪ▐  │  ·  [еЪ▓  ╛  ▐  [еЪ╙  н  н  [еЪЙ  ▒  ┐  [еЪ╕  │  ·  [еЪ^  T  T  [еЪЪ  
+    [еЪ  п    [еЪ)    Щ  [еЪ
+  Ъ  Щ  [еЪж  Г  т  [еЪ  %  п  [еЪЩ    
+  [еЪ  
+  	  [еЪз  Ц  Б  [еЪ  ╣  ╥  [еЪ  ╥  ц  [еЪ  ц  ╦  [еЪ    +  [еЪ╨  +  ╖  [еЪ    &  [еЪ  Щ  &  [еЪ  ,  ,  [еЪ    ,  [еЪ   ы    [еЪ  )    [еЪЩ  /  )  [еЪ  W  ╨  [еЪ  W  W  [еЪз  з  Ц  [еЪИ  ш  k  [еЪ  )  Ъ  [еЪР  з  Ц  [еЪ    	  [еЪэ  Р  Ь  [еЪР  Ы  з  [еЪэ  Р  А  [еЪЦ  Р  Ь  [еЪА  э  т  [еЪ
+  	  *  [еЪ   ы     [еЪ   ы     [еЪЬ  Р  Ы  [еЪЬ  Р  А  [еЪт  Г  Ф  [еЪА  ж  т  [еЪ╨    Г  [еЪ   ╠  ╝  [еЪА  т  ж  [еЪ       [еЪ╨  ╨  ═  [еЪ╨  ╨  ═  [еЪT  =  ╝  [еЪ╝  ╨  ╘  [еЪ╨  ═  ╒  [еЪЖ  ь  ъ  [еЪК  ж  Ж  [еЪ:       [еЪФ  т  ж  [еЪэ  т  А  [еЪ)  Г  ж  [еЪВ  З  В  [еЪ%  з  Б  [еЪъ  З  В  [еЪ╨  ╦  Ё  [еЪ+  ╨    [еЪ      [еЪ   ╣    [еЪW      [еЪ    &  [еЪ      [еЪ╨  Г  И  [еЪ╨  л  ╒  [еЪ      [еЪ    &  [еЪ   т  р  [еЪ   р  Я  [еЪ   т     [еЪ   т     [еЪ╨  л  ≥  [еЪ╨  ╨  е  [еЪ╨  е  г  [еЪ╨  ╨  г  [еЪ╨  ╨  г  [еЪ╨  ╔  Ё  [еЪ╨  ≥  ╔  [еЪ  ╨  Ы  [еЪ╨  ╦  ╨  [еЪЫ      [еЪ  Ы  ╨  [еЪW  Ы    [еЪ╨  ╨  ≥  [еЪ≥  ╨  ╨  [еЪ       [еЪ       [еЪW  Ы  W  [еЪ/  /  Щ  [еЪ        [еЪГ  ╨  ╨  [еЪ)  /    [еЪ      [еЪФ  ж  К  [еЪ      [еЪГ  И  Ф  [еЪ╨  ╨  Ё  [еЪ╨  ╨  Ё  [еЪ  Г  )  [еЪ©  C  >  [еЪЖ  К  ь  [еЪь  ъ  З  [еЪИ  ╨  Ё  [еЪW      [еЪ    Г  [еЪ  W    [еЪ  W    [еЪ      [еЪk  ╝  ш  [еЪ  W  W  [еЪ╦  ╙  ╣  [еЪ╦  ╣  ╘  [еЪ╖  ╦  ╘  [еЪ╨  ╟  ╨  [еЪ7  >  L  [еЪ╟  ╨  ╟  [еЪ╝  ╨  ╨  [еЪЁ  ╨  ╝  [еЪ╘  ╨  ╝  [еЪ   ╝     [еЪ   ╝     [еЪ%  п  Б  [еЪ  /  Щ  [еЪ,      [еЪз  Ы  Р  [еЪ╦  ╨  ╖  [еЪР  Ы  ⌡  [еЪT  ⌡  ┬  [еЪ      [еЪ┬  T  ;  [еЪW      [еЪА  ⌡  э  [еЪА  Ь  э  [еЪ⌡  А  T  [еЪА  T  =  [еЪж  Ж  К  [еЪЗ  В  ъ  [еЪъ  ь  Ж  [еЪт  А  =  [еЪт  =  C  [еЪж  Ф  5  [еЪC  ж  5  [еЪт  ж  C  [еЪT  ;  ┤  [еЪ+  ╨  ╨  [еЪG  5  7  [еЪ;  ;  ┬  [еЪЗ  В  З  [еЪ;  ┤  ┬  [еЪ=  у  ╝  [еЪT  ┤  ╝  [еЪ=  C  у  [еЪ7  >  5  [еЪY  L  5  [еЪL  Y  7  [еЪ5  C  >  [еЪ>  А  ©  [еЪG  Y  A  [еЪG  k  k  [еЪJ  F  F  [еЪF  A  Z  [еЪ8  Y  A  [еЪ\  5  Y  [еЪ8  5  U  [еЪ  U  р  [еЪA  F  J  [еЪФ  И  G  [еЪF  Z  Z  [еЪ╘  ╨  ╟  [еЪ  р  Б  [еЪЗ  ъ  ь  [еЪж  К  Ф  [еЪь  Ж  К  [еЪW    Ы  [еЪ\  5  \  [еЪР  э  ⌡  [еЪF  k  F  [еЪF  k  k  [еЪ5  Ф  G  [еЪC  ©  у  [еЪJ  A  8  [еЪ8  Y  \  [еЪG  k  F  [еЪk  И  G  [еЪ╝  ╨  k  [еЪ╨  ╟  ╨  [еЪG  A  F  [еЪk  F  I  [еЪk  <  :  [еЪI  k  <  [еЪ       [еЪ        [еЪ7  G  Y  [еЪБ        [еЪ╨  ╟  ╘  [еЪ  W    [еЪk  F  k  [еЪ8  J  U  [еЪ    р  [еЪJ    U  [еЪ  р    [еЪр      [еЪ   ╣  Б  [еЪ       [еЪF  A  Z  [еЪ        [еЪ\  8  5  [еЪ╨  ╨  л  [еЪ╨  ╨  л  [еЪk  :     [еЪ       [еЪ        [еЪ   ы  ╠  [еЪ        [еЪ   т  ╝  [еЪБ       [еЪ        [еЪ        [еЪ       [еЪ╨  г  ═  [еЪз  Ы  з  [еЪю  т  ╣  [еЪ╝  у  ╬  [еЪт  Ё  Ю  [еЪю  ╣  Ё  [еЪ+  g  g  [еЪ╝  ╬  ш  [еЪю  Ё  г  [еЪг  ©  ю  [еЪ┬  ┤  ╪  [еЪт  х  х  [еЪт  х  х  [еЪр  т  х  [еЪЯ  р  х  [еЪБ  р  ╘  [еЪ╣  Б  х  [еЪр  э  л  [еЪЁ  э  ╥  [еЪЦ  л  Ц  [еЪл  ц  Ц  [еЪл  ц  Ц  [еЪ╥  Ю  ц  [еЪЁ  Ф  Ю  [еЪ]  л  °  [еЪ┬  ╪    [еЪ▄  ]  ]  [еЪ⌡  ├  │  [еЪе  ╨  ╨  [еЪг  ╨  g  [еЪг  g  g  [еЪг  е  ╨  [еЪ┬  ∙    [еЪБ  ╒  ┬  [еЪ⌡  ∙  │  [еЪ├  ∙  │  [еЪ⌡  ∙  ┬  [еЪ│  y  ├  [еЪл  g  g  [еЪл  g  g  [еЪ  Ы  ∙  [еЪ∙  Ы  ⌡  [еЪ⌡  ├  ∙  [еЪy  ▀  ▄  [еЪ{  y  ├  [еЪ]  ▄  л  [еЪ]  S  M  [еЪ├  {  y  [еЪл  п  л  [еЪY  M  g  [еЪa  Y  g  [еЪ⌠  ▌  ╗  [еЪ}  └  ≥  [еЪ{  ≥  ▌  [еЪ{  ▀  y  [еЪ├  y  │  [еЪ╣  ▄  Ю  [еЪ°     °  [еЪ┤  ╪  ш  [еЪ°     └  [еЪф  ю  х  [еЪБ  х  ╘  [еЪр  ╘  ╞  [еЪg  e  ╖  [еЪ╥  ╣  ф  [еЪц  ╥  ф  [еЪ╦  ц  ф  [еЪэ  п  л  [еЪ╞  р  н  [еЪg  F  S  [еЪр  н  л  [еЪэ  ╥  п  [еЪы  х  ╔  [еЪ╢  ю  х  [еЪ╔  ╢  х  [еЪ╘  х  ё  [еЪф  х  х  [еЪё  с  ╨  [еЪё  с  х  [еЪ°  ╧  ╞  [еЪ╔  х  х  [еЪ╔  х  х  [еЪ°  л  л  [еЪ°  ╞  °  [еЪ┼  ⌠  ┼  [еЪЁ  Ф  Ф  [еЪF  g  g  [еЪ╨  ╨  °  [еЪ╥  Ю  Ф  [еЪЬ  │  ∙  [еЪ{  ▌  ▀  [еЪп  ц  ╥  [еЪ█  ▀  ▄  [еЪ▄  Ю  ц  [еЪ}  ≥  ▌  [еЪ└  °  }  [еЪ]  V  █  [еЪ°  л  н  [еЪц  ▄  л  [еЪ°  ╫  ╧  [еЪ°  н  ╫  [еЪл  ц  п  [еЪ°  ╞  ╨  [еЪл  °  °  [еЪ╝  т  х  [еЪ]  S  ]  [еЪх  ╣  ф  [еЪ]  S  S  [еЪ]  Q  ]  [еЪV  Q  ]  [еЪх  Б  х  [еЪ	    ░  [еЪЁ  ╥  Ф  [еЪ┼  ⌠  ┼  [еЪ∙  Ы    [еЪ╣  ╙  e  [еЪ╘  ╣  e  [еЪ╖  ╘  e  [еЪ∙  Ь  Ы  [еЪ∙  Ц  Ь  [еЪ═  ╒  g  [еЪ]  M  Q  [еЪ∙    Ц  [еЪ]  █  ─  [еЪ├  Ь  │  [еЪ╝  х  х  [еЪ╝  х  х  [еЪ├  ∙  Ь  [еЪ∙  │  ├  [еЪ▌  {  ≥  [еЪ└  °     [еЪу  ©  г  [еЪ}  ≥  └  [еЪ╧  °  °  [еЪ│  y  ├  [еЪ│  ├  y  [еЪ▀  ┌  {  [еЪ┌  ├  {  [еЪп  ┼  ╒  [еЪ{  ├  y  [еЪ╠  ╝  х  [еЪт  Ю  ╣  [еЪS  S  g  [еЪ└  ■  ┌  [еЪЦ    ┬  [еЪ°        [еЪ≥  F  ┤  [еЪБ  Ц  ┬  [еЪп    ┼  [еЪп  Б  ╒  [еЪ  ┼  ░  [еЪ└  ▀  ┌  [еЪ┌     ╖  [еЪ╖     └  [еЪ▀  ┌  ░  [еЪ*  	  ▀  [еЪ▌  ■  ╖  [еЪy  ▄  ╣  [еЪ⌠  ≈  ⌠  [еЪ©  А  ю  [еЪ⌠  ╗  ▌  [еЪ╖  ┘  ▌  [еЪ╙  ┌  ╖  [еЪ┌  ё  ┘  [еЪ  ё  _  [еЪ⌠  ≈  ▌  [еЪ█  ]  ▄  [еЪ╗  ⌠  ╗  [еЪ+    P  [еЪ}  └  °  [еЪ╠  ы  х  [еЪ▀  {  ▌  [еЪ≥  ▌  }  [еЪ─  ]  Q  [еЪю  х  х  [еЪю  х  х  [еЪ┌  ╙  ╙  [еЪ┼  ⌠  ⌠  [еЪ▀     └  [еЪ■  ┌  ▀  [еЪ≈  ┘  ▌  [еЪ╖  ╙  ┘  [еЪ┼  ⌠  ■  [еЪ■  ]  █  [еЪ]  Q  ]  [еЪ┤  ╝  ш  [еЪS  ]  ]  [еЪ╨  с  °  [еЪ⌠  ▌  ■  [еЪ⌠  √  ┼  [еЪ┼  ┤  ┴  [еЪ┼  ┴  √  [еЪF  g  ≥  [еЪ	  ▀  ░  [еЪ■  ╖  └  [еЪу  г  ╬  [еЪM  ]  S  [еЪ]  Q  M  [еЪы  х  х  [еЪы  х  х  [еЪ■  ▀  █  [еЪё  ┘  ≈  [еЪ  a  _  [еЪё  ≈  _  [еЪV    a  [еЪ  P  V  [еЪ+  ╖  g  [еЪa  e  g  [еЪ■  ┼  ]  [еЪe  g  g  [еЪ┌  ╙  ┘  [еЪ═  g  g  [еЪg  ═  g  [еЪ≥  ┤  ┼  [еЪg  P  F  [еЪg  S  g  [еЪ╒  л  g  [еЪa  g  g  [еЪг  ═  g  [еЪg  +  P  [еЪM  g  g  [еЪg  M  g  [еЪg  S  F  [еЪл  g  M  [еЪ  Ы    [еЪН  р  ч  [еЪЗ  р  У  [еЪУ  р  Н  [еЪУ  с  З  [еЪТ  ч  о  [еЪр  ч  Т  [еЪК  р  ь  [еЪр  ь  З  [еЪК  Ф  р  [еЪФ  И  р  [еЪс  с  З  [еЪУ  с  З  [еЪр  Н  ч  [еЪр  Н  У  [еЪч  Т  о  [еЪр  Т  ч  [еЪр  З  У  [еЪр  ь  К  [еЪИ  Ф  р  [еЪр  З  ь  [еЪК  Ф  р  [еЪс  З  З  [еЪЛ  Т  о  [еЪТ  ╞  Л  [еЪ╘  Т  ╠  [еЪ╠  Т  ╙  [еЪТ  ╙  ╞  [еЪр  ш  Т  [еЪИ  ш  р  [еЪ╝  Т  ╘  [еЪш  ╝  Т  [еЪ╠  ╘  ╟  [еЪ╠  ╠  ╟  [еЪТ  ╙  ╠  [еЪТ  ╦  о  [еЪЁ  И  р  [еЪЁ  р  Т  [еЪТ  ╥  ╦  [еЪТ  ╥  ╙  [еЪ╠  ╟  ╘  [еЪ╘  Т  ╠  [еЪ╘  Т  ╝  [еЪ╝  Ё  Т  [еЪ╠  ╟  ╟  [еЪА  щ  Ю  [еЪу  Д  Р  [еЪэ  щ  Д  [еЪу  С  з  [еЪА  т  Ю  [еЪД  Р  э  [еЪу  з  Р  [еЪА  э  щ  [еЪС  С  з  [еЪу  С  з  [еЪэ  щ  Д  [еЪу  Д  Р  [еЪА  Ю  щ  [еЪу  Р  з  [еЪА  э  щ  [еЪт  А  Ю  [еЪД  э  Р  [еЪС  з  з  [еЪт  Ю  Э  [еЪы  П  ъ  [еЪО  ы  Ж  [еЪж  Э  О  [еЪт  ж  Э  [еЪы  Ж  ъ  [еЪЖ  ж  О  [еЪП  ъ  В  [еЪП  П  В  [еЪП  ы  ъ  [еЪт  Э  Ю  [еЪж  О  Э  [еЪы  О  Ж  [еЪП  В  ъ  [еЪы  Ж  ъ  [еЪж  Ж  О  [еЪт  ж  Э  [еЪП  В  В  [еЪЩ  %    [еЪЩ      [еЪ╦    %  [еЪ╦  %  ©  [еЪ╦  ф  с  [еЪ÷  ф  ю  [еЪ÷  с  ф  [еЪс  ╦  ©  [еЪ÷  ╕  ю  [еЪ╕  ю  ╢  [еЪ╕  ╢  ╔  [еЪы  ╠  ╡  [еЪ╔  ы  ╡  [еЪ╡  ╔  ╕  [еЪ	  Щ    [еЪ╡    	  [еЪ	      [еЪ  	    [еЪы    ╡  [еЪ╠  ы  ╡  [еЪ[  B  >  [еЪE  [  >  [еЪB  5  L  [еЪ>  B  L  [еЪА  >  E  [еЪА  E  ╤  [еЪА  ю  к  [еЪд  ю  т  [еЪд  т  Ё  [еЪД  к  ю  [еЪд  Д  ю  [еЪк  А  ╤  [еЪд  ж  Ё  [еЪж  Ё  э  [еЪр  э  х  [еЪх  э  ж  [еЪM  B  5  [еЪх  U  M  [еЪ5  M  U  [еЪU  р  х  [еЪO  @  3  [еЪX  \  3  [еЪX  3  O  [еЪ\  X  4  [еЪW  @  2  [еЪ3  @  W  [еЪ3  J  8  [еЪ3  8  \  [еЪJ  3  F  [еЪF  I  3  [еЪ4  4  \  [еЪ4  X  \  [еЪ    O  [еЪ  X  O  [еЪ*      [еЪЩ    *  [еЪ  \  X  [еЪ8    J  [еЪ      [еЪ\    8  [еЪ    J  [еЪ4  \  \  [еЪ  *  Щ  [еЪ  *    [еЪ*      [еЪ  *    [еЪ    *  [еЪ    *  [еЪ      [еЪ*      [еЪ  *    [еЪ      [еЪ      [еЪW      [еЪK  2  W  [еЪ3  <  I  [еЪW  <  3  [еЪH  W  K  [еЪW    H  [еЪ      [еЪ    W  [еЪ  W  :  [еЪ:  <  W  [еЪ      [еЪC  ?  B  [еЪT  6  D  [еЪ=  ?  D  [еЪ;  6  V  [еЪC  5  B  [еЪT  =  D  [еЪ;  T  6  [еЪC  =  ?  [еЪV  V  ;  [еЪV  6  ;  [еЪ?  D  =  [еЪ6  D  T  [еЪB  ?  C  [еЪ6  T  ;  [еЪ?  C  =  [еЪB  5  C  [еЪD  =  T  [еЪV  ;  ;  [еЪ5  B  ^  [еЪA  9  Q  [еЪY  P  9  [еЪ7  ^  P  [еЪ5  7  ^  [еЪY  A  9  [еЪY  7  P  [еЪZ  A  Q  [еЪZ  Q  Q  [еЪQ  9  A  [еЪ^  B  5  [еЪP  ^  7  [еЪ9  P  Y  [еЪQ  Z  A  [еЪ9  Y  A  [еЪP  7  Y  [еЪ^  5  7  [еЪZ  Z  Q  [еЪ╜  я  ч  [еЪм  я  ч  [еЪ╩  ╞  ч  [еЪч  ╟  ╩  [еЪч  м  ╟  [еЪ╫  ╠  н  [еЪч  ╠  ╫  [еЪ╞  ╧  ч  [еЪ╧  ╫  ч  [еЪ╩  ╨  ╞  [еЪ╨  ╨  ╩  [еЪч  ╩  ╓  [еЪч  б  ╜  [еЪ╞  н  ╠  [еЪ╞  ╠  ч  [еЪ╙  б  ч  [еЪч  ╓  ╙  [еЪ╨  ё  ╩  [еЪ╩  ё  ч  [еЪё  ч  ╘  [еЪ╘  ╞  ч  [еЪ╨  ╩  ╩  [еЪ╠  б  ь  [еЪ╠  ъ  Ф  [еЪ╠  ь  ъ  [еЪъ  ╡  Ф  [еЪб  ╜  ч  [еЪб  ч  ╠  [еЪ╥  п  ╠  [еЪФ  ╠  ╥  [еЪл  ╠  п  [еЪ╠  л  н  [еЪ╡  Ф  Ф  [еЪФ  ъ  ╡  [еЪб  ╠  ь  [еЪ╠  ъ  ь  [еЪб  ч  ╜  [еЪ╠  ч  б  [еЪ╠  Ф  ъ  [еЪ╥  ╠  п  [еЪн  л  ╠  [еЪФ  ╠  ╥  [еЪ╠  л  п  [еЪ╡  ╡  Ф  [еЪ┘  Х  y  [еЪ╦  з  ц  [еЪы  ╦  Ю  [еЪХ  ы  ╣  [еЪХ  ╣  y  [еЪ╦  ц  Ю  [еЪы  Ю  ╣  [еЪз  ц  Ц  [еЪЦ  Ц  з  [еЪц  з  ╦  [еЪЁ  Х  д  [еЪ╣  ы  Х  [еЪЮ  ╦  ы  [еЪц  Ц  з  [еЪЮ  ц  ╦  [еЪ╣  Ю  ы  [еЪ╣  Ё  Х  [еЪЦ  з  з  [еЪд  а  г  [еЪ╢  и  ш  [еЪа  и  ╬  [еЪ╢  щ  ╪  [еЪд  г  Ё  [еЪи  ш  ╬  [еЪ╢  ╪  ш  [еЪа  г  ╬  [еЪщ  ╪    [еЪ  z  √  [еЪ│  ┴  ┌  [еЪ∙  z  ┴  [еЪ├  ┌  ┘  [еЪ∙    z  [еЪ├  │  ┌  [еЪy  ├  ┘  [еЪ│  ∙  ┴  [еЪ√  щ    [еЪ▐  ≈  u  [еЪ≈  Z  ▐  [еЪM  ≈  T  [еЪ≈  N  T  [еЪZ  ≈  N  [еЪw  ─  ≈  [еЪ█  ─  w  [еЪ≈  M  Q  [еЪ─  Q  ≈  [еЪT  M  S  [еЪT  S  S  [еЪ≈  T  N  [еЪ≈  [  u  [еЪV  █  w  [еЪV  w  ≈  [еЪR  ≈  [  [еЪN  ≈  R  [еЪT  M  S  [еЪM  ≈  T  [еЪ≈  Q  M  [еЪV  Q  ≈  [еЪT  T  S  [еЪ▒  w  ┐  [еЪ°  w  ≤  [еЪ▒  w  ≤  [еЪ≤  x  °  [еЪ≈  ┐  u  [еЪw  ┐  ≈  [еЪw  }  ▌  [еЪ°  w  }  [еЪ▌  ▀  w  [еЪ▀  █  w  [еЪx  °  °  [еЪ≤  x  °  [еЪw  ▒  ┐  [еЪ≤  w  ▒  [еЪ┐  ≈  u  [еЪw  ≈  ┐  [еЪw  °  ≤  [еЪ▌  w  }  [еЪ█  ▀  w  [еЪ}  w  °  [еЪ▌  ▀  w  [еЪx  x  °  [еЪy  ┘  ·  [еЪ~  ⌠  └  [еЪ▓  ~  ≥  [еЪ{  ·  ▓  [еЪy  {  ·  [еЪ~  ≥  └  [еЪ≥  {  ▓  [еЪ⌠     └  [еЪ⌠        [еЪ⌠  ~  └  [еЪy  ·  ┘  [еЪ{  ▓  ·  [еЪ~  ▓  ≥  [еЪ⌠     └  [еЪ~  ≥  └  [еЪ{  ≥  ▓  [еЪy  {  ·  [еЪ⌠  ⌠     [еЪ├  ┌  ┘  [еЪz  ┴  ∙  [еЪ│  ┌  ┴  [еЪz  √    [еЪ├  y  ┘  [еЪ┴  ∙  │  [еЪz    ∙  [еЪ├  │  ┌  [еЪ√      [еЪz  √    [еЪ│  ┴  ┌  [еЪz  ┴  ∙  [еЪ├  ┌  ┘  [еЪz  ∙    [еЪ├  │  ┌  [еЪy  ├  ┘  [еЪ┴  │  ∙  [еЪ√  √    [еЪ█  ─  ²  [еЪ─  ╕  ╙  [еЪ─  ²  ╕  [еЪ╙  ╕  │  [еЪ╔  █    [еЪ─  █  ╔  [еЪ┘  ─  ≈  [еЪ╙  ─  ┘  [еЪ⌠  ─  ≈  [еЪ⌠  √  ─  [еЪ│  │  ╙  [еЪ│  ╕  ╙  [еЪ²  X  H  [еЪ╕  ²  H  [еЪr  X  H  [еЪA  X  r  [еЪ╙  ╕  H  [еЪH  ≈  ┘  [еЪ_  H  a  [еЪH  ┘  ╙  [еЪ≈  H  _  [еЪ│  ╙  ╙  [еЪc  r  A  [еЪQ  c  r  [еЪT  F  r  [еЪr  G  T  [еЪr  Q  G  [еЪH  V  r  [еЪa  V  H  [еЪF  P  r  [еЪP  V  r  [еЪS  F  T  [еЪS  T  T  [еЪT  ╔  G  [еЪ≤    ╔  [еЪ─  ┴  √  [еЪ╔  ┴  ─  [еЪ≤  ╔  ∙  [еЪG  ╔  ∙  [еЪT  F  S  [еЪ╔  T  F  [еЪ╔  ┤  F  [еЪ┴  ╔  ┤  [еЪS  S  T  [еЪ├  ┌  ▐  [еЪ∙  z  ┴  [еЪ│  ┌  ┴  [еЪ  z  √  [еЪ├  ┌  ▐  [еЪ∙  │  ┴  [еЪ  ∙  z  [еЪ├  │  ┌  [еЪ√  ╓    [еЪ╓  ┐  ┬  [еЪ▄  ▒  ┼  [еЪ┐  ▒  ╒  [еЪ▐  ▄  ░  [еЪ┐  ╒  ┬  [еЪ▄  ░  ┼  [еЪ▐  ┌  ░  [еЪ▒  ┼  ╒  [еЪ╓  ┬    [еЪ┌  ▐  ╛  [еЪ▌  ├  ÷  [еЪ╖  ·  ├  [еЪ└  ╛  ·  [еЪ┌  └  ╛  [еЪ▌  ╖  ├  [еЪ╖  └  ·  [еЪ▌  ╗  ÷  [еЪ╗  ÷  ÷  [еЪ÷  ├  ▌  [еЪ╛  ▐  ┌  [еЪ·  ╛  └  [еЪ├  ·  ╖  [еЪ÷  ╗  ▌  [еЪ├  ╖  ▌  [еЪ·  └  ╖  [еЪ╛  ┌  └  [еЪ╗  ╗  ÷  [еЪ■     Ё  [еЪ   Ё  ╔  [еЪ   ╔  ≥  [еЪл  ╒  ё  [еЪ≥  л  ё  [еЪ≥  ё     [еЪN  A  a  [еЪM  ё  N  [еЪN  M  Y  [еЪa  N  Y  [еЪл  M  ё  [еЪ╒  л  ё  [еЪA  m  e  [еЪA  e  a  [еЪ╙  e  m  [еЪ╙  m  ╡  [еЪ╦  ╙  ф  [еЪ■  ╦  Ё  [еЪ■  ф  ╦  [еЪ╙  ф  ╡  [еЪ     Щ  [еЪ   Щ  &  [еЪ  &    [еЪ  &     [еЪ⌡  ▐  ┌  [еЪё    ⌡  [еЪ┌  ⌡  ё  [еЪ  ё    [еЪ╘  ▐  ▀  [еЪ▓  ╘  ▀  [еЪ▐  ┌     [еЪ▀  ▐     [еЪ*  ▀  ▓  [еЪ*  ▓     [еЪ
+  *    [еЪ  
+    [еЪ    Щ  [еЪ-    
+  [еЪ  -  
+  [еЪ*       [еЪЬ    '  [еЪ  '    [еЪ'    Ы  [еЪ  '  З  [еЪЗ  '    [еЪ  Ш    [еЪ'  Ш    [еЪ'  Ы    [еЪ  '    [еЪ    Ы  [еЪ      [еЪ  З  '  [еЪ'    Ь  [еЪ    Ш  [еЪ  Ш  '  [еЪ  '    [еЪЗ    '  [еЪЫ      [еЪ'    Ы  [еЪ'    Ы  [еЪ  '    [еЪ      [еЪ"  Ш    [еЪ(  /  Ш  [еЪ(  Ш  "  [еЪ(  Э  /  [еЪ  Ь  '  [еЪ  '  Ш  [еЪШ      [еЪШ    /  [еЪ    Ш  [еЪШ      [еЪЭ  /  /  [еЪ/  (  Э  [еЪ"    Ш  [еЪ(  "  Ш  [еЪ  '  Ь  [еЪШ  '    [еЪ/  (  Ш  [еЪШ      [еЪ    Ш  [еЪШ    /  [еЪ    Ш  [еЪЭ  Э  /  [еЪЮ  Э  т  [еЪ  $    [еЪ#    )  [еЪЭ  #  ж  [еЪЭ  ж  т  [еЪ  )    [еЪ#  )  ж  [еЪ$    ,  [еЪ,  ,  $  [еЪ  $    [еЪЩ  1    [еЪЪ  #  1  [еЪ)    #  [еЪ  ,  $  [еЪ)      [еЪЪ  )  #  [еЪЪ  Щ  1  [еЪ,  $  $  [еЪ      [еЪ  Ч  %  [еЪ      [еЪЧ  С  з  [еЪ    Щ  [еЪ  %    [еЪЧ  з  %  [еЪ      [еЪС  з  з  [еЪз  у  С  [еЪэ  Д  щ  [еЪР  у  Д  [еЪА  щ  Ю  [еЪР  з  у  [еЪА  э  щ  [еЪт  А  Ю  [еЪэ  Р  Д  [еЪС  С  з  [еЪ╚  ╨  ╨  [еЪ╨  ╚  ╨  [еЪ╨  ╚  ╨  [еЪ╨  ╚  ╨  [еЪ║  ╨  ╨  [еЪ╨  ║  ╨  [еЪ≤  м  ╤  [еЪ╚  ╤  ≤  [еЪd  e  f  [еЪ∙  ∙  ·  [еЪf        [еЪf        [еЪ║  ²  ╨  [еЪк  ╤  ╨  [еЪO  N  ╕  [еЪ╜  ╨  ю  [еЪ`  Т  Я  [еЪZ  ]  [  [еЪ]  Q  U  [еЪа  _  g  [еЪ_  И  b  [еЪf     `  [еЪ  Ч    [еЪх  ·  ║  [еЪ)    '  [еЪм  ≤  ∙  [еЪ      [еЪ      [еЪ╜  ╤  к  [еЪf    d  [еЪ`  b  e  [еЪЖ  ≤  ∙  [еЪ_  _  p  [еЪ²  к  ╜  [еЪ      [еЪJ  ]  U  [еЪ╛  k  n  [еЪ^  k  f  [еЪ╛  ╠  ⌡  [еЪ╕  J  O  [еЪ      [еЪ    (  [еЪ╨  ╗  ╨  [еЪ`  f  e  [еЪ╢  ╬  ╗  [еЪ╗  ╛  ╬  [еЪи  ╕  N  [еЪ∙  ≤  ∙  [еЪ  и  ╨  [еЪW  и    [еЪT  Z  P  [еЪ╬  ⌡  ╛  [еЪ∙  ⌡  ∙  [еЪЖ  П  ∙  [еЪЧ  '  Ч  [еЪ≤  Ж  ╚  [еЪ╚  ╨  Ж  [еЪ╤  м  ╜  [еЪ╜  ∙  м  [еЪ║  ╜  ²  [еЪ·  ∙  х  [еЪ╜  ∙  ∙  [еЪм  ∙  ∙  [еЪм  ∙  ∙  [еЪ·  ⌡  ╝  [еЪ╠  ╨  ╨  [еЪ²  ╨  ╨  [еЪ╨  ²  ╨  [еЪ²  ╨  к  [еЪ╤  ╨  ╚  [еЪк  ╨  ╨  [еЪ╨  к  ╨  [еЪ     )  [еЪ        [еЪ   )     [еЪ&  Ч  Ч  [еЪ_  b  o  [еЪ   +    [еЪ`        [еЪ`        [еЪ`     Я  [еЪ      `  [еЪ(    '  [еЪ`  b  Т  [еЪИ  Т  b  [еЪe  b  _  [еЪЧ  e  _  [еЪЧ  e  Ч  [еЪd  Ч  e  [еЪ║  ╜  х  [еЪ  d    [еЪ       [еЪ  f     [еЪ        [еЪ        [еЪ       [еЪ        [еЪ        [еЪ      [еЪ      [еЪ  Ч  d  [еЪ    Ч  [еЪЧ  d  Ч  [еЪЧ  d  Ч  [еЪЧ  Ч    [еЪх  ╜  ∙  [еЪ∙  х  ∙  [еЪ║  ·  ╝  [еЪ⌡  ·  ∙  [еЪ╝  ╨  ║  [еЪ⌡  ╠  ╝  [еЪ╠  ╨  ╝  [еЪ╠  ╨  ╨  [еЪ╨  ╛  ╠  [еЪ╛  ╗  ╨  [еЪJ  O  J  [еЪW  [  Q  [еЪ╛  ╨  k  [еЪ╨  ╨  ╛  [еЪU  ╪  ╖  [еЪf  ^  p  [еЪ╢  ╖  ╖  [еЪm  k     [еЪ   m     [еЪ^  k  k  [еЪk  k  ^  [еЪ╢  ∙  ╕  [еЪJ  ╕  ∙  [еЪ╢  ╕  и  [еЪи  ╗  ╨  [еЪи  N  W  [еЪ╢  ∙  ∙  [еЪ╗  ╢  и  [еЪ╢  ∙  ╬  [еЪ╬  ⌡  ∙  [еЪ)       [еЪT  W  W  [еЪT  W  W  [еЪ'  )    [еЪЧ    '  [еЪ(  '  Ч  [еЪЧ  (  Ч  [еЪ  Ч  (  [еЪЧ  б  &  [еЪ  &    [еЪ   m  +  [еЪ_  Ч  б  [еЪ       [еЪ)      [еЪ        [еЪ        [еЪ       [еЪP  N  T  [еЪJ  P  J  [еЪP  ]  J  [еЪQ  ╜  ╨  [еЪW  Q  ╨  [еЪJ  ╖  U  [еЪQ  U  ╜  [еЪ╖  ╪  ╖  [еЪ╨  ╨  ╚  [еЪ╨  ╨  ╚  [еЪ╪  ╢  ╖  [еЪ╨  ╜  ╨  [еЪю  ╜  ╪  [еЪ╪  ╜  U  [еЪ╢  ю  ╪  [еЪ╛  ╚  ╨  [еЪа  ╤  ╖  [еЪn  ╤  а  [еЪm  +  б  [еЪk  k  m  [еЪk  f  m  [еЪp  b  _  [еЪp  ^  e  [еЪb  f  p  [еЪe  _  p  [еЪk  n  ^  [еЪ_  g  _  [еЪ^  n  e  [еЪm  f  b  [еЪб  m  o  [еЪP  N  O  [еЪO  J  P  [еЪб  _  o  [еЪ&  +  б  [еЪ_  _  o  [еЪm  o  b  [еЪ+  &    [еЪ&  Ч    [еЪN  T  W  [еЪT  W  Z  [еЪW  Z  W  [еЪ]  P  Z  [еЪ╤  ю  ╢  [еЪ╖  ╤  ╢  [еЪn  ╤  ╛  [еЪ╚  ╛  ╤  [еЪю  ╤  ╚  [еЪ╨  ю  ╚  [еЪg  а  n  [еЪ╖  _  а  [еЪn  e  g  [еЪg  e  _  [еЪ]  [  Q  [еЪZ  W  [  [еЪО  х  х  [еЪО  х  х  [еЪх  х  О  [еЪЯ  х  О  [еЪх  х  ╟  [еЪх  х  ╟  [еЪз  д  К  [еЪО  д  К  [еЪR  |  W  [еЪ═  ═  ╛  [еЪg  W  g  [еЪg  W  g  [еЪх  ╟  ╚  [еЪд  х  ь  [еЪg  ■  ⌠  [еЪ]  c  P  [еЪЖ  ╨  C  [еЪ╒  ═  ÷  [еЪ   ╒  √  [еЪK  W  K  [еЪB  L  \  [еЪC  W  g  [еЪП  B  z  [еЪ═  ═  у  [еЪq  ]  o  [еЪК  ═  з  [еЪ]  I  ^  [еЪL  `  Z  [еЪ╨  д  ь  [еЪW  `  R  [еЪ|  C  z  [еЪК  Т  И  [еЪ  ▌    [еЪь  ╨  ╚  [еЪ\  b  [  [еЪ   ░  ╒  [еЪ]  c  O  [еЪ┼  ├  ~  [еЪ╬  ╖  ╧  [еЪ░  ■  g  [еЪZ  J  L  [еЪI  ]  p  [еЪх  х  ╤  [еЪC  W  |  [еЪа  л  ╤  [еЪ╧  л  ╤  [еЪ⌠  ж  g  [еЪИ  ═  К  [еЪж  с  °  [еЪх  с  ж  [еЪ÷  ∙  ≥  [еЪ╖  ╧  л  [еЪ═  ═  ╖  [еЪИ  Т  И  [еЪo  B  B  [еЪТ  К  О  [еЪЯ  Т  О  [еЪ╨  д  з  [еЪз  ╨  ═  [еЪ╟  ╨  ╚  [еЪу  ╛  ═  [еЪ═  ═  ╨  [еЪ═  з  ═  [еЪ═  з  ═  [еЪ╛  ╖  ╩  [еЪ╬  х  х  [еЪх  х  ╚  [еЪх  х  ╚  [еЪх  ь  ╚  [еЪО  д  х  [еЪх  х  ь  [еЪх  х  ь  [еЪq  ]  g  [еЪg  g  ]  [еЪg  g  q  [еЪB  n  B  [еЪ█    ┌  [еЪ^  g  s  [еЪg  C  g  [еЪg  C  g  [еЪ╨  C  g  [еЪ╨  C  ╨  [еЪo  p  ]  [еЪЖ  C  z  [еЪz  Ж  П  [еЪz  B  |  [еЪ|  B  B  [еЪB  B  |  [еЪ|  R  B  [еЪ╨  ╟  у  [еЪL  R  `  [еЪZ  g  J  [еЪW  g  `  [еЪg  J  g  [еЪg  J  g  [еЪg  Z  `  [еЪg  Z  g  [еЪg  Z  g  [еЪL  J  \  [еЪJ  [  \  [еЪR  L  B  [еЪ\  b  B  [еЪR  B  B  [еЪB  R  B  [еЪB  B  \  [еЪ╨  ═  у  [еЪу  ╛  ╟  [еЪ╩  ╟  ╛  [еЪ╖  ╛  ═  [еЪх  ╟  ╩  [еЪ╩  ╖  ╬  [еЪх  ╩  ╬  [еЪх  ╬  х  [еЪ╬  х  ╧  [еЪ╤  х  ╧  [еЪ░  ■  ░  [еЪ√  °  ═  [еЪ▄  s  I  [еЪ_  K     [еЪ~  ├  ▌  [еЪY  K  c  [еЪ≥  ▄  ┼  [еЪg  ▄  ≥  [еЪ┼  ~  ]  [еЪ┼  ~  ┼  [еЪ═  g  а  [еЪ═  ░  g  [еЪg  ж  а  [еЪ╤  х  ж  [еЪ⌠  °  ж  [еЪ═  а  ═  [еЪж  ╤  а  [еЪ═  л  а  [еЪ╖  ═  л  [еЪ[  g  q  [еЪ°  ≥  °  [еЪ°  ≥  °  [еЪb  o  q  [еЪB  b  o  [еЪo  B  p  [еЪB  B  p  [еЪp  I  B  [еЪn  B  I  [еЪI  n  ^  [еЪs  g  ▄  [еЪ  B  I  [еЪ]  g  ^  [еЪ[  q  b  [еЪ^  g  g  [еЪg  ^  g  [еЪJ  g  [  [еЪ∙  ⌠  ≥  [еЪ░  ∙  ░  [еЪ╒  ░  ∙  [еЪP  ]  √  [еЪ]  °  √  [еЪK     ░  [еЪP  √     [еЪK  _  K  [еЪ]  O  ]  [еЪ]  O  ]  [еЪK  W  _  [еЪ]  ]  P  [еЪP  _  c  [еЪ   _  P  [еЪ_  c  W  [еЪc  Y  O  [еЪc  K  ┘  [еЪO  O  Y  [еЪY  K  K  [еЪ▄  ┼  ┼  [еЪ▄  ┼  ├  [еЪ┌    ▌  [еЪ┘  ▌  ~  [еЪ▌  ┌  ├  [еЪ▌  ┘    [еЪ~  ]  c  [еЪ┘    K  [еЪ~  c  ┘  [еЪ├  ┌  ▄  [еЪ▄  █  I  [еЪ⌠  ■  ∙  [еЪ■  ░  ∙  [еЪI    █  [еЪI  n  s  [еЪ    █  [еЪ┌  ▄  █  [еЪ^  s  n  [еЪB  I  n  [еЪ°  ⌠  ≥  [еЪ÷  ≥  °  [еЪ°  °  ÷  [еЪ╒  ∙  ÷  [еЪc  W  Y  [еЪW  Y  K  [еЪO  ]  c  [еЪO  O  ]  [еЪ]  O  ]  [еЪ]  O  ]  [еЪc  Y  O  [еЪ√  ╒  ═  [еЪ°  ═  ÷  [еЪY  J  Y  [еЪJ  Y  Y  [еЪJ  J  Y  [еЪ  J  Y  [еЪ∙    а  [еЪ∙  J    [еЪ∙  а  а  [еЪ∙  ∙  а  [еЪ∙  а  а  [еЪ∙  ∙  а  [еЪ∙  ∙  а  [еЪ∙  а  а  [еЪ∙  ∙  а  [еЪа  ∙  а  [еЪ∙  ∙  а  [еЪ∙  а  а  [еЪ∙  ∙  а  [еЪа  ∙  а  [еЪ∙  ∙  а  [еЪа  ∙  а  [еЪ∙  а  а  [еЪ∙  а  а  [еЪ∙  ∙  а  [еЪП  а  У  [еЪП  ∙  а  [еЪС  И  С  [еЪ_  С  h  [еЪ_  h  h  [еЪ_  И  С  [еЪЧ  h  #  [еЪЧ  _  h  [еЪЧ  #  #  [еЪЧ  #  #  [еЪЧ  Ч  #  [еЪЧ  Ч  #  [еЪ#  Ч  #  [еЪЧ  Ч  #  [еЪЧ  #  #  [еЪЧ  Ч  #  [еЪ#  Ч  #  [еЪЧ  Ч  #  [еЪ#  Ч  #  [еЪЧ  Ч  #  [еЪ#  Ч  #  [еЪЧ  #  #  [еЪЧ  Ч  #  [еЪе  Ч  #  [еЪ_  е  l  [еЪ_  Ч  е  [еЪY  Y  J  [еЪY  J  J  [еЪ╩  J  ╖  [еЪ╩  Y  J  [еЪ╩  ╖  ╖  [еЪ╩  ╩  ╖  [еЪ╩  ╩  ╖  [еЪ╖  ╩  ╖  [еЪ╩  ╩  ╖  [еЪ╩  ╩  ╖  [еЪ_  ╩  ╖  [еЪl  ╩  _  [еЪl  _  _  [еЪl  l  _  [еЪl  _  _  [еЪl  l  _  [еЪ_  l  _  [еЪl  l  _  [еЪ═  ═  н  [еЪ═  н  н  [еЪ═  ═  н  [еЪн  ═  н  [еЪ═  ═  н  [еЪ═  н  н  [еЪ═  ═  н  [еЪн  ═  н  [еЪ═  ═  н  [еЪн  ═  н  [еЪИ  н  н  [еЪИ  н  С  [еЪИ  ═  н  [еЪИ  С  С  [еЪИ  И  С  [еЪ·  ·  ░  [еЪ·  ░  ░  [еЪ^  ░  K  [еЪ^  ·  ░  [еЪ^  K  K  [еЪ^  ^  K  [еЪ^  ^  K  [еЪK  ^  K  [еЪ^  ^  K  [еЪ·  ░  ·  [еЪ░  ·  ·  [еЪ░  ░  ·  [еЪн  ░  ·  [еЪ═  н  н  [еЪ═  ░  н  [еЪ═  н  н  [еЪ═  ═  н  [еЪ═  н  н  [еЪ═  ═  н  [еЪа  П  У  [еЪB  а  j  [еЪB  j  j  [еЪB  П  а  [еЪB  j  j  [еЪB  B  j  [еЪB  j  j  [еЪB  j  j  [еЪB  B  j  [еЪB  B  j  [еЪj  B  j  [еЪB  B  j  [еЪB  j  j  [еЪB  B  j  [еЪj  B  j  [еЪB  B  j  [еЪB  j  j  [еЪB  B  j  [еЪj  B  j  [еЪB  j  j  [еЪB  B  j  [еЪj  B  j  [еЪ  j  ▀  [еЪ  B  j  [еЪ^  ^  K  [еЪK  ^  K  [еЪ^  ^  K  [еЪ▀  K    [еЪ▀  ^  K  [еЪ▀      [еЪ▀  ▀    [еЪ  ▀    [еЪ▀  ▀    [еЪ%  к  u  [еЪ)  ~  ы  [еЪл  н  Ч  [еЪЮ  ∙  ²  [еЪ      [еЪж  ~  с  [еЪА  2  Ц  [еЪ@  I  x  [еЪ)	  %	  )	  [еЪ├  ┴  Y  [еЪI  L  │  [еЪ╗  э  ╡  [еЪ²  П  °  [еЪ/	  %	  )	  [еЪ╥  Г  /	  [еЪс    <  [еЪФ  Б  Г  [еЪ  y  v  [еЪ)	  )	  /	  [еЪ/	  ╥  )	  [еЪu  |  х  [еЪм  н    [еЪ  1  2  [еЪх  н  л  [еЪ	  ╤  ╜  [еЪ	  ╤  	  [еЪЪ  п  м  [еЪА  ,	  Ц  [еЪо      [еЪ  ╗  ╕  [еЪ"	  l  Ц  [еЪv  #  y  [еЪ<  :  т  [еЪ  x  I  [еЪ╚  ╞  ╞  [еЪL  ┘  M  [еЪ╕      [еЪЧ    3  [еЪy  #  &  [еЪА  ⌡  ъ  [еЪy  ─  H  [еЪ    Ъ  [еЪ@  ╢  I  [еЪ┬      [еЪW  T  ├  [еЪ√  ∙  ²  [еЪ
+  ╫  ┴  [еЪZ  	  ╫  [еЪп  н    [еЪн  п  к  [еЪЧ  н    [еЪ'	  "	  %	  [еЪv  н    [еЪ,	  Г  А  [еЪy  $  w  [еЪ╫  ┴  ┤  [еЪ    я  [еЪя  м    [еЪя  й    [еЪ  й  к  [еЪ┬  Y  ┴  [еЪк  н  х  [еЪ┤  ├  ┴  [еЪw      [еЪ┴    ┬  [еЪ└  ┤  W  [еЪ    м  [еЪ  
+  б  [еЪH  I  ╢  [еЪL  P  ┘  [еЪЪ  k  @  [еЪ│  I  H  [еЪП  ╝  ╛  [еЪ╢  Щ  Ъ  [еЪЮ     ²  [еЪ│  N  P  [еЪъ  ²  √  [еЪ╛     П  [еЪ=  ─  ∙  [еЪ°  ²  ъ  [еЪ┐  -  )  [еЪ√  │  =  [еЪ}  ж  ~  [еЪ╜  °  Ж  [еЪт  }  ~  [еЪ-  }  )  [еЪ~  т  с  [еЪы  ~  }  [еЪГ  Ф  А  [еЪы  /  .  [еЪ,	  %	  /	  [еЪ'	  ,	  %	  [еЪ%	  ,	  )	  [еЪ"	  Ц  ,	  [еЪ,	  %	  "	  [еЪ*	  '	  l  [еЪ'	  "	  l  [еЪЦ  2  Ъ  [еЪ3  1  Б  [еЪЦ  А  Ц  [еЪ2  А  Ф  [еЪ/	  Г  ,	  [еЪБ  ╥  Г  [еЪФ  2  1  [еЪ2    Ъ  [еЪ  ╤    [еЪ╜  э  ╗  [еЪ  ╤  ╗  [еЪ╤  ╜  ╗  [еЪ╡  ╚  ╗  [еЪ╚  ╞  ╕  [еЪ  ╕  
+  [еЪ╚  ╕  ╗  [еЪ╞  ╕  
+  [еЪ1  Ф  Б  [еЪ<      [еЪ  с  9  [еЪ  	  ╤  [еЪ9  ж  с  [еЪ9  	    [еЪт  с  <  [еЪ  <  :  [еЪ}  т  {  [еЪэ  }  {  [еЪы  )  /  [еЪ}  э  ы  [еЪы  э  .  [еЪ:    
+  [еЪ:  т  {  [еЪ  3  1  [еЪ|  #  &  [еЪu  к  х  [еЪ|  л  х  [еЪ$  r  %  [еЪп  м  к  [еЪ%  r  к  [еЪr  м  к  [еЪЪ    Ъ  [еЪ  п  Ъ  [еЪ  н    [еЪ&  %  u  [еЪy  $  %  [еЪy  &  %  [еЪ&  u  |  [еЪк      [еЪ  я  м  [еЪ  и  й  [еЪя  о    [еЪя  й  и  [еЪо  и  я  [еЪ$  w    [еЪ  w    [еЪy    w  [еЪ  к  й  [еЪй    б  [еЪн    м  [еЪ    к  [еЪ  к    [еЪP  └  ┘  [еЪW  ├  ┤  [еЪN  U  └  [еЪ╫  ┤  Z  [еЪ┤  └  U  [еЪZ  U  ┤  [еЪ	    б  [еЪ	  
+  ╫  [еЪ  ┴  
+  [еЪб  
+  	  [еЪб    й  [еЪW  └  ┘  [еЪ└  P  N  [еЪY  T  ├  [еЪT  M  ┘  [еЪ┘  T  W  [еЪM    L  [еЪI  L    [еЪЖ  Щ  ╝  [еЪЪ  ╢  @  [еЪЩ  Ж  ╜  [еЪH  ╢  y  [еЪЭ  ╜  Щ  [еЪy  Э  ╢  [еЪN  │  ─  [еЪ│  ─  H  [еЪ│  P  L  [еЪ╢  Щ  Э  [еЪЪ  Щ  ╝  [еЪk  x  @  [еЪk  ╛  ╝  [еЪ╝  Ъ  k  [еЪ²  П     [еЪП  Ж  ╝  [еЪ/  │  ┐  [еЪ=  √  ∙  [еЪ/  .  │  [еЪ√  А  ъ  [еЪ:  .  │  [еЪА  :  √  [еЪ╜  °  ⌡  [еЪ°  ⌡  ъ  [еЪ°  Ж  П  [еЪ│  :  √  [еЪ┐  =  │  [еЪ─  Ю  ∙  [еЪ─  -  ┐  [еЪ┐  =  ─  [еЪ~  )  }  [еЪ)  /  ┐  [еЪ╠  =  Ё  [еЪ╞  =  ╠  [еЪЫ  ╙  Ч  [еЪw  Ы  Ч  [еЪэ  .  |  [еЪ{  э  |  [еЪ=  y  6  [еЪ=  6    [еЪф      [еЪл  ф    [еЪ=  Ё    [еЪЧ  ╜  Э  [еЪЧ  Э  y  [еЪo  !  t  [еЪй  o  t  [еЪ;  Ч  ╜  [еЪU  V  N  [еЪZ  V  U  [еЪЧ  V  y  [еЪЕ  ъ  ъ  [еЪЕ  ъ  Ш  [еЪ|  =  y  [еЪ7  ,  ;  [еЪч  7  ;  [еЪ;  .  :  [еЪ;  :  А  [еЪl  *	  +	  [еЪЦ  l  +	  [еЪ|  ,  з  [еЪ|  з  y  [еЪЁ      [еЪЁ    ╘  [еЪЁ  ╘  ╘  [еЪV  y  ─  [еЪV  ─  N  [еЪ≤  ч  ;  [еЪ╙  ≤  ;  [еЪ╞  
+  =  [еЪ╞  ╞  =  [еЪ,  ;  |  [еЪ{  =  |  [еЪ;  ╙  Ч  [еЪ}  w  Ч  [еЪJ  }  Ч  [еЪЧ  J  V  [еЪV  X  R  [еЪV  R  J  [еЪ    и  [еЪ  и  о  [еЪ  V  Z  [еЪ;  А  ⌡  [еЪ╜  ;  ⌡  [еЪ  t  $  [еЪЦ  Ц  Е  [еЪЪ  Ц  Е  [еЪЪ  t  Е  [еЪt  $  r  [еЪt  r  м  [еЪЕ  +	  ъ  [еЪЪ  Ъ  t  [еЪм  Ъ  t  [еЪ  л    [еЪ!      [еЪ  X  V  [еЪ    V  [еЪ:  {  =  [еЪ
+  :  =  [еЪV      [еЪЦ  Е  +	  [еЪ-	  i  ъ  [еЪ-	  &	  &	  [еЪ-	  &	  i  [еЪ-	  i  i  [еЪ+	  -	  ъ  [еЪt  Е  Ш  [еЪ|  ;  .  [еЪt  Ш  Ш  [еЪt  Ш  й  [еЪ!    t  [еЪ  о    [еЪ$      [еЪ  Z  	  [еЪ  	    [еЪ≥  ╚  С  [еЪз  ─  ш  [еЪч  h  j  [еЪ,  ┌  7  [еЪ  5  >  [еЪ4  8  4  [еЪ/  ъ  Ю  [еЪ  З  Ы  [еЪi  i  o  [еЪ╬  S  R  [еЪ|  ~  }  [еЪ╙  ╝  ╟  [еЪС  ≥  ≤  [еЪo  Х  i  [еЪm  h  j  [еЪ─  в  у  [еЪЮ  ъ  Ю  [еЪ  ц  д  [еЪЮ  j  ч  [еЪ+  w  ь  [еЪп  г  ф  [еЪъ  ъ  Ю  [еЪо  p  o  [еЪ6    >  [еЪu      [еЪШ  й  я  [еЪа      [еЪ╝    ╣  [еЪ.	  j  $	  [еЪw    Ы  [еЪ5    4  [еЪ    ю  [еЪ╘  ╣    [еЪЫ  ч  0  [еЪв  7  8  [еЪ╖  ╝  ╖  [еЪ  ~  5  [еЪw  +  ш  [еЪ╗  В  Ь  [еЪ~  K  |  [еЪ~    ╥  [еЪп      [еЪ  "  t  [еЪБ  ≥  ·  [еЪШ  я  Э  [еЪ╦  ╨  ┌  [еЪ(  +  ш  [еЪЭ     З  [еЪ4  ╖    [еЪ.	  &	  $	  [еЪ╚  З  Ь  [еЪщ  ч  ч  [еЪч  щ  ч  [еЪ  "  u  [еЪ©  ю    [еЪ  t    [еЪ  г  д  [еЪ    а  [еЪ·  ≈  Р  [еЪs  m  n  [еЪm  г  s  [еЪS  K  ┌  [еЪБ  7  ч  [еЪя  и  Э  [еЪ╟  ╣  ╘  [еЪ    ╬  [еЪ{  ╥    [еЪo  Х  j  [еЪi  ъ  Х  [еЪj  Ю  Х  [еЪХ  Ю  ъ  [еЪm  o  j  [еЪ$	  &	  i  [еЪj  h  m  [еЪm  h  h  [еЪ&	  .	  &	  [еЪ$	  o  i  [еЪ$	  o  m  [еЪj  $	  m  [еЪЭ  Щ     [еЪШ  ъ  /  [еЪ0  щ  ч  [еЪ   Ы  0  [еЪЮ  щ  Ю  [еЪщ  ч  Ю  [еЪ/  0  Ю  [еЪ0  щ  Ю  [еЪШ  Щ  Э  [еЪ   /  0  [еЪ-  и  З  [еЪ/  Ш  Щ  [еЪЗ  Ы     [еЪо  и  я  [еЪи  г  -  [еЪо  я  й  [еЪs  г  и  [еЪп  л  ф  [еЪm  n  s  [еЪЩ  /     [еЪШ  Ш  Щ  [еЪp  s  о  [еЪs  и  о  [еЪn  p  s  [еЪ╣    >  [еЪ╟  ╝  ╣  [еЪ>  ╣    [еЪ╝  ╖  ╙  [еЪ  ╖  ╝  [еЪ╘  ╘  ╟  [еЪ╢  ╘  ╟  [еЪ╙  ╢  ╟  [еЪ7  5  8  [еЪ7  >  5  [еЪ6  >  7  [еЪ  >    [еЪ─  ш  w  [еЪv  в  4  [еЪу  6  7  [еЪy  у  ─  [еЪв  у  7  [еЪy  6  у  [еЪ─  w  x  [еЪз  (  ш  [еЪ(  +  ┘  [еЪ~  +  ь  [еЪЬ  ╡  З  [еЪ+  ┘  ~  [еЪ┌  (  ,  [еЪ8  ┘    [еЪ8  Б  7  [еЪ┌  ┘  8  [еЪ▓  5  6  [еЪ(  ┌  ┘  [еЪ┌  8  7  [еЪ─  x  в  [еЪw  ь  v  [еЪx  в  v  [еЪw  x  v  [еЪ8  5  4  [еЪв  4  8  [еЪ,  з  (  [еЪy  з  ─  [еЪ╙  ╘  Ы  [еЪВ    ╡  [еЪR  J  ┐  [еЪ╪  ╨    [еЪ}  w    [еЪ  ~  }  [еЪK  S  ┐  [еЪ{  ╦  K  [еЪK  ~  {  [еЪ8    6  [еЪ≤  Б  ч  [еЪ≥  Б  ≤  [еЪЗ  ╚  ╘  [еЪР  ╗  ╚  [еЪ╚  ≥  Р  [еЪo  о  й  [еЪ  е  ф  [еЪr  ц    [еЪ!     o  [еЪп    л  [еЪп  г    [еЪ  п    [еЪt  s  "  [еЪ"  p     [еЪ╬  X  R  [еЪ  ╬  X  [еЪ╬  S    [еЪ  ╬  ©  [еЪю      [еЪ  г  е  [еЪи  З  Э  [еЪЗ  -  Ы  [еЪ"  n  p  [еЪ"  s  n  [еЪ6  ·  ▓  [еЪБ  8  6  [еЪ┘  ~    [еЪ  6  5  [еЪ╥  ╡    [еЪ  З  ╡  [еЪ©    ╪  [еЪ┌    S  [еЪ╡  ╥    [еЪ    ╥  [еЪK  ╦  ┌  [еЪ┌    ╨  [еЪR  S  ┐  [еЪ|  ┐  J  [еЪ|  ┐  K  [еЪ}  |  J  [еЪ╥  {  ~  [еЪ  ╦  {  [еЪ·  6  Б  [еЪ▓  ≈  ·  [еЪ╚  ╗  Ь  [еЪ╡  Ь  В  [еЪЗ  ╘  Ы  [еЪС  ╘  ╙  [еЪС  ╘  ╚  [еЪ≤  С  ╙  [еЪ·  Р  ≥  [еЪ≈  ╗  Р  [еЪ    r  [еЪ  д  г  [еЪ    п  [еЪr      [еЪ  t    [еЪ  t  s  [еЪp     o  [еЪu     !  [еЪu     "  [еЪ  u  !  [еЪ  ©  ╬  [еЪ╪    ©  [еЪ©  ю    [еЪ    ю  [еЪ    д  [еЪ  д  ц  [еЪг  е  ф  [еЪа  е    [еЪа  е    [еЪ  а    [еЪУ  D  Ш  [еЪ      [еЪ  v  4  [еЪК    4  [еЪC  В  У  [еЪ╨  ╣  ╧  [еЪC  └  У  [еЪК  4  И  [еЪЙ  9  К  [еЪ╧  В  У  [еЪЧ  Б  ╔  [еЪф  v  q  [еЪ─  z  └  [еЪk  Б  n  [еЪn  h  ч  [еЪz    └  [еЪ9  z    [еЪ╧  У  ╤  [еЪ╤  У  Ш  [еЪ╣  В  ╧  [еЪУ  └  D  [еЪ└  ~  v  [еЪ└  D  ─  [еЪ╧  ╤  ╩  [еЪs      [еЪ╨      [еЪ      [еЪs    ф  [еЪ╔  ч  Ы  [еЪф  ╔  Ы  [еЪm  s  ф  [еЪБ  ╔  n  [еЪ  ╧    [еЪv      [еЪф  Ы  m  [еЪ  ╨  ╧  [еЪ  └  v  [еЪ  ╧  ╩  [еЪq  Ч  ф  [еЪф    v  [еЪ9    К  [еЪф  Ч  ╔  [еЪ╔  n  ч  [еЪ~  C  └  [еЪd    f  [еЪТ
+  Щ
+  В
+  [еЪк
+  ▓
+  \  [еЪл  ╤  ╣  [еЪ|
+  ─
+  Б	  [еЪ╠
+  R  Щ
+  [еЪЙ	  Л	  .
+  [еЪ'  В  Ж  [еЪ	  !	  	  [еЪ!	  /
+  	  [еЪъ      [еЪ'     Т  [еЪ)	  ,	  4
+  [еЪл  0    [еЪ	  	  !	  [еЪ!	  /
+  3
+  [еЪ╠
+  ─
+  ┘
+  [еЪ3
+  2
+  /
+  [еЪ╕  ÷  д  [еЪ  f  	  [еЪ╕  и  ё  [еЪИ	  ▓
+  √
+  [еЪк
+  \    [еЪ─
+  6
+  Б	  [еЪй
+  л
+  
+  [еЪ.
+  	  	  [еЪ╓  е  ╒  [еЪБ	  4
+  ш	  [еЪ	  	  	  [еЪ°  ÷  д  [еЪQ  ┘
+  ╣
+  [еЪР  В  '  [еЪЮ	  *	  '	  [еЪ  М  !  [еЪш	  |
+  Б	  [еЪ√
+  ▓
+  ▓
+  [еЪ°  ©  ÷  [еЪ╥    ┤  [еЪ%  С  $  [еЪм
+  √
+  ⌠
+  [еЪ'  Ж  Ь  [еЪ	    щ  [еЪ  Е    [еЪл  ╧  ╣  [еЪч  ъ    [еЪ    ч  [еЪм
+  л
+  к
+  [еЪ  к
+  л
+  [еЪ√
+  ▓
+  к
+  [еЪ	  ╚  	  [еЪд  ё  ╕  [еЪ.
+  	  3
+  [еЪф  ÷  ²  [еЪ  ч  ъ  [еЪй  ╒  ╕  [еЪ╕  й  и  [еЪй    ж  [еЪ  	  щ  [еЪ    ъ  [еЪк
+      [еЪъ      [еЪ╒  ╕  ф  [еЪъ  щ    [еЪ5
+  5
+  6
+  [еЪ┌
+  6
+  5
+  [еЪ    Х  [еЪё  с  и  [еЪ  э  щ  [еЪЬ  $  '  [еЪМ  !     [еЪЖ  /  ,  [еЪ'  $  Т  [еЪШ  Э  9  [еЪЬ  Ш  /  [еЪ╤    л  [еЪТ  Л  !  [еЪ╧  ┤  л  [еЪ  6  0  [еЪ╣  ╤  ⌠  [еЪл  ┤    [еЪТ
+  ╫  ╩  [еЪ╧  ∙  ≤  [еЪR  Щ
+  З
+  [еЪ  7  9  [еЪЩ
+  Q  T  [еЪ╩  З
+  Т
+  [еЪ╠
+  Щ
+  Q  [еЪT  В
+  Щ
+  [еЪ2
+  .
+  3
+  [еЪВ
+  E  ╪  [еЪ	  !	  	  [еЪэ  	  	  [еЪ	  ╚  ╡  [еЪэ  ╡  	  [еЪ	  	  	  [еЪ	  	  	  [еЪ	  ╞  ╚  [еЪ	  	  ╚  [еЪ⌠
+  Л	  Й	  [еЪ▓
+  /
+  И	  [еЪЛ	  	  .
+  [еЪ.
+  2
+  Й	  [еЪ!	  3
+  	  [еЪ3
+  /
+  /
+  [еЪИ	  2
+  Й	  [еЪЙ	  √
+  ⌠
+  [еЪ4
+  6
+  Б	  [еЪ)	  4
+  5
+  [еЪ4
+  6
+  5
+  [еЪ4
+  ,	  '	  [еЪЮ	  ш	  '	  [еЪ|
+  ш	  ┐
+  [еЪш	  '	  4
+  [еЪ┐
+  Ю	  ш	  [еЪЙ	  И	  √
+  [еЪ|
+  ┘
+  ─
+  [еЪ─
+  ╠
+  ┌
+  [еЪ6
+  ┌
+  ─
+  [еЪ┌
+  R  ╠
+  [еЪ┌
+  ┌
+  ─
+  [еЪ┘
+  Q  ╠
+  [еЪ┘
+  ╣
+  |
+  [еЪT  Q  S  [еЪШ
+  T  S  [еЪE  В
+  Т
+  [еЪШ
+  В
+  T  [еЪ╪  В
+  Ш
+  [еЪ╣
+  |
+  ┐
+  [еЪQ  S  ╣
+  [еЪ2
+  /
+  И	  [еЪ	  °  ©  [еЪ  f    [еЪ\    	  [еЪ²  c  d  [еЪл
+  
+    [еЪd  c    [еЪc  
+    [еЪм
+  й
+  ⌠
+  [еЪм
+  л
+  й
+  [еЪ√
+  к
+  м
+  [еЪf  ©  d  [еЪ÷  ²  d  [еЪ©  d  ÷  [еЪf  	  ©  [еЪи  ж  с  [еЪй  и  ж  [еЪ
+  т    [еЪй  ╓  ╒  [еЪй    т  [еЪ╓  т  й  [еЪф  е  ²  [еЪ╒  е  ф  [еЪ÷  ╕  ф  [еЪ    ж  [еЪэ    щ  [еЪ    щ  [еЪс  	    [еЪж  с    [еЪ  Е  Х  [еЪ    Х  [еЪЛ  Ф    [еЪч      [еЪ    Ф  [еЪ  Ф    [еЪ  
+  э  [еЪч      [еЪщ  ъ    [еЪ    э  [еЪэ  
+    [еЪМ    Х  [еЪ!    Л  [еЪХ  Е  М  [еЪЕ  ?  М  [еЪ   М  ?  [еЪ?  Р     [еЪ'     Р  [еЪ/  ,  Э  [еЪЬ  Ж  /  [еЪ9  7  Ш  [еЪ$  Ь  %  [еЪ-  7  Ш  [еЪ%  -  Ь  [еЪТ  С  Л  [еЪ$  Т  С  [еЪ!     Т  [еЪЬ  Ш  -  [еЪЭ  /  Ш  [еЪ,  В  Ж  [еЪ,  6  Э  [еЪЭ  6  0  [еЪл  0    [еЪ0  Э  9  [еЪ╣  ⌠  ≤  [еЪ╧  ╣  ≤  [еЪE  ╪  ∙  [еЪ╧  ╥  ┤  [еЪ■  ╪  ∙  [еЪ╥  ■  ╧  [еЪ    7  [еЪ┤      [еЪ9  0    [еЪ∙  ■  ╧  [еЪ≤  ╫  ∙  [еЪ∙  ╫  E  [еЪ╩  ⌠  ╫  [еЪ≤  ⌠  ╫  [еЪЩ
+  Т
+  З
+  [еЪE  ╫  Т
+  [еЪ+	  ├
+  -	  [еЪ*	  ├
+  +	  [еЪ*  4  .  [еЪ#  *  .  [еЪШ
+  ╪  Э
+  [еЪS  Ш
+  Э
+  [еЪ├
+  P  ╡
+  [еЪ├
+  ╡
+  ~
+  [еЪя    у  [еЪ║  я  у  [еЪ├
+  -	  ~
+  [еЪ.  7  -  [еЪ.  -  %  [еЪ`     e  [еЪ  `  e  [еЪ╦  .  7  [еЪГ  Л  Ф  [еЪГ  Ф    [еЪ.  Г  %  [еЪ1
+  	  Х	  [еЪ1
+  Х	  ░
+  [еЪЭ
+  ├
+  P  [еЪ▒  ╨  ╦  [еЪ╢  ▒  ╦  [еЪ╦  ╪  ■  [еЪ╦  ■  ╥  [еЪ	  ╞  ╠  [еЪ	  	  ╠  [еЪЭ
+  ╨  Ь
+  [еЪЭ
+  Ь
+  P  [еЪ-	  ~
+  щ	  [еЪ-	  щ	  щ	  [еЪ-	  щ	  &	  [еЪГ  %  С  [еЪГ  С  Л  [еЪЪ  ╢  ╦  [еЪ4  Ъ  ╦  [еЪЮ	  ┐
+  ├
+  [еЪ*	  Ю	  ├
+  [еЪ╨  ╦  Э
+  [еЪS  ├
+  Э
+  [еЪ╦  4  .  [еЪП  #  .  [еЪЙ  П  .  [еЪ.  Й  Г  [еЪЦ  Г    [еЪЙ  Г  Ц  [еЪу  
+  т  [еЪу  т  ╓  [еЪу  Г    [еЪ╦  ╥    [еЪ7  ╦    [еЪу  e  ²  [еЪЛ	  	  1
+  [еЪ⌠
+  Л	  1
+  [еЪ⌠
+  e  1
+  [еЪe  ²  c  [еЪe  c  
+  [еЪ╠  1
+  	  [еЪй
+  ⌠
+  e  [еЪ
+  й
+  e  [еЪб  ║  у  [еЪ   б  у  [еЪ    Г  [еЪ    Г  [еЪ╣
+  S  ├
+  [еЪ┐
+  ╣
+  ├
+  [еЪГ    у  [еЪ	  ╠  1
+  [еЪЁ  	  	  [еЪЁ  ╘  	  [еЪЁ  	  	  [еЪЁ  	  	  [еЪ╠  Ё  	  [еЪe  1
+  ░
+  [еЪЭ
+  ╦  ╪  [еЪe  ░
+  г
+  [еЪe  г
+    [еЪ   у  e  [еЪу  ╓  е  [еЪ²  у  е  [еЪу      [еЪу    
+  [еЪ   5  3  [еЪ╨  Ь
+  @  [еЪ	  	  	  [еЪ╨  √  ▒  [еЪ}
+  ┤
+  ч	  [еЪ{
+  ╟
+  │
+  [еЪФ	  Х	  -
+  [еЪ&  +  *  [еЪ	  	  	  [еЪД  Ц    [еЪ  Я  П  [еЪъ	  j  А	  [еЪ3     Ъ  [еЪ 	  	  	  [еЪ╖  ╙  	  [еЪЁ
+  ╥
+  U  [еЪ-
+  -
+  	  [еЪь  ╗    [еЪ-
+  	   	  [еЪЖ
+  У
+  B  [еЪ╔  р  я  [еЪХ	  	  -
+  [еЪ`      [еЪ╡
+  ~
+  ┤
+  [еЪ≥  ц  б  [еЪ  г
+  н
+  [еЪ    з  [еЪч	  Ц	  ъ	  [еЪ	  ╙  ╢  [еЪ*  #  &  [еЪч	  {
+  }
+  [еЪ    ы  [еЪщ	  щ	  Ц	  [еЪЕ	  Г	  ▐
+  [еЪ│
+  ╥
+  
+  [еЪh  ъ	  э	  [еЪ▐  ░  A  [еЪЖ
+  B  Ы
+  [еЪ1  )  Ы  [еЪЯ  К    [еЪЯ  &  (  [еЪ╔  ц  б  [еЪц  ⌡  а  [еЪ┬     ┴  [еЪд
+  ф
+    [еЪИ  А    [еЪB  Ы
+  @  [еЪ■
+  х
+  е
+  [еЪэ	  ч	  {
+  [еЪ	  	  ╢  [еЪ5  +  Ы  [еЪЕ	  Е	  Д	  [еЪ	  Е	  Д	  [еЪц  ⌡  ≥  [еЪЮ  ы    [еЪа  ю  ╖  [еЪ  р    [еЪ    з  [еЪ2  ┴  ╟  [еЪ]  ^    [еЪ    ]  [еЪД  К    [еЪ┬  ▒  ╢  [еЪх
+  н
+  ф
+  [еЪЦ	  ┤
+  ч	  [еЪ      [еЪ  (  О  [еЪ 	  	  	  [еЪ	  	   	  [еЪ	  -
+   	  [еЪ	  -
+  	  [еЪ	  	  	  [еЪ	  	  	  [еЪ	  	  	  [еЪ╖  	  	  [еЪ	  ╢  ╘  [еЪ	  	  	  [еЪ	  	  	  [еЪ	  	  ╙  [еЪ■
+  ▒
+  х
+  [еЪ░
+  Х	  Ф	  [еЪД	  Е	  Г	  [еЪГ	  ■
+  ▐
+  [еЪ-
+  -
+  Д	  [еЪ	  -
+  Д	  [еЪ-
+  Ф	  Г	  [еЪД	  -
+  Г	  [еЪг
+  ▒
+  х
+  [еЪФ	  Г	  ■
+  [еЪе
+  ф
+  д
+  [еЪФ	  ░
+  ▒
+  [еЪ▐
+  ■
+  е
+  [еЪн
+    ф
+  [еЪн
+  г
+  х
+  [еЪ  н
+    [еЪф
+      [еЪa    `  [еЪ  ]  ^  [еЪФ	  ■
+  ▒
+  [еЪ░
+  г
+  ▒
+  [еЪ  a    [еЪ  ф
+    [еЪ  a  ^  [еЪЦ	  щ	  ┤
+  [еЪЦ	  ъ	  А	  [еЪЦ	  щ	  А	  [еЪj  h  ъ	  [еЪэ	  ъ	  ч	  [еЪщ	  &	  А	  [еЪА	  j  .	  [еЪА	  .	  &	  [еЪ}
+  │
+  
+  [еЪ┤
+  }
+  
+  [еЪ╡
+  ┤
+  
+  [еЪ┤
+  ~
+  щ	  [еЪЫ
+  U  Ж
+  [еЪ╟
+  N  ╥
+  [еЪЁ
+  ╡
+  
+  [еЪЁ
+  P  U  [еЪ
+  ╥
+  Ё
+  [еЪP  ╡
+  Ё
+  [еЪO  U  Ж
+  [еЪU  Ь
+  Ы
+  [еЪ╬  @  B  [еЪУ
+  A  B  [еЪЬ
+  P  U  [еЪ╬  A  B  [еЪ@  √  ╨  [еЪ▓  ╬  ░  [еЪ▓  ┬  ▒  [еЪ▓  √  ╬  [еЪ├  ▐  Ё  [еЪ╬  √  @  [еЪ√  ▓  ▒  [еЪ╥
+  O  U  [еЪУ
+  N  Ж
+  [еЪ╥
+  N  O  [еЪN  Ж
+  O  [еЪ{
+  │
+  }
+  [еЪ╟
+  │
+  ╥
+  [еЪ@  Ь
+  Ы
+  [еЪЫ  У  +  [еЪ*  З  4  [еЪ)  "  У  [еЪЙ  Ц    [еЪ  А  Б  [еЪ#  &  П  [еЪ&  Я  П  [еЪК  Д    [еЪИ  К    [еЪК  Я    [еЪЁ  ▓  ░  [еЪЪ  ┬  ╢  [еЪ   ┬  Ъ  [еЪ+  5  З  [еЪ1  5  2  [еЪ5     2  [еЪя  ╔  ║  [еЪя      [еЪг  ╗  х  [еЪ`  _     [еЪ╔  б  ║  [еЪ╔  р  х  [еЪц  ╔  ╖  [еЪ  ⌡  а  [еЪa  ⌡  _  [еЪЦ      [еЪ      [еЪ  Д  Б  [еЪ    Ю  [еЪь    ы  [еЪ  р    [еЪе
+  х
+  ф
+  [еЪ▐
+  д
+  е
+  [еЪa  ^  ⌡  [еЪ^  ⌡    [еЪЁ  ┴  ├  [еЪ┬  ▓  Ё  [еЪA  ░  ╬  [еЪЁ  ▐  ░  [еЪ(  У  "  [еЪ&  +  У  [еЪЮ  Б    [еЪ  Б  Д  [еЪУ  (  &  [еЪ"  О  (  [еЪ  К  И  [еЪ  Б  А  [еЪ  Ц  Д  [еЪ    Й  [еЪ    К  [еЪП    Й  [еЪ(    Я  [еЪО  И    [еЪ┴  Ё  ┬  [еЪ╟  ┴  ├  [еЪЫ  5  1  [еЪУ  Ы  )  [еЪ+  З  *  [еЪ3  З  4  [еЪ3  З  5  [еЪЪ  3  4  [еЪ┴  2     [еЪ1  2  ╟  [еЪ╖  х  г  [еЪх    р  [еЪх  ╖  ╔  [еЪг  ю  ╖  [еЪ╖  а  ц  [еЪ  ю  а  [еЪa  _  `  [еЪ≥  _     [еЪ≥  _  ⌡  [еЪб  ≥     [еЪБ  Ю    [еЪ    Ю  [еЪЮ  ы    [еЪ  ь  ы  [еЪ    ь  [еЪх    ╗  [еЪр    я  [еЪз      [еЪз      [еЪ  з    [еЪИ
+  ▐  A  [еЪУ
+  И
+  A  [еЪИ
+  ├  ▐  [еЪ╟  И
+  ├  [еЪУ
+  A  У
+  [еЪN  У
+  У
+  [еЪ╟
+  У
+  N  [еЪ╟
+  N  ╟
+  [еЪ{
+  ╟
+  ╟
+  [еЪh  {
+  ╟
+  [еЪh  {
+  э	  [еЪh  h  э	  [еЪh  h  h  [еЪч  h  h  [еЪч  ч  h  [еЪч  ч  ч  [еЪч  ч  ч  [еЪЫ  ч  ч  [еЪЫ  Ы  ч  [еЪ-  Ы  Ы  [еЪг  Ы  -  [еЪm  г  Ы  [еЪm  m  г  [еЪs  m  m  [еЪs  m  s  [еЪ  s  s  [еЪr  s    [еЪ  r  s  [еЪц    r  [еЪ    ц  [еЪ      [еЪ      [еЪ╪      [еЪ╨    ╪  [еЪ╨  ╨  ╪  [еЪ╦  ╨  ╨  [еЪ╣  ╨  ╦  [еЪ  ╣  ╦  [еЪ  ╣    [еЪВ  ╣    [еЪВ    В  [еЪ╗  В  В  [еЪC  В  ╗  [еЪC  ╗  ≈  [еЪ▓  C  ≈  [еЪ~  ▓  C  [еЪ~  ▓  5  [еЪ~  ~  5  [еЪ~  ~  v  [еЪv  ~  ь  [еЪь  v  v  [еЪv  v  4  [еЪ4  v  4  [еЪ4  4  4  [еЪ4  4  И  [еЪИ  4  ╖  [еЪ╖  ╖  И  [еЪ╖  И  	  [еЪ	  И  	  [еЪИ  	  p  [еЪp  	  Е	  [еЪp  Е	  Е	  [еЪ▐
+  p  Е	  [еЪp  д
+  ▐
+  [еЪд
+  ▐
+  д
+  [еЪ  д
+  д
+  [еЪд
+      [еЪ  ]    [еЪ    ]  [еЪ    ю  [еЪ  ю  ю  [еЪг  ю  ю  [еЪ╗  ю  г  [еЪг  ╗  ╗  [еЪь  ╗  ╗  [еЪ  ╗  ь  [еЪь      [еЪ      [еЪ  А    [еЪ  А  А  [еЪА  А  И  [еЪО  А  И  [еЪИ  О  О  [еЪО  О  "  [еЪ)  О  "  [еЪ)  ╟  1  [еЪ)  )  1  [еЪ"  )  )  [еЪ╟  ╟  ├  [еЪ╟  1  ╟  [еЪ8  ╠  ,  [еЪ    ╘  [еЪ╤
+  ╟
+  У
+  [еЪn  ╤
+  ╟
+  [еЪ)  ╟  8  [еЪА  О  Н  [еЪ╟  8  D  [еЪn  h  ╟
+  [еЪ╢
+  k  n  [еЪ)  Н  8  [еЪи
+  q  М	  [еЪ  д  	  [еЪЙ
+  З
+  D  [еЪЙ  q  К  [еЪК  И  p  [еЪЗ
+  ╤
+  D  [еЪ╢
+  З
+  ╤
+  [еЪН  8  Р  [еЪР  8  ,  [еЪ)  О  Н  [еЪ8  D  ╠  [еЪD  У
+  И
+  [еЪD  ╠  Й
+  [еЪН  Р  Е  [еЪю  ╗    [еЪА      [еЪ╗      [еЪ  ю    [еЪМ	  д
+  p  [еЪ  М	  д
+  [еЪ  ю    [еЪq  К  М	  [еЪ  Н    [еЪд    ╘  [еЪ  д
+    [еЪА    Н  [еЪ╤
+  D  У
+  [еЪ  Н  Е  [еЪ	  и
+    [еЪ    д  [еЪ╢
+  ╤
+  n  [еЪ  и
+  М	  [еЪК  М	  p  [еЪ╟  И
+  D  [еЪq  |  л  [еЪq  л  Ч  [еЪq  #  |  [еЪv  #  q  [еЪЧ  л  Ч  [еЪЧ  3  Ч  [еЪЧ  3  Б  [еЪ3  Б  Б  [еЪБ  ╥  Б  [еЪБ  ╥  k  [еЪ╥  )	  k  [еЪ)	  )	  k  [еЪ)	  )	  k  [еЪ)	  k  5
+  [еЪk  5
+  5
+  [еЪ┌
+  k  5
+  [еЪk  ╢
+  ┌
+  [еЪ╢
+  ┌
+  ┌
+  [еЪ╢
+  ┌
+  R  [еЪ╢
+  З
+  R  [еЪЗ
+  R  З
+  [еЪ╩  З
+  З
+  [еЪЗ
+  ╩  Й
+  [еЪ⌠  Й
+  ╩  [еЪ╤  Й
+  ⌠  [еЪ╠  Й
+  ╤  [еЪ  ╠  ╤  [еЪ6  ╠    [еЪ,  ╠  6  [еЪ,  ,  6  [еЪВ  ,  ,  [еЪР  В  ,  [еЪР  Р  В  [еЪ?  Р  Р  [еЪЕ  ?  Р  [еЪЕ  Е  ?  [еЪ  Е  Е  [еЪ  Е    [еЪ      [еЪ	      [еЪ╘    	  [еЪс  ╘  	  [еЪё  ╘  с  [еЪд  ё  ╘  [еЪд  д  ё  [еЪ°  д  д  [еЪ°  	  д  [еЪ	  	  °  [еЪ\  	  	  [еЪи
+  	  \  [еЪи
+  \  ▓
+  [еЪ▓
+  и
+  ▓
+  [еЪq  и
+  ▓
+  [еЪq  ▓
+  /
+  [еЪ/
+  q  /
+  [еЪЙ  q  /
+  [еЪЙ  /
+  	  [еЪЙ  	  	  [еЪЙ  э  	  [еЪ╜  Й  э  [еЪ	  Й  ╜  [еЪ	  Й  	  [еЪ9  	  Й  [еЪ9  9  	  [еЪж  9  9  [еЪж  z  9  [еЪ}  z  ж  [еЪ-  z  }  [еЪ─  -  z  [еЪ-  ─  ─  [еЪ─  ─  Ю  [еЪЮ  ─  D  [еЪЮ     D  [еЪD     ╛  [еЪD  ╛  Ш  [еЪ╛  k  Ш  [еЪШ  k  x  [еЪШ  x  ╤  [еЪx    ╤  [еЪ╤    M  [еЪ╤  ╩  M  [еЪM  T  ╩  [еЪ╩  T  Y  [еЪ╩    Y  [еЪY  ┬    [еЪ  ┬    [еЪ      [еЪ  н  v  [еЪ    н  [еЪ      [еЪv  v  #  [еЪv  н  v  [еЪА  °  ч  [еЪЮ  °  А  [еЪЁ  ╦  ╤  [еЪ;  ╒  j  [еЪ°  ⌠  ═  [еЪo    Ю  [еЪ°  ч  ⌠  [еЪ╤  ╢  ╩  [еЪ3  ▄  h  [еЪ╤  Д  ╢  [еЪ√     ▀  [еЪ╤  √  ╩  [еЪМ  >  ░  [еЪj  °  ═  [еЪБ  8  Д  [еЪД  Ц  ;  [еЪ  ▒    [еЪ    ░  [еЪ    ░  [еЪj  ═  8  [еЪч  ⌠  щ  [еЪ╩  √  ▀  [еЪБ  Ё  Д  [еЪЮ  ≤  °  [еЪ8  Д  j  [еЪ╒  °  j  [еЪД  Ё  ╤  [еЪ╦  ┴  ╤  [еЪ╤  ┴  √  [еЪ≥  √  ┴  [еЪЮ    p  [еЪ√  Ю     [еЪ╢  Д  Ц  [еЪЮ  h  6  [еЪ▒  @  М  [еЪ@  h  М  [еЪh  ▓  6  [еЪМ    ░  [еЪ@  ▓  h  [еЪ3    Ю  [еЪ≥  o  √  [еЪ≤  ╒  °  [еЪ√  o  Ю  [еЪ▒  М    [еЪМ  h  >  [еЪj  Д  ;  [еЪ>  h  ▄  [еЪЮ  3  h  [еЪЮ  6    [еЪ   Ю  p  [еЪГ  П    [еЪi  ═  Л  [еЪE  F  Е  [еЪm  p    [еЪ═  ÷  ∙  [еЪ■  ■  ═  [еЪB  Ф  Ц  [еЪ╣  %  ╫  [еЪ  C  D  [еЪ▐  ▓  м  [еЪ┐  ├  а  [еЪ└  ▀  ├  [еЪЕ  Г    [еЪД  D  C  [еЪE  F  H  [еЪФ  :  ?  [еЪФ  Ц  Ф  [еЪв      [еЪФ  F  Д  [еЪК  Н  Г  [еЪ      [еЪЦ  Ф  Ц  [еЪg  в  ▌  [еЪ═  ⌠  ÷  [еЪ,  .  ^  [еЪщ  ▄  █  [еЪm  р  Э  [еЪ∙  ┐  └  [еЪ    F  [еЪ╣  ╫  ╦  [еЪ∙  ■  ═  [еЪр  з     [еЪ⌠  ┌  ┐  [еЪЕ  ?  ┴  [еЪ∙  I  ё  [еЪ┘  ┘  └  [еЪG  l  o  [еЪp  >  l  [еЪН  $  С  [еЪ├  █  а  [еЪ├  ╫  ╥  [еЪ  ,  .  [еЪ.  d  f  [еЪГ      [еЪ░  1  ▒  [еЪ┼  ▒  г  [еЪ>  p  m  [еЪ┼  ▒  ░  [еЪ┘  ∙  ■  [еЪ      [еЪП  %  С  [еЪЕ  Е  Л  [еЪЕ  Е  Л  [еЪ.  d  ^  [еЪ≤     я  [еЪ\  f  -  [еЪз      [еЪр  з  Э  [еЪ     Ф  [еЪж  э  _  [еЪ░  ж  т  [еЪ▓  █  г  [еЪm      [еЪ█  ▒  ┼  [еЪ┐  ▀  ┌  [еЪм  m  р  [еЪц  ╥  ┘  [еЪЦ  Ф  Д  [еЪД  D  F  [еЪЦ  C  Д  [еЪF  Ф  Е  [еЪF  H  D  [еЪ      [еЪH  F  E  [еЪE  H  E  [еЪ      [еЪ  D    [еЪD  H    [еЪH  F    [еЪ┼  ░  ▐  [еЪЦ  ┤  B  [еЪЛ  Е  ?  [еЪ░  ┴  ?  [еЪФ  Ф  Л  [еЪЕ  Ф  Л  [еЪB  ?  Ф  [еЪЛ  Ф  ?  [еЪ┼  щ  ▐  [еЪ░  B  ?  [еЪ1  ▒  ▒  [еЪ┤  ▐  B  [еЪ▒  ┴  ░  [еЪ▌  ▒  █  [еЪ█  щ  ┼  [еЪ▄  ▌  █  [еЪ▒  т  ░  [еЪ      [еЪd  э  _  [еЪ▐  B  ░  [еЪ┤  щ  ▐  [еЪ▌  в  т  [еЪт  ▌  ▒  [еЪт  в  э  [еЪ┐  ÷  ⌠  [еЪ┐  ▀  └  [еЪ÷  ┐  ∙  [еЪ┘  ├  └  [еЪ┘  └  ∙  [еЪ┌  щ  ▀  [еЪ▀  ├  ъ  [еЪ▀  ъ  щ  [еЪ═  ■  I  [еЪ∙  ÷  ═  [еЪ÷  ÷  ∙  [еЪ÷  ⌠  ⌠  [еЪё  ║  К  [еЪF  ё  ║  [еЪ÷  ÷  ═  [еЪК  ╖  ё  [еЪ╖  ÷  ё  [еЪГ  Л  К  [еЪН  Ф  ║  [еЪi  >  Г  [еЪ═  ═  ÷  [еЪЛ  ╖  К  [еЪЛ  ═  ╖  [еЪi  Г  Л  [еЪ■  F  I  [еЪI  F  ё  [еЪ═  I  ∙  [еЪ8  i  >  [еЪ8  >  m  [еЪ?  Г  Н  [еЪС  ┌  %  [еЪ  G  o  [еЪ╣    М  [еЪ$  ╨  ┌  [еЪ▐  ┴  д  [еЪй  ▒  о  [еЪ╦  ╫  ┐  [еЪ╫  ┐  ├  [еЪ█  ▓  д  [еЪ┼  █  ц  [еЪ█  ├  ц  [еЪl  G  p  [еЪ    Е  [еЪ  Г  Е  [еЪ%  П  М  [еЪП     Н  [еЪП  Г     [еЪg  ▌  ▄  [еЪу      [еЪ    А  [еЪg  3  4  [еЪ    ,  [еЪ    А  [еЪ.    \  [еЪd  f  _  [еЪd  в  4  [еЪ▐  м  и  [еЪи  м  m  [еЪм  ▓  о  [еЪр  м  ≤  [еЪв  з     [еЪз      [еЪ▒  ▒  ┼  [еЪ1  ▒  ┴  [еЪэ  в  d  [еЪж  э  т  [еЪ?  l  :  [еЪГ  ?  >  [еЪ║  Н  К  [еЪ?  Н  Ф  [еЪё  ÷  ∙  [еЪ═  ÷  ╖  [еЪ?  l  >  [еЪo  l  :  [еЪ  G    [еЪ  p  G  [еЪ╥  ┌  ╨  [еЪ╫  %  ┌  [еЪ≤  о  й  [еЪг  о  ▓  [еЪ┌  ╥  ╫  [еЪ╨  ┘  ╥  [еЪг  █  ┼  [еЪг  о  ▒  [еЪд  ▓  ▐  [еЪа  д  ┴  [еЪа  д  █  [еЪ┴  ┐  а  [еЪ╥  ц  ├  [еЪ┘  ┼  ц  [еЪ    G  [еЪ  Ф    [еЪС  П  Н  [еЪ┌  С  $  [еЪМ  %  ╣  [еЪ  М    [еЪ  М  П  [еЪ  Е    [еЪ     Г  [еЪФ  Н     [еЪ\  А    [еЪА      [еЪА  \    [еЪ  -  \  [еЪ\  f  .  [еЪ_  -  f  [еЪ4  в  g  [еЪ^  4  3  [еЪ^  4  d  [еЪ3  ,  ^  [еЪо  ≤  м  [еЪй  я  ≤  [еЪ≤     р  [еЪя  в     [еЪ  з  в  [еЪА      [еЪ      [еЪ  Э  у  [еЪЭ    з  [еЪу  m  Э  [еЪ⌡  ▄  ┼  [еЪ⌡  ┼  ┘  [еЪ(  ╪  '  [еЪ(  '  О  [еЪЙ  ║  Ф  [еЪЙ  Ф  :  [еЪH  ≥  ⌡  [еЪ╔  H  ⌡  [еЪ	      [еЪ	    ы  [еЪ≥  ⌡  ▄  [еЪ$  ╨  (  [еЪН  $  (  [еЪш  ⌠  ы  [еЪш  ы  a  [еЪН  D  (  [еЪ▒  ∙  ┼  [еЪй  ∙  ▒  [еЪ∙  ╨  (  [еЪИ  █  К  [еЪИ  И  К  [еЪ╔  Й  ⌡  [еЪD    s  [еЪD  s  <  [еЪo    D  [еЪ:  o  D  [еЪL  Е  E  [еЪL  E  E  [еЪИ  ╔  Й  [еЪ<  И  Й  [еЪ┴  ┴  ▄  [еЪ≥  ┴  ▄  [еЪ┘  ┼  ∙  [еЪ╨  ┘  ∙  [еЪD  О  Й  [еЪD  Й    [еЪ⌡  ┘  ┘  [еЪ⌡  ┘  ■  [еЪD  Й  <  [еЪ⌡  Й  ║  [еЪ(  D  О  [еЪ(  ▄  ┤  [еЪ(  ┤  ╪  [еЪ∙  (  ▄  [еЪ∙  к  ■  [еЪ∙  ■  ▄  [еЪ    	  [еЪв    	  [еЪй  	  ∙  [еЪФ  Н  D  [еЪ  Ф  D  [еЪ_  	  ш  [еЪК  ┴  Е  [еЪК  Е  Е  [еЪК  Е  Е  [еЪш  К  ┴  [еЪж  ░  ш  [еЪ_  ж  ш  [еЪИ  К  L  [еЪш  ░  1  [еЪ┴  ш  1  [еЪ	  a  1  [еЪ	  1    [еЪ∙  ы  т  [еЪ∙  т  к  [еЪ⌡  ■  ■  [еЪ⌡  ■  F  [еЪ⌡  F  ║  [еЪ	  ∙  ы  [еЪК  L  Е  [еЪИ  L  N  [еЪK  И  N  [еЪK  K  N  [еЪ█  ш  К  [еЪ:  Й  D  [еЪ3  ⌠  ш  [еЪ█  3  ш  [еЪ	  ш  a  [еЪ-  _  	  [еЪ  -  	  [еЪя  в  	  [еЪй  я  	  [еЪ█  ┬  3  [еЪ²  ≈  √  [еЪr  =  ╟  [еЪE  Ц  ╓  [еЪ█  ▌  ▐  [еЪ┬  ├  ▄  [еЪО  Е  Ц  [еЪs      [еЪ┴  █  ▐  [еЪ╧  У  ╪  [еЪ'  У  #  [еЪХ  J  I  [еЪ9  <  q  [еЪ√  ²  E  [еЪI  M  Н  [еЪ▀  ├  │  [еЪQ  I  M  [еЪ  &  Р  [еЪ4  ├  ▀  [еЪ9  Д  Е  [еЪы  т  Ъ  [еЪЦ  Х  G  [еЪ5  c  b  [еЪI  P  J  [еЪш  ы  Ъ  [еЪН  Б  A  [еЪ≈  ┬  ▌  [еЪ▐  у  ■  [еЪ≈  ф  е  [еЪж    
+  [еЪ┬  ▌  ┬  [еЪШ  З  Ъ  [еЪ²  ╕  H  [еЪ  B  И  [еЪК      [еЪ=  9  Д  [еЪХ  К    [еЪ░  *  н  [еЪР  !  #  [еЪ╧  ┬  └  [еЪ≈  ░  н  [еЪq  C  n  [еЪЗ  л  к  [еЪ╬  ©  ┬  [еЪД  Е  О  [еЪP  O  J  [еЪ    К  [еЪO  Q  P  [еЪn  r  E  [еЪН  I  Г  [еЪ╧  )  └  [еЪ2  `  b  [еЪ▐  ┬  3  [еЪ7  c  5  [еЪ!  Т  Ж  [еЪР      [еЪ┤  ╪  ╧  [еЪж  ш  Ъ  [еЪЕ  9  И  [еЪР  &  !  [еЪ©  Ь  е  [еЪG  ≈  ┬  [еЪт  к  З  [еЪЙ      [еЪъ  ]  ч  [еЪш    
+  [еЪ
+  щ  ч  [еЪ
+    ч  [еЪ/    щ  [еЪ▀  ь  з  [еЪ▐  0  ┬  [еЪ2  ч  ]  [еЪc  1  /  [еЪн  Ш  *  [еЪЪ  т  З  [еЪн  З  Ш  [еЪ*  с  Ш  [еЪЩ  Ш  с  [еЪЩ  ж  ь  [еЪ⌠  ▐  3  [еЪз  ■  у  [еЪь  ■  2  [еЪ0  ┬  4  [еЪ⌠  ы  у  [еЪщ  ч  /  [еЪ  О  Л  [еЪa  1  c  [еЪ7  a  c  [еЪ7  ы  у  [еЪ7  з  у  [еЪ▀  5  з  [еЪз  ь  ■  [еЪы  a  7  [еЪ5  з  7  [еЪ`  ▀  5  [еЪc  /  b  [еЪ/  2  b  [еЪ`  b  5  [еЪч  2  /  [еЪ]  2  `  [еЪИ  9  <  [еЪ╔  Е  И  [еЪл  ≈  ■  [еЪф  ╬  ▄  [еЪq  9  =  [еЪО  Ц  Х  [еЪ=  Д  ╟  [еЪО  ╟  Х  [еЪО  Д  ╟  [еЪE  G  √  [еЪЕ  ╓  Ц  [еЪЦ  G  E  [еЪ=  q  n  [еЪ=  r  n  [еЪ  s  C  [еЪs  <  q  [еЪn  E  C  [еЪ  C  E  [еЪs  q  C  [еЪE      [еЪЙ    К  [еЪE  B    [еЪ  Х  К  [еЪТ  ╧  )  [еЪИ  Х    [еЪХ      [еЪ    Р  [еЪК  Й    [еЪР  Л    [еЪО  Й    [еЪЕ  ╓  ╔  [еЪE  ╕  ╓  [еЪ╕  ╓  ╔  [еЪ²  E  ╕  [еЪH  ╕  ╔  [еЪ≥  ²  H  [еЪ·  ²  ≥  [еЪ√  ≈  G  [еЪG  √  G  [еЪ▐  ⌠  у  [еЪ▐  ■  0  [еЪ■  0  2  [еЪ├  │  Б  [еЪ2  4  0  [еЪ2  4  ▀  [еЪ│  Х  Г  [еЪ4  ┬  ├  [еЪ├  Б  ▄  [еЪA  Н  И  [еЪ┬  ▄  █  [еЪ█  A  И  [еЪБ  A  ▄  [еЪ█  ▄  A  [еЪГ  Н  Б  [еЪИ  Н  И  [еЪ│  Б  Г  [еЪГ  Х  I  [еЪ▐  ┴  ·  [еЪ▐  ·  ≈  [еЪ▌  █  ┬  [еЪ▐  ▌  ≈  [еЪ┴  ▐  ┴  [еЪ·  ≈  ²  [еЪ≥  ┴  ·  [еЪP  J  J  [еЪK  K  Q  [еЪQ  P  I  [еЪO  K  Q  [еЪQ  M  K  [еЪK  И  M  [еЪН  M  И  [еЪr  E  B  [еЪ  И  Х  [еЪ#  !  Т  [еЪТ  У  #  [еЪ'  О  Л  [еЪ╧  У  Т  [еЪ╪  '  У  [еЪТ  )  Ж  [еЪ┤  ╧  ┬  [еЪ!  &  Ж  [еЪЖ  В  )  [еЪ)  В  └  [еЪЬ  ░  Ы  [еЪ┬  └  ©  [еЪЬ  В  └  [еЪ└  Ь  ©  [еЪ┤  ╬  ┬  [еЪф  ╬  ©  [еЪе  ф  ©  [еЪ▄  ┤  ╬  [еЪе  ░  ≈  [еЪ■  ▄  ф  [еЪл  н  ≈  [еЪ■  ≈  ф  [еЪЬ  ░  е  [еЪ░  Ы  *  [еЪЗ  н  л  [еЪк  ■  л  [еЪЩ  Ъ  ж  [еЪ  щ  
+  [еЪь    ъ  [еЪ
+  ж  ш  [еЪШ  Щ  Ъ  [еЪс  ь  Щ  [еЪж  ь    [еЪч    ъ  [еЪ    щ  [еЪ  ы  ш  [еЪ1    /  [еЪ#  Л  Р  [еЪЛ  '  #  [еЪ▓  6  ь  [еЪь  ▓  2  [еЪ▓  ▀  2  [еЪ▓  @  ▀  [еЪ6  ь  ▀  [еЪ`  6  ▀  [еЪ  6  `  [еЪ  `  ]  [еЪъ    ]  [еЪp    ъ  [еЪp  ъ  ь  [еЪс  p  ь  [еЪ   p  с  [еЪ   с  *  [еЪЫ     *  [еЪ▀     Ы  [еЪ▀  Ы  Ь  [еЪВ  ▀  Ь  [еЪ▀  ╩  В  [еЪ╩  В  Ж  [еЪ&  ╩  Ж  [еЪ╢  ╩  &  [еЪ╢  &    [еЪ╢    И  [еЪ╢  Ц  И  [еЪЦ  И  B  [еЪЦ  B  r  [еЪ;  Ц  r  [еЪ;  r  ╟  [еЪ;  ╟  Х  [еЪ;  Х  ╒  [еЪ╒  Х  G  [еЪ╒  G  G  [еЪ╒  G  ≤  [еЪ≤  G  ┬  [еЪ≤  ┬  ┬  [еЪ≤  Ю  ┬  [еЪЮ  ┬  B  [еЪ┬  B    [еЪ    B  [еЪB    =	  [еЪ  =	  З  [еЪЗ  ─  =	  [еЪ─  =	  F
+  [еЪ─  F
+  C	  [еЪC	   
+  F
+  [еЪF
+   
+  у
+  [еЪK
+   
+  у
+  [еЪK
+  ╒
+  у
+  [еЪу
+  ╒
+    [еЪ╚
+  ╒
+    [еЪ╚
+  Ю
+    [еЪl  Ю
+    [еЪl  Ю
+  l  [еЪl  s  l  [еЪ╛  s  l  [еЪ#  s  ╛  [еЪ#  *  ╛  [еЪ╛  ╞  *  [еЪ0  *  ╞  [еЪ0  8  ╞  [еЪ▀  8  ╞  [еЪ>  8  ▀  [еЪ>  П
+  ▀  [еЪ▀  П
+    [еЪ  П
+    [еЪ  ╧
+    [еЪ╧
+  [    [еЪ╫
+  ╧
+  [  [еЪ╫
+  °
+  [  [еЪя
+  °
+  [  [еЪ:
+  °
+  я
+  [еЪС	  я
+  :
+  [еЪ?
+  С	  я
+  [еЪ5	  С	  ?
+  [еЪ5	  ?
+  5	  [еЪ5	  u  ?
+  [еЪР  5	  u  [еЪJ  Р  u  [еЪJ    u  [еЪ▒    J  [еЪ@  ▒  Х  [еЪХ  ▒  J  [еЪ▒  J  J  [еЪ▀  @  │  [еЪ@  Х  │  [еЪ  y    [еЪ  y    [еЪЪ
+  ┼  С
+  [еЪ?
+  я
+  Ь	  [еЪy  r  =
+  [еЪi    h  [еЪy    r  [еЪС
+    ▀  [еЪт
+  B
+  
+  [еЪб
+  С
+    [еЪ╞  ╜  ╛  [еЪС
+  ╜  ▀  [еЪц  <	  ?  [еЪЬ	  y  =
+  [еЪZ  о
+  б
+  [еЪб
+  [  я
+  [еЪЮ  B  А  [еЪч  щ  ?  [еЪА  ч  ?  [еЪЬ	  =
+  о
+  [еЪ    r  [еЪ╜  ▀  ╞  [еЪZ  Ъ
+  б
+  [еЪu    y  [еЪо
+  б
+  Ь	  [еЪ?
+  y  Ь	  [еЪб
+  Ъ
+  С
+  [еЪ┼  ╝  С
+  [еЪС
+  ╝  ╜  [еЪ╜  ╝  ╚  [еЪh    l  [еЪh  ╜  ╛  [еЪб
+    [  [еЪh  
+  у
+  [еЪ=	  B  ц  [еЪ=	  
+  ц  [еЪ
+  F
+  у
+  [еЪА  ц  ?  [еЪ=	  F
+  
+  [еЪт
+    h  [еЪ╚  i  ╜  [еЪ?
+  u  y  [еЪ╜  i  h  [еЪB  А  ц  [еЪц  
+  <	  [еЪЬ	  б
+  я
+  [еЪ<	  
+  B
+  [еЪh  т
+  
+  [еЪh  у
+    [еЪ╛  h  l  [еЪ=
+  о
+  =
+  [еЪ2	  =
+  =
+  [еЪо
+  =
+  О	  [еЪ=
+  r  2	  [еЪr  =
+  r  [еЪЛ  r  r  [еЪr  Л  Л  [еЪ  r  Л  [еЪ    r  [еЪ░      [еЪ  ░    [еЪ  ░    [еЪ  ░  C  [еЪ░  Ц  C  [еЪ>  ░  Ц  [еЪЦ  >  Ц  [еЪ>  ┤  Ц  [еЪ▄  >  ┤  [еЪ┤  ▄  щ  [еЪ▄  ▄  щ  [еЪ3  ▄  ▄  [еЪ▄  3  g  [еЪ3  3  g  [еЪ  3  3  [еЪ3    ,  [еЪ    ,  [еЪo      [еЪ  o    [еЪo  у    [еЪ≥  у  o  [еЪу  ≥  m  [еЪ≥  и  m  [еЪ▐  и  ≥  [еЪ≥  ┴  ▐  [еЪ┴  ┴  ≥  [еЪ┐  ┴  ┴  [еЪ┴  ╦  ┐  [еЪ╦  ╦  ┴  [еЪ╣  ╦  ╦  [еЪ╦    ╣  [еЪЁ    ╦  [еЪЕ    Ё  [еЪЁ    Е  [еЪБ    Ё  [еЪБ  m    [еЪБ  8  m  [еЪ8  8  Б  [еЪ8  i  8  [еЪ8  ═  i  [еЪ8  ═  ═  [еЪ═  ═  ═  [еЪ═  ⌠  ═  [еЪ═  ⌠  ⌠  [еЪ⌠  ⌠  ⌠  [еЪ⌠  ┌  ⌠  [еЪ⌠  щ  ┌  [еЪ⌠  щ  щ  [еЪщ  щ  ?  [еЪ?  щ  ?  [еЪ?  ?  ?  [еЪ?  ?  ?  [еЪ?  ?    [еЪ  ?  <	  [еЪ  <	  ╧  [еЪ╧  <	  <	  [еЪ<	  B
+  <	  [еЪ<	  B
+  |  [еЪ|  B
+  B
+  [еЪт
+  B
+  B
+  [еЪB
+  т
+  Ш	  [еЪт
+  Ш	  т
+  [еЪ  т
+  т
+  [еЪт
+    в
+  [еЪ╘
+  в
+    [еЪ╘
+    i  [еЪ╘
+  i    [еЪi    i  [еЪ╚  i  i  [еЪi  ╚  p  [еЪ"  p  ╚  [еЪ&  "  ╚  [еЪ╚  .  &  [еЪ╚  ╝  .  [еЪ5  .  ╝  [еЪ╝  Б
+  5  [еЪБ
+  ╝  ┼  [еЪЛ
+  Б
+  ┼  [еЪ┼  Ъ
+  Л
+  [еЪЪ
+  ┼  Ъ
+  [еЪV  Ъ
+  Ъ
+  [еЪЪ
+  ┴
+  V  [еЪ┴
+  Ъ
+  Z  [еЪ≤
+  ┴
+  Z  [еЪZ  о
+  ≤
+  [еЪZ  о
+  о
+  [еЪО	  о
+  о
+  [еЪX  J     [еЪО	  =
+  В	  [еЪ      [еЪ█
+   
+  ≤
+  [еЪП  {  z  [еЪ3	  s  {  [еЪ╩  е  ╧  [еЪГ
+  О
+  Л
+  [еЪ?  ?  A  [еЪx  )  &  [еЪ┌  7  5  [еЪF  Т  Н  [еЪ   X  V  [еЪA    ?  [еЪ  ┘  ├  [еЪЯ	  п
+  <
+  [еЪ    ╩  [еЪk      [еЪ      [еЪЖ	  Ы	  Р	  [еЪ╜
+      [еЪ  ╩  ╧  [еЪC
+  Ъ	  Ш	  [еЪr  z  2	  [еЪ═
+  ы
+  в
+  [еЪB
+  |  ?	  [еЪ  r  p  [еЪН  П  М  [еЪ├  ъ  @  [еЪБ
+  Г
+  Л
+  [еЪП  s  {  [еЪr  n     [еЪЛ  Л  М  [еЪ~  ╨  ╪  [еЪ6	  4	  :	  [еЪН  О  E  [еЪ≈
+  ╪
+  ц
+  [еЪ 
+  с
+  ≈
+  [еЪH  Н
+  M  [еЪ7  2  ┌  [еЪ7  Г
+  4  [еЪы
+  в
+  ╜
+  [еЪы
+  ж
+  ╖
+  [еЪX  █
+  ┬
+  [еЪ  |  ?	  [еЪ/  (  ~  [еЪ 
+  ≤
+  с
+  [еЪ└  ┘    [еЪs  О  П  [еЪ@  ъ  ?  [еЪJ  О
+  M  [еЪб    ╨  [еЪ╨  б  ╨  [еЪы
+  ж
+  ═
+  [еЪ!     q  [еЪ╗
+  ╖
+  ь
+  [еЪn      [еЪr  n    [еЪ  ┬
+  W  [еЪ║
+  Ч	  
+  [еЪЧ	  D
+  Э	  [еЪ)  2  ~  [еЪ┴
+  █
+  ≤
+  [еЪ  ?	  E
+  [еЪТ  М  Л  [еЪr  p  x  [еЪ┘  4  6  [еЪ      [еЪ  ?    [еЪA      [еЪ      [еЪ  A    [еЪ?  ?  @  [еЪ      [еЪ    ┘  [еЪъ  щ  ?  [еЪ@  A  ?  [еЪ@  A    [еЪ├    @  [еЪ└    ┐  [еЪ<	  ╧  е  [еЪ╪  б  ╨  [еЪ└  ~  ╪  [еЪ╩  б    [еЪб      [еЪ╩  е  ╪  [еЪ╪  б  ╩  [еЪ┐    |  [еЪе  ╪  └  [еЪE
+  ┘  B	  [еЪе  <	  ┐  [еЪ┘  ~  └  [еЪ?	  C
+  E
+  [еЪD
+  B	  E
+  [еЪC
+  ?	  B
+  [еЪE
+  Э	  D
+  [еЪ╜
+  ╘
+    [еЪж
+  
+  ║
+  [еЪе  └  ┐  [еЪ<	  |  ┐  [еЪЪ	  Э	  C
+  [еЪE
+  C
+  Э	  [еЪЪ	  
+  Э	  [еЪz  М  Л  [еЪТ  Н  М  [еЪz  М  П  [еЪН  F  E  [еЪП  О  Н  [еЪЛ    Т  [еЪ    Т  [еЪF    Т  [еЪ:	  {  3	  [еЪz  {  4	  [еЪ1	  z  4	  [еЪЛ  z  r  [еЪ6	  >
+  Ж	  [еЪ>
+  3	  6	  [еЪz  1	  2	  [еЪ6	  Ж	  A
+  [еЪ1	  6	  A
+  [еЪЖ	  Р	  В	  [еЪ>
+  Ы	  Я	  [еЪР	  О	  с
+  [еЪ2	  =
+  1	  [еЪA
+  Ж	  В	  [еЪA
+  В	  =
+  [еЪР	  В	  О	  [еЪ3	  :	  3	  [еЪ6	  :	  3	  [еЪ:	  4	  {  [еЪс
+  О	  о
+  [еЪ≤
+  с
+  о
+  [еЪЫ	  <
+  Р	  [еЪM  ?  О
+  [еЪ╪
+  ▀
+  ц
+  [еЪЛ
+  Ъ
+  G  [еЪН
+  Е
+  ?  [еЪ&  .  {  [еЪu  (  z  [еЪ5  Б
+  Г
+  [еЪ7  5  Г
+  [еЪ2  )  {  [еЪ┘  /  2  [еЪ2  7  ┘  [еЪц
+   
+  ≈
+  [еЪV  ┴
+  █
+  [еЪV  X  █
+  [еЪО
+  J  G  [еЪJ    H  [еЪJ  X    [еЪB
+  Ш	  C
+  [еЪ  i    [еЪ╙
+    А
+  [еЪШ	  т
+  I
+  [еЪв
+  ╜
+  ╘
+  [еЪ╜
+    А
+  [еЪы
+  ╜
+  ╗
+  [еЪж
+  ╖
+  ║
+  [еЪж
+  Ъ	  I
+  [еЪx  "  &  [еЪp  "  x  [еЪx  )  z  [еЪr  x  !  [еЪ   k  n  [еЪn      [еЪ┘    E
+  [еЪ~  ┘  B	  [еЪж
+  
+  Ъ	  [еЪЭ	  Ч	  
+  [еЪ<
+  ≈
+  п
+  [еЪР	  <
+  с
+  [еЪ>
+  Ы	  Ж	  [еЪЫ	  Я	  <
+  [еЪ4	  6	  1	  [еЪ1	  A
+  =
+  [еЪ<
+  ≈
+  с
+  [еЪп
+  ╪
+  ≈
+  [еЪ┬
+  ц
+  ▀
+  [еЪ█
+   
+  ц
+  [еЪ4  ?  Е
+  [еЪГ
+  О
+  ?  [еЪ!  z  u  [еЪ~  z  )  [еЪ?  4  Г
+  [еЪЕ
+  6  4  [еЪ2  /  ~  [еЪ~  z  (  [еЪ&  )  {  [еЪ┌  {  .  [еЪ┌  {  2  [еЪ.  5  ┌  [еЪ4  ┘  7  [еЪ6  /  ┘  [еЪц
+  ┬
+  █
+  [еЪ▀
+  W  ┬
+  [еЪJ  H  M  [еЪ?  M  Н
+  [еЪЛ
+  О
+  G  [еЪ   G  Ъ
+  [еЪ   G  J  [еЪЪ
+  V     [еЪ┬
+    X  [еЪW  H    [еЪ╗
+  А
+  ╙
+  [еЪА
+      [еЪА
+  ╗
+  ╜
+  [еЪ╙
+  ь
+  ╗
+  [еЪ╗
+  ╖
+  ы
+  [еЪ║
+  ь
+  ╖
+  [еЪШ	  Ъ	  I
+  [еЪ═
+  I
+  т
+  [еЪ═
+  I
+  ж
+  [еЪт
+  в
+  ═
+  [еЪz  !  x  [еЪu  q  !  [еЪ!     r  [еЪq  k     [еЪn  k    [еЪА
+      [еЪ      [еЪ    i  [еЪ    n  [еЪi  p    [еЪx  N  L  [еЪx  L  E  [еЪР
+  Ф
+  Я
+  [еЪР
+  Я
+  I  [еЪУ	  >
+  Я	  [еЪУ	  Я	  п
+  [еЪ8	  v  x  [еЪ@
+  8	  x  [еЪ  ╛
+    [еЪ    m  [еЪv  x  N  [еЪН
+  Е
+  Р
+  [еЪH  Н
+  Р
+  [еЪ
+  G
+  
+  [еЪ
+  
+  ё
+  [еЪH  ю
+  Р
+  [еЪ,  /  (  [еЪ,  (  u  [еЪ,  Е
+  Р
+  [еЪ╬  │  а  [еЪ  ╬  а  [еЪ@
+  У	  x  [еЪю
+  ▄
+  ╬
+  [еЪю
+  ╬
+  р
+  [еЪ╪
+  ▀
+  ю
+  [еЪп
+  ╪
+  ю
+  [еЪ┼      [еЪ┼    ┘  [еЪ  ┼  ▄  [еЪ    ▄  [еЪ┴    ▄  [еЪТ	  @
+  У	  [еЪр
+  Т	  У	  [еЪС  K  N  [еЪv  С  N  [еЪ6  /  ,  [еЪЕ
+  6  ,  [еЪю
+  I  Y  [еЪю
+  Y  ▄
+  [еЪx  E  О  [еЪx  О  s  [еЪю
+  У	  р
+  [еЪx  У	  >
+  [еЪР
+  ю
+  I  [еЪР
+  1  9  [еЪР
+  9  Ф
+  [еЪ,  Р
+  1  [еЪ+  ,  v  [еЪ1  ,  +  [еЪ  ╙
+    [еЪk      [еЪu    ,  [еЪW  H  ю
+  [еЪ▀
+  W  ю
+  [еЪ║
+    
+  [еЪа  ~  ╨  [еЪа  ╨  ╨  [еЪа  ╨    [еЪ
+  а  ~  [еЪЧ	  D
+  
+  [еЪ║
+  Ч	  
+  [еЪ  ┼  а  [еЪ
+  D
+  B	  [еЪ~  
+  B	  [еЪ  ё
+  э
+  [еЪ  э
+  ╛
+  [еЪ,  m  t  [еЪ,  t  v  [еЪx  s  3	  [еЪx  3	  3	  [еЪx  3	  >
+  [еЪ  ,  m  [еЪ┼  а    [еЪ│  
+  а  [еЪп
+  У	  ю
+  [еЪD	  G
+  
+  [еЪ│  D	  
+  [еЪ  
+  ё
+  [еЪь
+  ║
+    [еЪ╙
+  ь
+    [еЪq  k    [еЪu  q    [еЪ│  }  D	  [еЪ;	  Я  t  [еЪ:
+  °
+  ;
+  [еЪ0	  Н	  7	  [еЪЖ  В  O  [еЪЬ  Ш  }  [еЪН	  З	  П	  [еЪ╬
+  ▄
+  ▌
+  [еЪВ  K  O  [еЪ=  Ф
+  Ц
+  [еЪЯ
+  =  М
+  [еЪ      [еЪ9
+  р
+  ⌡
+  [еЪ0	  t  ;	  [еЪд      [еЪЗ  ─  Ь  [еЪ      [еЪП
+  L    [еЪ─  Ь  ├  [еЪ9
+  8
+  П	  [еЪm  t    [еЪ5	  С	  Н	  [еЪ╓
+  J
+  ╔
+  [еЪ      [еЪ  o  m  [еЪю  д  ╦  [еЪЖ  Р  Я  [еЪA	  Щ	  E	  [еЪ}  |  -  [еЪ╝
+    j  [еЪJ  Р  Ж  [еЪ  %  $  [еЪ;	  9	  8	  [еЪ╧
+  ╫
+  ┼
+  [еЪ╨
+  ▌
+  ┼
+  [еЪ8
+  ;
+  9
+  [еЪ  ╦
+  ╨
+  [еЪ#  '  y  [еЪК
+  М
+  L  [еЪ:  ┐  Ц
+  [еЪy  -  '  [еЪ⌡
+  ©
+  ≥
+  [еЪ$  w  v  [еЪ:    ─  [еЪП	  З	  8
+  [еЪ┬  █    [еЪ╨
+      [еЪ    █  [еЪ°
+  а
+  ≥
+  [еЪд    ╫  [еЪ┐  Ц
+  Д
+  [еЪ╓
+  ╒
+  щ
+  [еЪA	  }  D	  [еЪL
+  ╔
+  J
+  [еЪ>  ;  К
+  [еЪ    L  [еЪФ
+  Ц
+  9  [еЪ  j  o  [еЪП	  9
+  Т	  [еЪП
+  К
+  L  [еЪ|  0  ─  [еЪР  5	  Я  [еЪt  v  $  [еЪY  ▄
+  ▌
+  [еЪ╚
+  ъ
+  Ю
+  [еЪo      [еЪч
+  ъ
+    [еЪъ
+    ╝
+  [еЪз
+  ╛
+  ч
+  [еЪ 
+  
+  K
+  [еЪA	  @	  }  [еЪщ
+  ъ
+  ╚
+  [еЪ╔
+  э
+  з
+  [еЪ%  y  #  [еЪ  t  $  [еЪ$  %  y  [еЪ#  s  %  [еЪ  %  s  [еЪl  j    [еЪG
+  A	  D	  [еЪE	  Щ	  
+  [еЪC	   
+  E	  [еЪ}  ├  @	  [еЪG
+  
+  Щ	  [еЪз
+  ч
+  ъ
+  [еЪ  I  F  [еЪё
+  э
+  ╔
+  [еЪL
+  ё
+  ╔
+  [еЪL
+  
+  Щ	  [еЪЩ	  L
+  
+  [еЪ
+  J
+  K
+  [еЪE	  
+   
+  [еЪ
+  ё
+  L
+  [еЪ
+  L
+  J
+  [еЪK
+  J
+  ╒
+  [еЪ╔
+  з
+  ╓
+  [еЪ╓
+  з
+  щ
+  [еЪJ
+  ╓
+  ╒
+  [еЪщ
+  з
+  ъ
+  [еЪ╚
+  ╒
+  щ
+  [еЪТ	  9
+  р
+  [еЪ@
+  П	  Т	  [еЪ-  +  w  [еЪ}    1  [еЪ⌡
+  9
+  ;
+  [еЪН	  С	  З	  [еЪ8
+  :
+  ;
+  [еЪС	  :
+  З	  [еЪ:
+  З	  8
+  [еЪt  5	  0	  [еЪ7	  Н	  П	  [еЪ0	  5	  Н	  [еЪ≥
+  ;
+  ⌡
+  [еЪ≥
+  °
+  ;
+  [еЪ▌
+  ╬
+  ©
+  [еЪ╬
+  р
+  ⌡
+  [еЪа
+  ©
+  ≥
+  [еЪ©
+  а
+  ▌
+  [еЪ╬
+  ⌡
+  ©
+  [еЪ┼
+  ▌
+  а
+  [еЪY  ▌
+  ╨
+  [еЪ╫
+  ┼
+  а
+  [еЪ╦
+  ╨
+  ┼
+  [еЪЦ
+  Д
+  ;  [еЪ  ╧
+  ╦
+  [еЪ    ╦
+  [еЪL      [еЪ╨
+  Y    [еЪ  L  F  [еЪI  Y    [еЪП	  7	  @
+  [еЪ7	  0	  9	  [еЪ9	  7	  @
+  [еЪ9	  ;	  0	  [еЪ8	  9	  @
+  [еЪv  ;	  8	  [еЪУ  ;	  v  [еЪЯ  t  5	  [еЪ5	  t  5	  [еЪA	  G
+  Щ	  [еЪ@	  A	  E	  [еЪC	  @	  E	  [еЪЗ  ╦  Ь  [еЪ@	  ├  C	  [еЪC	  ─  ├  [еЪ  ╫  З  [еЪЬ  ├  }  [еЪ╦  Ш  Ь  [еЪю  д  ╬  [еЪ}  Ш  │  [еЪ│  ю  ╬  [еЪШ  ╦  ю  [еЪ│  Ш  ю  [еЪ╦  ╫  д  [еЪ╬  д    [еЪ╫  З  ╦  [еЪ  ╫    [еЪУ  В  С  [еЪУ  Я  В  [еЪO  J  Ж  [еЪЯ  В  Ж  [еЪС  В  K  [еЪ;	  У  Я  [еЪv  С  У  [еЪ┬      [еЪ    ┴  [еЪ      [еЪ  ┴  █  [еЪ      [еЪ      [еЪд      [еЪ╫
+  а
+  °
+  [еЪ╦
+  ╧
+  ┼
+  [еЪ;  М
+  К
+  [еЪМ
+  ;  =  [еЪЯ
+  I  F  [еЪ=  ;  Ц
+  [еЪФ
+  Я
+  =  [еЪД
+  ;  >  [еЪ9  Ц
+  :  [еЪ>  К
+  П
+  [еЪ>  8  Д
+  [еЪД
+  ┐  8  [еЪ'  *  0  [еЪ─  :  ┐  [еЪ0  ┐  8  [еЪ0  ┐  ─  [еЪ9    :  [еЪ  ─  }  [еЪ─  |  }  [еЪ1  9    [еЪ'  -  |  [еЪ+  1  }  [еЪ-  w  y  [еЪ}  +  -  [еЪ'  0  |  [еЪ#  '  *  [еЪy  w  $  [еЪv  +  w  [еЪj      [еЪ  ч
+    [еЪl  Ю
+  ╝
+  [еЪj  o    [еЪ    %  [еЪl  s    [еЪ╝
+  l  j  [еЪъ
+  ╝
+  Ю
+  [еЪ╛
+    ч
+  [еЪ  m  o  [еЪэ
+  ╛
+  з
+  [еЪF  L  М
+  [еЪF  Я
+  М
+  [еЪa  3  ▄  [еЪa  ▄  Й  [еЪЙ  ▄  ┤  [еЪ3  ,  a  [еЪ,  a  a  [еЪ,  a     [еЪ,       [еЪ        [еЪ     ц  [еЪ  ц  ц  [еЪ  п  ц  [еЪ`  п  ц  [еЪп  ▐  `  [еЪ▐  `  `  [еЪ▐  `  ╗  [еЪ▐  ╗  ╗  [еЪ▐  ю  ╗  [еЪK  ю  ╗  [еЪю  "  K  [еЪ"  K  K  [еЪ"  K  ╓  [еЪ"  ≈  ╓  [еЪ"    ≈  [еЪ  ≈  ≈  [еЪ  ≈  Я  [еЪ  A  Я  [еЪЯ  A  8  [еЪ8  Я  Я  [еЪ8  Я  Я  [еЪ8  Я  ═  [еЪЯ  ═  ⌠  [еЪ⌠  Я  ┌  [еЪЯ  ┌    [еЪ  Я  Ы  [еЪЫ  Я  y  [еЪЫ  y  >	  [еЪ>	  y  H
+  [еЪH
+  y  y  [еЪH
+  y  E  [еЪE  H
+  в
+  [еЪE  E  в
+  [еЪE  в
+    [еЪE  E    [еЪE  ─    [еЪ─  p    [еЪ─  p  ─  [еЪ─  &  p  [еЪ─  ─  &  [еЪ─  L  &  [еЪ▒  L  &  [еЪ▒  │  &  [еЪ▒  │  ▒  [еЪ▒  <  │  [еЪ▒  ▒  <  [еЪ▒  d  <  [еЪd  Ъ
+  <  [еЪ╒  d  Ъ
+  [еЪ╩
+  ╒  Ъ
+  [еЪ╒  ╒  ╩
+  [еЪ╒  Й  ╩
+  [еЪ7
+  Й  ╩
+  [еЪЙ  2	  7
+  [еЪЛ  Й  2	  [еЪЙ  Й  2	  [еЪЙ  Й  2	  [еЪC  Й  Л  [еЪЦ  Й  C  [еЪЙ  ┤  Ц  [еЪj    г  [еЪj  г  Ь  [еЪЬ  г  .  [еЪ    j  [еЪ  j  j  [еЪ  j  j  [еЪ  ц  j  [еЪц  j    [еЪц      [еЪц    9  [еЪц    9  [еЪ  9  e  [еЪ  Q  e  [еЪQ  e  e  [еЪQ  e  !  [еЪQ  !  !  [еЪQ  z  !  [еЪz  !  U  [еЪz  ╠  U  [еЪ╠  U  U  [еЪ╠  U  к  [еЪ╠  к  к  [еЪ╠  Я  к  [еЪЯ  к  к  [еЪЯ  к  к  [еЪЯ  5  к  [еЪк  5  *  [еЪ*  к  к  [еЪ*  к  к  [еЪ*  к  р  [еЪк  р    [еЪ  к  ╖  [еЪк  ╖  	  [еЪ	  к  Е	  [еЪЕ	  к  I	  [еЪЕ	  I	  д
+  [еЪд
+  I	  ]  [еЪ]  I	  I	  [еЪ]  I	  I	  [еЪI	  ]  ═  [еЪI	  I	  ═  [еЪI	  ═  п  [еЪM
+  I	  п  [еЪM
+  	
+  п  [еЪ	
+    п  [еЪ	
+  	
+    [еЪ	
+  А    [еЪP
+  	
+  А  [еЪP
+  P
+  А  [еЪ
+  P
+  А  [еЪ
+  О  А  [еЪ
+  
+  О  [еЪ
+  )  О  [еЪo
+  
+  )  [еЪo
+  o
+  )  [еЪo
+  Ч  )  [еЪ╕	  o
+  Ч  [еЪ╡  ╕	  Ч  [еЪЬ  ╕	  ╡  [еЪЬ  Ь  ╡  [еЪA  Ь  ╡  [еЪЬ  N  A  [еЪ{
+  Ь  N  [еЪЬ  Ь  N  [еЪЬ  Ь  N  [еЪ#	  Ь  {
+  [еЪч  Ь  #	  [еЪЬ  .  ч  [еЪ─  ╛  #  [еЪ}  ─  #  [еЪ{  }  #  [еЪё  {  #  [еЪ÷  ё  #  [еЪD  ÷  #  [еЪ)     /   [еЪ)  /   3   [еЪ)  3      [еЪ)        [еЪ)        [еЪ)     <   [еЪ#  )  <   [еЪ#  <   ▐   [еЪ#  ▐   ▓   [еЪ#  ▓   ≤   [еЪ#  ≤       [еЪ#      k   [еЪ#  k   o   [еЪ#  o   s   [еЪ#  s   E   [еЪ#  E   L   [еЪ#  L   R   [еЪ#  R   x   [еЪ#  x   ~   [еЪ#  ~   │   [еЪ#  │   └   [еЪ#  └   Y   [еЪ#  Y   ╧   [еЪ#  ╧   ╩   [еЪ#  ╩   Т   [еЪ#  Т   Ж   [еЪ#  Ж   Ш   [еЪ#  Ш   Э   [еЪ#  Э   л   [еЪ#  л   о   [еЪ#  о   у   [еЪ#  у   ь   [еЪ#  ь   ё   [еЪ#  ё   ╖   [еЪ#  ╖   ╛   [еЪ#  ╛   Б   [еЪ#  Б   Д   [еЪ#  Д   Ф   [еЪ#  Ф   M  [еЪ#  M    [еЪ#      [еЪ#    !  [еЪ#  !  [  [еЪ#  [  ^  [еЪ#  ^  `  [еЪ#  `  c  [еЪ#  c  0  [еЪ#  0  3  [еЪ#  3  6  [еЪ#  6  :  [еЪ#  :    [еЪ#    	  [еЪ#  	    [еЪ#    @  [еЪ#  @  D  [еЪ!  +   !  [еЪ+   М  !  [еЪ!  +   б  [еЪ+   б  б  [еЪ+   б  б  [еЪМ  +   М  [еЪN  +   М  [еЪ+     N  [еЪ  +   1   [еЪ+   б  J   [еЪ1     5   [еЪ5        [еЪ     :   [еЪ:         [еЪ      $   [еЪ$     ?   [еЪ?     ÷   [еЪ÷     q   [еЪ  G   q   [еЪ  S   G   [еЪ     S   [еЪ  ┘      [еЪ  [   ┘   [еЪ  `   [   [еЪ  ∙   `   [еЪ  м   ∙   [еЪ  ж   м   [еЪ  ╔   ж   [еЪ  ╜   ╔   [еЪЕ   ╜     [еЪЁ   Е     [еЪ╥   Ё     [еЪР   ╥     [еЪa  Р     [еЪ1  a    [еЪ8  1    [еЪ  8    [еЪ>      [еЪE  >    [еЪ  E    [еЪ      [еЪ      [еЪ╟      [еЪ╟      [еЪ╟    W  [еЪW  ╟  W  [еЪW  ╟  A  [еЪ╟  A  A  [еЪA  ╟  A  [еЪ╟  A  м	  [еЪм	  ╟    [еЪ  м	  v  [еЪv  м	  ё  [еЪё  м	  О  [еЪО  м	  R  [еЪR  м	  ┴  [еЪ┴  м	  
+  [еЪ
+  м	  ÷
+  [еЪ÷
+  м	  g  [еЪg  м	  к  [еЪк  м	    [еЪ  м	  B  [еЪB  м	  r  [еЪr  м	  ╙  [еЪ╙  м	  ч  [еЪч  м	  З  [еЪЗ  м	  м	  [еЪЗ  м	  м	  [еЪЗ  м	  м	  [еЪЗ  м	  Д  [еЪД  Д  З  [еЪЗ  Д  g
+  [еЪ▓	  g
+  З  [еЪ░  ▓	  З  [еЪ░  З  Ы  [еЪЫ  ░  Ж  [еЪЖ  ░  У  [еЪУ  ░  П  [еЪП  ░    [еЪ  ░    [еЪ  ░    [еЪ  ░  г  [еЪг  ░  д  [еЪд  ░  А  [еЪА  ░  ш  [еЪш  ░  ╩  [еЪ╩  ░  ╥  [еЪ╥  ░  я  [еЪя  ░  Й  [еЪЙ  ░  Е  [еЪЕ  ░  √  [еЪ√  ░  ⌠  [еЪ⌠  ░  ╜  [еЪ╜  ░  ╗  [еЪ╗  ░  ┴  [еЪ░  ╒  ┴  [еЪ░  °  ╒  [еЪ░  ┌  °  [еЪ░  ─  ┌  [еЪ░  _  ─  [еЪ░  {  _  [еЪ░  w  {  [еЪ░  X  w  [еЪ░  U  X  [еЪ░  h  U  [еЪ░  d  h  [еЪ░  b  d  [еЪ░  <  b  [еЪб  о  <  [еЪб  <  k  [еЪ<  k  k  [еЪ<  k  °  [еЪ°  °  <  [еЪ°  °  <  [еЪ░  °  <  [еЪ░  ░  <  [еЪб  ▌  о  [еЪб  ╞
+  ▌  [еЪб  ,
+  ╞
+  [еЪб  	  ,
+  [еЪб  Ь  	  [еЪб  l  Ь  [еЪб  '  l  [еЪб  ┼  '  [еЪб  +  ┼  [еЪб  э  +  [еЪб  s  э  [еЪб    s  [еЪб  ╘     [еЪб  J   ╘   [еЪ▓	  в  ░  [еЪ▓	  ╛  в  [еЪ╛  в  в  [еЪ╛  ╛  в  [еЪ╛  о  в  [еЪ╛  о  ╛  [еЪ╛  о  о  [еЪg	  о  ╛  [еЪg	  о  о  [еЪМ  о  g	  [еЪМ  о  М  [еЪМ  $  о  [еЪ*  $  М  [еЪ*  $  $  [еЪ*  $  *  [еЪ*  N  $  [еЪ*  N  *  [еЪ*  N  N  [еЪ  N  N  [еЪN    *  [еЪ)        [еЪ)        [еЪ)        [еЪ)     .   [еЪ)  .   (  [еЪ      )  [еЪ#      )  [еЪ>   #   )  [еЪ&   >   )  [еЪ)   &   )  [еЪD   )   )  [еЪQ   D   )  [еЪ}   Q   )  [еЪ┐   }   )  [еЪZ   ┐   )  [еЪ#  "  S  [еЪ#  S    [еЪ#      [еЪ#      [еЪ#      [еЪ#      [еЪ#      [еЪ#    5  [еЪ#  5  /  [еЪ#  /  Ы   [еЪ#  Ы   ©   [еЪ#  ©   ╤   [еЪ#  ╤   И   [еЪ#  И   Ц   [еЪ#  Ц   ╚   [еЪ#  ╚   ╒   [еЪ)  #  ╒   [еЪ)  ╒   т   [еЪ)  т   i   [еЪ)  i   ■   [еЪ)  ■   _   [еЪ)  _   Z   [еЪ      (  [еЪ    (     [еЪ      (  [еЪ   (      [еЪ   (  H   [еЪ   H   ╗   [еЪ   ╗     [еЪ     r  [еЪ      (  [еЪ   (     [еЪ     r  [еЪ)  (     [еЪр       [еЪ   )     [еЪ   )     [еЪ         [еЪD  ▄  м  [еЪD  м  H  [еЪ;  В  ╓  [еЪ;  ╓  з	  [еЪ;  з	  z
+  [еЪ;  z
+  Х
+  [еЪ;  Х
+  ▄  [еЪ;  ▄  D  [еЪE  ;  D  [еЪF  ;  E  [еЪM  ;  F  [еЪM  =  :  [еЪM  :  ;  [еЪ;     р  [еЪ;  р  {  [еЪ;  {  k  [еЪ;  k  В  [еЪN  a  D  [еЪN  D  H  [еЪc  Q  a  [еЪc  a  N  [еЪf  S  Q  [еЪf  Q  c  [еЪi  S  f  [еЪl  n  S  [еЪl  S  i  [еЪo  Y  n  [еЪo  n  l  [еЪt  Z  Y  [еЪt  Y  o  [еЪ[  Z  t  [еЪ[  |  Z  [еЪ]  |  [  [еЪ]  ╠  |  [еЪ╡  ╠  ]  [еЪ╡  ≤  ╠  [еЪ│  ≤  ╡  [еЪ│  ┐  ≤  [еЪ   ┐  │  [еЪ   ┘  ┐  [еЪ═  ё  ┘  [еЪ═  ┘     [еЪ┤  ┼  ё  [еЪ┤  ё  ═  [еЪ╕  █  ┼  [еЪ╕  ┼  ┤  [еЪ╚  ╝  █  [еЪ╚  █  ╕  [еЪ░  е  ╝  [еЪ░  ╝  ╚  [еЪи  к  е  [еЪи  е  ░  [еЪД  Г  к  [еЪД  к  и  [еЪИ  ╣  Г  [еЪИ  Г  Д  [еЪн  ╤  ╣  [еЪн  ╣  И  [еЪт  в  ╤  [еЪт  ╤  н  [еЪ╧  ь  в  [еЪ╧  в  т  [еЪы  ю  ь  [еЪы  ь  ╧  [еЪъ  Ш  ю  [еЪъ  ю  ы  [еЪЭ    Ш  [еЪЭ  Ш  ъ  [еЪЧ      [еЪЧ    Э  [еЪ      [еЪ    Ч  [еЪ"      [еЪ"      [еЪ    "  [еЪ	  Н    [еЪ	      [еЪ
+  Р  Н  [еЪ
+  Н  	  [еЪ  Р  
+  [еЪ  Р    [еЪ    Р  [еЪЬ  $    [еЪЬ      [еЪ&  $  Ь  [еЪ╗  ╝  "  [еЪ╡  "  ╝  [еЪ╞  ╗  "  [еЪ╠  "  ╡  [еЪ╚  ╞  "  [еЪ╜  ╒     [еЪ╜     t  [еЪ╜  t    [еЪ╜    "  [еЪ╜  "  ╠  [еЪ⌠  ╒  ╜  [еЪ#  ╚  "  [еЪф  ⌠  ╜  [еЪ╙  #  ╛  [еЪ╙  ╚  #  [еЪ╘  ╙  ╛  [еЪ  э  ╘  [еЪ  ╘  q  [еЪ  q  >  [еЪ  >  в  [еЪ  в    [еЪ    ·
+  [еЪ$  &  э  [еЪ$  э    [еЪ  $    [еЪ  $    [еЪ  %  $  [еЪ  $    [еЪ    $  [еЪ╜    ф  [еЪф    ┬  [еЪ┬    
+  [еЪ
+    ·
+  [еЪн  G  м  [еЪJ  G  м  [еЪ█  y
+  Х
+  [еЪы	  y
+  ╞
+  [еЪы	  	  з	  [еЪJ   ╘   I   [еЪ  I   ╘   [еЪq      [еЪs  э  q  [еЪ+  q  э  [еЪH   *  	   [еЪХ
+  z
+  y
+  [еЪq    s  [еЪ
+   I   J   [еЪ   I   H   [еЪЖ  ё  В  [еЪ+   *   J   [еЪо  I  <  [еЪо  ▌  н  [еЪ▄  м  н  [еЪы	  y
+  z
+  [еЪ   
+   I   [еЪL  J  м  [еЪс  [  ┼  [еЪq  [  +  [еЪн  G  K  [еЪ
+   *   J   [еЪH  L  м  [еЪH   (  *  [еЪо  K  I  [еЪH      	   [еЪ╗   H   I   [еЪ  I     [еЪ╞
+  y
+  █  [еЪ  s    [еЪ  I   ╗   [еЪ    ╗   [еЪ▄  Х
+  █  [еЪK  н  о  [еЪq  [    [еЪq  r    [еЪ  r  q  [еЪВ  ╓  ё  [еЪ  р  [  [еЪ┼  '  с  [еЪ╞
+  ,
+  ы	  [еЪЬ  	  ё  [еЪ╞
+  █  ▌  [еЪ╓  з	  	  [еЪё  	  	  [еЪз	  z
+  ы	  [еЪы	  	  ,
+  [еЪ▌  █  н  [еЪн  █  ▄  [еЪё  	  ╓  [еЪ,
+  	  	  [еЪk  В  Ж  [еЪk  {  z  [еЪz  Ж  l  [еЪЖ  ё  Ь  [еЪl  Ь  Ж  [еЪр  {  с  [еЪz  с  {  [еЪ[  с  р  [еЪl  '  z  [еЪс  z  '  [еЪЖ  z  k  [еЪ┼  +  [  [еЪ   6   5   [еЪT  O    [еЪ  ╟  X  [еЪ*   +   1   [еЪ.   *     [еЪ   *  	   [еЪэ   ╒   ы   [еЪ8   6      [еЪH  A  E  [еЪa  1  +  [еЪ÷   q   (   [еЪK  O    [еЪw   Q   v   [еЪY  $  T  [еЪ!   ;       [еЪ>   #   =   [еЪ  5  k  [еЪ   .      [еЪ'   &   %   [еЪ!   ;      [еЪ.   (  *  [еЪ"  $  S  [еЪ▒   _   █   [еЪk      [еЪ  X  T  [еЪT  W  Z  [еЪ   .      [еЪ)   &   (   [еЪ/  Ы   +  [еЪS    O  [еЪч   ╜   Ю   [еЪW  Y  T  [еЪ*   
+      [еЪK  O    [еЪ╢   И   ╡   [еЪ   
+      [еЪб   +  Ы   [еЪы   э   ╔   [еЪh   н   м   [еЪж   м   н   [еЪ   U   W   [еЪ∙   м   √   [еЪS      w   [еЪЁ   ╥   ╢   [еЪq   G   @   [еЪ8    k  [еЪ$   ?   =   [еЪf  /  +  [еЪ+  1  f  [еЪ╤   И   ╢   [еЪ}   Q   w   [еЪ©   б   ╬   [еЪП   ╬   ©   [еЪ`   ∙   ▒   [еЪж   ╔   ы   [еЪ┘   [   X   [еЪ╜   Е   Ю   [еЪ_   ■   ▒   [еЪ╒   т   ы   [еЪЮ   ╚   ч   [еЪ╚   Ц   Ю   [еЪZ   ┐   X   [еЪw      U   [еЪ╡   Ё   ╢   [еЪ╟   Ю   Е   [еЪ_   ┼   █   [еЪ(   &   '   [еЪ(   @   q   [еЪQ   u   v   [еЪ    $   !   [еЪ  >  
+  [еЪ5      6   [еЪA  H    [еЪ    O  [еЪ
+      [еЪ
+  A    [еЪ   6      [еЪ1   *      [еЪ   	      [еЪ      1   [еЪ   8      [еЪ   8      [еЪ      ;   [еЪ8   6      [еЪ:      8   [еЪ8   ;      [еЪ    :   ;   [еЪ8   ;   :   [еЪ   #   !   [еЪ    
+  [еЪ=   #   "   [еЪ      6   [еЪ$  S  T  [еЪ    K  [еЪT  X  Z  [еЪT  S  O  [еЪH  K    [еЪK  H    [еЪ  E  H  [еЪ
+  A  >  [еЪ    A  [еЪ  H    [еЪH      [еЪE  >  A  [еЪ    K  [еЪ5   1      [еЪ▒   ∙   √   [еЪi  k  5  [еЪ╢   П   ╥   [еЪ█   ▒   `   [еЪ√   ■   ▒   [еЪ■   i   √   [еЪн   h   i   [еЪi   т   н   [еЪы   н   т   [еЪы   н   ж   [еЪ`   [   █   [еЪ╜   ╔   э   [еЪX   [   ┼   [еЪ√   м   h   [еЪi   √   h   [еЪ╚   ╒   ч   [еЪ_   Z   ┼   [еЪб   a  +  [еЪР   a  ╬   [еЪ©   Ы   б   [еЪ)   D   @   [еЪ5  /  i  [еЪ&   >   %   [еЪ1  i  f  [еЪ╟   Ц   Ю   [еЪИ   Ц   ╟   [еЪ┐   }   W   [еЪЁ   Е   ╟   [еЪ   ┘   W   [еЪэ   ╜   ч   [еЪч   ╒   э   [еЪU   w   }   [еЪw   v   S   [еЪS   G   v   [еЪР   ╥   П   [еЪG   v   u   [еЪX   W   ┐   [еЪП   ╤   ╢   [еЪ©   ╤   П   [еЪ╟   Ё   ╡   [еЪИ   ╟   ╡   [еЪ┼   X   Z   [еЪW   X   ┘   [еЪW   }   U   [еЪ█   [   ┼   [еЪ'   (   ÷   [еЪ(   @   )   [еЪu   @   D   [еЪ?   ÷   %   [еЪ1  8  i  [еЪ=   ?   %   [еЪ$   "   =   [еЪ=   %   >   [еЪ%   ÷   '   [еЪi  8  k  [еЪi  /  f  [еЪ╬   a  б   [еЪ╬   П   Р   [еЪ@   u   G   [еЪQ   D   u   [еЪ!   $   "   [еЪ"   #   !   [еЪ    
+  [еЪ    k  [еЪW      [еЪ  Y  W  [еЪu  ║     [еЪ║  ё  ▓  [еЪ▓    ⌠  [еЪ╙  щ  ч  [еЪr  щ  ╙  [еЪq  p  A  [еЪ  A  B  [еЪк  A    [еЪ'    э  [еЪ   ╒  ║  [еЪA  p  B  [еЪ  щ  ч  [еЪ  щ  э  [еЪ┤  Э  ┬  [еЪч  З    [еЪX  ╟    [еЪ  v    [еЪt      [еЪ▓  ║  ╒  [еЪщ      [еЪ  Y  $  [еЪ  ╙  g  [еЪA  ╙  к  [еЪW  Z    [еЪч      [еЪ  "  $  [еЪ&  '  э  [еЪZ  X    [еЪ    э  [еЪ╘  э  щ  [еЪp  щ  r  [еЪu  ё  ║  [еЪr  B  p  [еЪp  щ  ╘  [еЪ╘  q  p  [еЪt     u  [еЪ  Z    [еЪA  ╙  в  [еЪ>  A  в  [еЪq  A  >  [еЪ┬  ф  Э  [еЪв    ╙  [еЪ÷
+    g  [еЪё  О  ▓  [еЪ┴  R  Э  [еЪu  v  ё  [еЪф  ⌠    [еЪЭ    R  [еЪ⌠  ╒  ▓  [еЪ▓    О  [еЪ  v  u  [еЪ  u  t  [еЪЭ    ф  [еЪО  R    [еЪ
+  ┬  ┤  [еЪ
+  ·
+  ²
+  [еЪ²
+  ┤  
+  [еЪ┤  Э  ┴  [еЪ
+  ┴  ┤  [еЪ  ·
+    [еЪ²
+    ·
+  [еЪ╙      [еЪ
+  ÷
+  ²
+  [еЪ²
+  ÷
+    [еЪ┤  ²
+  
+  [еЪg  к  ╙  [еЪ  Т  Ж  [еЪO  P  b  [еЪ<  I  b  [еЪЫ    З  [еЪЬ  '    [еЪ'      [еЪ╞  ▐  ╚  [еЪЯ  Т    [еЪk  V  U  [еЪ─  _  `  [еЪг  д  Щ  [еЪR  P  c  [еЪ©  ╫  ы  [еЪO  J  L  [еЪЛ  М    [еЪ  "     [еЪt  [  x  [еЪ    Ь  [еЪ   Ъ  Ч  [еЪЛ  М    [еЪ&  '  Ь  [еЪN  H  L  [еЪК  Х  И  [еЪv  w  x  [еЪb  I  O  [еЪG  K  O  [еЪ  Ь    [еЪЭ  Ч  Щ  [еЪ]  ╡  `  [еЪN  c  P  [еЪ▀  ▄  ╗  [еЪO  G  J  [еЪ      [еЪR  P  d  [еЪ÷  ·  ═  [еЪ      [еЪ≈  `  ╡  [еЪ▐  ╜  ╞  [еЪ■  √  х  [еЪ⌠  √  ■  [еЪж  ╩  ╦  [еЪЕ  √  Ф  [еЪш  ╩  ╫  [еЪ╒  °  ·  [еЪд  А  б  [еЪ{  w  x  [еЪ       [еЪ`  ~  ]  [еЪ~  `  _  [еЪ   ═  ·  [еЪ╧  ы  ╫  [еЪ│  ≈  ≥  [еЪ²  ≥  │  [еЪЙ  Е  Х  [еЪ⌠  ╜  ╞  [еЪ╥  я  р  [еЪ╗  ┴  ▀  [еЪИ  Д  Х  [еЪ╚  ░  ╞  [еЪ▄  ▀  ╕  [еЪ╕  ┤  ▀  [еЪн  т  р  [еЪ╦  ╫  ╩  [еЪ·  ÷  ╒  [еЪ╓  ▀  ┴  [еЪИ  п  К  [еЪЧ  Ъ  Щ  [еЪб  д  Щ  [еЪы  а  ©  [еЪ    Л  [еЪw  X  s  [еЪЖ  У  Т  [еЪV  k  l  [еЪd  b  P  [еЪt  v  s  [еЪs  V  o  [еЪ  Т    [еЪЫ      [еЪ      [еЪ    Ы  [еЪ  
+  Я  [еЪ	  Я  
+  [еЪi  f  k  [еЪl  i  k  [еЪ  	  М  [еЪl  o  V  [еЪЯ  Т  У  [еЪП  У  Я  [еЪЯ  М  	  [еЪ  П  М  [еЪЯ  М  П  [еЪ  "  Л  [еЪt  o  s  [еЪ"  !     [еЪ    Т  [еЪN  L  O  [еЪd  h  R  [еЪI  K  O  [еЪP  O  N  [еЪk  R  h  [еЪR  k  f  [еЪh  U  k  [еЪs  V  X  [еЪU  X  V  [еЪf  c  R  [еЪЖ  Ы    [еЪФ  Х  Е  [еЪz  x  [  [еЪ·  ²  °  [еЪХ  Й  К  [еЪХ  Ф  Д  [еЪД  и  Ф  [еЪх  и  ■  [еЪи  ░  ■  [еЪ╞  ■  ░  [еЪ╞  ■  ⌠  [еЪЙ  я  К  [еЪ╗  ╜  ▐  [еЪп  р  я  [еЪФ  √  х  [еЪи  Ф  х  [еЪ╕  ╚  ▄  [еЪИ  н  п  [еЪ`  ≈  ─  [еЪ┌  ─  ≥  [еЪ│  ╡  ≈  [еЪЭ  ъ  б  [еЪ[  ]  z  [еЪЧ       [еЪ_  z  ~  [еЪ▀  ╓  ┤  [еЪ═  ┤  ╓  [еЪт  ╧  ж  [еЪ╒  ┴  ╓  [еЪ╩  ╥  ж  [еЪ▐  ╗  ▄  [еЪ▄  ╚  ▐  [еЪ╫  ╧  ╦  [еЪ╫  ©  ш  [еЪш  А  ©  [еЪ┌  °  ²  [еЪА  ©  а  [еЪж  т  р  [еЪ·  ²     [еЪ│     ²  [еЪ╒  ÷  ╓  [еЪ═  ╓  ÷  [еЪр  н  п  [еЪж  р  ╥  [еЪж  ╧  ╦  [еЪК  я  п  [еЪЩ  г  Ъ  [еЪЩ  б  Э  [еЪа  б  ъ  [еЪ  г     [еЪ_  {  z  [еЪ        [еЪ     !  [еЪ        [еЪ   г  Ъ  [еЪx  z  {  [еЪ]  ~  z  [еЪ≥  ─  ≈  [еЪ≥  ²  ┌  [еЪб  а  А  [еЪы  ъ  а  [еЪ  !  Л  [еЪЛ  !  "  [еЪs  v  w  [еЪx  t  v  [еЪt  н  й  [еЪt  k  °  [еЪ²  °  ╚  [еЪ░  ²  ²  [еЪ║	  ▓	  ║	  [еЪД  Т  ║	  [еЪt  k  k  [еЪt  t  k  [еЪ°  °  ╚  [еЪ²  ░  ░  [еЪ°  °  ╚  [еЪ°  ╚  ╚  [еЪt  t  k  [еЪ°  ╚  t  [еЪв  Г  ²  [еЪГ  в  о  [еЪв  в  Г  [еЪш  Г  о  [еЪ░  в  ²  [еЪв  Г  Г  [еЪо  в  о  [еЪш  в  о  [еЪt  й  k  [еЪш  о  о  [еЪш  ш  о  [еЪй  k  б  [еЪ░  ²  °  [еЪш  ,  в  [еЪ,  $  $  [еЪ,  $  N  [еЪ!  Ш  0  [еЪ,  ,  $  [еЪN  N  ]  [еЪМ  Ш  М  [еЪN  N  ]  [еЪN  ]  ]  [еЪ,  в  $  [еЪ0  н  б  [еЪ!  !  0  [еЪМ  !  Ш  [еЪ0  б  !  [еЪ,  ,  $  [еЪ!  0  0  [еЪб  й  б  [еЪн  й  б  [еЪ]  N  Ш  [еЪМ  Ш  Ш  [еЪW  f    [еЪ      [еЪн  б  б  [еЪн  н  б  [еЪN  ]  ,  [еЪШ  N  М  [еЪв  $  о  [еЪt  t  U  [еЪt  U  U  [еЪt  U  U  [еЪt  U  U  [еЪU  ²  U  [еЪU  t  ╚  [еЪР  н  U  [еЪ²  ≈  Г  [еЪt  U  t  [еЪн  U  t  [еЪU  ²  ²  [еЪ└  ╚  ²  [еЪ 
+  ║	  Т  [еЪ
+  ║	  ║	  [еЪЛ  ш  ╜  [еЪГ  Г  ╜  [еЪ²  └  U  [еЪ└  ╚  └  [еЪ╜  ш  ╜  [еЪ╜  ш  ╜  [еЪ╜  ш  ╜  [еЪ²  U  ≈  [еЪ└  ╚  ╚  [еЪГ  ╜  ╜  [еЪш  ╜  Г  [еЪU  ╚  └  [еЪU  t  U  [еЪГ  ╜  ≈  [еЪш  ╜  ш  [еЪ  ,  ,  [еЪ  ,    [еЪ  ,    [еЪ  ,    [еЪШ  ╡  ╡  [еЪ]    ,  [еЪш    Л  [еЪ0  R  Ш  [еЪ  ,  ,  [еЪ  ,  ш  [еЪ╡  Ш  Ш  [еЪШ  d  ]  [еЪ  *    [еЪ  l  f  [еЪн  ÷  Р  [еЪ0  ÷  0  [еЪ╡  Ш  d  [еЪ]  d  d  [еЪн  ÷  ÷  [еЪн  ÷  ÷  [еЪ÷  ÷  н  [еЪR  Ш  ╡  [еЪ]  d  ]  [еЪ÷  0  ÷  [еЪ0  ÷  н  [еЪd    ]  [еЪ    ,  [еЪR  0  ÷  [еЪн  ÷  н  [еЪU  f  U  [еЪf  U  U  [еЪf  f  U  [еЪU  f  U  [еЪТ  U  Р  [еЪТ  f  U  [еЪU  U  f  [еЪU  f  f  [еЪ└  f  ┬  [еЪ└  U  f  [еЪ╜  П  Л  [еЪг  ╜  ╜  [еЪг  П  ╜  [еЪг  ╜  ╜  [еЪг  г  ╜  [еЪг  ╜  ╜  [еЪг  г  ╜  [еЪ└  └  ┬  [еЪ└  ┬  ┬  [еЪ\  └  ┬  [еЪU  \  \  [еЪU  └  \  [еЪ╜  ≈  ⌡  [еЪ╜  ⌡  г  [еЪ╜  г  г  [еЪ╜  ╜  г  [еЪU  U  \  [еЪU  \  \  [еЪ≈  \  ⌡  [еЪ≈  U  \  [еЪ      [еЪ      [еЪ      [еЪ      [еЪП    Л  [еЪП      [еЪ  i  d  [еЪ  d    [еЪ      [еЪ      [еЪ÷  Т  Р  [еЪ╧  ÷  ÷  [еЪ╧  Т  ÷  [еЪ╧  ÷  ÷  [еЪ╧  ╧  ÷  [еЪ╧  ÷  ÷  [еЪ╧  ╧  ÷  [еЪd  d  i  [еЪd  i  i  [еЪi  d  i  [еЪ╡  i  ╧  [еЪ╡  d  i  [еЪ÷  R  V  [еЪ÷  V  ╧  [еЪ÷  ╧  ╧  [еЪ÷  ÷  ╧  [еЪ╡  ╡  ╧  [еЪ╡  ╧  ╧  [еЪR  ╧  V  [еЪR  ╡  ╧  [еЪl  {  ~  [еЪг  e  е  [еЪ▐  ┴  ┐  [еЪ║  ²  e  [еЪ≤  X  `  [еЪ║  e  г  [еЪD  d  O  [еЪ─  ─  │  [еЪ{  l  }  [еЪy  y  }  [еЪе  ║  г  [еЪE  y  h  [еЪН  У  П  [еЪE  E  i  [еЪ│  a  ─  [еЪE  E  O  [еЪi  J  E  [еЪ─  ─  ┴  [еЪ}  h  y  [еЪ⌡  ≤  ║  [еЪ`  ≤  \  [еЪL  ─  a  [еЪУ  М  Н  [еЪL  ▒  X  [еЪh  D  O  [еЪ²  f  e  [еЪ┴  J  ┤  [еЪ╒  ╒  Ё  [еЪР  Й  ╒  [еЪ²  f  ▒  [еЪ▒  ▒  ▓  [еЪO  K  d  [еЪf  ▒  d  [еЪ╒  d  ╗  [еЪ┤  ┐  ┴  [еЪп  ║  Ё  [еЪР  М  Н  [еЪг  п  ║  [еЪ─  E  J  [еЪX  ▓  ▒  [еЪ`  b  X  [еЪР  ╒  Ё  [еЪ\  \  b  [еЪ┬  f  ┤  [еЪТ  f  ~  [еЪf  D  f  [еЪy  Я  {  [еЪС  Я  {  [еЪВ  С  {  [еЪh  }  l  [еЪ~  {  В  [еЪ{  }  y  [еЪ~  В  Т  [еЪ~  f  l  [еЪl  D  h  [еЪh  O  E  [еЪ╗  Ё  ║  [еЪЁ  ╒  ╗  [еЪЁ  Р  п  [еЪп  Н  Р  [еЪЙ  Й  Р  [еЪР  М  Й  [еЪМ  Й  Й  [еЪН  г  п  [еЪП  Н  г  [еЪO  K  i  [еЪE  O  i  [еЪi  J  K  [еЪK  ┤  J  [еЪ─  J  ┴  [еЪ²  ▓  ║  [еЪ▓  ▒  ²  [еЪ▒  ▒  ²  [еЪe  е  f  [еЪ╗  f  d  [еЪ▐  ┴  │  [еЪ┴  │  ─  [еЪa  │  ▐  [еЪ▐  b  a  [еЪa  X  L  [еЪf  l  D  [еЪf  f  d  [еЪd  D  f  [еЪd  f  K  [еЪ≤  ║  ▓  [еЪ⌡  г  ║  [еЪ▓  X  ≤  [еЪ\  ≤  ⌡  [еЪX  a  b  [еЪ\  \  `  [еЪ┬  ▐  \  [еЪ`  b  \  [еЪ║  ╗  е  [еЪг  ║  г  [еЪ║  г  г  [еЪf  ╗  е  [еЪг  г  е  [еЪK  f  ┤  [еЪ┬  ┐  ┬  [еЪ┬  ┐  ┤  [еЪ┐  ▐  ┬  [еЪ\  ▐  b  [еЪc  j  i  [еЪ©  ╓  ≈  [еЪq  j  c  [еЪ   a  !  [еЪS  ╣  ╫  [еЪL  ╧  \  [еЪ╥  ╧  L  [еЪ`  `  a  [еЪc  i  g  [еЪa  a  g  [еЪc  j  h  [еЪ
+  Ъ  !  [еЪ≈  ©  Я  [еЪд  "  ц  [еЪa  ╬  `  [еЪ  
+    [еЪд  "    [еЪ╓  √  ц  [еЪ√  ц  ╧  [еЪS  V  \  [еЪS  ╧  ╫  [еЪ©  ╣  ╫  [еЪ╕  В  С  [еЪX  L  \  [еЪ╗  ╗  ╣  [еЪK  K  X  [еЪ╗  `  ╬  [еЪ≈  ≈  ╓  [еЪТ  В  ╕  [еЪX  ╔  K  [еЪK  ╗  M  [еЪ      
+  [еЪ╓  ╔  K  [еЪС  ©  ╕  [еЪ`  ц  j  [еЪ╥  √  ╧  [еЪ╓  ≈  °  [еЪ!  g  a  [еЪд  j  h  [еЪ╣  M  ╗  [еЪ  
+  Ъ  [еЪц  ц  д  [еЪi  ╧  ©  [еЪ  h  i  [еЪ  П  j  [еЪ    Ъ  [еЪ!  g  i  [еЪc  У  М  [еЪc  М  Й  [еЪa  Й  c  [еЪУ  c  j  [еЪg  a  c  [еЪП  У  j  [еЪi  j    [еЪЪ  !  i  [еЪ   
+  !  [еЪ╓  °  √  [еЪ≈  °  ╓  [еЪ©  ╓  ц  [еЪ╕  ц  ©  [еЪЯ  ©  Я  [еЪ©  С  Я  [еЪЯ  С  Я  [еЪц  ╧  ╕  [еЪ╧  ╕  Т  [еЪ  "  
+  [еЪ
+  "     [еЪц     "  [еЪh  д    [еЪj  ц  д  [еЪX  ╔  L  [еЪK  X  M  [еЪX  M  \  [еЪ╥  ╔  L  [еЪ╓  °  ╔  [еЪq  j  a  [еЪa  `  j  [еЪ╬  a  q  [еЪ©  ╬  q  [еЪ╣  ╗  ╬  [еЪЪ    i  [еЪ      [еЪЪ      [еЪ      [еЪ\  M  S  [еЪV  ╧  \  [еЪM  ╣  S  [еЪV  ╧  S  [еЪ╣  ╬  ©  [еЪ╧  ╫  ╧  [еЪq  i  i  [еЪ©  ╧  ╫  [еЪ°  ╥  √  [еЪ╧  ╧  √  [еЪ√  ╧  ╧  [еЪ°  ╥  ╔  [еЪ╧  ╥  ╧  [еЪh      [еЪi  i  c  [еЪi  c  h  [еЪq  i  c  [еЪ©  i  q  [еЪ^  }    [еЪ\  }  ^  [еЪQ  a  e  [еЪ    Н  [еЪР    Н  [еЪВ    Р  [еЪ  В  Р  [еЪ      [еЪС  В    [еЪ  В  С  [еЪО    С  [еЪ    О  [еЪ└  Ё  C  [еЪ      [еЪ▌  ╔  ╖  [еЪ╪  с  в  [еЪ    В  [еЪe  F  M  [еЪ%      [еЪ;  :  @  [еЪ      [еЪm  u  W  [еЪT  m  W  [еЪe  F  a  [еЪл  м  Г  [еЪj  m  T  [еЪe  =  @  [еЪj  e  g  [еЪБ      [еЪ=  :  @  [еЪM  =  e  [еЪВ      [еЪ  #    [еЪ%  $    [еЪa  E  D  [еЪa  E  F  [еЪВ      [еЪ┘  ├  └  [еЪ▒  ▌  ╝  [еЪ├  ╔  ё  [еЪй  л  ╟  [еЪ╬  Б  Ю  [еЪс  ╣  м  [еЪe  j  Q  [еЪ@  g  e  [еЪj  S  Q  [еЪm  S  j  [еЪВ      [еЪ      [еЪЮ  ц  Б  [еЪ╪  ╬  ь  [еЪy  }  \  [еЪ▒  й  е  [еЪ  C  Ё  [еЪс  м  о  [еЪ╣  Г  м  [еЪ╢  о  м  [еЪм  л  ╢  [еЪ╤  с  ╣  [еЪв  с  ╤  [еЪ∙  й  ╟  [еЪл  й  к  [еЪк  е  й  [еЪк  Г  л  [еЪ▒  ∙  ▓  [еЪ╛  ▒  ▓  [еЪ█  ▌  ┼  [еЪ╝  ▌  █  [еЪ▌  ▒  ╛  [еЪ╟  ╢  л  [еЪ┬  ╔  ╖  [еЪ╔  ▌  ┼  [еЪё  ┼  ╔  [еЪЁ  }    [еЪ║  ├  ┬  [еЪ⌡  ├  ║  [еЪ├  ┬  ╔  [еЪ└  ⌡  ├  [еЪ╖  ▌  ╛  [еЪ      [еЪ      [еЪ      [еЪ    Ц  [еЪy  m  u  [еЪЦ    #  [еЪn  m  S  [еЪY  m  n  [еЪю  ь  ╬  [еЪy  m  Y  [еЪu  \  y  [еЪ|  }  Z  [еЪ╠  }  |  [еЪy  }  Z  [еЪЁ  }  ╠  [еЪZ  y  Y  [еЪg  T  j  [еЪШ  Б  ю  [еЪ  Б  Ш  [еЪз  Ю  ╬  [еЪ      [еЪф    Ц  [еЪц    ф  [еЪБ    ц  [еЪБ  ╬  ю  [еЪ╨  ╪  з  [еЪу  ╪  ╨  [еЪ╬  ╪  з  [еЪс  ╪  у  [еЪ      [еЪ    #  [еЪC  ⌡  └  [еЪу  о  с  [еЪ▒  ∙  й  [еЪе  ▒  ╝  [еЪ≤  ╠  Ё  [еЪ┐  └  ≤  [еЪ┘  └  ┐  [еЪё  ├  ┘  [еЪь  ╪  в  [еЪЁ  └  ≤  [еЪ    ╤  [еЪ╤  C    [еЪ,      [еЪР  ,    [еЪЕ    Р  [еЪ    Е  [еЪ  └    [еЪ  с  └  [еЪ└  >  с  [еЪс  ё  >  [еЪ>    ё  [еЪё    ╫
+  [еЪё  ╫
+  b  [еЪb  ╫
+  и
+  [еЪ╫
+  и
+  :
+  [еЪ5	  и
+  :
+  [еЪ5	  К	  и
+  [еЪ5	  	  К	  [еЪ5	  Р  	  [еЪР  J  	  [еЪJ  	  ╜  [еЪХ  J  ╜  [еЪХ  	  ╜  [еЪХ  ж  	  [еЪ▀  Х  ж  [еЪ▀  ▓  ж  [еЪ▓  ж  -  [еЪ▓  9  -  [еЪ9  6  ▓  [еЪ0  9  6  [еЪ0  Т  9  [еЪ0  Ё  Т  [еЪЁ    0  [еЪ    Ё  [еЪс      [еЪ     с  [еЪ     0   [еЪ  0   T   [еЪ  T   ┌   [еЪ  ┌   ┴   [еЪ  ┴   ^   [еЪ  ^   ⌠   [еЪ  ⌠   f   [еЪ  f   ·   [еЪ  ·   p   [еЪ  p   F   [еЪ  F   ъ   [еЪ  ъ   ╞   [еЪ  ╞   Х   [еЪ  Х   Н   [еЪ  Н   ╪   [еЪ  ╪   В   [еЪ  В   ф   [еЪ  ф   п   [еЪ  п   <  [еЪ  <  ?  [еЪ?  G    [еЪG      [еЪ      [еЪ    &  [еЪ  &  *  [еЪ  *  4  [еЪ  4  х  [еЪ  х  n  [еЪw    n  [еЪz    w  [еЪ~    z  [еЪ  ╜  ~  [еЪ  ╜  T  [еЪT  ╜    [еЪ  х  ╜  [еЪх  ╜    [еЪ  #  ╜  [еЪ#  ╜  л  [еЪ3  л  ╜  [еЪБ  3  ╜  [еЪ)	  Б  ╜  [еЪ)	  ┌
+    [еЪ╜  )	    [еЪ  R  ┌
+  [еЪR  C    [еЪ   с  ⌠  [еЪ⌠     б  [еЪ   б  &  [еЪ     &  [еЪ     B  [еЪ   B  ;  [еЪ╒     ;  [еЪ≤     ╒  [еЪ┬     ≤  [еЪ   ;  ┬  [еЪ└  ;  *  [еЪ*  ;  s  [еЪ;  s    [еЪ;  ш
+    [еЪ;  K
+  ш
+  [еЪ;  C	  K
+  [еЪЗ  C	  ;  [еЪ;    З  [еЪ;  ┬    [еЪ;  └  @  [еЪ@  └  g  [еЪg  └  T  [еЪT  └  W  [еЪW  └  u  [еЪu  └  \  [еЪ\  └  ^  [еЪ^  └    [еЪ  └  C  [еЪC  └  ⌡  [еЪ⌡  └  ║  [еЪ└  ┬  ║  [еЪ└  ╖  ┬  [еЪ└  ╛  ╖  [еЪ└  ▓  ╛  [еЪ└  ∙  ▓  [еЪ└  ╟  ∙  [еЪ└  ╢  ╟  [еЪ└  о  ╢  [еЪ└  у  о  [еЪ└  ╨  у  [еЪ└  з  ╨  [еЪ└  Ю  з  [еЪ└  ц  Ю  [еЪ└  ф  ц  [еЪ└  Ц  ф  [еЪ└  #  Ц  [еЪ└    #  [еЪ└  О    [еЪ└  С  О  [еЪ└    С  [еЪ└      [еЪ-         [еЪ╚  ╞  |  [еЪg  ,  .  [еЪВ   г   Ь   [еЪ         [еЪ-          [еЪ   -   4   [еЪ   4      [еЪ  C  А   [еЪ╗  ╕  |  [еЪ╕  ╡  ~  [еЪu  w  °  [еЪХ   ╞   ╠   [еЪ╠   ╣   Х   [еЪА   C  ш   [еЪ~  ╡  ╠  [еЪ╝  ╗  ╕  [еЪ,  g  4  [еЪ0   T   4   [еЪ╣   ╫   ╪   [еЪz  y  ╕  [еЪЗ   С   Ь   [еЪN   B   F   [еЪ|  ╒  ╕  [еЪj   n   l   [еЪг   Щ   ф   [еЪЩ   р   п   [еЪр   с   Щ   [еЪ]    &  [еЪ    4   -   [еЪ(  ]     [еЪ    N  [еЪх  n    [еЪg  7  4  [еЪ╫   Ь   В   [еЪw  °  z  [еЪ▌   ░   ]   [еЪ≈   c   ▌   [еЪ╞  ╗  |  [еЪ·   f   ⌡   [еЪ╕  y  ╒  [еЪ      0   [еЪ~  ╠  ╜  [еЪ4          [еЪ      0   [еЪ╕  ╡  ╝  [еЪ      4   [еЪ,  (  ]  [еЪВ   ф   г   [еЪz  ~  ╕  [еЪ   4   0   [еЪ├      ┌   [еЪ]   \   ├   [еЪ4      T   [еЪ\      ├   [еЪP   |   y   [еЪB   l   n   [еЪ°  u  ⌡  [еЪ┌   T      [еЪ°  z  y  [еЪx  ⌡  °  [еЪy  °  x  [еЪx  ╒  y  [еЪw  n  u  [еЪu    n  [еЪu      [еЪ7    х  [еЪ.  h  g  [еЪ  7  9  [еЪ4  х  7  [еЪ9      [еЪ  ⌡  u  [еЪ9  h  7  [еЪ7  g  h  [еЪ*  ,  4  [еЪ*  &  ]  [еЪ(  .  ,  [еЪЬ   г   З   [еЪ╪   ╫   В   [еЪ╦   К   ╣   [еЪЗ   к   г   [еЪЬ   ╫   С   [еЪЩ   г   к   [еЪ╣   Н   ╪   [еЪХ   Н   ╣   [еЪ╦   С   ╫   [еЪ╫   ╣   ╦   [еЪy   ╠   |   [еЪy   ╠   ╞   [еЪ╠   ╣   К   [еЪК   |   ╠   [еЪ╞   ъ   y   [еЪn   C   B   [еЪN   B   C   [еЪN   y   P   [еЪъ   F   N   [еЪF   p   B   [еЪB   l   p   [еЪp   ·   l   [еЪ⌡   c   f   [еЪf   ⌠   c   [еЪ⌡   c   ≈   [еЪ░   c   ⌠   [еЪ≈   j   ⌡   [еЪc   ░   ▌   [еЪl   ⌡   j   [еЪ┴   ^   ]   [еЪl   ⌡   ·   [еЪ⌠   ^   ░   [еЪ]   ░   ^   [еЪ├   ]   ┴   [еЪ▌   ]   \   [еЪ┌   ┴   ├   [еЪ├         [еЪC   P   N   [еЪN   y   ъ   [еЪ?  <  ╓   [еЪф   п   Щ   [еЪр   ╓   <  [еЪс   к   Щ   [еЪс   ш   ╓   [еЪ<  п   р   [еЪ╓   р   с   [еЪ  C  G  [еЪ╓   C  ш   [еЪ]  *  ,  [еЪ?  G  C  [еЪ]       [еЪ&      [еЪQ  N    [еЪ     Q  [еЪQ      [еЪ    Q  [еЪ     Q  [еЪ╓   C  ?  [еЪА   J    [еЪJ    N  [еЪ  G    [еЪ  N  Q  [еЪN    J  [еЪ   ,      [еЪ-   2   ,   [еЪ-   ,      [еЪ      2   [еЪ   2   -   [еЪ   ┬      [еЪ         [еЪ         [еЪ\   ▀   ┬   [еЪ\   ┬      [еЪ▌   ▀   \   [еЪ▌   d   a   [еЪ▌   a   ▀   [еЪ≈   d   ▌   [еЪ≈   ≥   d   [еЪj   ≥   ≈   [еЪj   °   ≥   [еЪn   °   j   [еЪn   r   m   [еЪn   m   °   [еЪC   r   n   [еЪC   K   r   [еЪP   K   C   [еЪP   {   O   [еЪP   O   K   [еЪ|   {   P   [еЪ|   Г   {   [еЪК   Й   Г   [еЪК   Г   |   [еЪ╦   ╨   М   [еЪ╦   М   Й   [еЪ╦   Й   К   [еЪС   ц   ю   [еЪС   ю   ╨   [еЪС   ╨   ╦   [еЪЗ   е   ц   [еЪЗ   ц   С   [еЪк   Ч   и   [еЪк   и   е   [еЪк   е   З   [еЪс   ║      [еЪс      Ч   [еЪс   Ч   к   [еЪш   ╕   ║   [еЪш   ║   с   [еЪА   F  ╙   [еЪА   ╙   ╕   [еЪА   ╕   ш   [еЪJ  L  I  [еЪJ  I  F  [еЪJ  F  А   [еЪ  P  L  [еЪ  L  J  [еЪ   %  U  [еЪ   U  P  [еЪ   P    [еЪ(  %     [еЪ(  )  '  [еЪ(  '  %  [еЪ.  )  (  [еЪ.  -  )  [еЪh  -  .  [еЪh  l  2  [еЪh  2  -  [еЪ9  l  h  [еЪ9    l  [еЪ  t    [еЪ      [еЪ    9  [еЪ⌡  v  t  [еЪ⌡  t    [еЪx  ·  v  [еЪx  v  ⌡  [еЪ╒  ╔  ║  [еЪ╒  ║  ·  [еЪ╒  ·  x  [еЪ|  ╖  ╔  [еЪ|  ╔  ╒  [еЪ╚  ╙  ╖  [еЪ╚  ╖  |  [еЪd  e  -  [еЪ2   ,      [еЪ   ┬   9   [еЪV   ─   │   [еЪM   t   K   [еЪ      9   [еЪ/   3      [еЪ═  ╓  ║  [еЪю   ╨   У   [еЪя   й   и   [еЪR  V    [еЪ9   7      [еЪ3         [еЪи   е   й   [еЪя   Ъ   Ч   [еЪ}  ─  │  [еЪm   r   A   [еЪ┤   ▄   <   [еЪ╙  ╖  │  [еЪ≥   d   g   [еЪЛ   О   Y   [еЪ  R    [еЪM  R    [еЪщ   Б   ╛   [еЪ╖   щ   ╛   [еЪz   M   R   [еЪщ   з   ╕   [еЪЖ   Ш   д   [еЪA   ═   o   [еЪ)  '  b  [еЪ\  V  !  [еЪц   ю   а   [еЪI  F    [еЪ\  _  %  [еЪ;  =    [еЪ║      в   [еЪ    I  [еЪ²  ═  ÷  [еЪd  b  c  [еЪB  t  =  [еЪ╔  ╖    [еЪ╓    {  [еЪ9   7      [еЪ         [еЪ      ,   [еЪ,         [еЪ{  ё  ╓  [еЪЙ   Г   ─   [еЪ   <   ┤   [еЪ}    │  [еЪ╙  ╘  │  [еЪ'  %  _  [еЪ_  \  [  [еЪь   ё   в   [еЪY   ╧   О   [еЪЯ   У   ╨   [еЪ─  ╛  ╘  [еЪ  │  ╖  [еЪ▄   ▀   ┤   [еЪ╓  ═  ё  [еЪ  ╓  ╔  [еЪ{  }    [еЪt    =  [еЪ╔  ║  ╓  [еЪ║  ·  ═  [еЪ÷  ё  ═  [еЪ²  B  v  [еЪ²  B  @  [еЪ═  ²  ·  [еЪ  @  B  [еЪv  t  B  [еЪj  ;  l  [еЪB  =    [еЪ	  =    [еЪ  =  	  [еЪ;  =    [еЪb  _  '  [еЪ_  b  ^  [еЪ9   ┤   ┬   [еЪ   2      [еЪ      7   [еЪ      7   [еЪ   7      [еЪj  e  3  [еЪ9   ┤      [еЪ▀   ┬   ┤   [еЪd   e   b   [еЪb   a   ▄   [еЪa   ▀   ▄   [еЪ▐   ▓   b   [еЪ▐   <   ▄   [еЪа   д   Ж   [еЪЯ   У   ╩   [еЪх   д   Ш   [еЪд   ц   а   [еЪУ   а   Т   [еЪх   ц   д   [еЪе   ц   х   [еЪи   Ч   я   [еЪх   й   Э   [еЪЛ   Й   ─   [еЪ`  b  c  [еЪ^  b  `  [еЪЭ   й   л   [еЪМ   ╨   Я   [еЪY   └   Л   [еЪЛ   ─   └   [еЪЯ   М   О   [еЪМ   Й   О   [еЪ│   └   ─   [еЪV   z   {   [еЪV   z   x   [еЪ─   Г   V   [еЪЪ   я   о   [еЪO   K   M   [еЪR   x   z   [еЪ{   O   z   [еЪk   o   ═   [еЪz   O   M   [еЪE   t   L   [еЪs   t   E   [еЪM   t   L   [еЪr   K   t   [еЪA   t   s   [еЪA   ═   m   [еЪs   o   A   [еЪt   A   r   [еЪ═   ²   k   [еЪ²   ═   °   [еЪ°   m   ═   [еЪk       ²   [еЪ    ≤   g   [еЪ²   g       [еЪ≥   °   ²   [еЪg   d   e   [еЪ│  ─  ╘  [еЪО   Й   Л   [еЪЯ   О   ╧   [еЪe   g   ≤   [еЪ²   ≥   g   [еЪ≤   ▓   e   [еЪb   e   ▓   [еЪd  b  )  [еЪD  ²  ÷  [еЪ@  ²  D  [еЪ-  2  e  [еЪ-  )  d  [еЪj  e  2  [еЪe  d  0  [еЪ  ;  l  [еЪ  ;    [еЪ3  j  6  [еЪj  :  6  [еЪl  2  j  [еЪ  :  ;  [еЪj  ;  :  [еЪ  !  V  [еЪ!  [  \  [еЪU  P  V  [еЪU  %  \  [еЪR    M  [еЪV  \  U  [еЪ   /      [еЪV  P  R  [еЪR    L  [еЪL  I    [еЪP  R  L  [еЪ    Ф   [еЪ╝   щ   Б   [еЪ╝     F  [еЪ  ╝   Д   [еЪ║   ╕   з   [еЪ╙   F  ╝   [еЪ▄   b   ▐   [еЪd   a   b   [еЪ╩   Т   У   [еЪ╩   ╧   Я   [еЪЪ   ь   у   [еЪо   Ъ   у   [еЪ   Ч   Ъ   [еЪЪ   в      [еЪв   Ъ   ь   [еЪз   в   ё   [еЪc  0  d  [еЪз   в   ║   [еЪз   щ   ╖   [еЪ╕   ╙   щ   [еЪщ   ╝   ╙   [еЪ      /   [еЪ      2   [еЪ   7      [еЪ      3   [еЪТ   Ж   а   [еЪа   ю   У   [еЪФ   M    [еЪЭ   Ш   х   [еЪ~   V   │   [еЪx   V   ~   [еЪФ   Д     [еЪ         [еЪя   й   л   [еЪй   е   х   [еЪБ   Д   ╝   [еЪL   R   M   [еЪ3  0  e  [еЪ╖   ё   з   [еЪо   л   я   [еЪ[  _  ^  [еЪ·  v  ²  [еЪГ   {   V   [еЪp	  Ь  Т  [еЪ╧  ╛  ╛  [еЪp	  ╛  g	  [еЪ╧  p	  ╛  [еЪ╛  ▓	  ║	  [еЪ║	  Д  g
+  [еЪ╛  ╛  ╧  [еЪ╛  ║	  ╧  [еЪp	  p	  g	  [еЪ╛  ╧  ╧  [еЪД  Т  Т  [еЪь	  м	  м	  [еЪм	  Д  Т  [еЪь	  ь	  м	  [еЪД  Д  Т  [еЪм	  ь	  Т  [еЪм	  т	  м	  [еЪь	  т	  м	  [еЪp	  Т  g	  [еЪь	  м	  м	  [еЪь	  ь	  м	  [еЪg	  Т  М  [еЪg
+  ║	  ▓	  [еЪь	  H  т	  [еЪH  A  A  [еЪH  A  A  [еЪ*  9    [еЪH  H  A  [еЪW  W  f  [еЪ      [еЪA  W  f  [еЪW  f  f  [еЪH  т	  A  [еЪ9  9  *  [еЪ*  *  9  [еЪ  *    [еЪ9  *  *  [еЪH  H  A  [еЪ*  9  9  [еЪМ  Т  М  [еЪЬ  Т  М  [еЪ9  *  М  [еЪЬ  9  М  [еЪA  f  H  [еЪ  W    [еЪA  т	  м	  [еЪp	  ╧  S	  [еЪp	  S	  S	  [еЪp	  S	  S	  [еЪp	  S	  S	  [еЪ[
+  ║	   
+  [еЪS	  ╧  ╧  [еЪт  Ь  S	  [еЪТ   
+  Т  [еЪp	  S	  p	  [еЪЬ  S	  p	  [еЪЩ  ь	  Щ  [еЪТ  ь	  ╡	  [еЪ
+  ║	  [
+  [еЪ
+  ║	  
+  [еЪЩ  ь	  ╡	  [еЪЩ  ь	  Щ  [еЪЩ  ь	  Щ  [еЪТ   
+   
+  [еЪ
+  ╧  ║	  [еЪь	  ╡	  ╡	  [еЪь	  ╡	  ь	  [еЪS	  ╧  
+  [еЪS	  ╧  S	  [еЪТ  ╡	   
+  [еЪь	  Щ  ь	  [еЪo  H  H  [еЪo  H  o  [еЪo  H  o  [еЪo  H  o  [еЪ  *  *  [еЪf  .  H  [еЪь	  o  Щ  [еЪY  9    [еЪo  H  H  [еЪo  H  ь	  [еЪЬ  т  т  [еЪ9    9  [еЪ  *  l  [еЪf  l  ;  [еЪ9  т  т  [еЪ9  т  т  [еЪт  т  9  [еЪY    *  [еЪf  ;  f  [еЪт    9  [еЪ9  т  9  [еЪ;  .  f  [еЪ.  o  H  [еЪY  9    [еЪ9  т  Ь  [еЪS	  a	  S	  [еЪa	  S	  S	  [еЪa	  a	  S	  [еЪS	  a	  S	  [еЪЕ  S	  т  [еЪЕ  a	  S	  [еЪS	  S	  a	  [еЪS	  a	  a	  [еЪ
+  a	  
+  [еЪ
+  S	  a	  [еЪЩ  	  Щ  [еЪ	  Щ  Щ  [еЪ	  	  Щ  [еЪ	  Щ  Щ  [еЪ	  	  Щ  [еЪй	  Щ  ╡	  [еЪй	  	  Щ  [еЪ
+  
+  
+  [еЪ
+  
+  
+  [еЪc
+  
+  
+  [еЪ[
+  c
+  c
+  [еЪ[
+  
+  c
+  [еЪй	  й	  ╡	  [еЪй	  ╡	  ╡	  [еЪ$
+  ╡	   
+  [еЪ$
+  й	  ╡	  [еЪ 
+  [
+  c
+  [еЪ 
+  c
+  $
+  [еЪ 
+  $
+  $
+  [еЪ 
+   
+  $
+  [еЪo  u  o  [еЪu  o  o  [еЪu  u  o  [еЪo  u  o  [еЪ	  o  Щ  [еЪ	  u  o  [еЪ<  >  ;  [еЪ<  ;  .  [еЪu  .  o  [еЪu  <  .  [еЪт  Е  т  [еЪЕ  т  т  [еЪЕ  Е  т  [еЪЕ  т  т  [еЪЕ  Е  т  [еЪЕ  т  т  [еЪЕ  Е  т  [еЪl  ;  >  [еЪl  >  o  [еЪo  l  o  [еЪ*  o  0  [еЪ*  l  o  [еЪ  Y  [  [еЪ  [  %  [еЪт  %  Е  [еЪт    %  [еЪ*  *  0  [еЪ*  0  0  [еЪY  0  [  [еЪY  *  0  [еЪh	  M	  l	  [еЪй	  q
+  х	  [еЪl
+  
+  
+  [еЪ*
+  u
+  q
+  [еЪ#
+  ^
+  '
+  [еЪ*
+  q
+  й	  [еЪH	  `	  P	  [еЪ	
+  P
+  R
+  [еЪM	  h	  U	  [еЪd	  U	  h	  [еЪх	  ╔	  й	  [еЪI	  I	  d	  [еЪ	  	  	  [еЪM
+  I	  e	  [еЪR
+  h
+  P
+  [еЪI	  I	  P	  [еЪe	  
+  M
+  [еЪ	
+  	
+  
+  [еЪU	  d	  I	  [еЪ$
+  #
+  *
+  [еЪ'
+  #
+  $
+  [еЪP
+  P
+  h
+  [еЪ	  Ч  	  [еЪP
+  
+  ^
+  [еЪd	  H	  P	  [еЪo
+  
+  u
+  [еЪ
+  
+  
+  [еЪ	  	  	  [еЪ	  Ь  Ь  [еЪu
+  r
+  o
+  [еЪ
+  
+  
+  [еЪP	  K	  `	  [еЪr
+  o
+  o
+  [еЪ╕	  o
+  ╜	  [еЪ
+  
+  
+  [еЪ	  	  ╔	  [еЪ	  Ч  	  [еЪ	  	  ╔	  [еЪ	
+  M
+  
+  [еЪ^
+  
+  
+  [еЪ'
+  i
+  ^
+  [еЪ	  Ь  	  [еЪc
+  c
+  i
+  [еЪ
+  a	  
+  [еЪЕ  a	  l	  [еЪa	  H	  a	  [еЪк  I	  M	  [еЪу  к  M	  [еЪВ  у  M	  [еЪI	  I	  U	  [еЪl	  M	  В  [еЪM	  U	  I	  [еЪl	  В  Е  [еЪl	  a	  h	  [еЪh	  H	  d	  [еЪd	  P	  I	  [еЪ╜	  ╔	  	  [еЪ	  ╜	  ╕	  [еЪЬ  ╕	  	  [еЪ	  	  	  [еЪЬ  Ь  	  [еЪ	  Ч  Ь  [еЪЧ  Ь  Ь  [еЪ	  	  	  [еЪ	  	  	  [еЪe	  K	  
+  [еЪI	  P	  e	  [еЪK	  P	  e	  [еЪK	  
+  
+  [еЪ	
+  
+  
+  [еЪu
+  *
+  
+  [еЪ
+  u
+  
+  [еЪr
+  u
+  q
+  [еЪq
+  х	  r
+  [еЪ╜	  r
+  o
+  [еЪl
+  
+  R
+  [еЪ
+  R
+  	
+  [еЪh
+  R
+  l
+  [еЪl
+  i
+  h
+  [еЪh
+  ^
+  P
+  [еЪa	  h	  H	  [еЪa	  a	  `	  [еЪ`	  H	  a	  [еЪ`	  a	  K	  [еЪ#
+  *
+  
+  [еЪ$
+  й	  *
+  [еЪ
+  ^
+  #
+  [еЪ$
+  #
+  $
+  [еЪ^
+  h
+  i
+  [еЪc
+  $
+  '
+  [еЪ
+  l
+  c
+  [еЪ'
+  i
+  c
+  [еЪ╔	  ╜	  х	  [еЪй	  ╔	  	  [еЪ╔	  	  	  [еЪr
+  ╜	  х	  [еЪй	  й	  х	  [еЪK	  a	  
+  [еЪ
+  
+  
+  [еЪ
+  
+  
+  [еЪ
+  l
+  
+  [еЪc
+  l
+  i
+  [еЪl  {  y  [еЪЙ  з  к  [еЪx  p  j  [еЪj  j  w  [еЪ,  -  3  [еЪW  %  b  [еЪД  %  W  [еЪe  e  g  [еЪl  y  q  [еЪj  j  q  [еЪj  p  =  [еЪ'  i  w  [еЪк  Й  к  [еЪ<  ?    [еЪg  t  e  [еЪ%  '  ;  [еЪ    ?  [еЪз  й  Н  [еЪй  Н  Е  [еЪ,  [  b  [еЪ,  0  3  [еЪ4  -  3  [еЪэ  В  у  [еЪ]  W  b  [еЪ!  !  -  [еЪU  U  ]  [еЪ!  e  t  [еЪк  к  з  [еЪЕ  В  э  [еЪ]    U  [еЪU  !  X  [еЪ  j  '  [еЪк    U  [еЪу  Й  э  [еЪe  9  p  [еЪД  й  Е  [еЪк  к  я  [еЪw  q  j  [еЪ<  p  =  [еЪ-  X  !  [еЪ;  '  i  [еЪ9    <  [еЪo  0  4  [еЪ>  <  =  [еЪu  	  {  [еЪu  u  i  [еЪw  q  y  [еЪl  	  Ч  [еЪl  Ч  Ь  [еЪj  Ь  l  [еЪ	  l  {  [еЪq  j  l  [еЪ	  	  {  [еЪy  {  u  [еЪi  w  y  [еЪj  '  w  [еЪз  я  й  [еЪк  я  з  [еЪЙ  з  Н  [еЪэ  Н  Й  [еЪк  Й  к  [еЪЙ  у  к  [еЪк  у  к  [еЪН  Е  э  [еЪЕ  э  Е  [еЪ?  <  %  [еЪ'  ?    [еЪ?  %  '  [еЪ=  <  %  [еЪp  9  <  [еЪ]    W  [еЪU  ]  X  [еЪ]  X  b  [еЪД    W  [еЪк  я    [еЪg  t  x  [еЪg  e  p  [еЪp  x  g  [еЪ4  t  x  [еЪ-  !  t  [еЪi  u  y  [еЪ;  <  u  [еЪi  ;  u  [еЪ<  %  ;  [еЪb  X  ,  [еЪ[  %  b  [еЪX  -  ,  [еЪ[  0  ,  [еЪ-  t  4  [еЪ0  3  0  [еЪx  o  o  [еЪ4  0  3  [еЪя  Д  й  [еЪЕ  Е  й  [еЪй  Е  Е  [еЪя  Д    [еЪД  Е  %  [еЪ=  %  <  [еЪo  >  j  [еЪ>  j  =  [еЪx  o  j  [еЪ4  o  x  [еЪЬ	  7
+  2	  [еЪw  Л  2	  [еЪЬ	  w  2	  [еЪ7
+  Ь	  б
+  [еЪ╩
+  7
+  б
+  [еЪ<  Ъ
+  K  [еЪG  w  Л  [еЪб
+  ╫
+    [еЪЪ
+  K  б
+  [еЪp  &  3  [еЪ│  K  3  [еЪ3  >  └  [еЪJ  w  G  [еЪ>	  H
+  ╕
+  [еЪG  Л  C  [еЪ:
+  5	  Ь	  [еЪР  5	  w  [еЪK  б
+    [еЪЬ	  б
+  :
+  [еЪK  >    [еЪ3  K  >  [еЪ©  Ы    [еЪв
+      [еЪ3  └  *  [еЪ│  <  K  [еЪ&  │  3  [еЪ  ┬  ©  [еЪ  *  s  [еЪp      [еЪ╕
+    ш
+  [еЪв
+  H
+  ╕
+  [еЪ┌  K
+  C	  [еЪЗ  ©  ┌  [еЪв
+    ╕
+  [еЪ┌  >	  Ы  [еЪ┬  ┤  ©  [еЪ┤  ┌    [еЪЪ
+  ╩
+  б
+  [еЪ©  ┤    [еЪ╕
+  >	  ┌  [еЪР  J  w  [еЪ  3  *  [еЪб
+  ╫
+  :
+  [еЪ  s    [еЪ╕
+      [еЪЗ    ©  [еЪ╕
+  K
+  ш
+  [еЪ┌  ╕
+  K
+  [еЪC	  З  ┌  [еЪ5	  Ь	  w  [еЪ┌  ©  Ы  [еЪp  3    [еЪМ  8  ═  [еЪ   ⌠  ═  [еЪМ     ═  [еЪ8  М  F  [еЪA  8  F  [еЪ"    Я  [еЪ┤     ⌠  [еЪF  B    [еЪ  Я  F  [еЪп  ▐  ▌  [еЪю  Я  ▌  [еЪ▌  &  б  [еЪ┬     ┤  [еЪ▄  3  e  [еЪ┤  ⌠  ┌  [еЪ;  ╒  М  [еЪ≤  ╒     [еЪЯ  F    [еЪМ  F  ;  [еЪЯ  &    [еЪ▌  Я  &  [еЪЙ  Ц  ┤  [еЪ,    Ч  [еЪ▌  б  ⌠  [еЪю  "  Я  [еЪ▐  ю  ▌  [еЪХ  J  Й  [еЪЧ  ⌠  с  [еЪп    Ч  [еЪe    0  [еЪ,  3  e  [еЪ▌  6  ▓  [еЪ▀  Й  ▌  [еЪ,  Ч  e  [еЪ▌  ┤  ▄  [еЪJ  G  Й  [еЪG  C  Ц  [еЪ  A  F  [еЪG  Й  Ц  [еЪe  ▄  ▌  [еЪ≤  ┬     [еЪЧ  ▌  ⌠  [еЪF  B  ;  [еЪЧ  с    [еЪe  Ч    [еЪХ  ▀  Й  [еЪe  0  6  [еЪ▌  e  6  [еЪ▀  ▓  ▌  [еЪ╒  М     [еЪ▌  Й  ┤  [еЪп  ▌  Ч  [еЪЧ
+  A  N  [еЪ└
+  {
+  N  [еЪЧ
+  └
+  N  [еЪA  Ч
+  ≈  [еЪ╡  A  ≈  [еЪ)  Ч  Щ  [еЪ(	  └
+  {
+  [еЪ≈  ╤    [еЪЧ  Щ  ≈  [еЪ  А  Н  [еЪО  Щ  Н  [еЪ,  Н  Р  [еЪ)	  └
+  (	  [еЪд
+  ]  ·  [еЪ(	  {
+  #	  [еЪC  R  Ч
+  [еЪ┌
+  R  └
+  [еЪЩ  ≈    [еЪЧ
+  ≈  C  [еЪЩ    ,  [еЪН  Щ  ,  [еЪ0
+  Е	  	  [еЪ═  п  ш  [еЪН  Р  Е  [еЪО  )  Щ  [еЪА  О  Н  [еЪ	  ╜  0
+  [еЪш  Е    [еЪ  п  ш  [еЪ·  с  ё  [еЪ═  ]  ·  [еЪ∙
+  b  и
+  [еЪК	  0
+  ∙
+  [еЪ═  ш  ·  [еЪ∙
+  д
+  Е	  [еЪ╜  ╛  0
+  [еЪ╛  ╖  	  [еЪЧ  ╡  ≈  [еЪ0
+  ╛  	  [еЪ·  д
+  ∙
+  [еЪ)	  ┌
+  └
+  [еЪш  Н  Е  [еЪ≈  ╤  C  [еЪш    с  [еЪ·  ш  с  [еЪК	  	  0
+  [еЪ·  b  ё  [еЪ∙
+  ·  b  [еЪи
+  К	  ∙
+  [еЪR  Ч
+  └
+  [еЪ∙
+  0
+  Е	  [еЪ  Н  ш  [еЪ  *  р  [еЪ;    р  [еЪ  ;  р  [еЪ*    <  [еЪ5  *  <  [еЪ╠  Я  ╞  [еЪ╛  ;    [еЪ<  9  Т  [еЪЯ  ╞  <  [еЪ  Q  O  [еЪz  ╞  O  [еЪЁ  O    [еЪ╜  ;  ╛  [еЪг    x  [еЪ╛    ╖  [еЪж  -    [еЪ	  ж  ;  [еЪ╞  <  Т  [еЪ  <  -  [еЪ╞  Т  Ё  [еЪO  ╞  Ё  [еЪД  ч  .  [еЪ  ц    [еЪO    T  [еЪz  ╠  ╞  [еЪQ  z  O  [еЪБ  )	  Д  [еЪ  T    [еЪ  ц    [еЪx  х    [еЪ    x  [еЪ  #  л  [еЪ3  Д    [еЪ    x  [еЪ  .  г  [еЪ)	  (	  Д  [еЪ(	  #	  ч  [еЪЯ  5  <  [еЪ(	  Д  ч  [еЪx  г    [еЪ╜  	  ;  [еЪ  O  T  [еЪ<  -  9  [еЪ    х  [еЪx    х  [еЪ3  Б  Д  [еЪx  #    [еЪ  x  #  [еЪл  3    [еЪж    ;  [еЪ  Д  .  [еЪ  O    [еЪ
