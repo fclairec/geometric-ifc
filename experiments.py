@@ -15,7 +15,7 @@ from learning.models import GCNConv
 from learning.trainers import Trainer
 from torch.nn import Sequential as Seq, Dropout, Linear as Lin
 from learning.models import MLP
-from learning.models import PN2Net, GCNConv, GCNPool, GCNCat, GCN, DGCNNNet, PN2Net
+from learning.models import PN2Net, GCNConv, GCNPool, GCNCat, GCN, DGCNNNet, PN2Net, GCNCat_extended, GCNCat_16, GCNCat_32, GCNCat_64, GCNCat_128
 
 import os
 import pandas as pd
@@ -31,7 +31,7 @@ NUM_WORKERS = 6
 # Define depending on hardware
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 print("running with:{}".format(device))
-# device = 'cpu'
+#device = 'cpu'
 
 print(os.getcwd())
 
@@ -40,24 +40,25 @@ WRITE_DF_TO_ = ['to_csv']  # , 'to_latex'
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Train 3D Geometric Classifier')
-    parser.add_argument('--dataset', default=['BIMGEOMV1', 'IFCNetCoreObj'], nargs='+', type=str, help='dataset name')
-    parser.add_argument('--num_epoch', default=[1], nargs='+', type=int, help='number of epochs')
+    parser.add_argument('--dataset', default=['BIMGEOMV4'], nargs='+', type=str, help='dataset name') #BIMGEOMV3
+    parser.add_argument('--num_epoch', default=[250], nargs='+', type=int, help='number of epochs')
     parser.add_argument('--batch_size', nargs='+', default=[30], type=int, help='batch size')
     parser.add_argument('--learning_rate', nargs='+', default=[0.001], type=float, help='learning rate of optimizer')
-    parser.add_argument('--model', default=["GCNPool", "GCNCat", "GCNCat", "PN2Net", "DGCNNNet"], nargs='+', help='model to train') #
+    parser.add_argument('--model', default=["GCNCat"], nargs='+', help='model to train') #"PN2Net", "DGCNNNet"
     parser.add_argument('--knn', default=[5], nargs='+', help='k nearest point neighbors to connect')
-    parser.add_argument('--rotation', default=["[0,0,0]"], nargs='+',
-                        help='rotation interval applied to each sample around a specific axis [x, y, z]') #, "[180,180,0]"
+    parser.add_argument('--rotation', default=["[0,0,180]"], nargs='+',
+                        help='rotation interval applied to each sample around a specific axis [x, y, z]') #, "[180,180,0]" , "[180,180,180]"
     parser.add_argument('--samplePoints', default=[1024], nargs='+', type=int,
                         help='points to sample from mesh surface')
-    parser.add_argument('--node_translation', default=[0.0], nargs='+', type=float,
+    parser.add_argument('--node_translation', default=[0.001], nargs='+', type=float,
                         help='translation interval applied to each point')
-    parser.add_argument('--mesh', default=[False], nargs='+', help='is input a surface mesh?')
+    parser.add_argument('--mesh', default=["PCD"], nargs='+', help='is input a surface mesh?')
 
     parser.add_argument('--data_path', default='../resources', type=str, help='path to dataset to train')
-    parser.add_argument('--output_path', default='../data/Wed_test_inf', type=str, help='output path for experiments')
+    parser.add_argument('--output_path', default='../data/1210_tab4_dgcnn', type=str, help='output path for experiments')
     parser.add_argument('--logdir', default='./log', type=str, help='path to directory to save log')
     parser.add_argument('--checkpoint_dir', default=False, nargs='+', type=str, help='list of paths to directory to checkpoint')
+
 
     args = parser.parse_args()
     return args
@@ -68,18 +69,29 @@ def transform_setup(k=5, rotation=[0, 0, 0], samplePoints=1024, mesh=False, node
     pre_transform = T.Compose([T.NormalizeScale(), T.Center()])
 
     # Mesh-to-Graph approach
-    if mesh:
+    if mesh is True and mesh is not "PCD":
         transform = T.Compose([T.RandomRotate(rotation[0], axis=0), T.RandomRotate(rotation[1], axis=1),
                                T.RandomRotate(rotation[2], axis=2),
                                T.GenerateMeshNormals(), T.RandomTranslate(node_translation),
-                               T.FaceToEdge(True), T.Distance(norm=True), T.TargetIndegree(cat=True)])
+                               T.FaceToEdge(False), T.Distance(norm=True), T.TargetIndegree(cat=True)])
 
     # Point Sampling & K-nn graph
-    else:
+    if mesh is False:
+        """transform = T.Compose([T.RandomRotate(rotation[0], axis=0), T.RandomRotate(rotation[1], axis=1),
+                               T.RandomRotate(rotation[2], axis=2),
+                               T.GenerateMeshNormals(), T.RandomTranslate(node_translation),
+                               T.SamplePoints(samplePoints, False, True), T.KNNGraph(k=k), T.Distance(norm=True)])"""
         transform = T.Compose([T.RandomRotate(rotation[0], axis=0), T.RandomRotate(rotation[1], axis=1),
                                T.RandomRotate(rotation[2], axis=2),
                                T.GenerateMeshNormals(), T.RandomTranslate(node_translation),
-                               T.SamplePoints(samplePoints, True, True), T.KNNGraph(k=k), T.Distance(norm=True)])
+                               T.SamplePoints(samplePoints, False, True), T.KNNGraph(k=k), T.Distance(norm=True)])
+
+    # Mesh-to-Graph approach
+    if mesh is "PCD":
+        transform = T.Compose([T.RandomRotate(rotation[0], axis=0), T.RandomRotate(rotation[1], axis=1),
+                               T.RandomRotate(rotation[2], axis=2),
+                               T.RandomTranslate(node_translation),
+                               T.KNNGraph(k=k), T.Distance(norm=True)]) #T.FixedPoints(num=1024),
 
     print("The following sample pre-transforms are applied: {}".format(pre_transform))
     print("The following sample transforms are applied: {}".format(transform))
@@ -122,6 +134,9 @@ class Experimenter(object):
                 self.model_to_load_dir = params['checkpoint_dir']
                 info_to_load = pd.read_csv(os.path.join(self.model_to_load_dir, "checkpoint_info.csv"), index_col=0)
                 dataset_name = info_to_load["dataset"].values[0]
+                dataset_name = params['dataset_name']
+                mesh = False
+                mesh = params['mesh']
                 model_name = globals()[info_to_load["model"].values[0]]
                 n_epochs = 1 # fix
                 batch_size = 30 # need this to do efficient testing?
@@ -130,8 +145,8 @@ class Experimenter(object):
                 learning_rate = 0.001
                 knn = 5
                 rotation = [0,0,0]
-                sample_points = 1024
-                mesh = False
+                sample_points = 2048
+
                 node_translation = 0
 
             # Prepare result output
@@ -148,7 +163,7 @@ class Experimenter(object):
                 output_path_run = os.path.join(self.model_to_load_dir, "transfer")
                 print("transfer learing dir registered")
             if pretrained and not train and inference:
-                output_path_run = os.path.join(self.model_to_load_dir, "inference")
+                output_path_run = os.path.join(self.model_to_load_dir, "inference"+ str(dataset_name[-2:]))
                 print("inference dir registered")
 
             if not os.path.exists(output_path_run):
@@ -157,8 +172,8 @@ class Experimenter(object):
             self.dataset_path = os.path.join(self.dataset_root_path, dataset_name)
             print(os.getcwd())
             print(self.dataset_path)
-            """if os.path.exists(os.path.join(self.dataset_path, "processed")):
-                shutil.rmtree(os.path.join(self.dataset_path, "processed"))"""
+            if os.path.exists(os.path.join(self.dataset_path, "processed")):
+                shutil.rmtree(os.path.join(self.dataset_path, "processed"))
 
             if dataset_name[0] == 'B':
                 self.dataset_name = BIMGEOM
@@ -214,8 +229,11 @@ class Experimenter(object):
                                                                                                     optimizer)
         print('{} seconds'.format(time.time() - t0))
         # Evaluate best model on Test set
+        print("here")
         test_acc, y_pred, y_real, _, _, _ = trainer.test(test_loader, seg=False)
+        print("here")
         val_acc2, _, _, _, _, _ = trainer.test(val_loader, seg=False)
+        print("here")
 
         print("Test accuracy = {}, Val accuracy = {}".format(test_acc, val_acc2))
 
@@ -233,7 +251,7 @@ class Experimenter(object):
             transform, pre_transform = transform_setup(rotation=rotation, samplePoints=sample_points, mesh=mesh)
         if model_name.__name__ is 'DGCNNNet':
             transform, pre_transform = transform_setup()
-        if model_name.__name__ is 'GCN' or 'GCN_cat' or 'GCN_pool' or 'GCNConv':
+        if model_name.__name__ is 'GCN' or 'GCN_cat' or 'GCN_pool' or 'GCNConv' or 'GCNCat_extended' or 'GCNCat_extended_16' or 'GCNCat_extended_32'or 'GCNCat_extended_64'or 'GCNCat_extended_128' or "GCNCat_16"or "GCNCat_32"or "GCNCat_64"or "GCNCat_128":
             # number of knn to connect to as argument
             transform, pre_transform = transform_setup(k=knn, rotation=rotation, samplePoints=sample_points,
                                                        mesh=mesh, node_translation=node_translation)
@@ -265,7 +283,9 @@ class Experimenter(object):
 
         # Imbalanced datasets: create sampler depending on the length of data per class
         if train:
+
             sampler_train = make_set_sampler(train_dataset)
+
         # sampler_val = make_set_sampler(val_dataset)
         if pretrained:
             sampler_test = None
@@ -275,14 +295,14 @@ class Experimenter(object):
         # Define dataloaders
         if train:
             train_loader = DataLoader(train_dataset, batch_size=batch_size, num_workers=NUM_WORKERS,
-                                      sampler=sampler_train)
-            unbalanced_train_loader = DataLoader(train_dataset, batch_size=batch_size, num_workers=NUM_WORKERS)
+                                      sampler=sampler_train, drop_last=True)
+            unbalanced_train_loader = DataLoader(train_dataset, batch_size=batch_size, num_workers=NUM_WORKERS, drop_last=True)
             val_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False, num_workers=NUM_WORKERS,
-                                    sampler=sampler_test)
+                                    sampler=sampler_test, drop_last=True)
             # val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False, num_workers=NUM_WORKERS,
             #                        sampler=sampler_val)
         test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False, num_workers=NUM_WORKERS,
-                                 sampler=sampler_test)
+                                 sampler=None, drop_last=True)
         if inference:
             inf_loader = DataLoader(test_dataset, batch_size=self.batch_size_inf, shuffle=False, num_workers=NUM_WORKERS,
                                  sampler=sampler_test)
@@ -321,13 +341,13 @@ class Experimenter(object):
             if pretrained:
                 model = model_name(dim_last_layer)
                 model.load_state_dict(checkpoint['state_dict'], strict=False)
-                model.mlp = Seq(
-                    MLP([1024, 512]), Dropout(0.5), MLP([512, 256]), Dropout(0.5),
-                    Lin(256, train_dataset.num_classes))
+                if train:
+                    model.mlp = Seq(MLP([1024, 512]), Dropout(0.5), MLP([512, 256]), Dropout(0.5),
+                        Lin(256, test_dataset.num_classes))
             else:
                 model = model_name(out_channels=train_dataset.num_classes)
 
-        if model_name.__name__ in ['GCN', 'GCNCat', 'GCNPool', 'GCNConv']:
+        if model_name.__name__ in ['GCN', 'GCNCat', 'GCNPool', 'GCNConv', 'GCNCat_extended', 'GCNCat_extended_16', 'GCNCat_extended_32', 'GCNCat_extended_64', 'GCNCat_extended_128', "GCNCat_16", "GCNCat_32","GCNCat_64", "GCNCat_128"]:
             if pretrained:
                 model = model_name(num_classes=dim_last_layer)
                 model.load_state_dict(checkpoint['state_dict'], strict=True)
@@ -362,12 +382,12 @@ class Experimenter(object):
             output_path_error = os.path.join(output_path_run, "error")
 
             print("overal inference accuracy : {}".format(inf_acc))
-            print("overal test accuracy (should be the same.. just different batch size : {}".format(test_acc))
+            #print("overal test accuracy (should be the same.. just different batch size : {}".format(test_acc))
             if not os.path.exists(output_path_error):
                 os.makedirs(output_path_error)
             #   TODO: make inference independant of test
 
-            self.inference(test_loader, output_path_run, output_path_error, inf_prob, inf_y_pred, inf_y_real, inf_crit_points, final_embedding)
+            self.inference(inf_loader, output_path_run, output_path_error, inf_prob, inf_y_pred, inf_y_real, inf_crit_points, final_embedding)
 
         # vis_graph(val_loader, output_path)
         # write_pointcloud(val_loader,output_path)$
@@ -397,7 +417,7 @@ class Experimenter(object):
         df_final_embedding.to_csv(os.path.join(output_path_run,"finalembeddings.csv"), index=False)
 
 
-        #vis_point(test_loader, output_path_run, output_path_error, prob, y_pred, y_real, crit_points)
+        vis_point(test_loader, output_path_run, output_path_error, prob, y_pred, y_real, crit_points)
         return
 
 
@@ -416,8 +436,7 @@ if __name__ == '__main__':
     if not os.path.exists(output_path):
         os.makedirs(output_path)
 
-    # print set plots
-    print_set_stats = False
+
 
     # for transfer learning we list the pretrained model models here. In case we train from scratch use pretrained_list = [False]
     #pretrained_list = [ "../Resultate/6_out_experiments/3_clas/model_state_best_val.pth.tar", "../Resultate/6_out_experiments/2_clas/model_state_best_val.pth.tar"] # "/data/out_ec3/0_clas/model_state_best_val.pth.tar"
@@ -442,6 +461,9 @@ if __name__ == '__main__':
         config['node_translation'] = args.node_translation
         config['mesh'] = args.mesh
 
+        # print set plots
+        print_set_stats = True
+
         # configure experiements
         ex = Experimenter(config, dataset_root_path, output_path)
         # run experiments
@@ -450,7 +472,11 @@ if __name__ == '__main__':
     if mode is "INF":
         pretrained = True
         train = False
+        # print set plots
+        print_set_stats = False
         config['checkpoint_dir'] = args.checkpoint_dir
+        config['dataset_name'] = args.dataset
+        config['mesh'] = args.mesh
         ex = Experimenter(config, dataset_root_path, output_path)
         # run experiments
         ex.run(print_set_stats, pretrained, train=train, inference=True)

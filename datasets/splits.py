@@ -45,7 +45,9 @@ def make_set_sampler(dataset):
 
     weights_dict = [(tup[0], 1 / tup[1]) for tup in list(l_per_class.items())]
     weights = [1 / tup[1] for tup in list(l_per_class.items())]
+
     samples_weights = [weights[t] for t in dataset.data.y]
+
     samples_weights = torch.from_numpy(np.array(samples_weights)).double()
     sampler = WeightedRandomSampler(samples_weights, len(samples_weights))
 

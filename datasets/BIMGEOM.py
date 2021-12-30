@@ -1,17 +1,56 @@
 import os.path as osp
 import torch
 import pandas as pd
+from torch._tensor_str import PRINT_OPTS, _tensor_str
 import pickle
 
 import glob
-from torch_geometric.io import read_ply
+from datasets.ply import read_ply, read_ply_binary, read_ply_pcd
 from torch_geometric.data import download_url, extract_zip
 import os
 import shutil
 import numpy as np
+
+import re
 # Edited because newest push to master in PytorchGeom is not in pip package (yet)
 from helpers.in_memory_dataset import InMemoryDataset
 import torch_geometric.transforms as T
+import openmesh
+from torch._tensor_str import PRINT_OPTS
+
+REGEX = r'[\[\]\(\),]|tensor|(\s)\1{2,}'
+
+
+def write_off(data, path):
+    r"""Writes a :class:`torch_geometric.data.Data` object to an OFF (Object
+    File Format) file.
+    Args:
+        data (:class:`torch_geometric.data.Data`): The data object.
+        path (str): The path to the file.
+    """
+    num_nodes, num_faces = data.pos.size(0), data.face.size(1)
+
+    pos = data.pos.to(torch.float)
+    face = data.face.t()
+    num_vertices = torch.full((num_faces, 1), face.size(1), dtype=torch.long)
+    face = torch.cat([num_vertices, face], dim=-1)
+
+    threshold = PRINT_OPTS.threshold
+    torch.set_printoptions(threshold=float('inf'))
+
+    pos_repr = re.sub(',', '', _tensor_str(pos, indent=0))
+    pos_repr = '\n'.join([x[2:-1] for x in pos_repr.split('\n')])[:-1]
+
+    face_repr = re.sub(',', '', _tensor_str(face, indent=0))
+    face_repr = '\n'.join([x[2:-1] for x in face_repr.split('\n')])[:-1]
+
+    with open(path, 'w') as f:
+        f.write('OFF\n{} {} 0\n'.format(num_nodes, num_faces))
+        f.write(pos_repr)
+        f.write('\n')
+        f.write(face_repr)
+        f.write('\n')
+    torch.set_printoptions(threshold=threshold)
 
 
 class BIMGEOM(InMemoryDataset):
@@ -56,7 +95,7 @@ class BIMGEOM(InMemoryDataset):
     }
 
     def __init__(self, root, name='V1', train=True, transform=None, pre_transform=None, pre_filter=None):
-        assert name in ['V1', 'V2']
+        assert name in ['V1', 'V2', 'V3', 'V4']
         self.name = name
 
         super(BIMGEOM, self).__init__(root, transform, pre_transform, pre_filter)
@@ -69,7 +108,7 @@ class BIMGEOM(InMemoryDataset):
     @property
     def raw_file_names(self):
         # helper for loading data from directory, class names must match directory names
-        if self.name == 'V1':
+        if self.name == 'V1' or 'V3' or 'V4':
             return [
                 # all classes in the dataset is in the dataset
                 'IfcDistributionControlElement', 'IfcFlowController', 'IfcFlowFitting', 'IfcFlowSegment',
@@ -80,7 +119,7 @@ class BIMGEOM(InMemoryDataset):
     @property
     def classmap(self):
         # helper for storing int instead of text for item labels
-        if self.name == 'V1':
+        if self.name == 'V1' or 'V3' or 'V4':
             return {
                 # all classes in the dataset is in the dataset
                 0: 'IfcDistributionControlElement', 1: 'IfcFlowController', 2: 'IfcFlowFitting',
@@ -150,16 +189,18 @@ class BIMGEOM(InMemoryDataset):
 
             for i, path in enumerate(paths):
                 path_list.append(path)
-
-                data = read_ply(path)
+                if self.name == 'V1':
+                    data = read_ply(path)
+                if self.name == 'V3':
+                    data = read_ply_binary(path)
+                if self.name == 'V4':
+                    data = read_ply_pcd(path)
                 label = list(self.classmap.keys())[list(self.classmap.values()).index(category)]
                 id_list.append(path)
 
                 data.y = torch.tensor([label])
 
-
-
-                """trans = T.SamplePoints(1025, True, True)
+                self.a_ = """trans = T.SamplePoints(1025, False, True)
                 trans2 = T.GenerateMeshNormals()
                 trans2(data)
                 trans(data)
@@ -213,9 +254,19 @@ class BIMGEOM(InMemoryDataset):
 
         if self.pre_transform is not None:
             data_list2 = []
+            dir ="./resources/geoms_test_cut"
+
+            if not os.path.exists(dir):
+                os.mkdir(dir)
             for i, d in enumerate(data_list):
                 d = self.pre_transform(d)
                 data_list2.append(d)
+
+                """if dataset is not "train":
+                    write_off(d, dir+"/" + id_list[i].split("/")[-1] + ".off")
+                    print("wrote off")
+                    print(os.getcwd())
+                    print(dir+"/" + id_list[i].split("/")[-1] + ".off")"""
 
             data_list = data_list2
 

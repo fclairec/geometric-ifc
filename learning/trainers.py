@@ -3,6 +3,7 @@ __author__ = 'fiona.collins'
 import numpy as np
 import torch
 import torch.nn.functional as F
+from sklearn.metrics import balanced_accuracy_score, accuracy_score
 import os
 import pandas as pd
 from sklearn.metrics import roc_auc_score, average_precision_score
@@ -40,7 +41,7 @@ def pointnetloss(outputs, labels, m3x3, m64x64, alpha=0.0001):
 
 
 class Trainer:
-    def __init__(self, model, output_path, max_patience=120):
+    def __init__(self, model, output_path, max_patience=70):
         self.model = model
         self.output_path = output_path
         self.max_patience = max_patience
@@ -103,7 +104,9 @@ class Trainer:
             print("\nEpoch {} - train loss: {}, train acc: {} val acc: {}".format(epoch, epoch_losses[-1],
                                                                                   train_accuracies[-1],
                                                                                   val_acc))
-
+            filename = "checkpoint_info.csv"
+            self.save_training_info(self.output_path, train_loader.dataset, train_loader.dataset.num_classes,
+                                    self.model.__class__.__name__, val_acc, filename)
             is_best = val_acc > best_performance
             best_performance = max(val_acc, best_performance)
             # saves state dictionary of every epoch (overwrites), additionally saves best
@@ -115,10 +118,9 @@ class Trainer:
                                      'best_val_acc': best_performance,
                                      'optimizer': optimizer.state_dict(),
                                      'num_output_classes': train_loader.dataset.num_classes
-                                 }, is_best
+                                 }, is_best, train_loader, best_performance
                                  )
-            self.save_training_info(self.output_path, train_loader.dataset, train_loader.dataset.num_classes, self.model.__class__.__name__, best_performance)
-            print("checkpoint saved to", self.output_path)
+
 
             # if we just found a better model (better validation accuracy)
             # then the window for early stop is set back to the max patience
@@ -139,32 +141,38 @@ class Trainer:
                 optimizer.load_state_dict(checkpoint['optimizer'])
                 self.model.to(device)
                 mean_epoch_time = statistics.mean(epoch_times)
-                print("finished training because patience {}".format(self.patience))
+                print("finished training because patience {} or all epochs done".format(self.patience))
                 return epoch_losses, train_accuracies, val_accuracies, epoch_test, mean_epoch_time
         print("finished training because finished")
         return
 
     def eval(self, data_loader, seg):
         self.model.eval()
+        y_pred = []
+        y_real = []
 
         correct = 0
         for i, data in enumerate(data_loader):
-            #i == 3: break
+            #if i == 3: break
             data = data.to(device)
             # loss = F.nll_loss(self.model(data)[0], data.y)
             with torch.no_grad():
                 output, _, _ = self.model(data)
                 pred = output.max(1)[1]
             correct += pred.eq(data.y).sum().item()
+            y_pred = concat((y_pred, pred.cpu().numpy()))
+            y_real = concat((y_real, data.y.cpu().numpy()))
 
         if seg:
             acc = correct / len(data_loader.dataset.data.pos)
             print("val acc {}".format(acc))
         else:
             acc = correct / len(data_loader.dataset)
+            bal_acc = balanced_accuracy_score(y_true=y_real, y_pred=y_pred)
             print("val acc {}".format(acc))
+            print("bal val acc {}".format(bal_acc))
 
-        return acc
+        return bal_acc
 
     def test(self, data_loader, seg, save_pred=False, prediction_path=None):
         self.model.eval()
@@ -241,19 +249,31 @@ class Trainer:
             # average over the number of graphs
             acc = correct / len(data_loader.dataset)
 
-        return acc, y_pred, y_real, prob, crit_points_list, final_embedding
+        bal_acc = balanced_accuracy_score(y_true=y_real, y_pred=y_pred)
+        acc_sk = accuracy_score(y_true=y_real, y_pred=y_pred)
+        print("acc_sk")
+        print(acc_sk)
+        print("bacc_sk")
+        print(bal_acc)
 
-    def save_checkpoint(self, path, state, is_best):
+        return bal_acc, y_pred, y_real, prob, crit_points_list, final_embedding
+
+    def save_checkpoint(self, path, state, is_best, loader, best_performance):
         filename = 'model_state.pth.tar'
         path_out = osp.join(path, filename)
         torch.save(state, path_out)
+
         if is_best:
             filename = 'model_state_best_val.pth.tar'
             path_out = osp.join(path, filename)
             torch.save(state, path_out)
+            filename = "checkpoint_info_best.csv"
+            self.save_training_info(self.output_path, loader.dataset, loader.dataset.num_classes,
+                                    self.model.__class__.__name__, best_performance, filename)
+            print("checkpoint saved to", self.output_path)
 
-    def save_training_info(self, path, dataset, num_classes, model, best_perf):
-        filename = "checkpoint_info.csv"
+    def save_training_info(self, path, dataset, num_classes, model, best_perf, filename):
+
         infos = []
         path_out = osp.join(path, filename)
         info = {}
@@ -324,6 +344,10 @@ class Trainer_seg(Trainer):
                                                                                   ))
 
             is_best = val_acc > best_performance
+            filename = "checkpoint_info.csv"
+            self.save_training_info(self.output_path, train_loader.dataset, train_loader.dataset.num_classes,
+                                    self.model.__class__.__name__, val_acc, filename)
+            print("hereeee?????")
             best_performance = max(val_acc, best_performance)
             # saves state dictionary of every epoch (overwrites), additionally saves best
             self.save_checkpoint(self.output_path,
@@ -334,7 +358,7 @@ class Trainer_seg(Trainer):
                                      'best_train_acc': best_performance,
                                      'optimizer': optimizer.state_dict(),
                                      'num_output_classes': train_loader.dataset.num_classes
-                                 }, is_best
+                                 }, is_best, train_loader, best_performance
                                  )
 
             # if we just found a better model (better validation accuracy)

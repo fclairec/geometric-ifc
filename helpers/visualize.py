@@ -1,11 +1,15 @@
 import matplotlib
 
 import matplotlib.pyplot as plt
+import re
+from torch_geometric.io import write_off
+from torch._tensor_str import PRINT_OPTS, _tensor_str
 
 import numpy
 import pickle
 import os
 import torch
+from torch._tensor_str import PRINT_OPTS
 
 from mpl_toolkits.mplot3d.art3d import Line3DCollection
 import struct
@@ -14,12 +18,82 @@ import struct
 from matplotlib import rc
 rc("text", usetex=False)
 
+REGEX = r'[\[\]\(\),]|tensor|(\s)\1{2,}'
+
 art_class_map = {
                 # corresponds to what is in the dataset
                 0: 'IfcDistributionControlElement', 1: 'IfcFlowController', 2: 'IfcFlowFitting',
                 3: 'IfcFlowSegment', 4: 'IfcFlowTerminal', 5: 'IfcColumn', 6: 'IfcFurnishingElement', 7: 'IfcStair',
                 8: 'IfcDoor', 9: 'IfcSlab', 10: 'IfcWall', 11: 'IfcWindow', 12: 'IfcRailing'
             }
+
+def cmyk_to_rgb(c, m, y, k, cmyk_scale=1, rgb_scale=255):
+    r = rgb_scale * (1.0 - c / float(cmyk_scale)) * (1.0 - k / float(cmyk_scale))
+    g = rgb_scale * (1.0 - m / float(cmyk_scale)) * (1.0 - k / float(cmyk_scale))
+    b = rgb_scale * (1.0 - y / float(cmyk_scale)) * (1.0 - k / float(cmyk_scale))
+    return r, g, b
+
+def write_off(data, path):
+    r"""Writes a :class:`torch_geometric.data.Data` object to an OFF (Object
+    File Format) file.
+    Args:
+        data (:class:`torch_geometric.data.Data`): The data object.
+        path (str): The path to the file.
+    """
+    num_nodes, num_faces = data.pos.size(0), data.face.size(1)
+
+    pos = data.pos.to(torch.float)
+    face = data.face.t()
+    num_vertices = torch.full((num_faces, 1), face.size(1), dtype=torch.long)
+    face = torch.cat([num_vertices, face], dim=-1)
+
+    threshold = PRINT_OPTS.threshold
+    torch.set_printoptions(threshold=float('inf'))
+
+    pos_repr = re.sub(',', '', _tensor_str(pos, indent=0))
+    pos_repr = '\n'.join([x[2:-1] for x in pos_repr.split('\n')])[:-1]
+
+    face_repr = re.sub(',', '', _tensor_str(face, indent=0))
+    face_repr = '\n'.join([x[2:-1] for x in face_repr.split('\n')])[:-1]
+
+    with open(path, 'w') as f:
+        f.write('OFF\n{} {} 0\n'.format(num_nodes, num_faces))
+        f.write(pos_repr)
+        f.write('\n')
+        f.write(face_repr)
+        f.write('\n')
+    torch.set_printoptions(threshold=threshold)
+
+def write_points_only(data, path):
+    r"""Writes a :class:`torch_geometric.data.Data` object to an OFF (Object
+    File Format) file.
+    Args:
+        data (:class:`torch_geometric.data.Data`): The data object.
+        path (str): The path to the file.
+    """
+    num_nodes, num_faces = data.pos.size(0), data.face.size(1)
+
+    pos = data.pos.to(torch.float)
+    face = data.face.t()
+    num_vertices = torch.full((num_faces, 1), face.size(1), dtype=torch.long)
+    face = torch.cat([num_vertices, face], dim=-1)
+
+    threshold = PRINT_OPTS.threshold
+    torch.set_printoptions(threshold=float('inf'))
+
+    pos_repr = re.sub(',', '', _tensor_str(pos, indent=0))
+    pos_repr = '\n'.join([x[2:-1] for x in pos_repr.split('\n')])[:-1]
+
+    face_repr = re.sub(',', '', _tensor_str(face, indent=0))
+    face_repr = '\n'.join([x[2:-1] for x in face_repr.split('\n')])[:-1]
+
+    with open(path, 'w') as f:
+        f.write('OFF\n{} {} 0\n'.format(num_nodes, num_faces))
+        f.write(pos_repr)
+        f.write('\n')
+        f.write(face_repr)
+        f.write('\n')
+    torch.set_printoptions(threshold=threshold)
 
 
 
@@ -33,14 +107,14 @@ def vis_point(test_loader,  output_path, output_path_error, prob, y_pred_list, y
         8: 'IfcDoor', 9: 'IfcSlab', 10: 'IfcWall', 11: 'IfcWindow', 12: 'IfcRailing'
     }
     if crit_points_list_ind is not None:
-        output_path_crit_p = os.path.join(output_path, "crit")
-        output_path_crit_p_ee = os.path.join(output_path, "crit_er")
-        if not os.path.exists(output_path_crit_p):
-            os.makedirs(output_path_crit_p)
-            os.makedirs(output_path_crit_p_ee)
-        print("crit point ind (sould be max 265):{} " .format(len(crit_points_list_ind)))
+        output_path_correct = os.path.join(output_path, "correct_pred")
+        output_path_error = os.path.join(output_path, "erronous_pred")
+        if not os.path.exists(output_path_correct):
+            os.makedirs(output_path_correct)
+            os.makedirs(output_path_error)
+        #print("crit point ind (sould be max 265):{} " .format(len(crit_points_list_ind[0])))
         #print(len(crit_points_list_ind))
-        vis_crit_points(test_loader, output_path_crit_p, output_path_crit_p_ee, prob, y_pred_list, y_real_list, crit_points_list_ind)
+        vis_crit_points(test_loader, output_path_correct, output_path_error, prob, y_pred_list, y_real_list, crit_points_list_ind)
     else:
         vis_normal_points()
     #write_pointcloud(test_loader, output_path_crit_p, rgb_points=None, xyz_points=None)
@@ -60,18 +134,23 @@ def vis_crit_points(test_loader, output_path, output_path_error, prob, y_pred_li
 
     for i, data in enumerate(test_loader):
 
+
+
         certainty = prob[i]
         y_real = y_real_list[i]
         y_pred = y_pred_list[i]
         y_real_l = test_loader.dataset.classmap[y_real]
         y_pred_l = test_loader.dataset.classmap[y_pred]
         pos = data.pos.numpy()
+        if test_loader.dataset.name == 'V4':
+            color = data.x.numpy()
 
 
         xyz = numpy.array(
             [list(a) for a in zip(data.pos[:, 0].numpy(), data.pos[:, 1].numpy(), data.pos[:, 2].numpy())])
 
         crit_unique_ind = numpy.unique(crit_points_list_ind[i])
+        #print(len(crit_unique_ind))
         # print("crit ind")
         # print(crit_unique_ind)
         crit_points = numpy.vstack([xyz[j] for j in crit_unique_ind])
@@ -83,9 +162,9 @@ def vis_crit_points(test_loader, output_path, output_path_error, prob, y_pred_li
 
         #print(crit_points)
 
-        with open(output_path_error + '/critpot.txt', "w") as text_file:
-            for pt in crit_points:
-                text_file.writelines('{} {} {} {} {} {}' .format(pt[0], pt[1], pt[2], 231, 206, 123))
+
+
+
         # full pointcloud
         ax = fig.add_subplot(1, 2, 1, projection='3d')
         ax.scatter(xyz[:, 0], xyz[:, 1], xyz[:, 2], color='black', s=5)
@@ -118,29 +197,63 @@ def vis_crit_points(test_loader, output_path, output_path_error, prob, y_pred_li
 
 
         if y_pred != y_real:
-            out = output_path_error + "/" + str(i) + y_real_l + "-" + y_pred_l + "-with(" + str(certainty) + ")"
+            out = output_path_error + "/" + str(test_loader.dataset.id[i].split("/")[-1]) + "-" + y_pred_l + "-with(" + str(certainty) + ")"
             with open(out + ".txt", "w") as text_file:
                 for line in pos:
-                    text_file.write(str(line[0]) + ', ' + str(line[1]) + ', ' + str(line[2]) + '\n')
+                    text_file.write('{} {} {} {} {} {} \n'.format(line[0], line[1], line[2], 255, 0, 0))
             plt.savefig(out + '.png')
             pickle.dump(fig, open(out + "intact", 'wb'))
             # plt.show()
             plt.close()
             torch.save(data, out + '.pt')
             torch.save(crit_points, out + 'crit.pt')
+            if test_loader.dataset.name == 'V4':
+                # print the point cloud not a mesh
+                with open(out + "_pointcloud.txt", "w") as text_file:
+                    for line_pos, line_color in zip(pos, color):
+                        print(len(line_color))
+
+                        r,b,g = line_color[0]*255, line_color[1]*255, line_color[2]*255
+                        print ( line_color[3])
+                        text_file.write('{} {} {} {} {} {} \n'.format(line_pos[0], line_pos[1], line_pos[2], r, b, g))
+            else:
+                write_off(data, out+".off")
+
+            with open(output_path_error + '/' + str(test_loader.dataset.id[i].split("/")[-1]) + 'critpot' + '.txt',
+                      "w") as text_file:
+                for pt in crit_points:
+                    text_file.writelines('{} {} {} {} {} {} \n'.format(pt[0], pt[1], pt[2], 255, 0, 0))
 
 
         else:
-            out = output_path + "/" + str(i) + y_real_l + "-" + y_pred_l + "-with(" + str(certainty) + ")"
+            out = output_path + "/" + str(test_loader.dataset.id[i].split("/")[-1]) + "-" + y_pred_l + "-with(" + str(certainty) + ")"
             with open(out + ".txt", "w") as text_file:
                 for line in pos:
-                    text_file.write(str(line[0]) + ', ' + str(line[1]) + ', ' + str(line[2]) + '\n')
+                    text_file.write('{} {} {} {} {} {} \n'.format(line[0], line[1], line[2], 255, 0, 0))
             plt.savefig(out + '.png')
             pickle.dump(fig, open(out + "intact.pickle", 'wb'))
             # plt.show()
             plt.close()
             torch.save(data, out + '.pt')
             torch.save(crit_points, out + 'crit.pt')
+
+            if test_loader.dataset.name == 'V4':
+                # print the point cloud not a mesh
+                # print the point cloud not a mesh
+                with open(out + "_pointcloud.txt", "w") as text_file:
+                    for line_pos, line_color in zip(pos, color):
+                        r,b,g = line_color[0]*255, line_color[1]*255, line_color[2]*255
+
+                        text_file.write(
+                            '{} {} {} {} {} {} \n'.format(line_pos[0], line_pos[1], line_pos[2], r,
+                                                          b, g))
+            else:
+                write_off(data, out + ".off")
+
+            with open(output_path + '/' + str(test_loader.dataset.id[i].split("/")[-1]) + 'critpot' + '.txt',
+                      "w") as text_file:
+                for pt in crit_points:
+                    text_file.writelines('{} {} {} {} {} {} \n'.format(pt[0], pt[1], pt[2], 255, 0, 0))
 
 
 

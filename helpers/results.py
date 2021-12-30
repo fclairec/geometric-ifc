@@ -3,7 +3,7 @@ from sklearn.metrics import accuracy_score
 import torch
 from pandas import DataFrame
 import pandas
-from sklearn.metrics import confusion_matrix, classification_report, accuracy_score
+from sklearn.metrics import confusion_matrix, classification_report, accuracy_score, balanced_accuracy_score, f1_score
 import matplotlib as mpl
 import numpy as np
 import os
@@ -38,6 +38,7 @@ class Results:
 
 
 def summary(model):
+    print(model)
     model_params_list = list(model.named_parameters())
     print("----------------------------------------------------------------")
     line_new = "{:>20}  {:>25} {:>15}".format("Layer.Parameter", "Param Tensor Shape", "Param #")
@@ -123,6 +124,19 @@ def save_test_results(y_real, y_pred, test_acc, output_path, test_dataset, epoch
             file_confmat_tex_nonnorm = output_path + '/confmat_nonorm' + plot_name + '.tex'
             df12.to_latex(file_confmat_tex_nonnorm, caption=plot_name)
             print("latex written")
+
+        bal_acc = balanced_accuracy_score(y_true=y_real, y_pred=y_pred)
+
+        f1_s = f1_score(y_true=y_real, y_pred=y_pred, average='micro')
+        print("F1-score {}" .format(f1_s))
+
+        print("balanced accuracy")
+        print(bal_acc)
+        bal = pandas.DataFrame({'bal_acc': bal_acc, 'f1_score': f1_s}, index=[1])
+        bal.to_csv(os.path.join(output_path,"bal_acc.csv"))
+
+
+
 
         # Classification report
         class_rep = classification_report(y_true=y_real, y_pred=y_pred, target_names=real_target_names,
@@ -218,7 +232,7 @@ def save_set_stats(output_path, train_loader, test_loader, train_dataset, test_d
 
 
     print("printing set stats")
-    Set_analyst(given_set=train_dataset).bar_plot("train_set", output_path)
+    #Set_analyst(given_set=train_dataset).bar_plot("train_set", output_path)
     l_trainset = Set_analyst(given_set=train_dataset).class_counter()
     l_testset = Set_analyst(given_set=test_dataset).class_counter()
     l_valset = Set_analyst(given_set=val_dataset).class_counter()

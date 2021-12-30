@@ -143,6 +143,213 @@ class GCNCat(torch.nn.Module):
         out = F.log_softmax(global_vect_12, dim=1)
         return out, global_vect_256, critical_points
 
+class GCNCat_extended(torch.nn.Module):
+    def __init__(self, num_classes):
+        super(GCNCat_extended, self).__init__()
+
+        self.conv1 = GCNConv(6, 64, cached=False, normalize=not True)
+        self.conv2 = GCNConv(64 + 6, 128, cached=False, normalize=not True)
+        self.conv3 = GCNConv(192 + 12, 256, cached=False, normalize=not True)
+        # CAREFUL: If modifying here, check line 202 in experiments.py for pretrained model
+        self.lin1 = torch.nn.Linear(256, 512)
+
+        self.mlp = Seq(
+            MLP([256, 512]), Dropout(0.5), MLP([512, 256]), Dropout(0.5),
+            Lin(256, num_classes))
+
+    def forward(self, data):
+        # input = torch.cat([data.norm, data.pos], dim=1)
+        # i = torch.cat([data.norm, data.pos, data.x], dim=1)
+        if data.normal is not None:
+            used_normals = data.normal
+        else:
+            used_normals = data.norm
+
+        input = torch.cat([used_normals, data.pos], dim=1)
+        x, batch = input, data.batch
+
+        edge_index, edge_weight = data.edge_index, data.edge_attr
+        edge_weight = torch.ones((edge_index.size(1),), dtype=x.dtype, device=edge_index.device)
+
+        x = F.dropout(x, training=self.training, p=0.2)
+        x = F.relu(self.conv1(x, edge_index, edge_weight))
+
+        x = torch.cat([x, input], dim=1)
+        x1 = F.dropout(x, training=self.training, p=0.2)
+        x1 = F.relu(self.conv2(x1, edge_index, edge_weight))
+
+        x = torch.cat([x, x1, input], dim=1)
+        x = F.dropout(x, training=self.training, p=0.2)
+        x = F.relu(self.conv3(x, edge_index, edge_weight))
+
+        global_vect_256, critical_points = global_max_pool(x, batch)
+        global_vect_12 = self.mlp(global_vect_256)
+        out = F.log_softmax(global_vect_12, dim=1)
+        return out, global_vect_256, critical_points
+
+class GCNCat_128(torch.nn.Module):
+    def __init__(self, num_classes):
+        super(GCNCat_128, self).__init__()
+
+        self.conv1 = GCNConv(6, 64, cached=False, normalize=not True)
+        self.conv2 = GCNConv(64 + 6, 128, cached=False, normalize=not True)
+        self.conv3 = GCNConv(192 + 12, 128, cached=False, normalize=not True)
+        # CAREFUL: If modifying here, check line 202 in experiments.py for pretrained model
+        self.lin1 = torch.nn.Linear(128, num_classes)
+
+
+    def forward(self, data):
+        # input = torch.cat([data.norm, data.pos], dim=1)
+        # i = torch.cat([data.norm, data.pos, data.x], dim=1)
+        if data.normal is not None:
+            used_normals = data.normal
+        else:
+            used_normals = data.norm
+
+        input = torch.cat([used_normals, data.pos], dim=1)
+        x, batch = input, data.batch
+
+        edge_index, edge_weight = data.edge_index, data.edge_attr
+        edge_weight = torch.ones((edge_index.size(1),), dtype=x.dtype, device=edge_index.device)
+
+        x = F.dropout(x, training=self.training, p=0.2)
+        x = F.relu(self.conv1(x, edge_index, edge_weight))
+
+        x = torch.cat([x, input], dim=1)
+        x1 = F.dropout(x, training=self.training, p=0.2)
+        x1 = F.relu(self.conv2(x1, edge_index, edge_weight))
+
+        x = torch.cat([x, x1, input], dim=1)
+        x = F.dropout(x, training=self.training, p=0.2)
+        x = F.relu(self.conv3(x, edge_index, edge_weight))
+
+        global_vect_256, critical_points = global_max_pool(x, batch)
+        global_vect_12 = self.lin1(global_vect_256)
+        out = F.log_softmax(global_vect_12, dim=1)
+        return out, global_vect_256, critical_points
+
+class GCNCat_64(torch.nn.Module):
+    def __init__(self, num_classes):
+        super(GCNCat_64, self).__init__()
+
+        self.conv1 = GCNConv(6, 64, cached=False, normalize=not True)
+        self.conv2 = GCNConv(64 + 6, 128, cached=False, normalize=not True)
+        self.conv3 = GCNConv(192 + 12, 64, cached=False, normalize=not True)
+        # CAREFUL: If modifying here, check line 202 in experiments.py for pretrained model
+        self.lin1 = torch.nn.Linear(64, num_classes)
+
+    def forward(self, data):
+        # input = torch.cat([data.norm, data.pos], dim=1)
+        # i = torch.cat([data.norm, data.pos, data.x], dim=1)
+        if data.normal is not None:
+            used_normals = data.normal
+        else:
+            used_normals = data.norm
+
+        input = torch.cat([used_normals, data.pos], dim=1)
+        x, batch = input, data.batch
+
+        edge_index, edge_weight = data.edge_index, data.edge_attr
+        edge_weight = torch.ones((edge_index.size(1),), dtype=x.dtype, device=edge_index.device)
+
+        x = F.dropout(x, training=self.training, p=0.2)
+        x = F.relu(self.conv1(x, edge_index, edge_weight))
+
+        x = torch.cat([x, input], dim=1)
+        x1 = F.dropout(x, training=self.training, p=0.2)
+        x1 = F.relu(self.conv2(x1, edge_index, edge_weight))
+
+        x = torch.cat([x, x1, input], dim=1)
+        x = F.dropout(x, training=self.training, p=0.2)
+        x = F.relu(self.conv3(x, edge_index, edge_weight))
+
+        global_vect_256, critical_points = global_max_pool(x, batch)
+        global_vect_12 = self.lin1(global_vect_256)
+        out = F.log_softmax(global_vect_12, dim=1)
+        return out, global_vect_256, critical_points
+
+class GCNCat_32(torch.nn.Module):
+    def __init__(self, num_classes):
+        super(GCNCat_32, self).__init__()
+
+        self.conv1 = GCNConv(6, 64, cached=False, normalize=not True)
+        self.conv2 = GCNConv(64 + 6, 128, cached=False, normalize=not True)
+        self.conv3 = GCNConv(192 + 12, 32, cached=False, normalize=not True)
+        # CAREFUL: If modifying here, check line 202 in experiments.py for pretrained model
+        self.lin1 = torch.nn.Linear(32, num_classes)
+
+
+    def forward(self, data):
+        # input = torch.cat([data.norm, data.pos], dim=1)
+        # i = torch.cat([data.norm, data.pos, data.x], dim=1)
+        if data.normal is not None:
+            used_normals = data.normal
+        else:
+            used_normals = data.norm
+
+        input = torch.cat([used_normals, data.pos], dim=1)
+        x, batch = input, data.batch
+
+        edge_index, edge_weight = data.edge_index, data.edge_attr
+        edge_weight = torch.ones((edge_index.size(1),), dtype=x.dtype, device=edge_index.device)
+
+        x = F.dropout(x, training=self.training, p=0.2)
+        x = F.relu(self.conv1(x, edge_index, edge_weight))
+
+        x = torch.cat([x, input], dim=1)
+        x1 = F.dropout(x, training=self.training, p=0.2)
+        x1 = F.relu(self.conv2(x1, edge_index, edge_weight))
+
+        x = torch.cat([x, x1, input], dim=1)
+        x = F.dropout(x, training=self.training, p=0.2)
+        x = F.relu(self.conv3(x, edge_index, edge_weight))
+
+        global_vect_256, critical_points = global_max_pool(x, batch)
+        global_vect_12 = self.lin1(global_vect_256)
+        out = F.log_softmax(global_vect_12, dim=1)
+        return out, global_vect_256, critical_points
+
+class GCNCat_16(torch.nn.Module):
+    def __init__(self, num_classes):
+        super(GCNCat_16, self).__init__()
+
+        self.conv1 = GCNConv(6, 64, cached=False, normalize=not True)
+        self.conv2 = GCNConv(64 + 6, 128, cached=False, normalize=not True)
+        self.conv3 = GCNConv(192 + 12, 16, cached=False, normalize=not True)
+        # CAREFUL: If modifying here, check line 202 in experiments.py for pretrained model
+        self.lin1 = torch.nn.Linear(16, num_classes)
+
+
+    def forward(self, data):
+        # input = torch.cat([data.norm, data.pos], dim=1)
+        # i = torch.cat([data.norm, data.pos, data.x], dim=1)
+        if data.normal is not None:
+            used_normals = data.normal
+        else:
+            used_normals = data.norm
+
+        input = torch.cat([used_normals, data.pos], dim=1)
+        x, batch = input, data.batch
+
+        edge_index, edge_weight = data.edge_index, data.edge_attr
+        edge_weight = torch.ones((edge_index.size(1),), dtype=x.dtype, device=edge_index.device)
+
+        x = F.dropout(x, training=self.training, p=0.2)
+        x = F.relu(self.conv1(x, edge_index, edge_weight))
+
+        x = torch.cat([x, input], dim=1)
+        x1 = F.dropout(x, training=self.training, p=0.2)
+        x1 = F.relu(self.conv2(x1, edge_index, edge_weight))
+
+        x = torch.cat([x, x1, input], dim=1)
+        x = F.dropout(x, training=self.training, p=0.2)
+        x = F.relu(self.conv3(x, edge_index, edge_weight))
+
+        global_vect_256, critical_points = global_max_pool(x, batch)
+        global_vect_12 = self.lin1(global_vect_256)
+        out = F.log_softmax(global_vect_12, dim=1)
+        return out, global_vect_256, critical_points
+
 
 class GCN(torch.nn.Module):
     def __init__(self, num_classes):
@@ -151,17 +358,18 @@ class GCN(torch.nn.Module):
         self.conv1 = GCNConv(6, 64, cached=False, normalize=not True)
         self.conv2 = GCNConv(64 + 6, 128, cached=False, normalize=not True)
         self.conv3 = GCNConv(128 + 6, 256, cached=False, normalize=not True)
+
         # CAREFUL: If modifying here, check line 202 in experiments.py for pretrained model
         self.lin1 = torch.nn.Linear(256, num_classes)
 
-    def forward(self, data):
+    def forward(self, data, addional_feats):
         if data.normal is not None:
             used_normals = data.normal
         else:
             used_normals = data.norm
 
         i = torch.cat([used_normals, data.pos], dim=1)
-        input = torch.cat([data.normal, data.pos], dim=1)
+        input = torch.cat([used_normals, data.pos], dim=1)
         # i = torch.cat([data.norm, data.pos], dim=1)
         # input = torch.cat([data.norm, data.pos],dim=1)
         x, batch = i, data.batch
@@ -173,16 +381,17 @@ class GCN(torch.nn.Module):
         x = F.relu(self.conv1(x, edge_index, edge_weight))
 
         x = torch.cat([x, input], dim=1)
-        x = F.dropout(x, training=self.training, p=0.2)
-        x = F.relu(self.conv2(x, edge_index, edge_weight))
+        x1 = F.dropout(x, training=self.training, p=0.2)
+        x1 = F.relu(self.conv2(x1, edge_index, edge_weight))
         """if batch.size(0) != data.pos.size(0):
             print("nooo")"""
 
-        x = torch.cat([x, input], dim=1)
+        x = torch.cat([x, x1, input], dim=1)
         x = F.dropout(x, training=self.training, p=0.2)
         x = F.relu(self.conv3(x, edge_index, edge_weight))
+
         """if batch.size(0) != data.pos.size(0):
-            print("nooo")"""
+                print("nooo")"""
 
         global_vect_256, critical_points = global_max_pool(x, batch)
         global_vect_12 = self.lin1(global_vect_256)
@@ -197,11 +406,11 @@ class GCNPool(torch.nn.Module):
     def __init__(self, num_classes):
         super(GCNPool, self).__init__()
 
-        self.conv1 = GCNConv(6, 64, cached=False, normalize=not True)
+        self.conv1 = GraphConv(6, 64, aggr='add')
 
-        self.conv2 = GCNConv(64 + 6, 128, cached=False, normalize=not True)
+        self.conv2 = GraphConv(64 + 6, 128, aggr='add')
 
-        self.conv3 = GCNConv(128 + 9, 256, cached=False, normalize=not True)
+        self.conv3 = GraphConv(128 + 9, 256, aggr='add')
         # CAREFUL: If modifying here, check line 202 in experiments.py for pretrained model
         self.lin1 = torch.nn.Linear(256, num_classes)
         self.con_int = PointConv()
