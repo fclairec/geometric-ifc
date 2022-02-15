@@ -8,6 +8,7 @@ import math
 import argparse
 import os
 import pygraphviz
+from itertools import count
 
 
 ## argument for csv file
@@ -123,11 +124,18 @@ for i in range(len(elements)):
         attr = {'category': 'distribution_control_element'}
         attrdi[dist[i]] = attr
 
+for i in range(len(elements)):
 
-## Making networkX graphs
+    if stair[i] != '':
+        pairs.append((elements[i], stair[i]))
+        attr = {'category': 'stair'}
+        attrdi[stair[i]] = attr
+
+### Making networkX graphs
 
 G = nx.Graph()
 fig, ax = plt.subplots()
+
 nodes = list(elements)
 G.add_nodes_from(nodes)
 G.add_edges_from(pairs)
@@ -135,8 +143,31 @@ pos = nx.nx_agraph.graphviz_layout(G) ## this takes the positions of nodes
 
 
 nx.set_node_attributes(G, attrdi)
-nodes = nx.draw_networkx_nodes(G, pos=pos, ax=ax)
-nx.draw_networkx_edges(G, pos=pos, ax=ax)
+
+
+
+## colors
+
+groups = set(nx.get_node_attributes(G,'category').values())
+mapping = dict(zip(sorted(groups),count()))
+
+nodes = G.nodes()
+colors = []
+print(mapping)
+
+for n in G.nodes():
+        if bool(G.nodes[n]):
+
+            colors.append(mapping[G.nodes[n]['category']])
+
+        else:
+            colors.append('5')
+        #print(n)
+
+print(colors)
+#colors = { 0 : 'red', 1: 'blue' , 2: 'green', 3: 'black'}
+nx.draw_networkx_edges(G, pos=pos, ax=ax, alpha=0.2)
+nodes = nx.draw_networkx_nodes(G, pos=pos, ax=ax, node_color=colors, cmap=plt.cm.jet)
 
 annot = ax.annotate("", xy=(0,0), xytext=(20,20),textcoords="offset points",
                     bbox=dict(boxstyle="round", fc="w"),
