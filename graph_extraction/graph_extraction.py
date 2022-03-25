@@ -41,133 +41,196 @@ dist = df['DistributionControlElement'].to_list()
 column = df['Column'].to_list()
 window = df['Window'].to_list()
 door = df['Door'].to_list()
+volume = df['Volume'].to_list()
+
+
 
 pairs = []
 attrdi = {}
+nodes = []
 
-
-# looping through each element to make edges. This can be improved in terms of implementation
-for i in range(len(elements)):
-
-    if wall[i] != '':
-        pairs.append((elements[i], wall[i]))
-        attr = {'category': 'wall'}
-        attrdi[wall[i]] = attr
+categoriesname = ['wall','stair','slab','furnishing', 'flowT', 'flowS','flowF','flowX', 'dist', 'column' , 'window', 'door']
+categories = [wall,stair,slab,furnishing, flowT, flowS,flowF,flowX, dist, column , window, door]
 
 for i in range(len(elements)):
+    counter = 0
+    attr2 = {'volume': volume[i]}
+    for cat in categories:
+        if cat[i] != '':
+            #print(cat[i])
+            pairs.append((elements[i], cat[i]))
+            attr = {'category': categoriesname[counter],'volume' : volume[i]}
+            attrdi[cat[i]] = attr
+            
+            nodes.append(cat[i])
+        counter += 1
 
-    if slab[i] != '':
-        pairs.append((elements[i], slab[i]))
-        attr = {'category': 'slab'}
-        attrdi[slab[i]] = attr
+# for i in range(len(elements)):
+#     attr = {'volume' : volume[i]}
+#     attrdi[elements[i]].update(attr)
+#     print(attrdi[elements[i]])
 
-for i in range(len(elements)):
+# # looping through each element to make edges. This can be improved in terms of implementation
+# for i in range(len(elements)):
 
-    if door[i] != '':
-        pairs.append((elements[i], door[i]))
-        attr = {'category': 'door'}
-        attrdi[door[i]] = attr
+#     if wall[i] != '':
+#         pairs.append((elements[i], wall[i]))
+#         attr = {'category': 'wall'}
+#         attrdi[wall[i]] = attr
+#         nodes.append(wall[i])
 
-for i in range(len(elements)):
+# for i in range(len(elements)):
 
-    if furnishing[i] != '':
-        pairs.append((elements[i], furnishing[i]))
-        attr = {'category': 'furnishing_element'}
-        attrdi[furnishing[i]] = attr
+#     if slab[i] != '':
+#         pairs.append((elements[i], slab[i]))
+#         attr = {'category': 'slab'}
+#         attrdi[slab[i]] = attr
+#         nodes.append(slab[i])
 
-for i in range(len(elements)):
+# for i in range(len(elements)):
 
-    if flowX[i] != '':
-        pairs.append((elements[i], flowX[i]))
-        attr = {'category': 'flowController'}
-        attrdi[flowX[i]] = attr
+#     if door[i] != '':
+#         pairs.append((elements[i], door[i]))
+#         attr = {'category': 'door'}
+#         attrdi[door[i]] = attr
+#         nodes.append(door[i])
 
-for i in range(len(elements)):
+# for i in range(len(elements)):
 
-    if flowT[i] != '':
-        pairs.append((elements[i], flowT[i]))
-        attr = {'category': 'flowTerminal'}
-        attrdi[flowT[i]] = attr
+#     if furnishing[i] != '':
+#         pairs.append((elements[i], furnishing[i]))
+#         attr = {'category': 'furnishing_element'}
+#         attrdi[furnishing[i]] = attr
+#         nodes.append(furnishing[i])
 
-for i in range(len(elements)):
+# for i in range(len(elements)):
 
-    if flowS[i] != '':
-        pairs.append((elements[i], flowS[i]))
-        attr = {'category': 'flowSegment'}
-        attrdi[flowS[i]] = attr
+#     if flowX[i] != '':
+#         pairs.append((elements[i], flowX[i]))
+#         attr = {'category': 'flowController'}
+#         attrdi[flowX[i]] = attr
+#         nodes.append(flowX[i])
 
-for i in range(len(elements)):
+# for i in range(len(elements)):
 
-    if flowF[i] != '':
-        pairs.append((elements[i], flowF[i]))
-        attr = {'category': 'flowFitting'}
-        attrdi[flowF[i]] = attr
+#     if flowT[i] != '':
+#         pairs.append((elements[i], flowT[i]))
+#         attr = {'category': 'flowTerminal'}
+#         attrdi[flowT[i]] = attr
+#         nodes.append(flowT[i])
 
-for i in range(len(elements)):
+# for i in range(len(elements)):
 
-    if window[i] != '':
-        pairs.append((elements[i], window[i]))
-        attr = {'category': 'window'}
-        attrdi[window[i]] = attr
+#     if flowS[i] != '':
+#         pairs.append((elements[i], flowS[i]))
+#         attr = {'category': 'flowSegment'}
+#         attrdi[flowS[i]] = attr
+#         nodes.append(flowS[i])
 
-for i in range(len(elements)):
+# for i in range(len(elements)):
 
-    if column[i] != '':
-        pairs.append((elements[i], column[i]))
-        attr = {'category': 'column'}
-        attrdi[column[i]] = attr
+#     if flowF[i] != '':
+#         pairs.append((elements[i], flowF[i]))
+#         attr = {'category': 'flowFitting'}
+#         attrdi[flowF[i]] = attr
+#         nodes.append(flowF[i])
 
-for i in range(len(elements)):
+# for i in range(len(elements)):
 
-    if dist[i] != '':
-        pairs.append((elements[i], dist[i]))
-        attr = {'category': 'distribution_control_element'}
-        attrdi[dist[i]] = attr
+#     if window[i] != '':
+#         pairs.append((elements[i], window[i]))
+#         attr = {'category': 'window'}
+#         attrdi[window[i]] = attr
+#         nodes.append(window[i])
 
-for i in range(len(elements)):
+# for i in range(len(elements)):
 
-    if stair[i] != '':
-        pairs.append((elements[i], stair[i]))
-        attr = {'category': 'stair'}
-        attrdi[stair[i]] = attr
+#     if column[i] != '':
+#         pairs.append((elements[i], column[i]))
+#         attr = {'category': 'column'}
+#         attrdi[column[i]] = attr
+#         nodes.append(column[i])
 
-### Making networkX graphs
+# for i in range(len(elements)):
 
-G = nx.Graph()
+#     if dist[i] != '':
+#         pairs.append((elements[i], dist[i]))
+#         attr = {'category': 'distribution_control_element'}
+#         attrdi[dist[i]] = attr
+#         nodes.append(dist[i])
+
+# for i in range(len(elements)):
+
+#     if stair[i] != '':
+#         pairs.append((elements[i], stair[i]))
+#         attr = {'category': 'stair'}
+#         attrdi[stair[i]] = attr
+#         nodes.append(stair[i])
+
+
+pairs = list(filter(lambda x: x[0] in nodes, pairs))
+
+F = nx.Graph()
 fig, ax = plt.subplots()
 
-nodes = list(elements)
-G.add_nodes_from(nodes)
-G.add_edges_from(pairs)
-pos = nx.nx_agraph.graphviz_layout(G) ## this takes the positions of nodes
+elementslist = list(elements)
+
+for i in elementslist[:]:
+    if i not in nodes:
+        #print(i)
+        elementslist.remove(i)
 
 
-nx.set_node_attributes(G, attrdi)
 
+nodes = []
+print(nodes)
+nodes = elementslist
+
+
+
+
+F.add_nodes_from(nodes)
+F.add_edges_from(pairs)
+F.add_edges_from(pairs)
+
+pos = nx.nx_agraph.graphviz_layout(F) ## this takes the positions of nodes
+
+
+nx.set_node_attributes(F, attrdi)
 
 
 ## colors
 
-groups = set(nx.get_node_attributes(G,'category').values())
+
+
+groups = set(nx.get_node_attributes(F,'category').values())
 mapping = dict(zip(sorted(groups),count()))
 
-nodes = G.nodes()
+
+
+nodes = F.nodes()
 colors = []
-print(mapping)
+#print(mapping)
 
-for n in G.nodes():
-        if bool(G.nodes[n]):
 
-            colors.append(mapping[G.nodes[n]['category']])
+for n in F.nodes():
+        if bool(F.nodes[n]):
+
+            colors.append(mapping[F.nodes[n]['category']])
+            
 
         else:
             colors.append('5')
-        #print(n)
+            #
+            print(n)
+        
+        
+        
 
-print(colors)
+#print(colors)
 #colors = { 0 : 'red', 1: 'blue' , 2: 'green', 3: 'black'}
-nx.draw_networkx_edges(G, pos=pos, ax=ax, alpha=0.2)
-nodes = nx.draw_networkx_nodes(G, pos=pos, ax=ax, node_color=colors, cmap=plt.cm.jet)
+nx.draw_networkx_edges(F, pos=pos, ax=ax, alpha=0.3)
+nodes = nx.draw_networkx_nodes(F, pos=pos, ax=ax, node_color=colors, cmap=plt.cm.jet)
 
 annot = ax.annotate("", xy=(0,0), xytext=(20,20),textcoords="offset points",
                     bbox=dict(boxstyle="round", fc="w"),
@@ -175,7 +238,7 @@ annot = ax.annotate("", xy=(0,0), xytext=(20,20),textcoords="offset points",
 annot.set_visible(False)
 
 idx_to_node_dict = {}
-for idx, node in enumerate(G.nodes):
+for idx, node in enumerate(F.nodes):
     idx_to_node_dict[idx] = node
 
 def update_annot(ind):
@@ -184,7 +247,7 @@ def update_annot(ind):
     xy = pos[node]
     annot.xy = xy
     node_attr = {'node': node}
-    node_attr.update(G.nodes[node])
+    node_attr.update(F.nodes[node])
     text = '\n'.join(f'{k}: {v}' for k, v in node_attr.items())
     annot.set_text(text)
 
