@@ -50,7 +50,7 @@ G.add_edges_from(pairs)
 
 pos = nx.nx_agraph.graphviz_layout(G) ## this takes the positions of nodes
 
-pos = nx.nx_agraph.graphviz_layout(G) ## this takes the positions of nodes
+#pos = nx.nx_agraph.graphviz_layout(G) ## this takes the positions of nodes
 
 
 nx.set_node_attributes(G, attrdir)
@@ -65,7 +65,7 @@ colors = []
 for n in G.nodes():
     if bool(G.nodes[n]):
 
-            colors.append(mapping[G.nodes[n]['category']])
+        colors.append(mapping[G.nodes[n]['category']])
             
 
     else:
@@ -76,6 +76,7 @@ for n in G.nodes():
 
 
 fig, ax = plt.subplots()
+nx.draw_networkx_edges(G, pos=pos, ax=ax, alpha=0.3)
 nodes = nx.draw_networkx_nodes(G, pos=pos, ax=ax, node_color=colors, cmap=plt.cm.jet)
 
 
@@ -114,7 +115,7 @@ def hover(event):
 
 fig.canvas.mpl_connect("motion_notify_event", hover)
 
-nx.draw_networkx(G)
+#nx.draw_networkx(G)
 plt.draw()
 plt.show()
 
