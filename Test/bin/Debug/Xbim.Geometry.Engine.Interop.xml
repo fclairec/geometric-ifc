@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Xbim.Geometry.Engine.Interop</name>
+    </assembly>
+    <members>
+        <member name="M:Xbim.Geometry.Engine.Interop.ModelWorkArounds.AddWorkAroundSurfaceofLinearExtrusionForRevit(Xbim.Common.IModel)">
+            <summary>
+            Adds a work around for versions of the Revit exporter prior to and inclusing Version(17, 4, 0, 0);
+            This did not correctly align linear extrusions bounds and surface due to a missing placement value
+            </summary>
+            <param name="model"></param>
+            <returns>The lookup tag in ModelFactors.WorkArounds for the workaround or null if not required due to a later version of the exporter</returns>
+        </member>
+        <member name="M:Xbim.Geometry.Engine.Interop.ModelWorkArounds.AddWorkAroundTrimForPolylinesIncorrectlySetToOneForEntireCurve(Xbim.Common.IModel)">
+            <summary>
+            In some processors the directrix of a sweep has a trimmed polyline, where the upper trim parameter has been set to 1
+            The publisher incorrectly intended to mean the entire length of the Polyline
+            The Polyline should be defined as the sum of the lengths of all of the segments, and partial segments required
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Xbim.Geometry.Engine.Interop.XbimArchitectureConventions">
+            <summary>
+            A class representing the conventions we use for processor specific Geometry Engine library
+            </summary> 
+        </member>
+        <member name="P:Xbim.Geometry.Engine.Interop.XbimArchitectureConventions.Suffix">
+            <summary>
+            The suffix we apply to platform-specific assemblys in the current process architecture
+            </summary>
+        </member>
+        <member name="P:Xbim.Geometry.Engine.Interop.XbimArchitectureConventions.ModuleName">
+            <summary>
+            name of the dll that that holds the geometry functionality
+            </summary>
+        </member>
+        <member name="M:Xbim.Geometry.Engine.Interop.XbimGeometryEngine.Transformed(Xbim.Common.Geometry.IXbimGeometryObject,Xbim.Ifc4.Interfaces.IIfcCartesianTransformationOperator)">
+            <summary>
+            Transforms an object geomtrically and returns a new object
+            </summary>
+            <param name="geometry"></param>
+            <param name="cartesianTransform"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Xbim.Geometry.Engine.Interop.Tracer">
+            <summary>
+            Traces method calls
+            </summary>
+        </member>
+    </members>
+</doc>

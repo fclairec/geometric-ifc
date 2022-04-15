@@ -1,0 +1,1050 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Xbim.ModelGeometry.Scene</name>
+    </assembly>
+    <members>
+        <member name="T:Xbim.ModelGeometry.Scene.Clustering.XbimDbscan">
+            <summary>
+            Initial ideas for this class derive from the Density-based spatial clustering of applications with noise (DBSCAN).
+            http://en.wikipedia.org/wiki/DBSCAN
+            Except the Noise portion has not been implemented.
+            </summary>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.Clustering.XbimDbscan.ValidDistance(Xbim.Common.Geometry.XbimRect3D,Xbim.Common.Geometry.XbimRect3D,System.Double)">
+            <summary>
+            Looks at the maximum distance (between all axis) between two boxes and compares it with a specified threshold.
+            </summary>
+            <param name="r1">Bounding box 1</param>
+            <param name="r2">Bounding box 2</param>
+            <param name="eps">the threshold distance</param>
+            <returns>True if the maximum distance is under the threshold.</returns>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.Clustering.XbimDbscan.AxisDistance(System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            Distance along a single ax.
+            </summary>
+            <param name="c1">Starting coordinate of interval 1 along the axis</param>
+            <param name="s1">Size of interval 1 along the axis</param>
+            <param name="c2">Starting coordinate of interval 2 along the axis</param>
+            <param name="s2">Size of interval 2 along the axis</param>
+            <returns>A positive distance if segments don't overlap (a negative if they do)</returns>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.Extensions.IIfcCartesianTransformExtensions.ToMatrix3D(Xbim.Ifc4.Interfaces.IIfcCartesianTransformationOperator3D,System.Collections.Concurrent.ConcurrentDictionary{System.Int32,System.Object})">
+            <summary>
+              Builds a windows XbimMatrix3D from a CartesianTransformationOperator3D
+            </summary>
+            <param name="ct3D"></param>
+            <param name="maps">An optional mapping dictionary</param>
+            <returns></returns>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.Extensions.IIfcCartesianTransformExtensions.ToMatrix3D(Xbim.Ifc4.Interfaces.IIfcCartesianTransformationOperator3DnonUniform,System.Collections.Concurrent.ConcurrentDictionary{System.Int32,System.Object})">
+            <summary>
+              Builds a windows XbimMatrix3D from a CartesianTransformationOperator3DnonUniform
+            </summary>
+            <param name="ct3D"></param>
+            <param name="maps"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.Extensions.IIfcRepresentationExtensions.IsBodyRepresentation(Xbim.Ifc4.Interfaces.IIfcRepresentation)">
+            <summary>
+            returns true if the representation is a 3D Shape (solid or surface), if it is a curve or curve set returns false
+            </summary>
+            <param name="rep"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.IXbimGeometryModel.Mesh(System.Double)">
+            <summary>
+            Creates a mesh with the specified deflection on curve interpolation, use model.ModelFactors to get the default deflection for the model
+            </summary>
+            <param name="deflection"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.IXbimGeometryModel.MeshTo(Xbim.ModelGeometry.Scene.IXbimMeshGeometry3D,Xbim.Ifc4.Interfaces.IIfcProduct,Xbim.Common.Geometry.XbimMatrix3D,System.Double,System.Int16)">
+            <summary>
+            Write the geometry as a triangulated mesh onto the mesh geometry and returns the details about the fragment on the mesh
+            </summary>
+            <param name="mesh3D">The mesh to write the geometry on to</param>
+            <param name="product">The product that the geometry represents</param>
+            <param name="transform">Tranforms all point before writing to the meshs</param>
+            <param name="deflection">The tangental deflection to use for curved surfaces</param>
+            <param name="modelId">An optional modelId</param>
+            <returns>The fragment of the mesh that has been added</returns>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.IXbimGeometryModel.WriteAsString(Xbim.Common.XbimModelFactors)">
+            <summary>
+            Returns a string containing the geometry in PLY format
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.IXbimGeometryModel.Cut(Xbim.ModelGeometry.Scene.IXbimGeometryModel,Xbim.Common.XbimModelFactors)">
+            <summary>
+            Cuts the toCut shape from this and returns the result
+            </summary>
+            <param name="toCut"></param>
+            <param name="modelFactors">Specifies the precision, and deflection factors for boolean operations, normally obtained from XbimModel.ModelFactors</param>
+            <returns></returns>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.IXbimGeometryModel.Write(System.String,Xbim.Common.XbimModelFactors)">
+            <summary>
+            Writes the geometry in the XBIM mesh format in a text file
+            </summary>
+            <param name="fileName"></param>
+            <param name="modelFactors"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.IXbimMeshGeometry3D.GetMeshGeometry3D(Xbim.ModelGeometry.Scene.XbimMeshFragment)">
+            <summary>
+            Returns the part of the mesh described in the fragment
+            </summary>
+            <param name="frag"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.IXbimPolyhedron.WritePly(System.String,System.Boolean)">
+            <summary>
+            Writes the polyhedron to a file in the Stanford PLY format
+            </summary>
+            <param name="fileName"></param>
+            <param name="ascii"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Xbim.ModelGeometry.Scene.IXbimRenderMaterial">
+            <summary>
+            Interface for grpahic card specific render materials or shaders
+            </summary>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.IXbimRenderMaterial.CreateMaterial(Xbim.Ifc.XbimTexture)">
+            <summary>
+            Call to ensure the native material has been created
+            </summary>
+            <param name="texture"></param>
+        </member>
+        <member name="P:Xbim.ModelGeometry.Scene.IXbimRenderMaterial.IsCreated">
+            <summary>
+            True if the native material has been created
+            </summary>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.IXbimTriangulatedModelBuilder.BeginBuild">
+            <summary>
+            Called to initialise the build
+            </summary>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.IXbimTriangulatedModelBuilder.BeginVertices(System.UInt32)">
+            <summary>
+            Called after BeginBuild
+            </summary>
+            <param name="numPoints">The number of unique vertices in the model</param>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.IXbimTriangulatedModelBuilder.AddVertex(Xbim.Common.Geometry.XbimPoint3D)">
+            <summary>
+            Called after BeginVertices, once for each unique vertex
+            </summary>
+            <param name="point3D"></param>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.IXbimTriangulatedModelBuilder.EndVertices">
+            <summary>
+            Called when all unique vertices have been added 
+            </summary>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.IXbimTriangulatedModelBuilder.BeginFaces(System.UInt16)">
+            <summary>
+            Called after EndVertices
+            </summary>
+            <param name="numFaces">Number of faces in the model</param>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.IXbimTriangulatedModelBuilder.BeginFace">
+            <summary>
+            Called after BeginFaces, onces for each face
+            </summary>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.IXbimTriangulatedModelBuilder.BeginNormals(System.UInt16)">
+            <summary>
+            Called after BeginFace
+            </summary>
+            <param name="numNormals">number of normals describing the face, either 1 if the face is planar or 1 normal for each vertices that defines the face</param>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.IXbimTriangulatedModelBuilder.AddNormal(Xbim.Common.Geometry.XbimVector3D)">
+            <summary>
+            Called after BegingNormals, once for each normal to add to face
+            </summary>
+            <param name="normal"></param>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.IXbimTriangulatedModelBuilder.EndNormals">
+            <summary>
+            Called after last normal has been added
+            </summary>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.IXbimTriangulatedModelBuilder.BeginPolygons(System.UInt16)">
+            <summary>
+            Called after EndNormal
+            </summary>
+            <param name="numPolygons">Number of polygons which make the face</param>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.IXbimTriangulatedModelBuilder.BeginPolygon">
+            <summary>
+            Called after BeginPolygons once for each Polygon
+            </summary>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.IXbimTriangulatedModelBuilder.BeginTriangulation(Xbim.ModelGeometry.Scene.TriangleType,System.UInt32)">
+            <summary>
+            Called after BeginPolygon, once for each triangulated area that describes the polygon
+            </summary>
+            <param name="meshType">The type of triangulation, mesh, fan, triangles etc</param>
+            <param name="indicesCount"></param>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.IXbimTriangulatedModelBuilder.AddTriangleIndex(System.UInt32)">
+            <summary>
+            Called after BeginTriangulation, once for each index, with respect to the triangulation type
+            </summary>
+            <param name="index">index into the list of unique vertices</param>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.IXbimTriangulatedModelBuilder.EndTriangulation">
+            <summary>
+            Triangulation complete
+            </summary>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.IXbimTriangulatedModelBuilder.EndPolygon">
+            <summary>
+            Polygon definition complete
+            </summary>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.IXbimTriangulatedModelBuilder.EndPolygons">
+            <summary>
+            All polygon definitions complete
+            </summary>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.IXbimTriangulatedModelBuilder.EndFace">
+            <summary>
+            Face complete
+            </summary>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.IXbimTriangulatedModelBuilder.EndFaces">
+            <summary>
+            All faces complete
+            </summary>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.IXbimTriangulatedModelBuilder.BeginChild">
+            <summary>
+            Called before a child is transmitted, calling sequence is same as parent
+            </summary>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.IXbimTriangulatedModelBuilder.EndChild">
+            <summary>
+            Called when child is completed
+            </summary>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.IXbimTriangulatedModelBuilder.EndBuild">
+            <summary>
+            Model build complete
+            </summary>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.IXbimTriangulatesToPositionsIndices.BeginBuild">
+            <summary>
+            Called to initialise the build
+            </summary>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.IXbimTriangulatesToPositionsIndices.BeginPositions(System.UInt32)">
+            <summary>
+            Called after BeginBuild
+            </summary>
+            <param name="numPoints">The number of unique vertices in the model</param>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.IXbimTriangulatesToPositionsIndices.AddPosition(Xbim.Common.Geometry.XbimPoint3D)">
+            <summary>
+            Called after BeginVertices, once for each unique vertex
+            </summary>
+            <param name="point3D"></param>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.IXbimTriangulatesToPositionsIndices.EndPositions">
+            <summary>
+            Called when all unique vertices have been added 
+            </summary>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.IXbimTriangulatesToPositionsIndices.BeginPolygons(System.UInt32,System.UInt32)">
+            <summary>
+            Called after EndNormal
+            </summary>
+            <param name="totalNumberTriangles">The total number of triangles in the face</param>
+            <param name="numPolygons">Number of polygons which make the face</param>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.IXbimTriangulatesToPositionsIndices.BeginPolygon(Xbim.ModelGeometry.Scene.TriangleType,System.UInt32)">
+            <summary>
+            Called after BeginPolygon, once for each triangulated area that describes the polygon
+            </summary>
+            <param name="meshType">The type of triangulation, mesh, fan, triangles etc</param>
+            <param name="indicesCount"></param>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.IXbimTriangulatesToPositionsIndices.AddTriangleIndex(System.UInt32)">
+            <summary>
+            Called after BeginTriangulation, once for each index, with respect to the triangulation type
+            </summary>
+            <param name="index">index into the list of unique vertices</param>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.IXbimTriangulatesToPositionsIndices.EndPolygon">
+            <summary>
+            Triangulation complete
+            </summary>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.IXbimTriangulatesToPositionsIndices.EndPolygons">
+            <summary>
+            All polygon definitions complete
+            </summary>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.IXbimTriangulatesToPositionsIndices.EndBuild">
+            <summary>
+            Model build complete
+            </summary>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.IXbimTriangulatesToPositionsNormalsIndices.BeginBuild">
+            <summary>
+            Called to initialise the build
+            </summary>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.IXbimTriangulatesToPositionsNormalsIndices.BeginPoints(System.UInt32)">
+            <summary>
+            Called after BeginBuild
+            </summary>
+            <param name="numPoints">The number of unique vertices in the model</param>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.IXbimTriangulatesToPositionsNormalsIndices.AddPosition(Xbim.Common.Geometry.XbimPoint3D)">
+            <summary>
+            Called after BeginVertices, once for each unique vertex
+            </summary>
+            <param name="point3D"></param>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.IXbimTriangulatesToPositionsNormalsIndices.EndPoints">
+            <summary>
+            Called when all unique vertices have been added 
+            </summary>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.IXbimTriangulatesToPositionsNormalsIndices.BeginPolygons(System.UInt32,System.UInt32)">
+            <summary>
+            Called after EndNormal
+            </summary>
+            <param name="totalNumberTriangles">The total number of triangles in the face</param>
+            <param name="numPolygons">Number of polygons which make the face</param>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.IXbimTriangulatesToPositionsNormalsIndices.BeginPolygon(Xbim.ModelGeometry.Scene.TriangleType,System.UInt32)">
+            <summary>
+            Called after BeginPolygon, once for each triangulated area that describes the polygon
+            </summary>
+            <param name="meshType">The type of triangulation, mesh, fan, triangles etc</param>
+            <param name="indicesCount"></param>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.IXbimTriangulatesToPositionsNormalsIndices.AddTriangleIndex(System.UInt32)">
+            <summary>
+            Called after BeginTriangulation, once for each index, with respect to the triangulation type
+            </summary>
+            <param name="index">index into the list of unique vertices</param>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.IXbimTriangulatesToPositionsNormalsIndices.EndPolygon">
+            <summary>
+            Triangulation complete
+            </summary>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.IXbimTriangulatesToPositionsNormalsIndices.EndPolygons">
+            <summary>
+            All polygon definitions complete
+            </summary>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.IXbimTriangulatesToPositionsNormalsIndices.EndBuild">
+            <summary>
+            Model build complete
+            </summary>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.IXbimTriangulatesToSimplePositionsNormalsIndices.BeginBuild(System.UInt32,System.UInt32)">
+            <summary>
+            Called to initialise the build
+            </summary>
+        </member>
+        <member name="T:Xbim.ModelGeometry.Scene.PositionsNormalsIndicesBinaryStreamWriter">
+            <summary>
+            Binary stream of triangles with posisiton, normals, indices.
+            Uint32 numPointsAndNormals
+            Uint32 numTriangles
+            numPointsAndNormals * 6 floats (3 float posistions + 3 float normals)
+            numTriangles * 3 uint (three indices)
+            </summary>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.TransformGraph.AddProducts``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Add a set of products, to process the whole model use AddAllProducts for increased performance
+            </summary>
+            <typeparam name="TProduct"></typeparam>
+            <param name="products"></param>
+        </member>
+        <member name="T:Xbim.ModelGeometry.Scene.Xbim3DModelContext">
+            <summary>
+            Represents a gemetric representation context, i.e. a 'Body' and 'Model'Representation
+            Note a 3DModelContext may contain multiple IIfcGeometricRepresentationContexts
+            </summary>
+        </member>
+        <member name="T:Xbim.ModelGeometry.Scene.Xbim3DModelContext.XbimProductBooleanInfo">
+            <summary>
+            Contains all the information needed to perform the meshing of a product with openings and projections
+            </summary>
+        </member>
+        <member name="P:Xbim.ModelGeometry.Scene.Xbim3DModelContext.XbimCreateContextHelper.GeometryShapeLookup">
+            <summary>
+            The key is the IIfc label of the geometry the value is the database record number
+            </summary>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.Xbim3DModelContext.XbimCreateContextHelper.GetProductShapeIds">
+            <summary>
+            populates the  hash sets with the identities of the representation items used in the model
+            </summary>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.Xbim3DModelContext.#ctor(Xbim.Common.IModel,System.String,System.String,Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            Initialises a model context from the model
+            </summary>
+            <param name="model"></param>
+            <param name="contextType"></param>
+            <param name="requiredContextIdentifier"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="P:Xbim.ModelGeometry.Scene.Xbim3DModelContext.Contexts">
+            <summary>
+            Lists the context that have been identified by the 3dModelContext initialisation
+            </summary>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.Xbim3DModelContext.CreateContext(Xbim.Common.ReportProgressDelegate,System.Boolean)">
+            <param name="progDelegate"></param>
+            <param name="adjustWcs"></param>       
+            <returns></returns>
+        </member>
+        <member name="F:Xbim.ModelGeometry.Scene.Xbim3DModelContext.CustomMeshingBehaviour">
+            <summary>
+            A custom function to determine the behaviour and deflection associated with individual items in the mesher.
+            Default properties can set in the Model.Modelfactors if the same deflection applies to all elements.
+            </summary>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.Xbim3DModelContext.WriteProductsWithFeatures(Xbim.ModelGeometry.Scene.Xbim3DModelContext.XbimCreateContextHelper,Xbim.Common.ReportProgressDelegate,Xbim.Common.Geometry.XbimGeometryType,Xbim.Common.Geometry.IGeometryStoreInitialiser)">
+            <summary>
+            Computes and writes to the DB all shapes of products considering their features (openings and extensions).
+            The process starts from listing all OpeningsAndProjections (from the context) then performs the solid operations.
+            </summary>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.Xbim3DModelContext.WriteProductShape(Xbim.ModelGeometry.Scene.Xbim3DModelContext.XbimCreateContextHelper,Xbim.Ifc4.Interfaces.IIfcProduct,System.Boolean,Xbim.Common.Geometry.IGeometryStoreInitialiser)">
+            <summary>
+            Process the products shape and writes the instances of shape geometries to the Database
+            </summary>
+            <param name="contextHelper"></param>
+            <param name="product">the product to write</param>
+            <param name="includesOpenings"></param>
+            <param name="txn"></param>
+            <returns>IEnumerable of XbimShapeInstance that have been written</returns>
+        </member>
+        <member name="P:Xbim.ModelGeometry.Scene.Xbim3DModelContext.MaxThreads">
+            <summary>
+            Defines the maximum number of threads to use in parallel operations  any value less then 1 is not used..
+            </summary>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.Xbim3DModelContext.WriteShapeInstanceToStore(System.Int32,System.Int32,System.Int32,Xbim.Ifc4.Interfaces.IIfcProduct,Xbim.Common.Geometry.XbimMatrix3D,Xbim.Common.Geometry.XbimRect3D,Xbim.Common.Geometry.XbimGeometryRepresentationType,Xbim.Common.Geometry.IGeometryStoreInitialiser)">
+            <summary>
+            Writes the geometry as a string into the database
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.Xbim3DModelContext.ShapeInstances">
+            <summary>
+            Returns an enumerable of all XbimShape Instances in the model in this context, retrieveAllData will ensure that
+            bounding box and transformation data are also retrieved
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.Xbim3DModelContext.GetLargestRegion">
+            <summary>
+            Get the region with the greates population
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.Xbim3DModelContext.ShapeInstancesOf(Xbim.Common.Geometry.XbimShapeGeometry,System.Boolean)">
+            <summary>
+            Returns all instances of the specified shape geometry
+            </summary>
+            <param name="geometry"></param>
+            <param name="ignoreFeatures">if true any instances of this geometry that are openings or projects are ignored</param>
+            <returns></returns>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.Xbim3DModelContext.ShapeInstancesOf(Xbim.Ifc4.Interfaces.IIfcProduct)">
+            <summary>
+            Returns the shape instances of the specified product in this context
+            </summary>
+            <param name="product"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.Xbim3DModelContext.ShapeGeometryMeshOf(System.Int32)">
+            <summary>
+            Returns a triangulated mesh geometry fopr the specified shape
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.Xbim3DModelContext.ShapeGeometryMeshOf(Xbim.Common.Geometry.XbimShapeGeometry)">
+            <summary>
+            Returns a triangulated mesh geometry fopr the specified shape geometry
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.Xbim3DModelContext.ShapeGeometryMeshOf(Xbim.Common.Geometry.XbimShapeInstance)">
+            <summary>
+            Returns a triangulated mesh geometry fopr the specified shape instance, all transformations are applied
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Xbim.ModelGeometry.Scene.XbimFloatEncodedBitmap">
+            <summary>
+            This class can be used to encode XYZ (arity 3) data or matrices (arity 9 for matrices 3x3 or 16 for matrices 4x4)
+            into the bitmap image which can than be used
+            in WebGL applications or elsewhere where image is the best format for data transfer. If data
+            exceed size of one bitmap new bitmaps are created automatically.
+            </summary>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.XbimFloatEncodedBitmap.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Constructor will create rectangle bitmap of the desired size 
+            </summary>
+            <param name="size">Resulting image will have resolution size x size</param>
+            <param name="arity">How many floats are in one data entry. This is ie. 3 for points or vec3, 9 for matrices 3x3, 16 for matrices 4x4
+            or any other number for different things to be stored</param>
+        </member>
+        <member name="P:Xbim.ModelGeometry.Scene.XbimFloatEncodedBitmap.BitmapSize">
+            <summary>
+            Gets actual size of bitmap. This is always number dividable by 3
+            </summary>
+        </member>
+        <member name="P:Xbim.ModelGeometry.Scene.XbimFloatEncodedBitmap.CurrentIndex">
+            <summary>
+            Gets current data entry index. 
+            </summary>
+        </member>
+        <member name="P:Xbim.ModelGeometry.Scene.XbimFloatEncodedBitmap.Bitmap">
+            <summary>
+            Gets underlying bitmap containing encoded data
+            </summary>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.XbimFloatEncodedBitmap.SaveAsPNG(System.String)">
+            <summary>
+            This function will save the bitmap to the specified PNG file. Extension will be added if no extension is specified.
+            </summary>
+            <param name="path">Target file path</param>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.XbimFloatEncodedBitmap.SaveAsPNG(System.IO.Stream)">
+            <summary>
+            This function writes bitmap image to the stream as a PNG image.
+            This function WON'T close the stream.
+            </summary>
+            <param name="stream">Stream used to write the PNG image</param>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.XbimFloatEncodedBitmap.AddDataEntries(System.Collections.Generic.IList{System.Single})">
+            <summary>
+            Adds data entries to the image and returns index of the last one. Number of floats must be multiple of arity.
+            </summary>
+            <param name="dataEntries">Data entries in one single list. If number of floats is not multiple of arity exception is thrown.</param>
+            <returns>Index of last data entry added to bitmap.</returns>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.XbimFloatEncodedBitmap.AddDataEntry(System.Collections.Generic.IList{System.Single})">
+            <summary>
+            Adds data entry to the image and returns index.
+            </summary>
+            <param name="values">List of values which count is arity. Any other number will throw an exception.</param>
+            <returns>Index of the new data entry.</returns>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.XbimFloatEncodedBitmap.SetDataEntry(System.Collections.Generic.IList{System.Single},System.Int64)">
+            <summary>
+            This function will set defined values in bitmap. If data exceeds current bitmap new bitmap will be alocated.
+            Number of values must be the same as arity specified in constructor. This function won't reset current index.
+            If you want to start adding values from some offset set the property of index to that value.
+            </summary>
+            <param name="values">Values to be set. Number of values must match arity</param>
+            <param name="index">Index of the data entry.</param>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.XbimFloatEncodedBitmap.GetDataEntry(System.Int64)">
+            <summary>
+            This function can be used to get data entry created previously with this function.
+            </summary>
+            <param name="index">Index of data entry</param>
+            <returns>Data where length of array is arity defined in constructor</returns>
+        </member>
+        <member name="P:Xbim.ModelGeometry.Scene.XbimFloatEncodedBitmap.FreeSpace">
+            <summary>
+            Gets number of data entries which can be written to thi actual bitmap
+            </summary>
+            <returns>Number of free data entries</returns>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.XbimMeshFragment.Offset(System.Int32,System.Int32)">
+            <summary>
+            Offsets the start of the fragment positions and triangle indices 
+            </summary>
+            <param name="startPos"></param>
+            <param name="startIndex"></param>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.XbimMeshFragmentCollection.Contains``1">
+            <summary>
+            Returns true if the collection contains a fragment for the specified type
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.XbimMeshFragmentCollection.Find(System.Int32)">
+            <summary>
+            returns the mesh fragment that contains the specified vertex index
+            an empty fragment is returned if one is not found
+            uses binary search for speed
+            </summary>
+            <param name="vertexIndex"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Xbim.ModelGeometry.Scene.XbimMeshGeometry3D">
+            <summary>
+            This class provide support for geoemtry triangulated neshes
+            </summary>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.XbimMeshGeometry3D.Read(System.String,System.Nullable{Xbim.Common.Geometry.XbimMatrix3D})">
+            <summary>
+            Reads an ascii string of Xbim mesh geometry data
+            </summary>
+            <param name="data"></param>
+            <param name="trans">An optional transformation</param>
+            <returns></returns>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.XbimMeshGeometry3D.Add(Xbim.Common.Geometry.XbimGeometryData,System.Int16)">
+            <summary>
+            Appends a geometry data object to the Mesh, returns false if the mesh would become too big and needs splitting
+            </summary>
+            <param name="geometryMeshData"></param>
+            <param name="modelId"></param>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.XbimMeshGeometry3D.MoveTo(Xbim.ModelGeometry.Scene.IXbimMeshGeometry3D)">
+            <summary>
+            Moves the content of this mesh to the other
+            </summary>
+            <param name="toMesh"></param>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.XbimMeshGeometry3D.Add(Xbim.ModelGeometry.Scene.IXbimMeshGeometry3D)">
+            <summary>
+            Adds a geometry mesh to this, includes all mesh fragments
+            </summary>
+            <param name="geom"></param>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.XbimMeshGeometry3D.Add(Xbim.ModelGeometry.Scene.IXbimGeometryModel,Xbim.Ifc4.Interfaces.IIfcProduct,Xbim.Common.Geometry.XbimMatrix3D,System.Nullable{System.Double},System.Int16)">
+            <summary>
+            Adds the geometry to the mesh for the given product, returns the mesh fragment details
+            </summary>
+            <param name="geometryModel">Geometry to add</param>
+            <param name="product">The product the geometry represents (this may be a partial representation)</param>
+            <param name="transform">Transform the geometry to a new location or rotation</param>
+            <param name="deflection">Deflection for triangulating curves, if null default defelction for the model is used</param>
+            <param name="modelId">An optional model ID</param>
+        </member>
+        <member name="T:Xbim.ModelGeometry.Scene.XbimMeshLayer`2">
+            <summary>
+            Provides support for a layer of meshes of the same material, TVISIBLE is the type of the mesh geometry required by the graphics adaptor
+            </summary>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.XbimMeshLayer`2.BoundingBoxTotal(System.Boolean)">
+            <summary>
+            Bounding box of visible and invisible elements, aligned to the XYZ axis, containing all points in this mesh
+            </summary>
+            <param name="forceRecalculation">if true the bounding box is recalculated, if false and previusly calculated the cached version is returned</param>
+            <returns></returns>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.XbimMeshLayer`2.BoundingBoxVisible(System.Boolean)">
+            <summary>
+            Bounding box of all visible elements, aligned to the XYZ axis, containing all points in this mesh
+            </summary>
+            <param name="forceRecalculation">if true the bounding box is recalculated, if false the previous cached version is returned</param>
+            <returns></returns>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.XbimMeshLayer`2.BoundingBoxHidden(System.Boolean)">
+            <summary>
+            Bounding box of all hidden elements, aligned to the XYZ axis, containing all points in this mesh
+            </summary>
+            <param name="forceRecalculation">if true the bounding box is recalculated, if false the previous cached version is returned</param>
+            <returns></returns>
+        </member>
+        <member name="P:Xbim.ModelGeometry.Scene.XbimMeshLayer`2.LayerColourMap">
+            <summary>
+            The colour map for this scene
+            </summary>
+        </member>
+        <member name="F:Xbim.ModelGeometry.Scene.XbimMeshLayer`2.Visible">
+            <summary>
+            A mesh that are currently rendered typically on the graphics adaptor
+            </summary>
+        </member>
+        <member name="F:Xbim.ModelGeometry.Scene.XbimMeshLayer`2.Material">
+            <summary>
+            The native graphic engine render material
+            </summary>
+        </member>
+        <member name="F:Xbim.ModelGeometry.Scene.XbimMeshLayer`2.Hidden">
+            <summary>
+            A mesh that is loaded but not visible on the graphics display
+            </summary>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.XbimMeshLayer`2.#ctor(Xbim.Common.IModel)">
+            <summary>
+            Creates a mesh using the default colour (typically white)
+            </summary>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.XbimMeshLayer`2.#ctor(Xbim.Common.IModel,Xbim.Ifc.XbimColour)">
+            <summary>
+            Create a new layer that will display meshes in the specified colour
+            If the mesh geometry item has a style specified in the IFC definition sub layers will be created for each style
+            </summary>
+            <param name="m">a Model</param>
+            <param name="colour"></param>
+        </member>
+        <member name="P:Xbim.ModelGeometry.Scene.XbimMeshLayer`2.HasContent">
+            <summary>
+            Returns true if the layer has any geometric content
+            </summary>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.XbimMeshLayer`2.ShowAll">
+            <summary>
+            Moves all items in the hidden mesh to the visible mesh
+            </summary>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.XbimMeshLayer`2.HideAll">
+            <summary>
+            Moves all items in the visible mesh to the hidden mesh
+            </summary>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.XbimMeshLayer`2.Add(Xbim.ModelGeometry.Scene.IXbimGeometryModel,Xbim.Ifc4.Kernel.IfcProduct,Xbim.Common.Geometry.XbimMatrix3D,System.Nullable{System.Double},System.Int16)">
+            <summary>
+            Adds the geometry to the mesh for the given product, returns the mesh fragment details
+            </summary>
+            <param name="geometryModel">Geometry to add</param>
+            <param name="product">The product the geometry represents (this may be a partial representation)</param>
+            <param name="transform">Transform the geometry to a new location or rotation</param>
+            <param name="deflection">Deflection for triangulating curves, if null default defelction for the model is used</param>
+            <param name="modelId">An optional model ID</param>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.XbimMeshLayer`2.AddToHidden(Xbim.Common.Geometry.XbimGeometryData,Xbim.Common.IModel,System.Int16)">
+            <summary>
+            Adds the geometry fragment to the hidden mesh, if the model is not null 
+            the fragment is placed on a sub layer of the correct style
+            the sub layer is automaticaly created if it does not exist.
+            </summary>
+            <param name="geomData"></param>
+            <param name="model"></param>
+            <param name="modelId"></param>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.XbimMeshLayer`2.AddToHidden(Xbim.Common.Geometry.XbimGeometryData,Xbim.Common.IModel)">
+            <summary>
+            Adds the geometry fragment to the hidden mesh, if the model is not null 
+            the fragment is placed on a sub layer of the correct style
+            the sub layer is automaticaly created if it does not exist.
+            </summary>
+            <param name="geomData"></param>
+            <param name="model"></param>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.XbimMeshLayer`2.GetMeshFragments(System.Int32,System.Boolean,System.Boolean)">
+            <summary>
+             Returns a collection of fragments for this layer, does not traverse sub layers or hidden layers unless arguments are true
+            </summary>
+            <param name="entityLabel">the ifc entity label</param>
+            <param name="includeHidden">Include fragments in hidden layers</param>
+            <param name="includSublayers">Recurse into sub layers</param>
+            <returns></returns>
+        </member>
+        <member name="P:Xbim.ModelGeometry.Scene.XbimMeshLayer`2.Layers">
+            <summary>
+            Returns all the layers including sub layers of this layer
+            </summary>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.XbimMeshLayer`2.Balance">
+            <summary>
+            Resizes the layers so that none has more than USHORT number of indices
+            </summary>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.XbimMeshLayer`2.LayersTree(System.Int32)">
+            <summary>
+            Useful for analysis and debugging purposes (invoked by Querying interface)
+            </summary>
+            <param name="indentation">the number of indentation spaces at this tree level</param>
+            <returns>Enumerable strings of indented elements</returns>
+        </member>
+        <member name="T:Xbim.ModelGeometry.Scene.XbimOctree`1">
+            <summary>
+            A class to cluster spatial items in iteratively narrower space boundaries.
+            Formerly used in XbimMesher to split large models like this:
+            
+            XbimOctree octree = new XbimOctree(bounds.Length(), MaxWorldSize * metre, 1f, bounds.Centroid());
+            octree.Add(geomData.GeometryLabel, bound);
+            then iterating over octree.Populated to retrieve the clusters.
+            
+            Warning: If items fall across boundaries of children they stop the iterative split of the parent they fall into.
+            </summary>
+            <typeparam name="T">e.g. Int for geometry labels</typeparam>
+        </member>
+        <member name="F:Xbim.ModelGeometry.Scene.XbimOctree`1.ChildCount">
+            <summary>
+            The number of children in an octree.
+            </summary>
+        </member>
+        <member name="F:Xbim.ModelGeometry.Scene.XbimOctree`1.looseness">
+            <summary>
+            The octree's looseness value.
+            </summary> 
+        </member>
+        <member name="F:Xbim.ModelGeometry.Scene.XbimOctree`1.depth">
+            <summary>
+            The octree's depth.
+            </summary> 
+        </member>
+        <member name="F:Xbim.ModelGeometry.Scene.XbimOctree`1.centre">
+            <summary> 
+            The octree's centre coordinates.
+            </summary> 
+        </member>
+        <member name="F:Xbim.ModelGeometry.Scene.XbimOctree`1.length">
+            <summary>
+            The octree's length.
+            </summary>
+        </member>
+        <member name="F:Xbim.ModelGeometry.Scene.XbimOctree`1.bounds">
+             <summary>
+            The bounding box that represents the octree.
+            </summary> 
+        </member>
+        <member name="F:Xbim.ModelGeometry.Scene.XbimOctree`1.objects">
+             <summary>
+            The objects in the octree.
+            </summary> 
+        </member>
+        <member name="F:Xbim.ModelGeometry.Scene.XbimOctree`1.children">
+            <summary>
+            The octree's child nodes.
+            </summary> 
+        </member>
+        <member name="F:Xbim.ModelGeometry.Scene.XbimOctree`1.parent">
+            <summary>
+            Parent of this subtree or null if this is the root node
+            </summary>
+        </member>
+        <member name="F:Xbim.ModelGeometry.Scene.XbimOctree`1.localAddress">
+            <summary>
+            Local address of this node (like [1,1,1]), null for the root node
+            </summary>
+        </member>
+        <member name="F:Xbim.ModelGeometry.Scene.XbimOctree`1.worldSize">
+             <summary>
+            The octree's world size.
+            </summary> 
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.XbimOctree`1.#ctor(System.Double,System.Double,System.Double)">
+            <summary>
+            Creates a new octree.
+            </summary>
+            <param name="worldSize">/// The octree's world size.</param>
+            <param name="targetCanvasSize">The octree recursion depth.</param>
+            <param name="looseness">The octree's looseness value.</param>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.XbimOctree`1.#ctor(System.Double,System.Double,System.Double,System.Int32,Xbim.Common.Geometry.XbimPoint3D)">
+            <summary>
+            Creates a new octree.
+            </summary>
+            <param name="worldSize">The octree's world size.</param>
+            <param name="targetCanvasSize"></param>
+            <param name="looseness">The octree's looseness value.</param>
+            <param name="depth">The maximum depth to recurse to.</param>
+            <param name="centre">The octree's centre coordinates.</param>
+        </member>
+        <member name="P:Xbim.ModelGeometry.Scene.XbimOctree`1.Populated">
+            <summary>
+            Returns the main octrees that are populated
+            </summary>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.XbimOctree`1.ContentBounds">
+            <summary>
+            Returns the total bounds for all contetn under this node
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.XbimOctree`1.Remove(`0)">
+            <summary>
+            Removes the specified obj.
+            </summary>
+            <param name="obj">the object to remove.</param>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.XbimOctree`1.HasChanged(`0,Xbim.Common.Geometry.XbimRect3D)">
+            <summary>
+            Determines whether the specified obj has changed.
+            </summary>
+            <param name="obj"></param>
+            <param name="bBox"></param>
+            <returns>true if the specified obj has changed; otherwise, false.</returns>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.XbimOctree`1.Add(`0,Xbim.Common.Geometry.XbimPoint3D,System.Double)">
+            <summary>
+            Adds the given object to the octree.
+            </summary>
+            <param name="o">The object to add.</param>
+            <param name="centre">The object's centre coordinates.</param>
+            <param name="radius">The object's radius.</param>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.XbimOctree`1.Add(`0,Xbim.Common.Geometry.XbimRect3D)">
+            <summary>
+            Adds the given object to the octree.
+            </summary>
+            <param name="o"></param>
+            <param name="bBox"></param>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.XbimOctree`1.Add(`0,Xbim.Common.Geometry.XbimRect3D,Xbim.Common.Geometry.XbimPoint3D,System.Double)">
+            <summary>
+            Adds the given object to the octree.
+            </summary>
+            <param name="o">The object to add.</param>
+            <param name="b">The object's bounds.</param>
+            <param name="centre">The object's centre coordinates.</param>
+            <param name="radius">The object's radius.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.XbimOctree`1.ContentIncludingChildContent">
+            <summary>
+            Returns the total content of this octree and all its children (recursive in the tree structure)
+            This was wrong implementation (not recursive but only for 2 levels) until 20/12/2013. 
+            Fixed by Martin Cerny
+            </summary>
+            <returns>Overall content of the tree node and all subtrees</returns>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.XbimOctree`1.ContentIncludingParentContent">
+            <summary>
+            Returns the content of this node and content of all it't parents but only in the upper direction.
+            </summary>
+            <returns>Returns the content of this node and content of all it't parents.</returns>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.XbimOctree`1.Split">
+            <summary>
+            Splits the octree into eight children.
+            </summary>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.XbimOctree`1.Find(`0)">
+            <summary>
+            Function for search in the tree
+            </summary>
+            <param name="item">Object to be found</param>
+            <returns>Tree or subtree which contains the item as it's own content (not just in the subtree)</returns>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.XbimOctree`1.GetNeighbour(Xbim.Common.Geometry.XbimDirectionEnum,System.Boolean)">
+            <summary>
+            This will get the neighbour cells on the same level of resolution
+            </summary>
+            <param name="direction">Direction where to look for the neighbour</param>
+            <param name="onlySameResolution">If this is true and node of the same 
+            resolution doesn't exist as a neighbour NULL will be returned</param>
+            <returns>neighbouring cell on the same or lower level of resolution or null.</returns>
+        </member>
+        <member name="P:Xbim.ModelGeometry.Scene.XbimOctree`1.Subtrees">
+            <summary>
+            Returns all 8 subtrees or empty set if this is a leaf
+            </summary>
+        </member>
+        <member name="P:Xbim.ModelGeometry.Scene.XbimOctree`1.Parent">
+            <summary>
+            Returns parent node or null for the root
+            </summary>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.OctAddress.Move(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            This will return new address moved to the new position. 
+            Result is always in the correct format +1/-1
+            </summary>
+            <param name="x">move directions +1/-1/0</param>
+            <param name="y">move directions +1/-1/0</param>
+            <param name="z">move directions +1/-1/0</param>
+            <returns>New address</returns>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.OctAddress.Move(System.Int32[])">
+            <summary>
+            This will return new address moved to the new position. 
+            Result is always in the correct format +1/-1
+            </summary>
+            <param name="move">move directions +1/-1/0</param>
+            <returns>New address</returns>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.OctAddress.Addition(System.Int32,System.Int32)">
+            <summary>
+            Result will allways stay in the bounds of the address
+            </summary>
+            <param name="address"></param>
+            <param name="move"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.XbimPlacementTree.GetTransform(Xbim.Ifc4.Interfaces.IIfcProduct,Xbim.ModelGeometry.Scene.XbimPlacementTree,Xbim.Geometry.Engine.Interop.XbimGeometryEngine)">
+            <summary>
+            This function centralises the extraction of a product placement, but it needs the support of XbimPlacementTree and an XbimGeometryEngine
+            We should probably find a conceptual place for it somewhere in the scene, where these are cached.
+            </summary>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.XbimPlacementTree.#ctor(Xbim.Common.IModel,System.Boolean)">
+            <summary>
+                Builds a placement tree of all ifcLocalPlacements
+            </summary>
+            <param name="model"></param>
+            <param name="adjustWcs">
+                If there is a single root displacement, this is removed from the tree and added to the World
+                Coordinate System. Useful for models where the site has been located into a geographical context
+            </param>
+        </member>
+        <member name="T:Xbim.ModelGeometry.Scene.XbimTriangulatedModelStream">
+            <summary>
+            Binary stream encoded triangulated mesh; capable of builing other 
+            </summary>
+        </member>
+        <member name="T:Xbim.ModelGeometry.Scene.XbimTriangulatedModelStream.IndexReader">
+            <summary>
+            Used to read data from binary streams.
+            </summary>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.XbimTriangulatedModelStream.BuildWithNormals``1(``0,Xbim.Common.Geometry.XbimMatrix3D,System.Int16)">
+            <summary>
+            Builds a triangulated mesh with normals, appends points etc t the end of the existing mesh
+            </summary>
+            <typeparam name="TGeomType"></typeparam>
+            <param name="builder"></param>
+            <param name="transform"></param>
+            <param name="modelId"></param>
+            <returns>The fragment defining the piece of the mesh built with this operation
+            If there is no data an empty fragment is returned, if the mesh is goinng to excees the size of a an unsigned short
+            then the data is not added and a fragement with zero number of points is returned and 
+            a start position that is equal to the length of the mesh. The Entity Label is also sent to int.MinValue</returns>
+        </member>
+        <member name="M:Xbim.ModelGeometry.Scene.XbimTriangulatedModelStream.BuildWithNormals``1(``0,System.IO.BinaryReader,Xbim.Common.Geometry.XbimMatrix3D)">
+            <summary>
+            If adding the data to the mesh causes the mesh to exceed the max size of ushort.MaxSize
+            the data is not added and false is returned.
+            </summary>
+            <typeparam name="TGeomType"></typeparam>
+            <param name="builder"></param>
+            <param name="br"></param>
+            <param name="transform"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Xbim.ModelGeometry.XbimEnvironment.RedistInstalled(System.Nullable{System.Boolean})">
+            <summary>
+            Tests if the requierd VC++ redist platform is installed for the current execution environment.
+            </summary>
+            <returns>true if installed</returns>
+        </member>
+        <member name="M:Xbim.ModelGeometry.XbimEnvironment.RedistDownloadPath">
+            <summary>
+            Suggests the relevant download URL for the required C++ redistributable setup.
+            </summary>
+            <returns>a string pointing to the relevant executable</returns>
+        </member>
+        <member name="M:Xbim.ModelGeometry.XbimEnvironment.InstalledRuntimes">
+            <summary>
+            Tests for vc2013 redist installation through the registry
+            </summary>
+            <returns>A list of matching installations</returns>
+        </member>
+        <member name="M:Xbim.ModelGeometry.XbimEnvironment.Is64BitProcess">
+            <summary>
+            The function used by the underlying interop library to determin what C++ assembly to load.
+            </summary>
+            <returns>true for 64 bit environments</returns>
+        </member>
+    </members>
+</doc>

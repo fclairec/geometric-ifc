@@ -1,0 +1,5 @@
+﻿<Weavers xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="FodyWeavers.xsd">
+  <Costura 
+  Unmanaged32Assemblies='Xbim.Geometry.Engine32.dll'
+Unmanaged64Assemblies='Xbim.Geometry.Engine64.dll' />
+</Weavers>
